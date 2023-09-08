@@ -13,7 +13,7 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  late String password;
+  String password="";
 
   String? validateEmail(String? value) {
     if (value == null) {
@@ -149,7 +149,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: size.height * 0.28),
+                        padding: EdgeInsets.only(top: size.height * 0.20),
                         child: ElevatedButton(
                           style: ButtonStyle(
                             fixedSize: MaterialStatePropertyAll<Size>(

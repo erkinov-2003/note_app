@@ -66,6 +66,9 @@ class _TextEditState extends State<TextEdit> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: !widget.isRead?Colors.white:Colors.transparent,
+          ),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(

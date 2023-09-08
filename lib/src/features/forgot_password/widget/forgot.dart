@@ -65,7 +65,7 @@ class _ForgotState extends State<Forgot> {
             child: ListView(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.005),
+                  padding: EdgeInsets.only(top: size.height * 0.09),
                   child: Text(
                     "Forgot Password",
                     style: TextStyle(
@@ -76,7 +76,7 @@ class _ForgotState extends State<Forgot> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.21),
+                  padding: EdgeInsets.only(top: size.height * 0.02),
                   child: const Text(
                     "Enter Email address",
                     style: TextStyle(
@@ -100,7 +100,7 @@ class _ForgotState extends State<Forgot> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: size.height * 0.37),
+                        padding: EdgeInsets.only(top: size.height * 0.45),
                         child: ElevatedButton(
                           style: ButtonStyle(
                             fixedSize: MaterialStatePropertyAll<Size>(
