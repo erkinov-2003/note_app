@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextEdit extends StatelessWidget {
+class TextEdit extends StatefulWidget {
   final String? Function(String? value) validateEmail;
   final String value;
   final bool isPassword;
@@ -15,11 +15,25 @@ class TextEdit extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<TextEdit> createState() => _TextEditState();
+}
+
+class _TextEditState extends State<TextEdit> {
+  bool show = true;
+
+  void showPassword() {
+    show = !show;
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
-    FocusNode focusNode=FocusNode();
+    FocusNode focusNode = FocusNode();
     return TextFormField(
+      obscureText: show && widget.isPassword,
+      obscuringCharacter: "*",
       focusNode: focusNode,
-      readOnly: isRead,
+      readOnly: widget.isRead,
       onTapOutside: (event) => focusNode.unfocus(),
       textInputAction: TextInputAction.send,
       style: const TextStyle(
@@ -27,9 +41,18 @@ class TextEdit extends StatelessWidget {
         fontWeight: FontWeight.w500,
         color: Colors.white,
       ),
-      validator: isRead?null:validateEmail,
+      validator: widget.isRead ? null : widget.validateEmail,
       decoration: InputDecoration(
-        hintText: value,
+        hintText: widget.value,
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                onPressed: showPassword,
+                icon: Icon(
+                  show ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey,
+                ),
+              )
+            : null,
         hintStyle: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w500,
