@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../auth/widgets/registr_page_controller.dart';
 import 'language_changer_page.dart';
 import 'theme_changer_page.dart';
 
@@ -59,11 +60,20 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 onPressed: () {
-                  pageController.animateToPage(
-                    1,
-                    duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOut,
-                  );
+                  if (pageController.page != null && pageController.page?.toInt() == 0) {
+                    pageController.animateToPage(
+                      1,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeInOut,
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegistrationPageController(),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   "Next",

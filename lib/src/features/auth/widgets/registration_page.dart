@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'widgets/text_fields.dart';
+import 'text_fields.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});

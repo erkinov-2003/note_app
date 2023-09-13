@@ -1,21 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/splash_screen/auth/controller/main_controller.dart';
-
-import '../login_page.dart';
-import '../registration_page.dart';
+import '../controller/main_controller.dart';
+import 'login_page.dart';
+import 'registration_page.dart';
 import 'page_widget.dart';
 import 'signin_with.dart';
 
 class RegistrationPageController extends StatefulWidget {
-  const RegistrationPageController({Key? key}) : super(key: key);
+  const RegistrationPageController({super.key});
 
   @override
-  State<RegistrationPageController> createState() =>
-      _RegistrationPageControllerState();
+  State<RegistrationPageController> createState() => _RegistrationPageControllerState();
 }
 
-class _RegistrationPageControllerState
-    extends State<RegistrationPageController> {
+class _RegistrationPageControllerState extends State<RegistrationPageController> {
+  late MainController controller;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+    controller = MainController(
+      pageController: pageController,
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider(
+      controller: controller,
+      child: const View(),
+    );
+  }
+}
+
+class View extends StatefulWidget {
+  const View({Key? key}) : super(key: key);
+
+  @override
+  State<View> createState() => _ViewState();
+}
+
+class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     final isRegistration = Provider.of(context).isRegistration;
@@ -58,7 +91,7 @@ class _RegistrationPageControllerState
                                 ),
                               ),
                         const SizedBox(height: 10),
-                        PageWidget(),
+                        const PageWidget(),
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -78,8 +111,7 @@ class _RegistrationPageControllerState
                 ),
                 const Expanded(
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
                         Spacer(),
