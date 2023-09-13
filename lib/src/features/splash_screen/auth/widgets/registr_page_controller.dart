@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/splash_screen/auth/controller/main_controller.dart';
 
 import '../login_page.dart';
 import '../registration_page.dart';
@@ -15,49 +16,12 @@ class RegistrationPageController extends StatefulWidget {
 
 class _RegistrationPageControllerState
     extends State<RegistrationPageController> {
-  late PageController pageController;
-  int pageNumber = 1;
-
-  bool isRegistration = true;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController = PageController();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
-  void onTap(int pageNumber) {
-    pageController.animateToPage(
-      pageNumber,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linear,
-    );
-  }
-
-  void onTap2() {
-    if (isRegistration) {
-      pageNumber = 2;
-      pageController.animateToPage(1,
-          duration: const Duration(milliseconds: 300), curve: Curves.linear);
-      isRegistration = false;
-      setState(() {});
-    } else if (!isRegistration) {
-      pageNumber = 1;
-      pageController.animateToPage(0,
-          duration: const Duration(milliseconds: 300), curve: Curves.linear);
-      isRegistration = true;
-      setState(() {});
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final isRegistration = Provider.of(context).isRegistration;
+    final onTap = Provider.of(context).onTap;
+    final pageController = Provider.of(context).pageController;
+
     return Scaffold(
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
@@ -94,10 +58,7 @@ class _RegistrationPageControllerState
                                 ),
                               ),
                         const SizedBox(height: 10),
-                        PageWidget(
-                          onTap: onTap2,
-                          isRegistration: isRegistration,
-                        ),
+                        PageWidget(),
                         const SizedBox(height: 20),
                       ],
                     ),
@@ -106,6 +67,7 @@ class _RegistrationPageControllerState
                 Expanded(
                   flex: 2,
                   child: PageView(
+                    physics: const NeverScrollableScrollPhysics(),
                     onPageChanged: onTap,
                     controller: pageController,
                     children: const [

@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 
-class PageWidget extends StatefulWidget {
-  final bool isRegistration;
-  final void Function() onTap;
+import '../controller/main_controller.dart';
 
-  const PageWidget({
-    required this.onTap,
-    required this.isRegistration,
-    super.key,
-});
+class PageWidget extends StatefulWidget {
+  const PageWidget({super.key});
 
   @override
   State<PageWidget> createState() => _PageWidgetState();
 }
 
 class _PageWidgetState extends State<PageWidget> {
-
   @override
   Widget build(BuildContext context) {
+    final isRegistration = Provider.of(context, listen: true).isRegistration;
+    final onTap = Provider.of(context).onTap2;
     return SizedBox(
       height: 50,
       width: 220,
@@ -30,11 +26,11 @@ class _PageWidgetState extends State<PageWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             GestureDetector(
-              onTap: widget.onTap,
+              onTap: onTap,
               child: SizedBox(
                 height: 40,
                 width: 100,
-                child: widget.isRegistration
+                child: isRegistration
                     ? const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -69,11 +65,11 @@ class _PageWidgetState extends State<PageWidget> {
               ),
             ),
             GestureDetector(
-              onTap: widget.onTap,
+              onTap: onTap,
               child: SizedBox(
                 height: 40,
                 width: 100,
-                child: !widget.isRegistration
+                child: !isRegistration
                     ? const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
