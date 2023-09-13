@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_images.dart';
-import 'package:note_app/src/common/provider/welcome_page_provider.dart';
+
+import '../../../common/constants/app_images.dart';
 
 class ThemeChangerPage extends StatefulWidget {
   const ThemeChangerPage({super.key});
@@ -20,13 +20,13 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
 
   @override
   Widget build(BuildContext context) {
-    final pageController = WelcomePageProvider.of(context).pageController;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 33,
-            vertical: 35,
+          padding: const EdgeInsets.only(
+            top: 35,
+            left: 35,
+            right: 35,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,32 +59,6 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                   side: BorderSide(
                     width: 1,
                     color: Colors.white,
-                  ),
-                ),
-              ),
-              FilledButton(
-                style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFF36BFFA),
-                  maximumSize: const Size(double.infinity, 70),
-                  minimumSize: const Size(double.infinity, 70),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  pageController.nextPage(
-                    duration: const Duration(milliseconds: 100),
-                    curve: Curves.easeInOut,
-                  );
-                },
-                child: const Text(
-                  "Next",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

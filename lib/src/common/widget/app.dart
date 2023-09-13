@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/welcome_page/widget/welcome_page.dart';
+
+import '../../features/splash_screen/widget/splash_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -11,10 +12,10 @@ class App extends StatelessWidget {
       title: "Note App",
       theme: ThemeData(
         useMaterial3: true,
-        fontFamily: "Ranade"
+        fontFamily: "Ranade",
       ),
       darkTheme: ThemeData.dark(useMaterial3: true),
-      home: const WelcomePage(),
+      home: const SplashScreen(),
     );
   }
 }
