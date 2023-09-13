@@ -1,0 +1,4 @@
+abstract class AppImages {
+  static const themeBgImage = "assets/images/img_theme_bg.png";
+  static const languageBgImage = "assets/images/img_language_bg.png";
+}
