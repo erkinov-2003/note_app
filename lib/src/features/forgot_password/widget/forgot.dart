@@ -33,7 +33,6 @@ class _ForgotState extends State<Forgot> {
   void openKey(bool a) {
     a = !a;
     setState(() {});
-    print(a);
   }
 
   @override
