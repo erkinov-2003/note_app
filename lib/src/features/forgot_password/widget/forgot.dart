@@ -3,6 +3,37 @@ import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 import '../model/text_feild.dart';
 
+class ForgotWithModel extends StatefulWidget {
+  const ForgotWithModel({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotWithModel> createState() => _ForgotWithModelState();
+}
+
+class _ForgotWithModelState extends State<ForgotWithModel> {
+  late Model model;
+
+  @override
+  void initState() {
+    super.initState();
+    model = Model(email: "");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    model.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider(
+      model: model,
+      child: const Forgot(),
+    );
+  }
+}
+
 class Forgot extends StatefulWidget {
   const Forgot({Key? key}) : super(key: key);
 

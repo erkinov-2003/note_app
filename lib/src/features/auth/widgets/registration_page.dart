@@ -48,12 +48,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
-                  maximumSize: const Size(400, 60),
-                  minimumSize: const Size(400, 60),
-                  backgroundColor: const Color(0xFF36BFFA),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)))),
-              onPressed: () {},
+                maximumSize: const Size(400, 60),
+                minimumSize: const Size(400, 60),
+                backgroundColor: const Color(0xFF36BFFA),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+              ),
+              onPressed: () {
+              },
               child: const Center(
                 child: Text(
                   "Sign In",
