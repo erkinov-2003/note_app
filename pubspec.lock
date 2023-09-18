@@ -86,6 +86,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_staggered_grid_view:
+    dependency: "direct main"
+    description:
+      name: flutter_staggered_grid_view
+      sha256: "19e7abb550c96fbfeb546b23f3ff356ee7c59a019a651f8f102a4ba9b7349395"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -314,22 +322,5 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4-beta"
-  win32:
-    dependency: transitive
-    description:
-      name: win32
-      sha256: "9e82a402b7f3d518fb9c02d0e9ae45952df31b9bf34d77baf19da2de03fc2aaa"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.0.7"
-  xdg_directories:
-    dependency: transitive
-    description:
-      name: xdg_directories
-      sha256: "589ada45ba9e39405c198fe34eb0f607cddb2108527e658136120892beac46d2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.3"
 sdks:
-  dart: ">=3.1.0-185.0.dev <4.0.0"
-  flutter: ">=3.7.0"
+  dart: ">=3.0.6 <4.0.0"
