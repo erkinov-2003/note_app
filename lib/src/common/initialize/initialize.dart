@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/dependencies.dart';
 import '../utils/logger.dart';
+import '../utils/storage.dart';
 
 Future<Dependencies>? _initializeApp;
 
@@ -53,7 +55,8 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> 
   (
     'Initializing databases',
     (dependencies) async {
-      dependencies.storage = await SharedPreferences.getInstance();
+      $storage = await SharedPreferences.getInstance();
+      $secureStorage = const FlutterSecureStorage();
     },
   ),
   (
