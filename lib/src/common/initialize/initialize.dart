@@ -19,10 +19,10 @@ Future<Dependencies> $initializeApp({
         try {
           final dependencies = MutableDependencies();
 
-          int totalSteps = _intializationSteps.length;
+          int totalSteps = _initializationSteps.length;
           int currentStep = 0;
 
-          for (final step in _intializationSteps) {
+          for (final step in _initializationSteps) {
             currentStep++;
 
             final percent = (currentStep * 100 ~/ totalSteps).clamp(0, 100);
@@ -45,7 +45,7 @@ Future<Dependencies> $initializeApp({
       },
     );
 
-final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> _intializationSteps = [
+final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> _initializationSteps = [
   (
     'Initial app data',
     (_) async {
