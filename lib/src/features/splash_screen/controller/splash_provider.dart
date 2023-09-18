@@ -24,3 +24,4 @@ class SplashProvider extends InheritedWidget {
   @override
   bool updateShouldNotify(SplashProvider oldWidget) => false;
 }
+
