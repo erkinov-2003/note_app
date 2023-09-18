@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TextEdit extends StatefulWidget {
-  final String? Function(String? value) validateEmail;
-  final String value;
+  final String? Function(String? value)? validateEmail;
+  final String? value;
   final bool isPassword;
   final bool isRead;
 
   const TextEdit({
     Key? key,
-    required this.validateEmail,
+    this.validateEmail,
     required this.value,
     required this.isPassword,
     required this.isRead,
@@ -19,7 +19,7 @@ class TextEdit extends StatefulWidget {
 }
 
 class _TextEditState extends State<TextEdit> {
-  bool show = true;
+  bool show = false;
 
   void showPassword() {
     show = !show;
@@ -30,7 +30,7 @@ class _TextEditState extends State<TextEdit> {
   Widget build(BuildContext context) {
     FocusNode focusNode = FocusNode();
     return TextFormField(
-      obscureText: show && widget.isPassword,
+      obscureText: !show && widget.isPassword,
       obscuringCharacter: "*",
       focusNode: focusNode,
       readOnly: widget.isRead,
@@ -47,6 +47,9 @@ class _TextEditState extends State<TextEdit> {
         suffixIcon: widget.isPassword
             ? IconButton(
                 onPressed: showPassword,
+                style: IconButton.styleFrom(
+                  elevation: 2,
+                ),
                 icon: Icon(
                   show ? Icons.visibility : Icons.visibility_off,
                   color: Colors.grey,

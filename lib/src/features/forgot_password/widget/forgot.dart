@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 import '../model/text_feild.dart';
-import 'chenge_password.dart';
 
 class Forgot extends StatefulWidget {
   const Forgot({Key? key}) : super(key: key);
@@ -11,25 +11,6 @@ class Forgot extends StatefulWidget {
 }
 
 class _ForgotState extends State<Forgot> {
-  late String email;
-
-  String? validateEmail(String? value) {
-    if (value == null) {
-      return "Emailda kamida bitta harf bo'lishi kerak";
-    }
-    if (!RegExp(r'[A-z]+[@]').hasMatch(value)) {
-      return "Email harflardan boshlanishi va @ belgisi bo'lishi shart";
-    }
-    if (!RegExp(r'[A-z]+[@][A-z]').hasMatch(value)) {
-      return "Emailda @ belgidan keyin kamida bitta harf bo'lishi kerak";
-    }
-    if (!value.contains(".com")) {
-      return "Emailda '.com' bo'lishi shart";
-    }
-    email = value;
-    return null;
-  }
-
   void openKey(bool a) {
     a = !a;
     setState(() {});
@@ -37,8 +18,26 @@ class _ForgotState extends State<Forgot> {
 
   @override
   Widget build(BuildContext context) {
+    final email = Provider.of(context);
     final _formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
+
+    String? validateEmail(String? value) {
+      if (value == null) {
+        return "Emailda kamida bitta harf bo'lishi kerak";
+      }
+      if (!RegExp(r'[A-z]+[@]').hasMatch(value)) {
+        return "Email harflardan boshlanishi va @ belgisi bo'lishi shart";
+      }
+      if (!RegExp(r'[A-z]+[@][A-z]').hasMatch(value)) {
+        return "Emailda @ belgidan keyin kamida bitta harf bo'lishi kerak";
+      }
+      if (!value.contains(".com")) {
+        return "Emailda '.com' bo'lishi shart";
+      }
+      email.update(value);
+      return null;
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -46,12 +45,7 @@ class _ForgotState extends State<Forgot> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Forgot(),
-            ),
-          ),
+          onPressed: () => email.openForgotPage(context),
         ),
       ),
       body: Center(
@@ -114,16 +108,7 @@ class _ForgotState extends State<Forgot> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChangePassword(value: email),
-                                  ));
-                            }
-                          },
+                          onPressed: () => email.openChangePasswordPage(_formKey, context),
                           child: Text(
                             "Send code",
                             style: TextStyle(

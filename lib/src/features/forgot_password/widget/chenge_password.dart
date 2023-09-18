@@ -1,35 +1,20 @@
 import 'package:flutter/material.dart';
 
+import '../model/model.dart';
 import '../model/text_feild.dart';
 import 'forgot.dart';
 
 class ChangePassword extends StatefulWidget {
-  final String value;
-
-  const ChangePassword({Key? key, required this.value}) : super(key: key);
+  const ChangePassword({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
-  String password="";
-
-  String? validateEmail(String? value) {
-    if (value == null) {
-      return "Emailda kamida bitta harf bo'lishi kerak";
-    }
-    if (!RegExp(r'[A-z]+[@]').hasMatch(value)) {
-      return "Email harflardan boshlanishi va @ belgisi bo'lishi shart";
-    }
-    if (!RegExp(r'[A-z]+[@][A-z]').hasMatch(value)) {
-      return "Emailda @ belgidan keyin kamida bitta harf bo'lishi kerak";
-    }
-    if (!value.contains(".com")) {
-      return "Emailda '.com' bo'lishi shart";
-    }
-    return null;
-  }
+  String password = "";
 
   String? validatePasswordOne(String? value) {
     if (value!.length < 4) {
@@ -48,6 +33,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of(context);
     final _formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
@@ -57,12 +43,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const Forgot(),
-            ),
-          ),
+          onPressed: ()=> model.openForgotPage(context),
         ),
       ),
       body: Center(
@@ -102,8 +83,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.012),
                         child: TextEdit(
-                          value: widget.value,
-                          validateEmail: validateEmail,
+                          value: model.email,
                           isPassword: false,
                           isRead: true,
                         ),
