@@ -11,9 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
+
   shared_preferences: ^2.2.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +38,11 @@ flutter:
       fonts:
         - asset: assets/fonts/Ranade-Bold.otf
           weight: 600
+
+flutter_intl:
+  enabled: true
+  class_name: GeneratedLocalization
+  main_locale: en
+  arb_dir: lib/src/common/localization
+  output_dir: lib/src/common/localization/generated
+  use_deferred_loading: false
