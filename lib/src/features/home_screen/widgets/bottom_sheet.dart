@@ -66,10 +66,11 @@ PersistentBottomSheetController customBottomSheet(BuildContext context) {
                     ),
                   ),
                   IconButton(
-                    onPressed: () => {},
-                    icon: const Image(
-                      image: AssetImage("assets/icons/ic_rus.png"),
-                      height: 24,
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                      size: 35,
                     ),
                   )
                 ],
