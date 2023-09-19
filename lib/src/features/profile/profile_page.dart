@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'custom_dialog.dart';
 import 'custom_list_tile.dart';
 
@@ -9,6 +8,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sizeH = MediaQuery.of(context).size.height;
+    final sizeW = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
       body: SafeArea(
@@ -43,7 +44,74 @@ class ProfilePage extends StatelessWidget {
                         backgroundColor: const Color(0xFF797979),
                         alignment: const Alignment(.8, 1.2),
                         label: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20))),
+                              context: context,
+                              builder: (context) => SizedBox(
+                                  height: 200,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      const Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 20, left: 20),
+                                            child: Text(
+                                              "Profile Images",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 20, left: 5),
+                                            child: Icon(
+                                              Icons.camera_alt_rounded,
+                                              size: 25,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: sizeH * 0.062,
+                                        width: sizeW * 0.93,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  const Color(0xFF36BFFA)),
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "Open Gallery",
+                                            style: TextStyle(fontSize: 17),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: sizeH * 0.062,
+                                        width: sizeW * 0.93,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color(0xFF36BFFA),
+                                          ),
+                                          onPressed: () {},
+                                          child: const Text(
+                                            "Open Camera",
+                                            style: TextStyle(fontSize: 17),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                            );
+                          },
                           child: const SizedBox(
                             child: Icon(
                               Icons.camera_alt_outlined,
@@ -149,8 +217,7 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-
-  ValueNotifier<int> selected=ValueNotifier(-1);
+  ValueNotifier<int> selected = ValueNotifier(-1);
   List<Widget> imagesPath = [
     const Image(
       image: AssetImage("assets/images/english.png"),
@@ -176,70 +243,80 @@ class _CustomSwitchState extends State<CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return CustomListTile(
-      title: "Theme",
-      trailing: Switch(
-        value: switchValue,
-        onChanged: (value) {
-          switchValue = value;
-          setState(() {});
-        },
-      ),
-      onTap: () {
-        showModalBottomSheet(
+        title: "Theme",
+        trailing: Switch(
+          value: switchValue,
+          onChanged: (value) {
+            switchValue = value;
+            setState(() {});
+          },
+        ),
+        onTap: () {
+          showModalBottomSheet(
             context: context,
-            builder: (context)=>Column(
+            builder: (context) => Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(left: 17,top: 20),
+                  padding: EdgeInsets.only(left: 17, top: 20),
                   child: Row(
                     children: [
-                      Text("Language",style: TextStyle(fontSize: 20,fontWeight:FontWeight.w700),),
-                      Image(image: AssetImage("assets/images/Vector.png"),height: 20,),
+                      Text(
+                        "Language",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w700),
+                      ),
+                      Image(
+                        image: AssetImage("assets/images/Vector.png"),
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 15,),
+                const SizedBox(
+                  height: 15,
+                ),
                 ValueListenableBuilder(
                     valueListenable: selected,
-                    builder: (context,value, child) {
+                    builder: (context, value, child) {
                       return ListView.builder(
                         shrinkWrap: true,
                         itemCount: list.length, // 10 ta element
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
                               title: SizedBox(
-                                height: 45,
-                                width: 100,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: index==value ? const Color(0xFF36BFFA) : const Color(0xFF575758),
-                                  ),
-                                  onPressed: () {
-                                    selected.value = index;
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(list[index]),
-                                      imagesPath[index],
-                                    ],
-                                  ),
-                                ),
-                              )
-                          );
+                            height: 45,
+                            width: 100,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: index == value
+                                    ? const Color(0xFF36BFFA)
+                                    : const Color(0xFF575758),
+                              ),
+                              onPressed: () {
+                                selected.value = index;
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(list[index]),
+                                  imagesPath[index],
+                                ],
+                              ),
+                            ),
+                          ));
                         },
                       );
-                    }
+                    }),
+                const SizedBox(
+                  height: 15,
                 ),
-                const SizedBox(height: 15,),
               ],
             ),
-        );
-        }
-
-    );
+          );
+        });
   }
 }
