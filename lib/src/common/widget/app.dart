@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/features/home_screen/widgets/home_page.dart';
 import 'package:note_app/src/features/profile/profile_page.dart';
 
 
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
       ],
       supportedLocales: GeneratedLocalization.delegate.supportedLocales,
       darkTheme: ThemeData.dark(useMaterial3: true),
-      home:  ProfilePage(),
+      home: const  HomePage(),
     );
   }
 }
