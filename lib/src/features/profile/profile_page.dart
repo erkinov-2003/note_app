@@ -96,9 +96,9 @@ class ProfilePage extends StatelessWidget {
                                         width: sizeW*0.93,
                                         child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                            ),
+                                              shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                              ),
                                               backgroundColor: const Color(0xFF36BFFA)
                                           ),
                                           onPressed: (){},
@@ -205,7 +205,7 @@ class ProfilePage extends StatelessWidget {
                                           child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(Radius.circular(10))
+                                                  borderRadius: BorderRadius.all(Radius.circular(10))
                                               ),
                                               backgroundColor: index==value ? const Color(0xFF36BFFA) : const Color(0xFF575758),
                                             ),
@@ -292,15 +292,15 @@ class _CustomSwitchState extends State<CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return CustomListTile(
-      title: "Theme",
-      trailing: Switch(
-        value: switchValue,
-        onChanged: (value) {
-          switchValue = value;
-          setState(() {});
-        },
-      ),
-      onTap: () {
+        title: "Theme",
+        trailing: Switch(
+          value: switchValue,
+          onChanged: (value) {
+            switchValue = value;
+            setState(() {});
+          },
+        ),
+        onTap: () {
         }
 
     );
