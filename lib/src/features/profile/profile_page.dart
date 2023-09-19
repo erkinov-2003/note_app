@@ -149,6 +149,29 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
+
+  ValueNotifier<int> selected=ValueNotifier(-1);
+  List<Widget> imagesPath = [
+    const Image(
+      image: AssetImage("assets/images/english.png"),
+      height: 25,
+    ),
+    const Image(
+      image: AssetImage("assets/images/russia.png"),
+      height: 25,
+    ),
+    const Image(
+      image: AssetImage("assets/images/uzbek.png"),
+      height: 25,
+    ),
+  ];
+
+  List<String> list = [
+    "English",
+    "Russia",
+    "Uzbek",
+  ];
+
   bool switchValue = false;
   @override
   Widget build(BuildContext context) {
@@ -161,7 +184,62 @@ class _CustomSwitchState extends State<CustomSwitch> {
           setState(() {});
         },
       ),
-      onTap: () {},
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context)=>Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 17,top: 20),
+                  child: Row(
+                    children: [
+                      Text("Language",style: TextStyle(fontSize: 20,fontWeight:FontWeight.w700),),
+                      Image(image: AssetImage("assets/images/Vector.png"),height: 20,),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15,),
+                ValueListenableBuilder(
+                    valueListenable: selected,
+                    builder: (context,value, child) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: list.length, // 10 ta element
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                              title: SizedBox(
+                                height: 45,
+                                width: 100,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: index==value ? const Color(0xFF36BFFA) : const Color(0xFF575758),
+                                  ),
+                                  onPressed: () {
+                                    selected.value = index;
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(list[index]),
+                                      imagesPath[index],
+                                    ],
+                                  ),
+                                ),
+                              )
+                          );
+                        },
+                      );
+                    }
+                ),
+                const SizedBox(height: 15,),
+              ],
+            ),
+        );
+        }
+
     );
   }
 }
