@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
-import '../../../common/models/user_model.dart';
-import '../../../common/utils/storage.dart';
-import '../../auth/widgets/registr_page_controller.dart';
-import '../model/text_feild.dart';
+import '../model/text_field.dart';
 
 class ForgotWithModel extends StatefulWidget {
   const ForgotWithModel({Key? key}) : super(key: key);
@@ -71,12 +67,6 @@ class _ForgotState extends State<Forgot> {
       if (!value.contains(".com")) {
         return "Emailda '.com' bo'lishi shart";
       }
-      List<String> users=$storage.getStringList("users") ?? [];
-      List<User> allUsers=List<User>.from(users.map((e) => User.fromJson(jsonDecode(e))).toList()).toList();
-      bool isSighnedIn=allUsers.any((element) => element.email==value);
-      if(!isSighnedIn){
-        return "Bunday foydalanuvchi yo'q";
-      }
       email.update(value);
       return null;
     }
@@ -86,13 +76,8 @@ class _ForgotState extends State<Forgot> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.black,
-        leading: BackButton(
-          onPressed: () => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const RegistrationPageController(),
-            ),
-          ),
+        leading: const BackButton(
+          color: AppColors.white,
         ),
       ),
       body: Center(
@@ -111,7 +96,7 @@ class _ForgotState extends State<Forgot> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
@@ -122,7 +107,7 @@ class _ForgotState extends State<Forgot> {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFF575758),
+                      color: AppColors.textColor,
                     ),
                   ),
                 ),
@@ -145,7 +130,7 @@ class _ForgotState extends State<Forgot> {
                           style: ButtonStyle(
                             backgroundColor:
                                 const MaterialStatePropertyAll<Color>(
-                              Color(0xFF36BFFA),
+                              AppColors.airColor,
                             ),
                             fixedSize: MaterialStatePropertyAll<Size>(
                               Size(
@@ -166,7 +151,7 @@ class _ForgotState extends State<Forgot> {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,
-                              color: Colors.white,
+                              color: AppColors.white,
                             ),
                           ),
                         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/model.dart';
-import '../model/text_feild.dart';
+import '../model/text_field.dart';
 
 class ChangePassword extends StatefulWidget {
 

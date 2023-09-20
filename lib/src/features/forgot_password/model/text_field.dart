@@ -67,7 +67,7 @@ class _TextEditState extends State<TextEdit> {
           color: Color(0xFF575758),
         ),
         filled: true,
-        fillColor: const Color(0xFFF262629),
+        fillColor: const Color(0xFF262629),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10),
