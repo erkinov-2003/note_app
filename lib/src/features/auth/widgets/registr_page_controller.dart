@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import '../controller/main_controller.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
 import 'page_widget.dart';
-import 'signin_with.dart';
+import 'signing_with.dart';
 
 class RegistrationPageController extends StatefulWidget {
   const RegistrationPageController({super.key});
@@ -75,12 +76,12 @@ class _ViewState extends State<View> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 8),
                         isRegistration
                             ? const Text(
                                 "Your NOTE in\nthe here...",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 35,
                                 ),
@@ -88,7 +89,7 @@ class _ViewState extends State<View> {
                             : const Text(
                                 "Welcome to back\nYour NOTE...",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 35,
                                 ),

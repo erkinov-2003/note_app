@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../common/constants/app_colors.dart';
 import '../../home_screen/widgets/home_page.dart';
 import 'text_fields.dart';
 
@@ -106,7 +107,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 style: FilledButton.styleFrom(
                   maximumSize: const Size(400, 60),
                   minimumSize: const Size(400, 60),
-                  backgroundColor: const Color(0xFF36BFFA),
+                  backgroundColor: AppColors.airColor,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),

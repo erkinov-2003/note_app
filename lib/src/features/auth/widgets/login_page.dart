@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 
 import '../../forgot_password/widget/forgot.dart';
 import '../../home_screen/widgets/home_page.dart';
@@ -92,7 +93,7 @@ class _LogInState extends State<LogIn> {
               style: FilledButton.styleFrom(
                   maximumSize: const Size(400, 60),
                   minimumSize: const Size(400, 60),
-                  backgroundColor: const Color(0xFF36BFFA),
+                  backgroundColor: AppColors.airColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)))),
               onPressed: () {
@@ -129,7 +130,7 @@ class _LogInState extends State<LogIn> {
                 "Forgot password?",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF36BFFA),
+                  color: AppColors.airColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),

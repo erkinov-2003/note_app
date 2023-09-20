@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 
 class TextFields extends StatefulWidget {
   final String infoText;
@@ -8,7 +9,6 @@ class TextFields extends StatefulWidget {
   final TextInputAction textInputAction;
   final String? Function(String? value)? validator;
   final TextEditingController controller;
-
 
   const TextFields({
     required this.controller,
@@ -51,7 +51,7 @@ class _TextFieldsState extends State<TextFields> {
             child: Text(
               widget.infoText,
               style: const TextStyle(
-                color: Color(0xFF575758),
+                color: AppColors.textColor,
                 fontSize: 13,
               ),
             ),
@@ -69,24 +69,28 @@ class _TextFieldsState extends State<TextFields> {
                 obscureText: showPassword ?? false,
                 decoration: InputDecoration(
                   errorStyle: const TextStyle(
-                    color: Color(0xFFB04F4F),
+                    color: AppColors.errorBorder,
                     fontSize: 12,
                     fontWeight: FontWeight.w100,
                   ),
                   focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xFFFFFFFF)),
+                    borderSide: BorderSide(
+                      color: AppColors.white,
+                    ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                   filled: true,
-                  fillColor: const Color(0xFF262629),
+                  fillColor: AppColors.fillColor,
                   suffixIcon: showPassword != null
                       ? GestureDetector(
                           onTap: changeObscure,
                           child: Icon(
-                            showPassword! ? Icons.visibility_off : Icons.visibility,
-                            color: const Color(0xFF878787),
+                            showPassword!
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: AppColors.iconColor,
                           ),
                         )
                       : null,
@@ -97,14 +101,14 @@ class _TextFieldsState extends State<TextFields> {
                   ),
                   hintText: widget.exampleText,
                   hintStyle: const TextStyle(
-                    color: Color(0xFF575758),
+                    color: AppColors.textColor,
                     fontSize: 13,
                   ),
                 ),
                 showCursor: true,
-                cursorColor: Colors.white,
+                cursorColor: AppColors.white,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ),
