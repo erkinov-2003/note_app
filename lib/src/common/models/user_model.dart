@@ -5,8 +5,8 @@ class User {
   final String? name;
   final String? surname;
   final String? email;
-  final String? loginPassword;
-  final String? secretPassword;
+  final String? password;
+  final String? notePassword;
   final String? image;
 
   User({
@@ -14,8 +14,8 @@ class User {
     this.name,
     this.surname,
     this.email,
-    this.loginPassword,
-    this.secretPassword,
+    this.password,
+    this.notePassword,
     this.image,
   });
 
@@ -24,8 +24,8 @@ class User {
     String? name,
     String? surname,
     String? email,
-    String? loginPassword,
-    String? secretPassword,
+    String? password,
+    String? notePassword,
     String? image,
   }) =>
       User(
@@ -33,8 +33,8 @@ class User {
         name: name ?? this.name,
         surname: surname ?? this.surname,
         email: email ?? this.email,
-        loginPassword: loginPassword ?? this.loginPassword,
-        secretPassword: secretPassword ?? this.secretPassword,
+        password: password ?? this.password,
+        notePassword: notePassword ?? this.notePassword,
         image: image ?? this.image,
       );
 
@@ -47,8 +47,8 @@ class User {
         name: json["name"] as String?,
         surname: json["surname"] as String?,
         email: json["email"] as String?,
-        loginPassword: json["loginPassword"] as String?,
-        secretPassword: json["secretPassword"] as String?,
+        password: json["password"] as String?,
+        notePassword: json["notePassword"] as String?,
         image: json["image"] as String?,
       );
 
@@ -57,8 +57,8 @@ class User {
         "name": name,
         "surname": surname,
         "email": email,
-        "loginPassword": loginPassword,
-        "secretPassword": secretPassword,
+        "password": password,
+        "notePassword": notePassword,
         "image": image,
       };
 }
