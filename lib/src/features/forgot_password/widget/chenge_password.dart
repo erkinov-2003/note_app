@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../home_screen/home_page.dart';
 import '../model/model.dart';
 import '../model/text_feild.dart';
-import 'forgot.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
@@ -132,6 +132,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                         padding: EdgeInsets.only(top: size.height * 0.20),
                         child: ElevatedButton(
                           style: ButtonStyle(
+                            backgroundColor:
+                            const MaterialStatePropertyAll<Color>(
+                              Color(0xFF36BFFA),
+                            ),
                             fixedSize: MaterialStatePropertyAll<Size>(
                               Size(
                                 size.width,
@@ -149,7 +153,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Forgot(),
+                                    builder: (context) => HomePage(),
                                   ));
                             }
                           },
@@ -158,6 +162,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,
+                              color: Colors.white,
                             ),
                           ),
                         ),

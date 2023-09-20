@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../../forgot_password/widget/forgot.dart';
 import 'text_fields.dart';
 
 class LogIn extends StatefulWidget {
@@ -62,7 +62,12 @@ class _LogInState extends State<LogIn> {
           const SizedBox(height: 20),
           Center(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ForgotWithModel(),
+                ),
+              ),
               child: const Text(
                 "Forgot password?",
                 style: TextStyle(

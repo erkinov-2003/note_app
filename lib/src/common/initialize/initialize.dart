@@ -60,6 +60,13 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> 
     },
   ),
   (
+  'Initializing Notes',
+      (dependencies) async {
+    // final notes = $storage;
+    $secureStorage = const FlutterSecureStorage();
+  },
+  ),
+  (
     'Custom Delay 1',
     (_) async {
       await Future.delayed(const Duration(seconds: 1));
