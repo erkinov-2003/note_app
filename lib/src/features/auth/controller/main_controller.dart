@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MainController with ChangeNotifier {
   late PageController pageController;
+  late TextEditingController textEditingController;
   int pageNumber = 1;
   bool isRegistration = true;
 
@@ -23,7 +24,7 @@ class MainController with ChangeNotifier {
       pageController.animateToPage(1,
           duration: const Duration(milliseconds: 300), curve: Curves.linear);
       isRegistration = false;
-     notifyListeners();
+      notifyListeners();
     } else if (!isRegistration) {
       pageNumber = 1;
       pageController.animateToPage(0,
@@ -32,6 +33,8 @@ class MainController with ChangeNotifier {
       notifyListeners();
     }
   }
+
+
 }
 
 class Provider extends InheritedNotifier<MainController> {
@@ -47,12 +50,10 @@ class Provider extends InheritedNotifier<MainController> {
   static Provider? maybeOf(BuildContext context, {bool listen = false}) =>
       listen
           ? context.dependOnInheritedWidgetOfExactType<Provider>()
-          : context
-          .getElementForInheritedWidgetOfExactType<Provider>()
-          ?.widget as Provider?;
+          : context.getElementForInheritedWidgetOfExactType<Provider>()?.widget
+              as Provider?;
 
-  static Never _noInheritedWidgetError() =>
-      throw ArgumentError(
+  static Never _noInheritedWidgetError() => throw ArgumentError(
         'Not found InheritedWidget of type Provider',
         'out_of_scope',
       );

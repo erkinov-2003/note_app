@@ -9,10 +9,12 @@ class RegistrationPageController extends StatefulWidget {
   const RegistrationPageController({super.key});
 
   @override
-  State<RegistrationPageController> createState() => _RegistrationPageControllerState();
+  State<RegistrationPageController> createState() =>
+      _RegistrationPageControllerState();
 }
 
-class _RegistrationPageControllerState extends State<RegistrationPageController> {
+class _RegistrationPageControllerState
+    extends State<RegistrationPageController> {
   late MainController controller;
   late PageController pageController;
 
@@ -66,6 +68,7 @@ class _ViewState extends State<View> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
+                  flex: 2,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
@@ -92,13 +95,13 @@ class _ViewState extends State<View> {
                               ),
                         const SizedBox(height: 10),
                         const PageWidget(),
-                        const SizedBox(height: 20),
+                        // const SizedBox(height: 20),
                       ],
                     ),
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     onPageChanged: onTap,
@@ -110,8 +113,10 @@ class _ViewState extends State<View> {
                   ),
                 ),
                 const Expanded(
+                  flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
                         Spacer(),
