@@ -6,6 +6,11 @@ abstract class AppIcons {
   static const globe = "assets/icons/globe.png";
   static const lockIcon = "assets/icons/lock.png";
   static const editIcon = "assets/icons/edit.png";
+
+  static const icApple = "assets/images/apple.png";
+  static const icFacebook = "assets/images/facebook.png";
+  static const icTwitter = "assets/images/twitter.png";
+
   static const avatar = "assets/images/avatar_add.png";
   static const ruFlag = "assets/icons/ru_flag.png";
   static const ukFlag = "assets/icons/uk_flag.png";

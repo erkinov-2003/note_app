@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 
 class IconsButton extends StatefulWidget {
   final String image;
@@ -20,7 +21,7 @@ class _IconsButtonState extends State<IconsButton> {
       width: 44,
       child: DecoratedBox(
         decoration: const BoxDecoration(
-          color: Color(0xFF262629),
+          color: AppColors.buttonColor,
           borderRadius: BorderRadius.all(Radius.circular(14)),
         ),
         child: Padding(

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import '../controller/main_controller.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
 import 'page_widget.dart';
-import 'signin_with.dart';
+import 'signing_with.dart';
 
 class RegistrationPageController extends StatefulWidget {
   const RegistrationPageController({super.key});
 
   @override
-  State<RegistrationPageController> createState() => _RegistrationPageControllerState();
+  State<RegistrationPageController> createState() =>
+      _RegistrationPageControllerState();
 }
 
-class _RegistrationPageControllerState extends State<RegistrationPageController> {
+class _RegistrationPageControllerState
+    extends State<RegistrationPageController> {
   late MainController controller;
   late PageController pageController;
 
@@ -66,18 +69,19 @@ class _ViewState extends State<View> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
+                  flex: 2,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 15),
+                        const SizedBox(height: 8),
                         isRegistration
                             ? const Text(
-                                "Your NOTE in\nthe here...",
+                                "Your NOTE in the here...",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 35,
                                 ),
@@ -85,20 +89,20 @@ class _ViewState extends State<View> {
                             : const Text(
                                 "Welcome to back\nYour NOTE...",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 35,
                                 ),
                               ),
                         const SizedBox(height: 10),
                         const PageWidget(),
-                        const SizedBox(height: 20),
+                        // const SizedBox(height: 20),
                       ],
                     ),
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     onPageChanged: onTap,
@@ -110,8 +114,10 @@ class _ViewState extends State<View> {
                   ),
                 ),
                 const Expanded(
+                  flex: 2,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
                         Spacer(),
