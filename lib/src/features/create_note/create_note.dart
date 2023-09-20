@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
+
+import '../../common/models/note_model.dart';
 import 'mixin/note_mixin.dart';
 
 class CreateNote extends StatefulWidget {
-  const CreateNote({Key? key}) : super(key: key);
+  final NoteModel? note;
+
+  const CreateNote({
+    this.note,
+    super.key,
+  });
 
   @override
   State<CreateNote> createState() => _CreateNoteState();
@@ -14,6 +21,15 @@ class CreateNote extends StatefulWidget {
 class _CreateNoteState extends State<CreateNote> with NoteMixin {
   @override
   Widget build(BuildContext context) {
+    final noteModel = NoteModel(
+      image: "",
+      title: "",
+      body: "",
+      dateTime: DateTime.now(),
+      link: "",
+      isSecret: false,
+    );
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -40,6 +56,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
           GestureDetector(
             onTap: () async {
               await pickImageFromGallery();
+              noteModel.image = "";
             },
             child: const Padding(
               padding: EdgeInsets.all(15),
@@ -65,7 +82,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
           return SizedBox.square(
             dimension: 75,
             child: FloatingActionButton(
-              onPressed: () => onSaved,
+              onPressed: onSaved,
               shape: const CircleBorder(),
               backgroundColor:
                   value ? AppColors.colorFAB1 : AppColors.colorFAB0,
@@ -87,6 +104,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                 valueListenable: isDisabled,
                 builder: (context, value, child) {
                   return TextField(
+                    controller: controllerTitle,
                     onChanged: onChanged,
                     style: const TextStyle(
                       color: AppColors.black,
@@ -116,7 +134,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
               valueListenable: isDisabled,
               builder: (context, value, child) {
                 return TextField(
-                  controller: controller,
+                  controller: controllerBody,
                   onChanged: onChanged,
                   style: const TextStyle(
                     fontSize: 18,
@@ -126,7 +144,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                   keyboardType: TextInputType.multiline,
                   cursorColor: AppColors.transparent,
                   cursorRadius: const Radius.circular(5),
-                  maxLines: value || controller.text.isEmpty ? 5 : null,
+                  maxLines: value || controllerBody.text.isEmpty ? 5 : null,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText:
