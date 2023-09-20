@@ -73,7 +73,7 @@ class _ForgotState extends State<Forgot> {
       }
       List<String> users = $storage.getStringList("users") ?? [];
       List<User> allUsers = List<User>.from(
-              users.map((e) => User.fromJson(jsonDecode(e))).toList())
+              users.map((e) => User.fromMap(jsonDecode(e))).toList())
           .toList();
       bool isSighnedIn = allUsers.any((element) => element.email == value);
       if (!isSighnedIn) {
