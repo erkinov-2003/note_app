@@ -73,8 +73,6 @@ class Model with ChangeNotifier {
       if (index != -1) {
         allUsers.removeAt(index);
         User newUser = foundUsers.first.copyWith(loginPassword: password);
-        print(password);
-        print(newUser);
         allUsers.insert(index, newUser);
         users = allUsers.map((e) => jsonEncode(e.toJson())).toList();
         $storage.setStringList("users", users);
