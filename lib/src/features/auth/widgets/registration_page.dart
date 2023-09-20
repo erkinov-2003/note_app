@@ -73,6 +73,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const SizedBox(height: 10),
                   TextFields(
                     controller: nameController,
                     validator: validateName,
@@ -101,7 +102,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             Center(
               child: FilledButton(
                 style: FilledButton.styleFrom(

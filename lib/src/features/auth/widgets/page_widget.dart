@@ -32,7 +32,7 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: isRegistration
-                    ? const DecoratedBox(
+                    ?  const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -71,7 +71,7 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: !isRegistration
-                    ? const DecoratedBox(
+                    ?  const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
