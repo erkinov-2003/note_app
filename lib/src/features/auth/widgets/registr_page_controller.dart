@@ -37,7 +37,7 @@ class _RegistrationPageControllerState
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ProviderRegistration(
       controller: controller,
       child: const View(),
     );
@@ -54,9 +54,9 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
-    final isRegistration = Provider.of(context, listen: true).isRegistration;
-    final onTap = Provider.of(context).onTap;
-    final pageController = Provider.of(context).pageController;
+    final isRegistration = ProviderRegistration.of(context, listen: true).isRegistration;
+    final onTap = ProviderRegistration.of(context).onTap;
+    final pageController = ProviderRegistration.of(context).pageController;
 
     return Scaffold(
       backgroundColor: Colors.black,

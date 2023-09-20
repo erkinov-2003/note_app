@@ -1,11 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../../common/models/user_model.dart';
-import '../../../common/utils/storage.dart';
-import '../../home_screen/widgets/home_page.dart';
+import '../controller/main_controller.dart';
 import 'text_fields.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -16,7 +12,6 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  List<User> users = [];
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -24,58 +19,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   void initState() {
-    getAllUsers();
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
   }
 
-  void getAllUsers() async {
-    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
-    users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
-  }
-
-
-  String? validatePassword(String? value) {
-    if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return "Password is too short, it must be at least 8 characters";
-    }
-    if (value != null && value.contains(" ")) {
-      return "Password shouldn't have space";
-    }
-    if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return "Password must have at least one number";
-    }
-    if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return "Password must have at least one letter";
-    }
-    if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return "Password must have at least one Capital letter";
-    }
-    return null;
-  }
-
-  String? validateEmail(String? value) {
-    if (users.any((e) => e.email == value)) {
-      return "You are already Registered";
-    }
-    if (value != null && !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$").hasMatch(value)) {
-      return "Invalid email address!";
-    }
-    return null;
-  }
-
-  String? validateName(String? value) {
-    if (value != null && value.length <= 3) {
-      return "Invalid name!";
-    }
-
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final validatePassword = ProviderRegistration.of(context).validatePasswordR;
+    final validateEmail = ProviderRegistration.of(context).validateEmailR;
+    final validateName = ProviderRegistration.of(context).validateName;
+    final checkRegistration =
+        ProviderRegistration.of(context).checkRegistration;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -131,28 +87,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    User userOne = User(
-                      name: nameController.text,
-                      email: emailController.text,
-                      loginPassword: passwordController.text,
-                    );
-                    users.add(userOne);
-                    $secureStorage.write(
-                      key: StorageKeys.users.key,
-                      value: jsonEncode(
-                        users.map((e) => e.toJson()).toList(),
-                      ),
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
-                  }
-                },
+                onPressed: () => checkRegistration(
+                  formKey,
+                  nameController,
+                  emailController,
+                  passwordController,
+                  context,
+                ),
                 child: const Center(
                   child: Text(
                     "Sign In",
