@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../home_screen/widgets/home_page.dart';
+import '../../home_screen/home_page.dart';
 import '../model/model.dart';
 import '../model/text_feild.dart';
 
