@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
+import '../../../common/constants/app_colors.dart';
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
 import '../model/text_field.dart';
 
 class ForgotWithModel extends StatefulWidget {
@@ -66,6 +70,14 @@ class _ForgotState extends State<Forgot> {
       }
       if (!value.contains(".com")) {
         return "Emailda '.com' bo'lishi shart";
+      }
+      List<String> users = $storage.getStringList("users") ?? [];
+      List<User> allUsers = List<User>.from(
+              users.map((e) => User.fromJson(jsonDecode(e))).toList())
+          .toList();
+      bool isSighnedIn = allUsers.any((element) => element.email == value);
+      if (!isSighnedIn) {
+        return "Bunday foydalanuvchi yo'q";
       }
       email.update(value);
       return null;
