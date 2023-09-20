@@ -12,8 +12,10 @@ mixin NoteMixin on State<CreateNote> {
   final isDisabled = ValueNotifier<bool>(true);
   final controllerTitle = TextEditingController();
   final controllerBody = TextEditingController();
+  String noteId = "0";
+  String userId = "0";
   String? imagePath;
-  String? link;
+  List<String>? link;
   bool isSecret = false;
 
   void onChanged(String value) => isDisabled.value = value.isEmpty;
@@ -28,6 +30,8 @@ mixin NoteMixin on State<CreateNote> {
 
   void onSaved() async {
     final noteModel = NoteModel(
+      noteId: noteId,
+      userId: userId,
       dateTime: DateTime.now(),
       image: imagePath,
       title: controllerTitle.text,

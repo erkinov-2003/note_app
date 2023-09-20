@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_icons.dart';
 
+import '../../../common/constants/app_colors.dart';
 import 'icons_button.dart';
 
 class SignInWith extends StatelessWidget {
@@ -13,7 +15,7 @@ class SignInWith extends StatelessWidget {
           "Sign in with ",
           style: TextStyle(
             fontSize: 14,
-            color: Color(0xFF575758),
+            color: AppColors.textColor,
           ),
         ),
         SizedBox(height: 8),
@@ -23,13 +25,13 @@ class SignInWith extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconsButton(
-                image: "assets/images/apple.png",
+                image: AppIcons.icApple,
               ),
               IconsButton(
-                image: "assets/images/facebook.png",
+                image: AppIcons.icFacebook,
               ),
               IconsButton(
-                image: "assets/images/twitter.png",
+                image: AppIcons.icTwitter,
               ),
             ],
           ),

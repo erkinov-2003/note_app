@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 
 import '../controller/main_controller.dart';
 
@@ -19,7 +20,7 @@ class _PageWidgetState extends State<PageWidget> {
       width: 220,
       child: DecoratedBox(
         decoration: const BoxDecoration(
-          color: Color(0xFF1A1A1B),
+          color: AppColors.backgroundColor,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         child: Row(
@@ -35,12 +36,12 @@ class _PageWidgetState extends State<PageWidget> {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black54,
+                              color: AppColors.black54,
                               offset: Offset(0, 4),
                               blurRadius: 2,
                             ),
                           ],
-                          color: Color(0x663E3E41),
+                          color: AppColors.borderColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Center(
@@ -48,7 +49,7 @@ class _PageWidgetState extends State<PageWidget> {
                             "Register",
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xFFFFFFFF),
+                              color: AppColors.white,
                             ),
                           ),
                         ),
@@ -58,7 +59,7 @@ class _PageWidgetState extends State<PageWidget> {
                           "Register",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF575758),
+                            color: AppColors.textColor,
                           ),
                         ),
                       ),
@@ -74,12 +75,12 @@ class _PageWidgetState extends State<PageWidget> {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black54,
+                              color: AppColors.black54,
                               offset: Offset(0, 4),
                               blurRadius: 2,
                             ),
                           ],
-                          color: Color(0x663E3E41),
+                          color: AppColors.borderColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Center(
@@ -87,7 +88,7 @@ class _PageWidgetState extends State<PageWidget> {
                             "Log in",
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xFFFFFFFF),
+                              color: AppColors.white,
                             ),
                           ),
                         ),
@@ -97,7 +98,7 @@ class _PageWidgetState extends State<PageWidget> {
                           "Log in",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF575758),
+                            color: AppColors.textColor,
                           ),
                         ),
                       ),
