@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 
 import '../../../common/constants/app_colors.dart';
@@ -9,6 +10,7 @@ class LanguageBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization=GeneratedLocalization();
     List<String> list = [
       "English",
       "Russia",
@@ -19,7 +21,7 @@ class LanguageBottomSheet extends StatelessWidget {
       AppIcons.ruFlag,
       AppIcons.uzFlag,
     ];
-    int index = $storage.getInt("language") ?? 0;
+    int index = $storage.getInt(StorageKeys.locale.key) ?? 0;
     ValueNotifier<int> selected = ValueNotifier(index);
     return BottomSheet(
       onClosing: () {},
@@ -32,9 +34,9 @@ class LanguageBottomSheet extends StatelessWidget {
             padding: const EdgeInsets.only(left: 17, top: 20),
             child: Row(
               children: [
-                const Text(
-                  "Language",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                 Text(
+                  localization.language,
+                  style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(width: 20),
                 const Image(
@@ -75,7 +77,7 @@ class LanguageBottomSheet extends StatelessWidget {
                         ),
                         onPressed: () async {
                           selected.value = index;
-                          await $storage.setInt("language", index);
+                          await $storage.setInt(StorageKeys.locale.key, index);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

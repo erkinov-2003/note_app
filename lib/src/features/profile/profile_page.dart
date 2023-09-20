@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
 
+import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
 import '../../common/utils/storage.dart';
 import 'widgets/custom_dialog.dart';
@@ -12,30 +15,36 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF000000),
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+    final localization = GeneratedLocalization();
+    final storedName = $storage.getString("name") ?? localization.yourName;
+    ValueNotifier<String> name = ValueNotifier(storedName);
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 450,
+      ),
+      child: Scaffold(
+        backgroundColor: const Color(0xFF000000),
+        appBar: AppBar(
+          leading: BackButton(
+            color: AppColors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+          backgroundColor: const Color(0xFF000000),
+          title: Text(
+            localization.profile,
+            style: const TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: SafeArea(
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                    left: 20,
-                    bottom: 20,
-                  ),
-                  child: Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -46,7 +55,12 @@ class ProfilePage extends StatelessWidget {
                         backgroundColor: const Color(0xFF797979),
                         alignment: const Alignment(.8, 1.2),
                         label: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => const CameraBottomSheet(),
+                            );
+                          },
                           child: const SizedBox(
                             child: Icon(
                               Icons.camera_alt_outlined,
@@ -102,7 +116,7 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
-                  title: "Language",
+                  title: localization.language,
                   trailing: const Image(
                     width: 25,
                     height: 25,
@@ -116,7 +130,7 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 CustomListTile(
-                  title: "Secret note Password",
+                  title: localization.secretPassword,
                   trailing: const Image(
                     width: 25,
                     height: 25,
@@ -126,7 +140,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const Spacer(),
                 CustomListTile(
-                  title: "Log out",
+                  title: localization.logOut,
                   trailing: const Image(
                     width: 25,
                     height: 25,
@@ -169,7 +183,7 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool switchValue = $storage.getBool("isDark") ?? false;
+  bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
   @override
   Widget build(BuildContext context) {
     return CustomListTile(
@@ -178,7 +192,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
         value: switchValue,
         onChanged: (value) {
           switchValue = value;
-          $storage.setBool("isDark", switchValue);
+          $storage.setBool(StorageKeys.theme.key, switchValue);
           setState(() {});
         },
       ),
