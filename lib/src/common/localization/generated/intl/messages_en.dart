@@ -21,5 +21,40 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addPassword": MessageLookupByLibrary.simpleMessage("Add Password"),
+        "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
+        "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
+        "enterEmailAddress":
+            MessageLookupByLibrary.simpleMessage("Enter email address"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("Forgot password?"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "languageApp": MessageLookupByLibrary.simpleMessage("Language APP"),
+        "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "newNote": MessageLookupByLibrary.simpleMessage("New Note"),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "openCamera": MessageLookupByLibrary.simpleMessage("Open Camera"),
+        "openGallery": MessageLookupByLibrary.simpleMessage("Open Gallery"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "profileImage": MessageLookupByLibrary.simpleMessage("Profile Image"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "secretPassword":
+            MessageLookupByLibrary.simpleMessage("Secret note Password"),
+        "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
+        "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signInTitle": MessageLookupByLibrary.simpleMessage(
+            "Welcome to back Your NOTE..."),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signUpTitle":
+            MessageLookupByLibrary.simpleMessage("Your NOTE in the here..."),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
+        "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
+      };
 }
