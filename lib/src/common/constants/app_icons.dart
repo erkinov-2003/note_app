@@ -10,4 +10,8 @@ abstract class AppIcons {
   static const ruFlag = "assets/icons/ru_flag.png";
   static const ukFlag = "assets/icons/uk_flag.png";
   static const uzFlag = "assets/icons/uz_flag.png";
+
+  static const icGallery = "assets/images/ic_image.png";
+  static const icLink = "assets/images/ic_link.png";
+  static const icSave = "assets/images/ic_save.png";
 }

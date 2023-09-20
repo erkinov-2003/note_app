@@ -12,8 +12,6 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final storedName = $storage.getString("name") ?? "Your Name";
-    final ValueNotifier<String> name = ValueNotifier(storedName);
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
       body: SafeArea(

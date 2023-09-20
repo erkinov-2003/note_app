@@ -35,6 +35,7 @@ void main() {
       );
     },
     onError: (error, stackTrace) => runApp(
+
       ErrorApp(message: '$error'),
     ),
   ).ignore();
