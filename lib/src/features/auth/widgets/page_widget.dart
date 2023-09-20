@@ -41,7 +41,7 @@ class _PageWidgetState extends State<PageWidget> {
                               blurRadius: 2,
                             ),
                           ],
-                          color: Color(0x663E3E41),
+                          color: AppColors.borderColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Center(
@@ -80,7 +80,7 @@ class _PageWidgetState extends State<PageWidget> {
                               blurRadius: 2,
                             ),
                           ],
-                          color: Color(0x663E3E41),
+                          color: AppColors.borderColor,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Center(
@@ -88,7 +88,7 @@ class _PageWidgetState extends State<PageWidget> {
                             "Log in",
                             style: TextStyle(
                               fontSize: 14,
-                              color: Color(0xFFFFFFFF),
+                              color: AppColors.white,
                             ),
                           ),
                         ),
@@ -98,7 +98,7 @@ class _PageWidgetState extends State<PageWidget> {
                           "Log in",
                           style: TextStyle(
                             fontSize: 14,
-                            color: Color(0xFF575758),
+                            color: AppColors.textColor,
                           ),
                         ),
                       ),
