@@ -43,22 +43,22 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromMap(Map<String, Object?> json) => User(
-    id: json["id"] as String?,
-    name: json["name"] as String?,
-    surname: json["surname"] as String?,
-    email: json["email"] as String?,
-    password: json["password"] as String?,
-    notePassword: json["notePassword"] as String?,
-    image: json["image"] as String?,
-  );
+        id: json["id"] as String?,
+        name: json["name"] as String?,
+        surname: json["surname"] as String?,
+        email: json["email"] as String?,
+        password: json["password"] as String?,
+        notePassword: json["notePassword"] as String?,
+        image: json["image"] as String?,
+      );
 
   Map<String, Object?> toMap() => {
-    "id": id,
-    "name": name,
-    "surname": surname,
-    "email": email,
-    "password": password,
-    "notePassword": notePassword,
-    "image": image,
-  };
+        "id": id,
+        "name": name,
+        "surname": surname,
+        "email": email,
+        "password": password,
+        "notePassword": notePassword,
+        "image": image,
+      };
 }

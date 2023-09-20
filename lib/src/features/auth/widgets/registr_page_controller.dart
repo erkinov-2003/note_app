@@ -79,7 +79,7 @@ class _ViewState extends State<View> {
                         const SizedBox(height: 8),
                         isRegistration
                             ? const Text(
-                                "Your NOTE in\nthe here...",
+                                "Your NOTE in the here...",
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
