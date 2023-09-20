@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
+import '../../auth/widgets/registr_page_controller.dart';
 import '../model/text_feild.dart';
 
 class ForgotWithModel extends StatefulWidget {
@@ -16,7 +21,7 @@ class _ForgotWithModelState extends State<ForgotWithModel> {
   @override
   void initState() {
     super.initState();
-    model = Model(email: "");
+    model = Model(email: "", password: "");
   }
 
   @override
@@ -66,6 +71,12 @@ class _ForgotState extends State<Forgot> {
       if (!value.contains(".com")) {
         return "Emailda '.com' bo'lishi shart";
       }
+      List<String> users=$storage.getStringList("users") ?? [];
+      List<User> allUsers=List<User>.from(users.map((e) => User.fromJson(jsonDecode(e))).toList()).toList();
+      bool isSighnedIn=allUsers.any((element) => element.email==value);
+      if(!isSighnedIn){
+        return "Bunday foydalanuvchi yo'q";
+      }
       email.update(value);
       return null;
     }
@@ -76,7 +87,12 @@ class _ForgotState extends State<Forgot> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: () => email.openForgotPage(context),
+          onPressed: () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RegistrationPageController(),
+            ),
+          ),
         ),
       ),
       body: Center(
@@ -127,6 +143,10 @@ class _ForgotState extends State<Forgot> {
                         padding: EdgeInsets.only(top: size.height * 0.45),
                         child: ElevatedButton(
                           style: ButtonStyle(
+                            backgroundColor:
+                                const MaterialStatePropertyAll<Color>(
+                              Color(0xFF36BFFA),
+                            ),
                             fixedSize: MaterialStatePropertyAll<Size>(
                               Size(
                                 size.width * 0.85,
@@ -139,12 +159,14 @@ class _ForgotState extends State<Forgot> {
                               ),
                             ),
                           ),
-                          onPressed: () => email.openChangePasswordPage(_formKey, context),
+                          onPressed: () =>
+                              email.openChangePasswordPage(_formKey, context),
                           child: Text(
                             "Send code",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,
+                              color: Colors.white,
                             ),
                           ),
                         ),

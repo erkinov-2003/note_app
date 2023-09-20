@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../model/model.dart';
 import '../model/text_feild.dart';
-import 'forgot.dart';
 
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({
+
+  ChangePassword({
     Key? key,
   }) : super(key: key);
 
@@ -43,7 +42,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: ()=> model.openForgotPage(context),
+          onPressed: () => model.openForgotPage(context),
         ),
       ),
       body: Center(
@@ -132,6 +131,10 @@ class _ChangePasswordState extends State<ChangePassword> {
                         padding: EdgeInsets.only(top: size.height * 0.20),
                         child: ElevatedButton(
                           style: ButtonStyle(
+                            backgroundColor:
+                                const MaterialStatePropertyAll<Color>(
+                              Color(0xFF36BFFA),
+                            ),
                             fixedSize: MaterialStatePropertyAll<Size>(
                               Size(
                                 size.width,
@@ -144,20 +147,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Forgot(),
-                                  ));
-                            }
-                          },
+                          onPressed: () =>
+                              model.openHomePage(context, _formKey),
                           child: Text(
                             "Enter",
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,
+                              color: Colors.white,
                             ),
                           ),
                         ),
