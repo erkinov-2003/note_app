@@ -24,8 +24,8 @@ class User {
     String? name,
     String? surname,
     String? email,
-    final String? loginPassword,
-    final String? secretPassword,
+    String? loginPassword,
+    String? secretPassword,
     String? image,
   }) =>
       User(
