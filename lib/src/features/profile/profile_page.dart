@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
-
-import 'custom_dialog.dart';
-import 'custom_list_tile.dart';
+import '../../common/constants/app_icons.dart';
+import '../../common/utils/storage.dart';
+import 'widgets/custom_dialog.dart';
+import 'widgets/custom_list_tile.dart';
+import 'widgets/language_bottom_sheet.dart';
+import 'widgets/name_dialog.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final storedName = $storage.getString("name") ?? "Your Name";
+    final ValueNotifier<String> name = ValueNotifier(storedName);
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
       body: SafeArea(
@@ -64,21 +69,33 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Text(
-                      "Your Name",
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 40),
-                      child: Image(
-                        height: 40,
-                        width: 40,
-                        image: AssetImage(
-                          "assets/icons/edit.png",
+                    ValueListenableBuilder(
+                        valueListenable: name,
+                        builder: (context, value, _) {
+                          return Text(
+                            value,
+                            style: const TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          );
+                        }),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => NameDialog(
+                            name: name,
+                          ),
+                        );
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: 40),
+                        child: Image(
+                          height: 40,
+                          width: 40,
+                          image: AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
@@ -91,16 +108,21 @@ class ProfilePage extends StatelessWidget {
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/globe.png"),
+                    image: AssetImage(AppIcons.globe),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) => const LanguageBottomSheet(),
+                    );
+                  },
                 ),
                 CustomListTile(
                   title: "Secret note Password",
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/lock.png"),
+                    image: AssetImage(AppIcons.lockIcon),
                   ),
                   onTap: () {},
                 ),
@@ -110,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/log_out.png"),
+                    image: AssetImage(AppIcons.lockIcon),
                   ),
                   onTap: () {
                     showDialog(
@@ -131,7 +153,7 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 15),
               ],
             ),
           ),
@@ -149,7 +171,7 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool switchValue = false;
+  bool switchValue = $storage.getBool("isDark") ?? false;
   @override
   Widget build(BuildContext context) {
     return CustomListTile(
@@ -158,6 +180,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
         value: switchValue,
         onChanged: (value) {
           switchValue = value;
+          $storage.setBool("isDark", switchValue);
           setState(() {});
         },
       ),
