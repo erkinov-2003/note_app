@@ -21,15 +21,6 @@ class CreateNote extends StatefulWidget {
 class _CreateNoteState extends State<CreateNote> with NoteMixin {
   @override
   Widget build(BuildContext context) {
-    final noteModel = NoteModel(
-      image: "",
-      title: "",
-      body: "",
-      dateTime: DateTime.now(),
-      link: "",
-      isSecret: false,
-    );
-
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -56,7 +47,6 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
           GestureDetector(
             onTap: () async {
               await pickImageFromGallery();
-              noteModel.image = "";
             },
             child: const Padding(
               padding: EdgeInsets.all(15),
