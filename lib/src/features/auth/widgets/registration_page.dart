@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
 import '../../../common/constants/app_colors.dart';
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
 import '../../home_screen/widgets/home_page.dart';
 import 'text_fields.dart';
 
@@ -11,6 +16,7 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  List<User> users = [];
   late TextEditingController nameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -18,11 +24,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   void initState() {
+    getAllUsers();
     nameController = TextEditingController();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
   }
+
+  void getAllUsers() async {
+    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
+    users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
+  }
+
 
   String? validatePassword(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
@@ -44,9 +57,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   String? validateEmail(String? value) {
-    if (value != null &&
-        !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
-            .hasMatch(value)) {
+    if (users.any((e) => e.email == value)) {
+      return "You are already Registered";
+    }
+    if (value != null && !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$").hasMatch(value)) {
       return "Invalid email address!";
     }
     return null;
@@ -56,11 +70,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     if (value != null && value.length <= 3) {
       return "Invalid name!";
     }
+
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: SizedBox(
@@ -117,6 +133,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
+                    User userOne = User(
+                      name: nameController.text,
+                      email: emailController.text,
+                      loginPassword: passwordController.text,
+                    );
+                    users.add(userOne);
+                    $secureStorage.write(
+                      key: StorageKeys.users.key,
+                      value: jsonEncode(
+                        users.map((e) => e.toJson()).toList(),
+                      ),
+                    );
                     Navigator.push(
                       context,
                       MaterialPageRoute(

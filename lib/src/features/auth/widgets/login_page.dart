@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
+import '../../../common/constants/app_colors.dart';
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
 import '../../forgot_password/widget/forgot.dart';
 import '../../home_screen/widgets/home_page.dart';
 import 'text_fields.dart';
@@ -13,15 +17,23 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
+  User user = User();
+  List<User> users = [];
   late TextEditingController emailController;
   late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
+    getAllUsers();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     super.initState();
+  }
+
+  void getAllUsers() async {
+    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
+    users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
   }
 
   String? validatePassword(String? value) {
@@ -97,14 +109,45 @@ class _LogInState extends State<LogIn> {
                   backgroundColor: AppColors.airColor,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)))),
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState!.validate()) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
+                  bool isFounded = false;
+                  for (int i = 0; i < users.length; i++) {
+                    if (users[i].email == emailController.text.trim()) {
+                      user = users[i];
+                      isFounded = true;
+                    }
+                  }
+                  if (!isFounded) {
+                    ScaffoldMessenger.of(context)..clearSnackBars()..showSnackBar(
+                      const SnackBar(
+                        content: Text("You don't have Account"),
+                      ),
+                    );
+                  } else {
+                    if (user.loginPassword == passwordController.text.trim()) {
+                      await $secureStorage.write(
+                        key: StorageKeys.oneUser.key,
+                        value: jsonEncode(
+                          user.toJson(),
+                        ),
+                      );
+                      if (context.mounted) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context)..clearSnackBars()..showSnackBar(
+                        const SnackBar(
+                          content: Text("Wrong password"),
+                        ),
+                      );
+                    }
+                  }
                 }
               },
               child: const Center(
