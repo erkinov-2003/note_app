@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../home_screen/widgets/home_page.dart';
 import '../model/model.dart';
 import '../model/text_feild.dart';
 
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({
+
+  ChangePassword({
     Key? key,
   }) : super(key: key);
 
@@ -43,7 +42,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: ()=> model.openForgotPage(context),
+          onPressed: () => model.openForgotPage(context),
         ),
       ),
       body: Center(
@@ -133,7 +132,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                            const MaterialStatePropertyAll<Color>(
+                                const MaterialStatePropertyAll<Color>(
                               Color(0xFF36BFFA),
                             ),
                             fixedSize: MaterialStatePropertyAll<Size>(
@@ -148,15 +147,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ));
-                            }
-                          },
+                          onPressed: () =>
+                              model.openHomePage(context, _formKey),
                           child: Text(
                             "Enter",
                             style: TextStyle(

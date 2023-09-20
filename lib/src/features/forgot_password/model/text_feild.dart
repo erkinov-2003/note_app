@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 class TextEdit extends StatefulWidget {
   final String? Function(String? value)? validateEmail;
@@ -19,6 +20,7 @@ class TextEdit extends StatefulWidget {
 }
 
 class _TextEditState extends State<TextEdit> {
+  TextEditingController controller=TextEditingController();
   bool show = false;
 
   void showPassword() {
@@ -28,8 +30,11 @@ class _TextEditState extends State<TextEdit> {
 
   @override
   Widget build(BuildContext context) {
+    final model=Provider.of(context);
     FocusNode focusNode = FocusNode();
     return TextFormField(
+      onChanged: widget.isPassword?(value) => model.updatePassword(controller.text):null,
+      controller: controller,
       obscureText: !show && widget.isPassword,
       obscuringCharacter: "*",
       focusNode: focusNode,

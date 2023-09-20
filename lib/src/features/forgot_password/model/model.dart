@@ -1,27 +1,42 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
+import '../../home_screen/widgets/home_page.dart';
 import '../widget/chenge_password.dart';
 import '../widget/forgot.dart';
 
 class Model with ChangeNotifier {
   String email;
+  String password;
 
-  Model({required this.email});
+  Model({required this.email, required this.password});
 
   void update(String value) {
     email = value;
     notifyListeners();
   }
 
+  void updatePassword(String value) {
+    password = value;
+    notifyListeners();
+  }
+
   void openChangePasswordPage(
-      GlobalKey<FormState> _formKey, BuildContext context) {
+    GlobalKey<FormState> _formKey,
+    BuildContext context,
+  ) {
     if (_formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Provider(
             child: ChangePassword(),
-            model: Model(email: email),
+            model: Model(
+              email: email,
+              password: password,
+            ),
           ),
         ),
       );
@@ -34,10 +49,43 @@ class Model with ChangeNotifier {
       MaterialPageRoute(
         builder: (context) => Provider(
           child: Forgot(),
-          model: Model(email: email),
+          model: Model(
+            email: email,
+            password: password,
+          ),
         ),
       ),
     );
+  }
+
+  void openHomePage(
+    BuildContext context,
+    GlobalKey<FormState> _formKey,
+  ) {
+    if (_formKey.currentState!.validate()) {
+      List<String> users = $storage.getStringList("users") ?? [];
+      List<User> allUsers = List<User>.from(
+              users.map((e) => User.fromJson(jsonDecode(e))).toList())
+          .toList();
+      List<User> foundUsers =
+          allUsers.where((element) => element.email == email).toList();
+      int index = allUsers.indexOf(foundUsers.first);
+      if (index != -1) {
+        allUsers.removeAt(index);
+        User newUser = foundUsers.first.copyWith(loginPassword: password);
+        print(password);
+        print(newUser);
+        allUsers.insert(index, newUser);
+        users = allUsers.map((e) => jsonEncode(e.toJson())).toList();
+        $storage.setStringList("users", users);
+        // print(users);
+      }
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+    }
   }
 }
 

@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
+import '../../../common/models/user_model.dart';
+import '../../../common/utils/storage.dart';
 import '../../auth/widgets/registr_page_controller.dart';
 import '../model/text_feild.dart';
 
@@ -17,7 +21,7 @@ class _ForgotWithModelState extends State<ForgotWithModel> {
   @override
   void initState() {
     super.initState();
-    model = Model(email: "");
+    model = Model(email: "", password: "");
   }
 
   @override
@@ -66,6 +70,12 @@ class _ForgotState extends State<Forgot> {
       }
       if (!value.contains(".com")) {
         return "Emailda '.com' bo'lishi shart";
+      }
+      List<String> users=$storage.getStringList("users") ?? [];
+      List<User> allUsers=List<User>.from(users.map((e) => User.fromJson(jsonDecode(e))).toList()).toList();
+      bool isSighnedIn=allUsers.any((element) => element.email==value);
+      if(!isSighnedIn){
+        return "Bunday foydalanuvchi yo'q";
       }
       email.update(value);
       return null;
