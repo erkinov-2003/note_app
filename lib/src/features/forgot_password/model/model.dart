@@ -65,7 +65,7 @@ class Model with ChangeNotifier {
     if (_formKey.currentState!.validate()) {
       List<String> users = $storage.getStringList("users") ?? [];
       List<User> allUsers = List<User>.from(
-              users.map((e) => User.fromJson(jsonDecode(e))).toList())
+              users.map((e) => User.fromMap(jsonDecode(e))).toList())
           .toList();
       List<User> foundUsers =
           allUsers.where((element) => element.email == email).toList();
