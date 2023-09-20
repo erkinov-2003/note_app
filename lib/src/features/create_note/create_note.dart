@@ -1,48 +1,57 @@
 import 'package:flutter/material.dart';
 
+import '../../common/constants/app_colors.dart';
+import '../../common/constants/app_icons.dart';
+
+import '../../common/models/note_model.dart';
+import 'mixin/note_mixin.dart';
+
 class CreateNote extends StatefulWidget {
-  const CreateNote({Key? key}) : super(key: key);
+  final NoteModel? note;
+
+  const CreateNote({
+    this.note,
+    super.key,
+  });
 
   @override
   State<CreateNote> createState() => _CreateNoteState();
 }
 
-class _CreateNoteState extends State<CreateNote> {
-  final isDisabled = ValueNotifier<bool>(true);
-
-  void onChanged(String value) => isDisabled.value = value.isEmpty;
-
+class _CreateNoteState extends State<CreateNote> with NoteMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         leading: Theme(
           data: ThemeData(
-            splashColor: Colors.transparent,
+            splashColor: AppColors.transparent,
           ),
           child: const BackButton(
-            color: Color(0xFF000000),
+            color: AppColors.black,
           ),
         ),
         leadingWidth: 40,
         title: const Text(
           "Back",
           style: TextStyle(
-            color: Color(0xFF000000),
+            color: AppColors.black,
             fontSize: 16.5,
           ),
         ),
         titleSpacing: 0,
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await pickImageFromGallery();
+            },
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Image(
-                image: AssetImage("assets/images/ic_image.png"),
+                image: AssetImage(AppIcons.icGallery),
               ),
             ),
           ),
@@ -51,7 +60,7 @@ class _CreateNoteState extends State<CreateNote> {
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Image(
-                image: AssetImage("assets/images/ic_link.png"),
+                image: AssetImage(AppIcons.icLink),
               ),
             ),
           ),
@@ -63,13 +72,14 @@ class _CreateNoteState extends State<CreateNote> {
           return SizedBox.square(
             dimension: 75,
             child: FloatingActionButton(
-              onPressed: () {},
+              onPressed: onSaved,
+              shape: const CircleBorder(),
               backgroundColor:
-                  value ? const Color(0xFFD0D5DD) : const Color(0xFF000000),
+                  value ? AppColors.colorFAB1 : AppColors.colorFAB0,
               child: const Image(
                 width: 40,
                 height: 40,
-                image: AssetImage("assets/images/ic_save.png"),
+                image: AssetImage(AppIcons.icSave),
               ),
             ),
           );
@@ -84,12 +94,16 @@ class _CreateNoteState extends State<CreateNote> {
                 valueListenable: isDisabled,
                 builder: (context, value, child) {
                   return TextField(
+                    controller: controllerTitle,
                     onChanged: onChanged,
                     style: const TextStyle(
+                      color: AppColors.black,
                       fontSize: 32,
+                      decorationThickness: 0,
                     ),
-                    cursorColor: const Color(0x00000000),
-                    cursorHeight: 40,
+                    cursorColor: AppColors.transparent,
+                    cursorHeight: 50,
+                    textAlignVertical: TextAlignVertical.center,
                     cursorRadius: const Radius.circular(10),
                     maxLines: 4,
                     minLines: 1,
@@ -110,20 +124,23 @@ class _CreateNoteState extends State<CreateNote> {
               valueListenable: isDisabled,
               builder: (context, value, child) {
                 return TextField(
+                  controller: controllerBody,
                   onChanged: onChanged,
                   style: const TextStyle(
                     fontSize: 18,
+                    color: AppColors.black,
+                    decorationThickness: 0,
                   ),
                   keyboardType: TextInputType.multiline,
-                  cursorColor: const Color(0x00000000),
+                  cursorColor: AppColors.transparent,
                   cursorRadius: const Radius.circular(5),
-                  maxLines: value ? 6 : null,
+                  maxLines: value || controllerBody.text.isEmpty ? 5 : null,
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText:
                         "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.",
                     hintStyle: TextStyle(
-                      color: Color(0xFFE4E7EC),
+                      color: AppColors.hintColor,
                       fontSize: 18,
                     ),
                   ),

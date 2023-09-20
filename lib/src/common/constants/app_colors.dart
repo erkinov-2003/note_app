@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
 abstract class AppColors {
   static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
+  static const transparent = Color(0x00000000);
   static const blueGrey = Color(0xFFB9E6FE);
 
   /// Registration Colors
@@ -24,4 +25,7 @@ abstract class AppColors {
   static const errorBorder = Color(0xFFB04F4F);
   static const fillColor = Color(0xFF262629);
   static const iconColor = Color(0xFF878787);
+  static const colorFAB0 = Color(0xFF000000);
+  static const colorFAB1 = Color(0xFFD0D5DD);
+  static const hintColor = Color(0xFFE4E7EC);
 }

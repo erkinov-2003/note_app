@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:note_app/src/features/home_screen/widgets/bottom_sheet.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
@@ -22,7 +23,7 @@ class _HomePage extends State<HomePage> {
         toolbarHeight: 80,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10,top: 10),
+            padding: const EdgeInsets.only(right: 10, top: 10),
             child: GestureDetector(
               onTap: () {},
               child: const SizedBox(
@@ -84,6 +85,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {},
+      onLongPress: () => customBottomSheet(context),
       child: SizedBox(
         height: 171,
         width: 166,

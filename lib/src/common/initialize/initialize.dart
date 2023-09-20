@@ -66,12 +66,6 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> 
     },
   ),
   (
-    'Custom Delay 2',
-    (_) async {
-      await Future.delayed(const Duration(seconds: 1));
-    },
-  ),
-  (
     'App Initialized',
     (_) async {
       await Future.delayed(const Duration(milliseconds: 300));

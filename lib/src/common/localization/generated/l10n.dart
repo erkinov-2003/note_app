@@ -50,6 +50,296 @@ class GeneratedLocalization {
     return Localizations.of<GeneratedLocalization>(
         context, GeneratedLocalization);
   }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme App`
+  String get themeApp {
+    return Intl.message(
+      'Theme App',
+      name: 'themeApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language APP`
+  String get languageApp {
+    return Intl.message(
+      'Language APP',
+      name: 'languageApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get signIn {
+    return Intl.message(
+      'Sign In',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to back Your NOTE...`
+  String get signInTitle {
+    return Intl.message(
+      'Welcome to back Your NOTE...',
+      name: 'signInTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your NOTE in the here...`
+  String get signUpTitle {
+    return Intl.message(
+      'Your NOTE in the here...',
+      name: 'signUpTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message(
+      'Full Name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address`
+  String get emailAddress {
+    return Intl.message(
+      'Email address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter email address`
+  String get enterEmailAddress {
+    return Intl.message(
+      'Enter email address',
+      name: 'enterEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Password`
+  String get setPassword {
+    return Intl.message(
+      'Set Password',
+      name: 'setPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Password`
+  String get addPassword {
+    return Intl.message(
+      'Add Password',
+      name: 'addPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message(
+      'Back',
+      name: 'back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log In`
+  String get logIn {
+    return Intl.message(
+      'Log In',
+      name: 'logIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Gallery`
+  String get openGallery {
+    return Intl.message(
+      'Open Gallery',
+      name: 'openGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open Camera`
+  String get openCamera {
+    return Intl.message(
+      'Open Camera',
+      name: 'openCamera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Photo`
+  String get addPhoto {
+    return Intl.message(
+      'Add Photo',
+      name: 'addPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Name`
+  String get yourName {
+    return Intl.message(
+      'Your Name',
+      name: 'yourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Secret note Password`
+  String get secretPassword {
+    return Intl.message(
+      'Secret note Password',
+      name: 'secretPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Out`
+  String get logOut {
+    return Intl.message(
+      'Log Out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile Image`
+  String get profileImage {
+    return Intl.message(
+      'Profile Image',
+      name: 'profileImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Note`
+  String get newNote {
+    return Intl.message(
+      'New Note',
+      name: 'newNote',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate
@@ -60,6 +350,7 @@ class AppLocalizationDelegate
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'uz'),
     ];
   }
 
