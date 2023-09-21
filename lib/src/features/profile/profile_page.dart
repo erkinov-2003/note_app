@@ -1,23 +1,41 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
+import '../../common/models/user_model.dart';
 import '../../common/utils/storage.dart';
-import 'widgets/custom_dialog.dart';
+import 'widgets/log_out_dialog.dart';
 import 'widgets/custom_list_tile.dart';
 import 'widgets/language_bottom_sheet.dart';
 import 'widgets/name_dialog.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  ValueNotifier<String> name = ValueNotifier("");
+
+  @override
+  void didChangeDependencies() async {
+    name.value = User.fromJson(jsonDecode(
+                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
+                    "Your Name"))
+            .name ??
+        "";
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
-    final storedName = $storage.getString("name") ?? localization.yourName;
-    ValueNotifier<String> name = ValueNotifier(storedName);
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 450,
@@ -82,17 +100,18 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     ValueListenableBuilder(
-                        valueListenable: name,
-                        builder: (context, value, _) {
-                          return Text(
-                            value,
-                            style: const TextStyle(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          );
-                        }),
+                      valueListenable: name,
+                      builder: (context, value, _) {
+                        return Text(
+                          value,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                      },
+                    ),
                     GestureDetector(
                       onTap: () {
                         showDialog(

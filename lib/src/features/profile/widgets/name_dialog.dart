@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 
 class NameDialog extends StatefulWidget {
@@ -15,6 +18,7 @@ class NameDialog extends StatefulWidget {
 
 class _NameDialogState extends State<NameDialog> {
   late final TextEditingController nameController;
+  User user = User();
 
   @override
   void initState() {
@@ -23,8 +27,16 @@ class _NameDialogState extends State<NameDialog> {
   }
 
   @override
-  void didChangeDependencies() {
-    nameController.text = $storage.getString("name") ?? "Your Name";
+  void didChangeDependencies() async {
+    nameController.text =
+        User.fromJson(jsonDecode(
+                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
+                    "Your Name"))
+            .name ??
+        "";
+    user = User.fromJson(jsonDecode(
+        await $secureStorage.read(key: StorageKeys.oneUser.key) ??
+            "Your Name"));
     super.didChangeDependencies();
   }
 
@@ -79,9 +91,16 @@ class _NameDialogState extends State<NameDialog> {
           ),
         ),
         TextButton(
-          onPressed: () {
-            $storage.setString("name", nameController.text);
-           widget.name.value= nameController.text;
+          onPressed: () async {
+            user = user.copyWith(name: nameController.text);
+            await $secureStorage.write(
+              key: StorageKeys.oneUser.key,
+              value: jsonEncode(
+                user.toJson(),
+              ),
+            );
+            widget.name.value = nameController.text;
+            // ignore: use_build_context_synchronously
             Navigator.pop(context);
           },
           child: const Text(
