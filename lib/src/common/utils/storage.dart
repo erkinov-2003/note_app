@@ -6,7 +6,9 @@ late final FlutterSecureStorage $secureStorage;
 
 enum StorageKeys {
   locale("locale"),
-  theme("is_dark");
+  theme("is_dark"),
+  noteBody("body"),
+  notes("notes");
 
   const StorageKeys(this.key);
 

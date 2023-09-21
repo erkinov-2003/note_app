@@ -1,8 +1,10 @@
+import '../../features/create_note/models/link_model.dart';
+
 class NoteModel {
-  String noteId;
+  int noteId;
   String userId;
   String? title;
-  String? body;
+  List<LinkModel>? body;
   DateTime dateTime;
   String? image;
   List<String>? link;
@@ -20,10 +22,12 @@ class NoteModel {
   });
 
   factory NoteModel.fromJson(Map<String, Object?> json) => NoteModel(
-        noteId: json["noteId"] as String,
+        noteId: json["noteId"] as int,
         userId: json["userId"] as String,
         title: json["title"] as String?,
-        body: json["body"] as String?,
+        body: json["body"] != null
+            ? List<LinkModel>.from(json["body"] as List)
+            : null,
         dateTime: DateTime.parse(json["dateTime"] as String),
         image: json["image"] as String?,
         link: json["link"] != null
