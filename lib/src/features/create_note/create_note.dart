@@ -71,7 +71,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
       ),
       floatingActionButton: ValueListenableBuilder(
         valueListenable: isDisabled,
-        builder: (context, value, child) {
+        builder: (context, value, _) {
           return SizedBox.square(
             dimension: 75,
             child: FloatingActionButton(

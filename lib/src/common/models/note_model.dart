@@ -13,13 +13,13 @@ class NoteModel {
   NoteModel({
     required this.noteId,
     required this.userId,
-    required this.dateTime,
+    DateTime? dateTime,
     this.title,
     this.body,
     this.image,
     this.link,
     this.isSecret = false,
-  });
+  }) : dateTime = dateTime ?? DateTime.now();
 
   factory NoteModel.fromJson(Map<String, Object?> json) => NoteModel(
         noteId: json["noteId"] as int,
