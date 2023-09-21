@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
 
-import '../../forgot_password/widget/forgot.dart';
-import '../../home_screen/widgets/home_page.dart';
+import '../../../common/constants/app_colors.dart';
+import '../controller/main_controller.dart';
 import 'text_fields.dart';
 
 class LogIn extends StatefulWidget {
@@ -24,48 +23,26 @@ class _LogInState extends State<LogIn> {
     super.initState();
   }
 
-  String? validatePassword(String? value) {
-    if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return "Password is too short, it must be at least 8 characters";
-    }
-    if (value != null && value.contains(" ")) {
-      return "Password shouldn't have space";
-    }
-    if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return "Password must have at least one number";
-    }
-    if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return "Password must have at least one letter";
-    }
-    if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return "Password must have at least one Capital letter";
-    }
-    return null;
-  }
-
-  String? validateEmail(String? value) {
-    if (value != null &&
-        !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
-            .hasMatch(value)) {
-      return "Invalid email address!";
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final validatePassword = ProviderRegistration.of(context).validatePassword;
+    final validateEmail = ProviderRegistration.of(context).validateEmail;
+    final forgotPassword = ProviderRegistration.of(context).forgotPassword;
+    final checkLogin = ProviderRegistration.of(context).checkLogin;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 220,
+            height: 230,
             child: Form(
               key: formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  const SizedBox(height: 10),
                   TextFields(
                     validator: validateEmail,
                     controller: emailController,
@@ -87,28 +64,26 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
-                  maximumSize: const Size(400, 60),
-                  minimumSize: const Size(400, 60),
-                  backgroundColor: AppColors.airColor,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)))),
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                }
-              },
+                maximumSize: const Size(400, 60),
+                minimumSize: const Size(400, 60),
+                backgroundColor: AppColors.airColor,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+              ),
+              onPressed: () => checkLogin(
+                context,
+                formKey,
+                emailController,
+                passwordController,
+              ),
               child: const Center(
                 child: Text(
-                  "Sign In",
+                  "Sign Up",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -120,12 +95,7 @@ class _LogInState extends State<LogIn> {
           const SizedBox(height: 20),
           Center(
             child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ForgotWithModel(),
-                ),
-              ),
+              onTap: () => forgotPassword(context),
               child: const Text(
                 "Forgot password?",
                 style: TextStyle(
@@ -136,7 +106,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          // const SizedBox(height: 20),
         ],
       ),
     );

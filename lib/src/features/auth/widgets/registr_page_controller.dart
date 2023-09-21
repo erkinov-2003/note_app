@@ -37,7 +37,7 @@ class _RegistrationPageControllerState
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ProviderRegistration(
       controller: controller,
       child: const View(),
     );
@@ -54,9 +54,9 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
-    final isRegistration = Provider.of(context).isRegistration;
-    final onTap = Provider.of(context).onTap;
-    final pageController = Provider.of(context).pageController;
+    final isRegistration = ProviderRegistration.of(context, listen: true).isRegistration;
+    final onTap = ProviderRegistration.of(context).onTap;
+    final pageController = ProviderRegistration.of(context).pageController;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -76,14 +76,14 @@ class _ViewState extends State<View> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 5),
                         isRegistration
                             ? const Text(
                                 "Your NOTE in the here...",
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 35,
+                                  fontSize: 28,
                                 ),
                               )
                             : const Text(
@@ -91,10 +91,10 @@ class _ViewState extends State<View> {
                                 style: TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 35,
+                                  fontSize: 28,
                                 ),
                               ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 5),
                         const PageWidget(),
                         // const SizedBox(height: 20),
                       ],
