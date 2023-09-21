@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,6 +26,9 @@ mixin NoteMixin on State<CreateNote> {
   String? imagePath;
   List<String>? link;
   bool isSecret = false;
+
+  bool isImageSelected = false;
+  File? imageFile;
 
   @override
   void didChangeDependencies() {
@@ -86,6 +90,9 @@ mixin NoteMixin on State<CreateNote> {
           await ImagePicker().pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
         imagePath = pickedImage.path;
+        imageFile = File(pickedImage.path);
+        isImageSelected = true;
+        setState(() {});
         return pickedImage.path;
       } else {
         info("User didn't pick any image.");
@@ -93,6 +100,27 @@ mixin NoteMixin on State<CreateNote> {
     } catch (e, s) {
       shout("$e");
       info("$s");
+    }
+
+    return "";
+  }
+
+  FutureOr<String> pickImageFromCamera() async {
+    try {
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.camera);
+      if (pickedImage != null) {
+        imagePath = pickedImage.path;
+        imageFile = File(pickedImage.path);
+        isImageSelected = true;
+        setState(() {});
+        return pickedImage.path;
+      } else {
+        info("User didn't take any picture.");
+      }
+    } catch (e, s) {
+      shout("$e");
+      shout("$s");
     }
 
     return "";

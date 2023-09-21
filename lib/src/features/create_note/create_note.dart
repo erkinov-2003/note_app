@@ -89,13 +89,19 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
         },
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
+            isImageSelected
+                ? Image(
+                    fit: BoxFit.cover,
+                    image: FileImage(imageFile!),
+                  )
+                : const SizedBox.shrink(),
             ValueListenableBuilder(
                 valueListenable: isDisabled,
-                builder: (context, value, child) {
+                builder: (context, value, _) {
                   return TextField(
                     controller: controllerTitle,
                     onChanged: onChanged,

@@ -53,7 +53,10 @@ class _LinkDialogState extends State<LinkDialog> {
             children: [
               const Text(
                 "Text with link",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SizedBox(
                 width: size.width * 0.72,
@@ -64,7 +67,7 @@ class _LinkDialogState extends State<LinkDialog> {
                     color: AppColors.black,
                   ),
                   textAlignVertical: TextAlignVertical.center,
-                  cursorColor: Colors.black45,
+                  cursorColor: AppColors.black,
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -79,7 +82,7 @@ class _LinkDialogState extends State<LinkDialog> {
                       fontWeight: FontWeight.w300,
                     ),
                     filled: true,
-                    fillColor: const Color(0xFFD9D9D9),
+                    fillColor: AppColors.textFieldBG,
                   ),
                 ),
               ),
@@ -89,7 +92,7 @@ class _LinkDialogState extends State<LinkDialog> {
                 child: TextField(
                   controller: controllerLinkName,
                   cursorColor: Colors.black,
-                  style: const TextStyle(color: Colors.cyan),
+                  style: const TextStyle(color: AppColors.blue),
                   decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -102,7 +105,7 @@ class _LinkDialogState extends State<LinkDialog> {
                     hintText: "Paste Link",
                     hintStyle: const TextStyle(
                       fontWeight: FontWeight.w300,
-                      color: Colors.cyan,
+                      color: AppColors.blue,
                     ),
                     filled: true,
                     fillColor: const Color(0xFFD9D9D9),
@@ -116,13 +119,12 @@ class _LinkDialogState extends State<LinkDialog> {
                     child: const Text(
                       "Cancel",
                       style: TextStyle(
-                          color: Color(0xFF757575),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500),
+                        color: AppColors.gray,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
+                    onTap: () => Navigator.pop(context),
                   ),
                   const SizedBox(
                     width: 20,
@@ -143,9 +145,10 @@ class _LinkDialogState extends State<LinkDialog> {
                     child: const Text(
                       "Add Link",
                       style: TextStyle(
-                          color: Color(0xFF36BFFA),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
+                        color: AppColors.blue,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
