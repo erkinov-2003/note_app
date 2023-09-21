@@ -1,8 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'dart:convert';
 
-import 'custom_dialog.dart';
-import 'custom_list_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
+
+import '../../common/constants/app_colors.dart';
+import '../../common/constants/app_icons.dart';
+import '../../common/models/user_model.dart';
+import '../../common/utils/storage.dart';
+import 'widgets/log_out_dialog.dart';
+import 'widgets/custom_list_tile.dart';
+import 'widgets/language_bottom_sheet.dart';
+import 'widgets/name_dialog.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -12,60 +21,49 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  ValueNotifier<int> selected = ValueNotifier(-1);
+  ValueNotifier<String> name = ValueNotifier("");
 
-  List<Widget> imagesPath = [
-    const Image(
-      image: AssetImage("assets/icons/ic_eng.png"),
-      height: 25,
-    ),
-    const Image(
-      image: AssetImage("assets/icons/ic_rus.png"),
-      height: 25,
-    ),
-    const Image(
-      image: AssetImage("assets/icons/ic_uzb.png"),
-      height: 25,
-    ),
-  ];
-
-  List<String> list = [
-    "English",
-    "Russia",
-    "Uzbek",
-  ];
-
-  ImagePicker picker = ImagePicker();
-  XFile? image;
+  @override
+  void didChangeDependencies() async {
+    name.value = User.fromJson(jsonDecode(
+                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
+                    "Your Name"))
+            .name ??
+        "";
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final sizeH = MediaQuery.of(context).size.height;
-    final sizeW = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: const Color(0xFF000000),
-      body: SafeArea(
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+    final localization = GeneratedLocalization();
+    final screenSize=MediaQuery.sizeOf(context);
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: 450,
+      ),
+      child: Scaffold(
+        backgroundColor: const Color(0xFF000000),
+        appBar: AppBar(
+          leading: BackButton(
+            color: AppColors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+          backgroundColor: const Color(0xFF000000),
+          title: Text(
+            localization.profile,
+            style: const TextStyle(
+              fontSize: 35,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: SafeArea(
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
-                    top: 10,
-                    left: 20,
-                    bottom: 20,
-                  ),
-                  child: Text(
-                    "Profile",
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -78,97 +76,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         label: GestureDetector(
                           onTap: () {
                             showModalBottomSheet(
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20),
-                                ),
-                              ),
                               context: context,
-                              builder: (context) => SizedBox(
-                                  height: 200,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      const Row(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              left: 20,
-                                            ),
-                                            child: Text(
-                                              "Profile Images",
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 20,
-                                              left: 5,
-                                            ),
-                                            child: Icon(
-                                              Icons.camera_alt_rounded,
-                                              size: 25,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: sizeH * 0.062,
-                                        width: sizeW * 0.93,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                            ),
-                                            backgroundColor:
-                                                const Color(0xFF36BFFA),
-                                          ),
-                                          onPressed: () async {
-                                            image = await picker.pickImage(
-                                              source: ImageSource.gallery,
-                                            );
-                                            setState(() {});
-                                          },
-                                          child: const Text(
-                                            "Open Gallery",
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: sizeH * 0.062,
-                                        width: sizeW * 0.93,
-                                        child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(10),
-                                              ),
-                                            ),
-                                            backgroundColor:
-                                                const Color(0xFF36BFFA),
-                                          ),
-                                          onPressed: () async {
-                                            image = await picker.pickImage(
-                                                source: ImageSource.camera);
-                                            setState(() {});
-                                          },
-                                          child: const Text(
-                                            "Open Camera",
-                                            style: TextStyle(fontSize: 17),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
@@ -191,21 +100,38 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
-                    const Text(
-                      "Your Name",
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    ValueListenableBuilder(
+                      valueListenable: name,
+                      builder: (context, value, _) {
+                        return SizedBox(
+                          width: screenSize.width*.4,
+                          child: Text(
+                            value,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 40),
-                      child: Image(
-                        height: 40,
-                        width: 40,
-                        image: AssetImage(
-                          "assets/icons/edit.png",
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => NameDialog(
+                            name: name,
+                          ),
+                        );
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: 40),
+                        child: Image(
+                          height: 40,
+                          width: 40,
+                          image: AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
@@ -214,101 +140,35 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
-                  title: "Language",
+                  title: localization.language,
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/globe.png"),
+                    image: AssetImage(AppIcons.globe),
                   ),
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 17, top: 20),
-                            child: Row(
-                              children: [
-                                Text(
-                                  "Language",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Image(
-                                  image: AssetImage("assets/images/Vector.png"),
-                                  height: 20,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          ValueListenableBuilder(
-                              valueListenable: selected,
-                              builder: (context, value, child) {
-                                return ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: list.length, // 10 ta element
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return ListTile(
-                                        title: SizedBox(
-                                      height: 45,
-                                      width: 100,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10))),
-                                          backgroundColor: index == value
-                                              ? const Color(0xFF36BFFA)
-                                              : const Color(0xFF575758),
-                                        ),
-                                        onPressed: () {
-                                          selected.value = index;
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(list[index]),
-                                            imagesPath[index],
-                                          ],
-                                        ),
-                                      ),
-                                    ));
-                                  },
-                                );
-                              }),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                        ],
-                      ),
+                      builder: (context) => const LanguageBottomSheet(),
                     );
                   },
                 ),
                 CustomListTile(
-                  title: "Secret note Password",
+                  title: localization.secretPassword,
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/lock.png"),
+                    image: AssetImage(AppIcons.lockIcon),
                   ),
                   onTap: () {},
                 ),
                 const Spacer(),
                 CustomListTile(
-                  title: "Log out",
+                  title: localization.logOut,
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage("assets/icons/log_out.png"),
+                    image: AssetImage(AppIcons.lockIcon),
                   ),
                   onTap: () {
                     showDialog(
@@ -329,7 +189,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 15),
               ],
             ),
           ),
@@ -347,18 +207,20 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool switchValue = false;
+  bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
   @override
   Widget build(BuildContext context) {
     return CustomListTile(
-        title: "Theme",
-        trailing: Switch(
-          value: switchValue,
-          onChanged: (value) {
-            switchValue = value;
-            setState(() {});
-          },
-        ),
-        onTap: () {});
+      title: "Theme",
+      trailing: Switch(
+        value: switchValue,
+        onChanged: (value) {
+          switchValue = value;
+          $storage.setBool(StorageKeys.theme.key, switchValue);
+          setState(() {});
+        },
+      ),
+      onTap: () {},
+    );
   }
 }

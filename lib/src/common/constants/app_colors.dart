@@ -28,4 +28,6 @@ abstract class AppColors {
   static const colorFAB0 = Color(0xFF000000);
   static const colorFAB1 = Color(0xFFD0D5DD);
   static const hintColor = Color(0xFFE4E7EC);
+  static const selectedLanguageColor=Color(0xFF36BFFA);
+  static const unSelectedLanguageColor=Color(0xFF575758);
 }

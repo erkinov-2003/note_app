@@ -5,6 +5,7 @@ import 'package:note_app/src/features/home_screen/widgets/new_noter.dart';
 import '../../common/constants/app_colors.dart';
 import 'widgets/note.dart';
 import 'package:note_app/src/features/home_screen/widgets/bottom_sheet.dart';
+import 'package:note_app/src/features/profile/profile_page.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
@@ -17,6 +18,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  void openProfile() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfilePage(),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +38,7 @@ class _HomePage extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10,top: 10),
             child: GestureDetector(
-              onTap: () {},
+              onTap: openProfile,
               child: const SizedBox(
                 width: 57,
                 height: 57,

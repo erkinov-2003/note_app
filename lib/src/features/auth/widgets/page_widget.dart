@@ -13,8 +13,8 @@ class PageWidget extends StatefulWidget {
 class _PageWidgetState extends State<PageWidget> {
   @override
   Widget build(BuildContext context) {
-    final isRegistration = Provider.of(context, listen: true).isRegistration;
-    final onTap = Provider.of(context).onTap2;
+    final isRegistration = ProviderRegistration.of(context, listen: true).isRegistration;
+    final onTap = ProviderRegistration.of(context).onTap2;
     return SizedBox(
       height: 50,
       width: 220,
@@ -32,7 +32,7 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: isRegistration
-                    ? const DecoratedBox(
+                    ?  const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
@@ -71,7 +71,7 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: !isRegistration
-                    ? const DecoratedBox(
+                    ?  const DecoratedBox(
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(

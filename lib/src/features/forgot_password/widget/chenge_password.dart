@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../home_screen/home_page.dart';
 import '../model/model.dart';
-import '../model/text_feild.dart';
+import '../model/text_field.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
@@ -148,15 +146,8 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ));
-                            }
-                          },
+                          onPressed: () =>
+                              model.openHomePage(context, _formKey),
                           child: Text(
                             "Enter",
                             style: TextStyle(
