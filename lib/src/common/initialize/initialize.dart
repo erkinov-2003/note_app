@@ -72,52 +72,7 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
       $notes.setNotes(
         $storage.getString("notes") != null
             ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()
-            : <NoteModel>[
-                NoteModel(
-                  noteId: "1",
-                  userId: "1",
-                  title: "Note app Zo'r JDBNIRNIRNRNRJ",
-                  body: "jebfenfirnfirnfirfnric rf r rf rf rf"
-                      " r f rf r fr f r fr f rfrr fr f rf r f rfnj "
-                      "nnirji4jij inirn4ifni 4nfi4nfi4jifn4ii4jfi4fij4ij4iji4jri4jri4jrijri4"
-                      "n",
-                  dateTime: DateTime.now(),
-                  isSecret: true
-                ),
-                NoteModel(
-                  noteId: "1",
-                  userId: "1",
-                  title: "2",
-                  body: "jebfenfirnfirnfirfnrin",
-                  dateTime: DateTime.now(),
-                ),
-                NoteModel(
-                  noteId: "1",
-                  userId: "1",
-                  title: "3",
-                  body: "jebfenfirnfirnfirfnric rf r rf rf rf"
-                      " r f rf r fr f r fr f rfrr fr f rf r f rfnj nnirji4jij inirn4ifni 4nfi4nfi4jifn4ii4jfi4fij4ij4iji4jri4jri4jrijri4"
-                      "n",
-                  dateTime: DateTime.now(),
-                ),
-                NoteModel(
-                  noteId: "1",
-                  userId: "1",
-                  title: "4",
-                  // isSecret: true,
-                  body: "jebfenfirnfirnfirfnrin",
-                  dateTime: DateTime.now(),
-                ),
-                NoteModel(
-                  noteId: "2",
-                  userId: "4",
-                  title: "5",
-                  body: "jebfenfirnfirnfirfnric rf r rf rf rf"
-                      " r f rf r fr f r fr f rfrr fr f rf r f rfnj nnirji4jij inirn4ifni 4nfi4nfi4jifn4ii4jfi4fij4ij4iji4jri4jri4jrijri4"
-                      "n",
-                  dateTime: DateTime.now(),
-                ),
-              ],
+            : <NoteModel>[],
       );
       String? notes = await $secureStorage.read(key: "notes");
       $notes.setSecureNotes(notes != null

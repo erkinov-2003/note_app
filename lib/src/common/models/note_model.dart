@@ -63,10 +63,10 @@ class NoteModel {
 
 
   NoteModel copyWith({
-    String? noteId,
+    int? noteId,
     String? userId,
     String? title,
-    String? body,
+    List<LinkModel>? body,
     String? image,
     List<String>? link,
     bool? isSecret,

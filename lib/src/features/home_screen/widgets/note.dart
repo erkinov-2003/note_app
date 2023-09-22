@@ -1,9 +1,10 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:note_app/src/common/constants/app_images.dart';
 import 'package:note_app/src/common/models/note_model.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../common/constants/app_colors.dart';
 
@@ -38,7 +39,9 @@ class _NoteState extends State<Note> {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
-          border: Border.all(color: AppColors.white,strokeAlign: BorderSide.strokeAlignOutside),
+          border: Border.all(
+              color: AppColors.white,
+              strokeAlign: BorderSide.strokeAlignOutside),
         ),
         child: Stack(
           children: [
@@ -56,12 +59,8 @@ class _NoteState extends State<Note> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    widget.noteModel.body!,
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    style:
-                        const TextStyle(color: AppColors.white, fontSize: 15),
+                  RichText(
+                    text: TextSpan(),
                   ),
                   const SizedBox(height: 10),
                   widget.noteModel.image == null
@@ -70,21 +69,37 @@ class _NoteState extends State<Note> {
                           image: AssetImage(widget.noteModel.image!),
                         ),
                   const SizedBox(height: 9),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        formatted,
-                        style: const TextStyle(color: AppColors.white),
-                      ),
-                      widget.noteModel.isSecret
-                          ? Image.asset(
-                              AppImages.lock,
-                              color: AppColors.white,
-                            )
-                          : const SizedBox(),
-                    ],
-                  )
+                  RichText(
+                    text: TextSpan(
+                      children: widget.noteModel.body!.map<TextSpan>(
+                        (e) {
+                          if (e.link != null) {
+                            return TextSpan(
+                              style: const TextStyle(
+                                color: AppColors.blue,
+                                decoration: TextDecoration.underline,
+                              ),
+                              text: e.name,
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () async {
+                                  final url = e.link;
+                                  if (await canLaunchUrlString(url!)) {
+                                    await launchUrlString(url);
+                                  }
+                                },
+                            );
+                          } else {
+                            return TextSpan(
+                              style: const TextStyle(
+                                color: AppColors.black,
+                              ),
+                              text: e.name,
+                            );
+                          }
+                        },
+                      ).toList(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -105,7 +120,8 @@ class _NoteState extends State<Note> {
                                 widget.noteModel.title ?? " ",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(color: Colors.white, fontSize: 25),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 25),
                               ),
                               const SizedBox(height: 10),
                               const Icon(Icons.lock),
@@ -123,3 +139,7 @@ class _NoteState extends State<Note> {
     );
   }
 }
+
+/*
+
+ */
