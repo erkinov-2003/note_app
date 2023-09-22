@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:note_app/src/features/home_screen/widgets/new_noter.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import 'widgets/note.dart';
-import 'package:note_app/src/features/home_screen/widgets/bottom_sheet.dart';
-import 'package:note_app/src/features/profile/profile_page.dart';
-
-import '../../../common/constants/app_colors.dart';
-import '../../../common/constants/app_icons.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,14 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  void openProfile() {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const ProfilePage(),
-        ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +25,9 @@ class _HomePage extends State<HomePage> {
         toolbarHeight: 80,
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 10,top: 10),
+            padding: const EdgeInsets.only(right: 10, top: 10),
             child: GestureDetector(
-              onTap: openProfile,
+              onTap: () {},
               child: const SizedBox(
                 width: 57,
                 height: 57,
@@ -72,28 +61,20 @@ class _HomePage extends State<HomePage> {
           ],
         ),
       ),
-      body: MasonryGridView.count(
-        padding: const EdgeInsets.all(10),
-        crossAxisCount: 2,
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        itemCount: 100,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              index == 0 ? const CustomNewNote() : const SizedBox(),
-              index == 0 ? const SizedBox(height: 10) : const SizedBox(),
-              Note(
-                title: 'krnvfnrjfnrrf jmjhbhjbjhbjbhbjbhbbjbf',
-                subTitle: 'EBUhdijhubhrijrifrubhfbnjik'
-                    'ojfwnienfirnfinrifnnnnnnnnnnnnnnnnnnnn'
-                    'nnnnnnnnnnnnnnnnnnnnnnnnnnn'
-                    'nnribhnjiko3efrijb  ',
-                dateTime: DateTime.now(),
-                isLogget: true,
-                path: "assets/images/facebook.png",
-              ),
-            ],
+      body: Consumer<Notes>(
+        builder: (context, value, child) {
+          print(value.allNotes);
+          return MasonryGridView.count(
+            padding: const EdgeInsets.all(10),
+            crossAxisCount: 2,
+            mainAxisSpacing: 15,
+            crossAxisSpacing: 15,
+            itemCount: value.allNotes.length + 1,
+            itemBuilder: (context, index) {
+              return index == 0
+                  ? const CustomNewNote()
+                  : SizedBox(height: 300,width: 166,child: Note(noteModel: value.allNotes[index - 1]));
+            },
           );
         },
       ),

@@ -56,4 +56,27 @@ class NoteModel {
       isSecret: $isSecret,
     );
     """;
+
+
+  NoteModel copyWith({
+    String? noteId,
+    String? userId,
+    String? title,
+    String? body,
+    String? image,
+    List<String>? link,
+    bool? isSecret,
+  }) =>
+      NoteModel(
+        noteId: noteId ?? this.noteId,
+        userId: userId ?? this.userId,
+        title: title ?? this.title,
+        body: body ?? this.body,
+        image: image ?? this.image,
+        link: link ?? this.link,
+        isSecret: isSecret ?? this.isSecret,
+        dateTime: dateTime,
+      );
+
+
 }

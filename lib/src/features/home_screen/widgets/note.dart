@@ -1,24 +1,16 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/src/common/constants/app_images.dart';
+import 'package:note_app/src/common/models/note_model.dart';
 
 import '../../../common/constants/app_colors.dart';
 
 class Note extends StatefulWidget {
-  final String title;
-  final String subTitle;
-  final String? path;
-  final bool isLogget;
-  final DateTime dateTime;
+  final NoteModel noteModel;
 
-  const Note({
-    Key? key,
-    this.path,
-    required this.title,
-    required this.subTitle,
-    this.isLogget = false,
-    required this.dateTime,
-  }) : super(key: key);
+  const Note({required this.noteModel, super.key});
 
   @override
   State<Note> createState() => _NoteState();
@@ -35,63 +27,97 @@ class _NoteState extends State<Note> {
 
   void parser() {
     DateFormat format = DateFormat("dd.MM.yyyy");
-    formatted = format.format(widget.dateTime);
+    formatted = format.format(widget.noteModel.dateTime);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
       onLongPress: () {},
+      onTap: () {},
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
-          border: Border.all(color: AppColors.white),
+          border: Border.all(color: AppColors.white,strokeAlign: BorderSide.strokeAlignOutside),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontSize: 24,
-                  overflow: TextOverflow.ellipsis,
-                  color: AppColors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                widget.subTitle,
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: AppColors.white, fontSize: 15),
-              ),
-              const SizedBox(height: 10),
-              widget.path == null
-                  ? const SizedBox()
-                  : Image(
-                      image: AssetImage(widget.path!),
-                    ),
-              const SizedBox(height: 9),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    formatted,
-                    style: const TextStyle(color: AppColors.white),
+                    widget.noteModel.title!,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      overflow: TextOverflow.ellipsis,
+                      color: AppColors.white,
+                    ),
                   ),
-                  widget.isLogget
-                      ? Image.asset(
-                          AppImages.lock,
-                          color: AppColors.white,
-                        )
-                      : const SizedBox(),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.noteModel.body!,
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    style:
+                        const TextStyle(color: AppColors.white, fontSize: 15),
+                  ),
+                  const SizedBox(height: 10),
+                  widget.noteModel.image == null
+                      ? const SizedBox()
+                      : Image(
+                          image: AssetImage(widget.noteModel.image!),
+                        ),
+                  const SizedBox(height: 9),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        formatted,
+                        style: const TextStyle(color: AppColors.white),
+                      ),
+                      widget.noteModel.isSecret
+                          ? Image.asset(
+                              AppImages.lock,
+                              color: AppColors.white,
+                            )
+                          : const SizedBox(),
+                    ],
+                  )
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            if (widget.noteModel.isSecret)
+              Center(
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaY: 3, sigmaX: 3),
+                    child: SizedBox.expand(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.noteModel.title ?? " ",
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(color: Colors.white, fontSize: 25),
+                              ),
+                              const SizedBox(height: 10),
+                              const Icon(Icons.lock),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
