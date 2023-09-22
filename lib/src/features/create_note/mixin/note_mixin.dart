@@ -81,7 +81,7 @@ mixin NoteMixin on State<CreateNote> {
       }
     }
 
-    await $storage.setString(StorageKeys.noteBody.key, jsonEncode(body));
+    await $storage.setString(StorageKeys.notes.key, jsonEncode(noteModel));
   }
 
   FutureOr<String> pickImageFromGallery() async {
