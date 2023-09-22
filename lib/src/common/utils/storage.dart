@@ -8,7 +8,8 @@ enum StorageKeys {
   oneUser("oneUser"),
   users("users"),
   locale("locale"),
-  theme("is_dark");
+  theme("is_dark"),
+  notes("notes");
 
   const StorageKeys(this.key);
 
