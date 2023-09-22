@@ -63,20 +63,31 @@ class Model with ChangeNotifier {
     GlobalKey<FormState> _formKey,
   ) {
     if (_formKey.currentState!.validate()) {
-      List<String> users = $storage.getStringList("users") ?? [];
-      List<User> allUsers = List<User>.from(
-              users.map((e) => User.fromMap(jsonDecode(e))).toList())
-          .toList();
-      List<User> foundUsers =
-          allUsers.where((element) => element.email == email).toList();
-      int index = allUsers.indexOf(foundUsers.first);
-      if (index != -1) {
-        allUsers.removeAt(index);
-        User newUser = foundUsers.first.copyWith(loginPassword: password);
-        allUsers.insert(index, newUser);
-        users = allUsers.map((e) => jsonEncode(e.toJson())).toList();
-        $storage.setStringList("users", users);
-        // print(users);
+      User user=User();
+
+      $secureStorage.write(
+        key: StorageKeys.oneUser.key,
+        value: jsonEncode(
+          user.toJson(),
+        ),
+      );
+
+      user.loginPassword!=password;
+
+      // List<String> users = $storage.getStringList("users") ?? [];
+      // List<User> allUsers = List<User>.from(
+      //         users.map((e) => User.fromMap(jsonDecode(e))).toList())
+      //     .toList();
+      // List<User> foundUsers =
+      //     allUsers.where((element) => element.email == email).toList();
+      // int index = allUsers.indexOf(foundUsers.first);
+      // if (index != -1) {
+      //   allUsers.removeAt(index);
+      //   User newUser = foundUsers.first.copyWith(loginPassword: password);
+      //   allUsers.insert(index, newUser);
+      //   users = allUsers.map((e) => jsonEncode(e.toJson())).toList();
+      //   $storage.setStringList("users", users);
+        print(user);
       }
       Navigator.pushReplacement(
           context,
@@ -85,7 +96,6 @@ class Model with ChangeNotifier {
           ));
     }
   }
-}
 
 class Provider extends InheritedNotifier<Model> {
   const Provider({

@@ -71,10 +71,8 @@ class _ForgotState extends State<Forgot> {
       if (!value.contains(".com")) {
         return "Emailda '.com' bo'lishi shart";
       }
-      List<String> users = $storage.getStringList("users") ?? [];
-      List<User> allUsers = List<User>.from(
-              users.map((e) => User.fromMap(jsonDecode(e))).toList())
-          .toList();
+      String json = ($secureStorage.read(key: StorageKeys.users.key)).toString() ?? "";
+      List<User> allUsers = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
       bool isSighnedIn = allUsers.any((element) => element.email == value);
       if (!isSighnedIn) {
         return "Bunday foydalanuvchi yo'q";
