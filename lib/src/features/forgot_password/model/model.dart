@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
-import '../../home_screen/widgets/home_page.dart';
 import '../widget/chenge_password.dart';
 import '../widget/forgot.dart';
 
@@ -100,12 +99,7 @@ class Model with ChangeNotifier {
       }
         notifyListeners();
       }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomePage(),
-      ),
-    );
+    Navigator.pop(context);
   }
 }
 
