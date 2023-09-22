@@ -7,11 +7,13 @@ late final FlutterSecureStorage $secureStorage;
 late final Notes $notes;
 
 
-enum StorageKeys { 
-  users("users"),
+enum StorageKeys {
   oneUser("oneUser"),
+  users("users"),
   locale("locale"),
-  theme("is_dark");
+  theme("is_dark"),
+  notes("notes");
+
   const StorageKeys(this.key);
 
   final String key;
