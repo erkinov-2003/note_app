@@ -5,6 +5,8 @@ late final SharedPreferences $storage;
 late final FlutterSecureStorage $secureStorage;
 
 enum StorageKeys {
+  oneUser("oneUser"),
+  users("users"),
   locale("locale"),
   theme("is_dark"),
   noteBody("body"),

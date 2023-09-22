@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/features/create_note/create_note.dart';
 
 import '../../features/splash_screen/widget/splash_screen.dart';
 
@@ -25,7 +24,7 @@ class App extends StatelessWidget {
       ],
       supportedLocales: GeneratedLocalization.delegate.supportedLocales,
       darkTheme: ThemeData.dark(useMaterial3: true),
-      home: const CreateNote(),
+      home: const SplashScreen(),
     );
   }
 }
