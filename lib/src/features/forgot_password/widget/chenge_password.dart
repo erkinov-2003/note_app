@@ -16,8 +16,8 @@ class _ChangePasswordState extends State<ChangePassword> {
   String password = "";
 
   String? validatePasswordOne(String? value) {
-    if (value!.length < 4) {
-      return "Parol kamida 4 ta belgi bo'lishi shart";
+    if (value!.length < 8) {
+      return "Parol kamida 8 ta belgi bo'lishi shart";
     }
     password = value;
     return null;

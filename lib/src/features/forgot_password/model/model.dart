@@ -10,8 +10,13 @@ import '../widget/forgot.dart';
 class Model with ChangeNotifier {
   String email;
   String password;
+  List<User> allUsers;
 
-  Model({required this.email, required this.password});
+  Model({
+    required this.email,
+    required this.password,
+    required this.allUsers,
+  });
 
   void update(String value) {
     email = value;
@@ -20,6 +25,13 @@ class Model with ChangeNotifier {
 
   void updatePassword(String value) {
     password = value;
+    notifyListeners();
+  }
+
+  void getAllUsers() async {
+    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
+    allUsers =
+        List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
     notifyListeners();
   }
 
@@ -36,6 +48,7 @@ class Model with ChangeNotifier {
             model: Model(
               email: email,
               password: password,
+              allUsers: allUsers,
             ),
           ),
         ),
@@ -48,54 +61,53 @@ class Model with ChangeNotifier {
       context,
       MaterialPageRoute(
         builder: (context) => Provider(
-          child: Forgot(),
+          child: const Forgot(),
           model: Model(
             email: email,
             password: password,
+            allUsers: allUsers,
           ),
         ),
       ),
     );
   }
 
+  String? validateEmail(String value, BuildContext context) {
+    bool isSighnedIn = allUsers.any((element) => element.email == value);
+    if (!isSighnedIn) {
+      return "Bunday foydalanuvchi yo'q";
+    }
+    update(value);
+    return null;
+  }
+
   void openHomePage(
     BuildContext context,
     GlobalKey<FormState> _formKey,
-  ) {
+  ) async {
     if (_formKey.currentState!.validate()) {
-      User user=User();
-
-      $secureStorage.write(
-        key: StorageKeys.oneUser.key,
-        value: jsonEncode(
-          user.toJson(),
-        ),
-      );
-
-      user.loginPassword!=password;
-
-      // List<String> users = $storage.getStringList("users") ?? [];
-      // List<User> allUsers = List<User>.from(
-      //         users.map((e) => User.fromMap(jsonDecode(e))).toList())
-      //     .toList();
-      // List<User> foundUsers =
-      //     allUsers.where((element) => element.email == email).toList();
-      // int index = allUsers.indexOf(foundUsers.first);
-      // if (index != -1) {
-      //   allUsers.removeAt(index);
-      //   User newUser = foundUsers.first.copyWith(loginPassword: password);
-      //   allUsers.insert(index, newUser);
-      //   users = allUsers.map((e) => jsonEncode(e.toJson())).toList();
-      //   $storage.setStringList("users", users);
-        print(user);
+      List<User> foundUsers =
+          allUsers.where((element) => element.email == email).toList();
+      int index = allUsers.indexOf(foundUsers.first);
+      if (index != -1) {
+        allUsers[index].loginPassword = password;
+        await $secureStorage.write(
+          key: StorageKeys.users.key,
+          value: jsonEncode(
+            allUsers.map((e) => e.toJson()).toList(),
+          ),
+        );
       }
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
-    }
+        notifyListeners();
+      }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
+    );
   }
+}
 
 class Provider extends InheritedNotifier<Model> {
   const Provider({
@@ -112,8 +124,6 @@ class Provider extends InheritedNotifier<Model> {
           ? context.dependOnInheritedWidgetOfExactType<Provider>()
           : context.getElementForInheritedWidgetOfExactType<Provider>()?.widget
               as Provider?;
-
-  // static Provider? maybeOf(BuildContext context, {bool listen=false})=> listen?context.dependOnInheritedWidgetOfExactType<Provider>()<Provider>():context.getElementForInheritedWidgetOfExactType<Provider>()?.widget as Provider?;
 
   static Never _noInheritedWidgetError() => throw ArgumentError(
       "No fount Inherited of type Provider", "out_of_scope");

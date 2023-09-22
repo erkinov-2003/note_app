@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../../common/models/user_model.dart';
-import '../../../common/utils/storage.dart';
 import '../model/text_field.dart';
 
 class ForgotWithModel extends StatefulWidget {
+
   const ForgotWithModel({Key? key}) : super(key: key);
 
   @override
@@ -21,7 +18,12 @@ class _ForgotWithModelState extends State<ForgotWithModel> {
   @override
   void initState() {
     super.initState();
-    model = Model(email: "", password: "");
+    model = Model(
+      email: "",
+      password: "",
+      allUsers: [],
+    );
+    model.getAllUsers();
   }
 
   @override
@@ -57,29 +59,6 @@ class _ForgotState extends State<Forgot> {
     final email = Provider.of(context);
     final _formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
-
-    String? validateEmail(String? value) {
-      if (value == null) {
-        return "Emailda kamida bitta harf bo'lishi kerak";
-      }
-      if (!RegExp(r'[A-z]+[@]').hasMatch(value)) {
-        return "Email harflardan boshlanishi va @ belgisi bo'lishi shart";
-      }
-      if (!RegExp(r'[A-z]+[@][A-z]').hasMatch(value)) {
-        return "Emailda @ belgidan keyin kamida bitta harf bo'lishi kerak";
-      }
-      if (!value.contains(".com")) {
-        return "Emailda '.com' bo'lishi shart";
-      }
-      String json = ($secureStorage.read(key: StorageKeys.users.key)).toString() ?? "";
-      List<User> allUsers = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
-      bool isSighnedIn = allUsers.any((element) => element.email == value);
-      if (!isSighnedIn) {
-        return "Bunday foydalanuvchi yo'q";
-      }
-      email.update(value);
-      return null;
-    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -129,7 +108,8 @@ class _ForgotState extends State<Forgot> {
                         padding: EdgeInsets.only(top: size.height * 0.012),
                         child: TextEdit(
                           value: "you@example.com",
-                          validateEmail: validateEmail,
+                          validateEmail: (value) =>
+                              email.validateEmail(value!, context),
                           isPassword: false,
                           isRead: false,
                         ),
