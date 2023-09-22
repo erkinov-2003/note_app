@@ -86,7 +86,7 @@ class MainController with ChangeNotifier {
     return null;
   }
 
-  void getAllUsers() async {
+  Future<void> getAllUsers() async {
     String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
     users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
   }
@@ -118,7 +118,7 @@ class MainController with ChangeNotifier {
   void forgotPassword(context) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ForgotWithModel(),
+          builder: (context) => ForgotWithModel(),
         ),
       );
 
@@ -129,6 +129,7 @@ class MainController with ChangeNotifier {
     TextEditingController passwordController,
   ) async {
     if (formKey.currentState!.validate()) {
+      await getAllUsers();
       bool isFounded = false;
       for (int i = 0; i < users.length; i++) {
         if (users[i].email == emailController.text.trim()) {
