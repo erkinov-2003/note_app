@@ -36,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
+    final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 450,
@@ -102,12 +103,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     ValueListenableBuilder(
                       valueListenable: name,
                       builder: (context, value, _) {
-                        return Text(
-                          value,
-                          style: const TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                        return SizedBox(
+                          width: screenSize.width * .4,
+                          child: Text(
+                            value,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         );
                       },
@@ -163,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage(AppIcons.lockIcon),
+                    image: AssetImage(AppIcons.logOut),
                   ),
                   onTap: () {
                     showDialog(
