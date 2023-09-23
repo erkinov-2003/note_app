@@ -26,13 +26,13 @@ class NoteModel {
         userId: json["userId"] as String,
         title: json["title"] as String?,
         body: json["body"] != null
-            ? List<LinkModel>.from(json["body"] as List)
-            : null,
+            ? List<Map<String,Object?>>.from(json["body"] as List).map(LinkModel.fromJson).toList()
+            : [],
         dateTime: DateTime.parse(json["dateTime"] as String),
         image: json["image"] as String?,
         link: json["link"] != null
             ? List<String>.from(json["link"] as List)
-            : null,
+            : [],
         isSecret: json["isSecret"] as bool,
       );
 
@@ -53,7 +53,7 @@ class NoteModel {
       noteId: $noteId,
       userId:$userId,
       title: $title,
-      body: $body,
+      body: ${body?.map((e) => e.toString())},
       dateTime: $dateTime,
       image: $image,
       link: $link,

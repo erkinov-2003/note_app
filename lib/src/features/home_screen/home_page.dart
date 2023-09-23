@@ -63,7 +63,6 @@ class _HomePage extends State<HomePage> {
       ),
       body: Consumer<Notes>(
         builder: (context, value, child) {
-          print(value.allNotes);
           return MasonryGridView.count(
             padding: const EdgeInsets.all(10),
             crossAxisCount: 2,
@@ -73,7 +72,7 @@ class _HomePage extends State<HomePage> {
             itemBuilder: (context, index) {
               return index == 0
                   ? const CustomNewNote()
-                  : SizedBox(height: 300,width: 166,child: Note(noteModel: value.allNotes[index - 1]));
+                  : Note(noteModel: value.allNotes[index - 1]);
             },
           );
         },

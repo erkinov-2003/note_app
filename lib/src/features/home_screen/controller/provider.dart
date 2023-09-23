@@ -14,8 +14,7 @@ class Notes with ChangeNotifier {
 
   List<NoteModel> get secureNotes => _secureNotes;
 
-  List<NoteModel> get allNotes => [...notes, ..._secureNotes]
-    ..sort((a, b) => a.dateTime.compareTo(b.dateTime));
+  List<NoteModel> get allNotes => [...notes, ..._secureNotes]..sort((a, b) => b.dateTime.compareTo(a.dateTime));
 
   void changeSecure(NoteModel note) {
     removeNote(note);
@@ -47,7 +46,7 @@ class Notes with ChangeNotifier {
     notifyListeners();
   }
 
-  void update(String id, NoteModel note) {
+  void update(int id, NoteModel note) {
     if (note.isSecret) {
       int index = _secureNotes.indexOf(note);
       _secureNotes[index] = note;

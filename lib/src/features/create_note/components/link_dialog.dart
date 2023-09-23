@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../mixin/note_mixin.dart';
-import '../models/link_model.dart';
 
 class LinkDialog extends StatefulWidget {
   final TextEditingController controllerBody;
@@ -131,15 +130,12 @@ class _LinkDialogState extends State<LinkDialog> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      String temp = widget.controllerBody.text.trim();
-                      temp += " ${controllerLink.text} ";
+                      widget.controllerBody.text += " ";
+                      int lastIndex = widget.controllerBody.text.split(" ").length;
+                      String temp = widget.controllerBody.text;
+                      temp +=  controllerLink.text;
                       widget.controllerBody.text = temp;
-                      savedLinks.add(
-                        LinkModel(
-                          link: controllerLink.text,
-                          name: controllerLinkName.text,
-                        ),
-                      );
+                      $savedLinks[lastIndex] = controllerLinkName.text;
                       Navigator.pop(context);
                     },
                     child: const Text(

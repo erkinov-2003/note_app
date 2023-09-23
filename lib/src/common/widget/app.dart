@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/utils/storage.dart';
-import 'package:note_app/src/features/home_screen/home_page.dart';
+import 'package:note_app/src/features/splash_screen/widget/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
@@ -27,7 +27,7 @@ class App extends StatelessWidget {
         ],
         supportedLocales: GeneratedLocalization.delegate.supportedLocales,
         darkTheme: ThemeData.dark(useMaterial3: true),
-        home: const HomePage(),
+        home: const SplashScreen(),
       ),
     );
   }

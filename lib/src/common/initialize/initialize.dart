@@ -69,6 +69,8 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
   (
     'Initializing Notes',
     (dependencies) async {
+      $storage.clear();
+      // print($storage.getString("notes"));
       $notes.setNotes(
         $storage.getString("notes") != null
             ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
@@ -53,63 +54,69 @@ class _NoteState extends State<Note> {
                   Text(
                     widget.noteModel.title!,
                     style: const TextStyle(
-                      fontSize: 24,
+                      fontSize: 27,
                       overflow: TextOverflow.ellipsis,
                       color: AppColors.white,
                     ),
                   ),
                   const SizedBox(height: 10),
                   RichText(
-                    text: TextSpan(),
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                      children: widget.noteModel.body!.map<TextSpan>((e) {
+                        if (e.link != null) {
+                          return TextSpan(
+                            style: const TextStyle(
+                              color: AppColors.blue,
+                              decoration: TextDecoration.underline,
+                            ),
+                            text: "${e.name} ",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                final url = e.link;
+                                if (await canLaunchUrlString(url!)) {
+                                  await launchUrlString(url);
+                                }
+                              },
+                          );
+                        } else {
+                          return TextSpan(
+                            style: const TextStyle(
+                              color: AppColors.white,
+                            ),
+                            text: "${e.name} ",
+                          );
+                        }
+                      }).toList(),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   widget.noteModel.image == null
                       ? const SizedBox()
-                      : Image(
-                          image: AssetImage(widget.noteModel.image!),
-                        ),
+                      : ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                          child: Image.file(File(widget.noteModel.image!))),
                   const SizedBox(height: 9),
-                  RichText(
-                    text: TextSpan(
-                      children: widget.noteModel.body!.map<TextSpan>(
-                        (e) {
-                          if (e.link != null) {
-                            return TextSpan(
-                              style: const TextStyle(
-                                color: AppColors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
-                              text: e.name,
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () async {
-                                  final url = e.link;
-                                  if (await canLaunchUrlString(url!)) {
-                                    await launchUrlString(url);
-                                  }
-                                },
-                            );
-                          } else {
-                            return TextSpan(
-                              style: const TextStyle(
-                                color: AppColors.black,
-                              ),
-                              text: e.name,
-                            );
-                          }
-                        },
-                      ).toList(),
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        formatted,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-            if (widget.noteModel.isSecret)
-              Center(
+            if(widget.noteModel.isSecret) Center(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaY: 3, sigmaX: 3),
-                    child: SizedBox.expand(
+                    filter: ImageFilter.blur(sigmaY: 4, sigmaX: 4),
+                    child: SizedBox(
+                      height: 290,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
                         child: Center(
@@ -139,7 +146,3 @@ class _NoteState extends State<Note> {
     );
   }
 }
-
-/*
-
- */

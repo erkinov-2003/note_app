@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/create_note/create_note.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
@@ -10,7 +10,14 @@ class CustomNewNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CreateNote(),
+          ),
+        );
+      },
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppColors.black,

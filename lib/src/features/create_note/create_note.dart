@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/home_screen/controller/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
@@ -74,16 +76,20 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
         builder: (context, value, _) {
           return SizedBox.square(
             dimension: 75,
-            child: FloatingActionButton(
-              onPressed: onSaved,
-              shape: const CircleBorder(),
-              backgroundColor:
+            child: Consumer<Notes>(
+              builder: (context, model, child) {
+                return FloatingActionButton(
+                  onPressed: () => onSaved(model),
+                  shape: const CircleBorder(),
+                  backgroundColor:
                   value ? AppColors.colorFAB1 : AppColors.colorFAB0,
-              child: const Image(
-                width: 40,
-                height: 40,
-                image: AssetImage(AppIcons.icSave),
-              ),
+                  child: const Image(
+                    width: 40,
+                    height: 40,
+                    image: AssetImage(AppIcons.icSave),
+                  ),
+                );
+              },
             ),
           );
         },
