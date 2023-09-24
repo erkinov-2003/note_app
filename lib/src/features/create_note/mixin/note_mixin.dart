@@ -1,18 +1,17 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:note_app/src/features/home_screen/controller/provider.dart';
 
 import '../../../common/models/note_model.dart';
 import '../../../common/utils/logger.dart';
-import '../../../common/utils/storage.dart';
 import '../components/link_dialog.dart';
 import '../create_note.dart';
 import '../models/link_model.dart';
 
-List<LinkModel> savedLinks = [];
+Map<int, String> $savedLinks = {};
 
 mixin NoteMixin on State<CreateNote> {
   final isDisabled = ValueNotifier<bool>(true);
@@ -22,7 +21,7 @@ mixin NoteMixin on State<CreateNote> {
   int noteId = 0;
   String userId = "0";
   String? title;
-  List<LinkModel>? body;
+  List<LinkModel> body = [];
   String? imagePath;
   List<String>? link;
   bool isSecret = false;
@@ -39,16 +38,22 @@ mixin NoteMixin on State<CreateNote> {
 
   void onChanged(String value) {
     isDisabled.value = value.isEmpty;
-    String lastWord = controllerBody.text.split(" ").last;
-    if (lastWord.isNotEmpty) {
-      String word = lastWord;
-      savedLinks.add(
-        LinkModel(name: word),
-      );
-    }
   }
 
-  void onSaved() async {
+  void onSaved(Notes notes) async {
+
+
+      print($savedLinks);
+
+      final list = controllerBody.text.split(" ");
+      for(int i = 0; i < list.length; i++) {
+        body.add(LinkModel(name: list[i],link: $savedLinks[i+1]));
+      }
+
+      print(body);
+      $savedLinks.clear();
+
+
     final noteModel = NoteModel(
       noteId: noteId,
       userId: userId,
@@ -59,29 +64,13 @@ mixin NoteMixin on State<CreateNote> {
       isSecret: isSecret,
     );
 
-    List<String> notes = $storage.getStringList("notes") ?? [];
     if (widget.note == null) {
-      notes.add(jsonEncode(noteModel.toJson()));
-      await $storage.setStringList(StorageKeys.notes.key, notes);
+      notes.addNote(noteModel);
     } else {
-      int noteIndex = notes.indexOf(jsonEncode(widget.note));
-      notes.removeAt(noteIndex);
-      notes.insert(noteIndex, jsonEncode(noteModel.toJson()));
+      notes.update(widget.note!.noteId, noteModel);
     }
 
-    await $storage.setStringList(StorageKeys.notes.key, notes);
-
-    if (body != null) {
-      for (int i = 0; i < savedLinks.length - 1; i++) {
-        body!.add(savedLinks[i]);
-        if (savedLinks[i].name == savedLinks[i + 1].name) {
-          body!.removeAt(i + 1);
-        }
-      }
-    }
-
-    notes.add(jsonEncode(noteModel));
-    await $storage.setString(StorageKeys.notes.key, jsonEncode(notes));
+    Navigator.pop(context);
   }
 
   FutureOr<String> pickImageFromGallery() async {
@@ -101,7 +90,6 @@ mixin NoteMixin on State<CreateNote> {
       shout("$e");
       info("$s");
     }
-
     return "";
   }
 
