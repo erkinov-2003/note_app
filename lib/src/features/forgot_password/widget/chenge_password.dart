@@ -3,8 +3,7 @@ import '../model/model.dart';
 import '../model/text_field.dart';
 
 class ChangePassword extends StatefulWidget {
-
-  ChangePassword({
+  const ChangePassword({
     Key? key,
   }) : super(key: key);
 
@@ -42,7 +41,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         elevation: 0,
         backgroundColor: Colors.black,
         leading: BackButton(
-          onPressed: () => model.openForgotPage(context),
+          onPressed: ()=> model.openForgotPage(context),
         ),
       ),
       body: Center(
@@ -132,7 +131,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                                const MaterialStatePropertyAll<Color>(
+                            const MaterialStatePropertyAll<Color>(
                               Color(0xFF36BFFA),
                             ),
                             fixedSize: MaterialStatePropertyAll<Size>(

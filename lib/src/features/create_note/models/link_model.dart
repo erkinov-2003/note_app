@@ -16,4 +16,9 @@ class LinkModel {
         "name": name,
         "link": link,
       };
+
+  @override
+  String toString() {
+    return 'LinkModel{name: $name, link: $link}';
+  }
 }

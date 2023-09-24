@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/models/note_model.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 
-PersistentBottomSheetController customBottomSheet(BuildContext context) {
+Object customBottomSheet(
+  BuildContext context,
+  NoteModel note,
+) {
+  ValueNotifier<bool> isChecked = ValueNotifier<bool>(false);
   return showBottomSheet(
     context: context,
     builder: (context) {
@@ -28,26 +34,50 @@ PersistentBottomSheetController customBottomSheet(BuildContext context) {
                     ),
                   ),
                 ),
-                onPressed: () => {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Add Password",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 21,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => {},
-                      icon: const Image(
-                        image: AssetImage("assets/icons/lock.png"),
-                        height: 24,
-                      ),
-                    )
-                  ],
+                onPressed: () {
+                  isChecked.value = true;
+                },
+                child: ValueListenableBuilder(
+                  valueListenable: isChecked,
+                  builder: (context, value, child) {
+                    return value
+                        ? TextField(
+                            decoration: InputDecoration(
+                              hintText: "Enter Password",
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  if(!note.isSecret) {
+                                    $notes.changeSecure(note);
+                                  }else {
+                                    $notes.changeSecureSet(note);
+                                  }
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.done,color: Colors.green,),
+                              ),
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Add Password",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 21,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => {},
+                                icon: const Image(
+                                  image: AssetImage("assets/icons/lock.png"),
+                                  height: 24,
+                                ),
+                              )
+                            ],
+                          );
+                  },
                 ),
               ),
               const SizedBox(height: 10),
@@ -61,7 +91,9 @@ PersistentBottomSheetController customBottomSheet(BuildContext context) {
                     ),
                   ),
                 ),
-                onPressed: () => {},
+                onPressed: () {
+                  $notes.removeNote(note);
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

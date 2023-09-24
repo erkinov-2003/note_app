@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:note_app/src/common/models/note_model.dart';
+import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/dependencies.dart';
@@ -45,7 +48,10 @@ Future<Dependencies> $initializeApp({
       },
     );
 
-final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> _initializationSteps = [
+
+
+final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
+    _initializationSteps = [
   (
     'Initial app data',
     (_) async {
@@ -57,6 +63,25 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))> 
     (dependencies) async {
       $storage = await SharedPreferences.getInstance();
       $secureStorage = const FlutterSecureStorage();
+      $notes = Notes();
+    },
+  ),
+  (
+    'Initializing Notes',
+    (dependencies) async {
+      $storage.clear();
+      // print($storage.getString("notes"));
+      $notes.setNotes(
+        $storage.getString("notes") != null
+            ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()
+            : <NoteModel>[],
+      );
+      String? notes = await $secureStorage.read(key: "notes");
+      $notes.setSecureNotes(notes != null
+          ? List<Map<String, Object?>>.from(jsonDecode(notes) as List)
+              .map(NoteModel.fromJson)
+              .toList()
+          : <NoteModel>[]);
     },
   ),
   (

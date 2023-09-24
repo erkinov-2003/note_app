@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 import '../../forgot_password/widget/forgot.dart';
-import '../../home_screen/widgets/home_page.dart';
+import '../../home_screen/home_page.dart';
 
 class MainController with ChangeNotifier {
   User user = User();
