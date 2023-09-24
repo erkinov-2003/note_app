@@ -52,7 +52,6 @@ mixin NoteMixin on State<CreateNote> {
     final noteModel = NoteModel(
       noteId: noteId,
       userId: userId,
-      dateTime: DateTime.now(),
       title: controllerTitle.text,
       body: body,
       image: imagePath,
