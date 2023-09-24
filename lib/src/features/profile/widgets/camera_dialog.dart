@@ -1,17 +1,26 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
 
-class CameraBottomSheet extends StatelessWidget {
+class CameraBottomSheet extends StatefulWidget {
   const CameraBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  State<CameraBottomSheet> createState() => _CameraBottomSheetState();
+}
+
+class _CameraBottomSheetState extends State<CameraBottomSheet> {
+  ImagePicker picker = ImagePicker();
+  XFile? image;
 
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
     final sizeH = MediaQuery.sizeOf(context).height;
     final sizeW = MediaQuery.sizeOf(context).width;
-
     return SizedBox(
       height: 200,
       child: Column(
@@ -38,12 +47,13 @@ class CameraBottomSheet extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
-                      Icons.cancel,
-                      color: AppColors.black,
-                      size: 25,
-                    )),
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.cancel,
+                    color: AppColors.black,
+                    size: 25,
+                  ),
+                ),
               )
             ],
           ),
@@ -55,7 +65,10 @@ class CameraBottomSheet extends StatelessWidget {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF36BFFA)),
-                onPressed: () {},
+                onPressed: () async {
+                  image = await picker.pickImage(source: ImageSource.gallery);
+                  setState(() {});
+                },
                 child: Text(
                   localization.openGallery,
                   style: const TextStyle(
@@ -75,7 +88,10 @@ class CameraBottomSheet extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF36BFFA),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  image = await picker.pickImage(source: ImageSource.camera);
+                  setState(() {});
+                },
                 child: Text(
                   localization.openCamera,
                   style: const TextStyle(
