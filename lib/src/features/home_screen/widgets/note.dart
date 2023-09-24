@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../common/constants/app_colors.dart';
+import 'bottom_sheet.dart';
 
 class Note extends StatefulWidget {
   final NoteModel noteModel;
@@ -33,10 +34,14 @@ class _NoteState extends State<Note> {
     formatted = format.format(widget.noteModel.dateTime);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {},
+      onLongPress: () {
+        customBottomSheet(context, widget.noteModel);
+        setState(() {});
+      },
       onTap: () {},
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -76,7 +81,7 @@ class _NoteState extends State<Note> {
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
                                 String? url = e.link;
-                                if(!url!.startsWith("https://")){
+                                if (!url!.startsWith("https://")) {
                                   url = "https://" + url;
                                 }
                                 if (!await launchUrl(
