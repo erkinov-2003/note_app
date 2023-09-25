@@ -41,7 +41,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   }
 
   void checkOldPassword() {
-    final correctOldPassword = "1234";
+    const correctOldPassword = "1234";
     final enteredOldPassword = oldControllers
         .map((controller) => controller.text)
         .join();

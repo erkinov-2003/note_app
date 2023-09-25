@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../../../common/constants/app_colors.dart';
-import '../controller/main_controller.dart';
+import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -25,14 +24,43 @@ class _RegistrationPageState extends State<RegistrationPage> {
     super.initState();
   }
 
+  String? validatePassword(String? value) {
+    if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
+      return "Password is too short, it must be at least 8 characters";
+    }
+    if (value != null && value.contains(" ")) {
+      return "Password shouldn't have space";
+    }
+    if (value != null && !RegExp(r"\d").hasMatch(value)) {
+      return "Password must have at least one number";
+    }
+    if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
+      return "Password must have at least one letter";
+    }
+    if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
+      return "Password must have at least one Capital letter";
+    }
+    return null;
+  }
+
+  String? validateEmail(String? value) {
+    if (value != null &&
+        !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
+            .hasMatch(value)) {
+      return "Invalid email address!";
+    }
+    return null;
+  }
+
+  String? validateName(String? value) {
+    if (value != null && value.length <= 3) {
+      return "Invalid name!";
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final validatePassword = ProviderRegistration.of(context).validatePasswordR;
-    final validateEmail = ProviderRegistration.of(context).validateEmailR;
-    final validateName = ProviderRegistration.of(context).validateName;
-    final checkRegistration =
-        ProviderRegistration.of(context).checkRegistration;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: SizedBox(
@@ -87,13 +115,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                onPressed: () => checkRegistration(
-                  formKey,
-                  nameController,
-                  emailController,
-                  passwordController,
-                  context,
-                ),
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                  }
+                },
                 child: const Center(
                   child: Text(
                     "Sign In",
