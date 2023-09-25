@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/auth/widgets/registration_page.dart';
 
 import '../../../common/constants/app_icons.dart';
 import '../../../common/localization/generated/l10n.dart';

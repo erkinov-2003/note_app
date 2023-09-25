@@ -1,8 +1,4 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:note_app/src/features/auth/controller/main_controller.dart';
-import 'package:note_app/src/features/forgot_password/model/model.dart';
 import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:provider/provider.dart';
 

@@ -37,7 +37,7 @@ void main() {
       runApp(
         InheritedDependencies(
           dependencies: dependencies,
-          child: App(users: users),
+          child: App(),
         ),
       );
     },
