@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
 import 'package:note_app/src/features/secret_notes/new_pass.dart';
 import 'package:note_app/src/features/secret_notes/update_pass.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
@@ -79,7 +81,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => const CameraBottomSheet(),
+                              builder: (context) => ChangeNotifierProvider(
+                                create: (context) => ProfileController(),
+                                child: const CameraBottomSheet(),
+                              ),
                             );
                           },
                           child: const SizedBox(
@@ -164,10 +169,19 @@ class _ProfilePageState extends State<ProfilePage> {
                     image: AssetImage(AppIcons.lockIcon),
                   ),
                   onTap: () async {
-                    if((await $secureStorage.read(key: StorageKeys.notesPassword.key))==null&&mounted){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const NewSecretPassword()));
+                    if ((await $secureStorage.read(
+                                key: StorageKeys.notesPassword.key)) ==
+                            null &&
+                        mounted) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NewSecretPassword()));
                     } else {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdatePassword()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UpdatePassword()));
                     }
                   },
                 ),

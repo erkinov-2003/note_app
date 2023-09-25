@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';
+import 'package:note_app/src/features/profile/profile_page.dart';
 import '../../features/splash_screen/widget/splash_screen.dart';
 import '../localization/generated/l10n.dart';
 import 'package:note_app/src/common/providers/lang_provider.dart';
@@ -38,7 +39,7 @@ class App extends StatelessWidget {
             darkTheme: ThemeData.dark(useMaterial3: true),
             home: $notes.isLogged == "true"
                 ? const HomePage()
-                : const SplashScreen(),
+                : const ProfilePage(),
             locale: value.getLocale(),
           );
         },
