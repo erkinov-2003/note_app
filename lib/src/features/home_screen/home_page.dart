@@ -21,6 +21,10 @@ class _HomePage extends State<HomePage> {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         elevation: 0,
+        leading: const IconButton(
+          icon: Icon(Icons.arrow_back_rounded),
+          onPressed: null,
+        ),
         backgroundColor: AppColors.black,
         toolbarHeight: 80,
         actions: [
