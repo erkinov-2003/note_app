@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../model/text_field.dart';
 
 class ForgotWithModel extends StatefulWidget {
@@ -56,6 +57,7 @@ class _ForgotState extends State<Forgot> {
 
   @override
   Widget build(BuildContext context) {
+    final localization = GeneratedLocalization();
     final email = Provider.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
@@ -81,7 +83,7 @@ class _ForgotState extends State<Forgot> {
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.09),
                   child: Text(
-                    "Forgot Password",
+                    localization.forgotPassword,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
@@ -91,9 +93,9 @@ class _ForgotState extends State<Forgot> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.02),
-                  child: const Text(
-                    "Enter Email address",
-                    style: TextStyle(
+                  child: Text(
+                    localization.enterEmailAddress,
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       color: AppColors.textColor,
