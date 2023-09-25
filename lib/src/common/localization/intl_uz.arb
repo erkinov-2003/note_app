@@ -27,5 +27,11 @@
   "logOut": "Tizimdan chiqish",
   "language": "Til",
   "profileImage": "Profil Rasmi",
-  "newNote": "Yangi eslatma"
+  "newNote": "Yangi eslatma",
+  "updateSecretPass": "Maxfiy parolingizni yangilang",
+  "newSecretPass": "Yangi maxfiy parol yarating",
+  "check": "Tekshirish",
+  "setPassword": "Parolni o'rnatish",
+  "setPassword2": "Yangi parolni o'rnatish",
+  "oldPassword": "Sizning eski parolingiz"
 }

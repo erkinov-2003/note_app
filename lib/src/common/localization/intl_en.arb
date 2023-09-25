@@ -27,5 +27,11 @@
   "logOut": "Log Out",
   "language": "Language",
   "profileImage": "Profile Image",
-  "newNote": "New Note"
+  "newNote": "New Note",
+  "updateSecretPass": "Update your secret\nNotes password",
+  "newSecretPass": "Create your secret\nNotes password",
+  "check": "Check",
+  "setPassword": "Set Password",
+  "setPassword2": "Set new password",
+  "oldPassword": "Your old password"
 }

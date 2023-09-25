@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPassword": MessageLookupByLibrary.simpleMessage("Добавить Пароль"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавить Фотографию"),
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
+        "check": MessageLookupByLibrary.simpleMessage("Проверить"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("Адрес электронной почты"),
@@ -39,7 +40,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "logIn": MessageLookupByLibrary.simpleMessage("Авторизоваться"),
         "logOut": MessageLookupByLibrary.simpleMessage("Выйти из Системы"),
         "newNote": MessageLookupByLibrary.simpleMessage("Новая заметка"),
+        "newSecretPass": MessageLookupByLibrary.simpleMessage(
+            "Создайте новый секретный пароль"),
         "next": MessageLookupByLibrary.simpleMessage("Следующий"),
+        "oldPassword":
+            MessageLookupByLibrary.simpleMessage("Ваш старый пароль"),
         "openCamera": MessageLookupByLibrary.simpleMessage("Открытая Камера"),
         "openGallery": MessageLookupByLibrary.simpleMessage("Открытая Галерея"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
@@ -51,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пароль для секретной заметки"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Установить пароль"),
+        "setPassword2":
+            MessageLookupByLibrary.simpleMessage("Установить новый пароль"),
         "signIn": MessageLookupByLibrary.simpleMessage("Bойти в Cистему"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать, чтобы отозвать свою ЗАМЕТКУ..."),
@@ -59,6 +66,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ваша ЗАМЕТКА здесь..."),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Тема Приложение"),
+        "updateSecretPass": MessageLookupByLibrary.simpleMessage(
+            "Обновите свой секретный пароль"),
         "yourName": MessageLookupByLibrary.simpleMessage("Ваше Имя")
       };
 }

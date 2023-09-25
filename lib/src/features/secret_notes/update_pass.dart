@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/utils/storage.dart';
+import '../../common/utils/storage.dart';
+import '../../common/localization/generated/l10n.dart';
 
 class UpdatePassword extends StatefulWidget {
   const UpdatePassword({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   late final List<FocusNode> focusNodes;
   late final List<FocusNode> focusNodes1;
   bool isOldPasswordCorrect = false;
+  final localization = GeneratedLocalization();
 
   @override
   void initState() {
@@ -69,12 +71,12 @@ class _UpdatePasswordState extends State<UpdatePassword> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding:
-                  EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
+                  const EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
                   child: Text(
-                    "Update your secret\nNotes password",
-                    style: TextStyle(
+                    localization.updateSecretPass,
+                    style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w600,
                       fontFamily: "Ranade",
@@ -82,11 +84,11 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 35, top: 45),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35, top: 45),
                   child: Text(
-                    "Your old password",
-                    style: TextStyle(
+                    localization.oldPassword,
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Ranade",
@@ -156,11 +158,11 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: 15, left: 35),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 35),
                         child: Text(
-                          "Set new password",
-                          style: TextStyle(
+                          localization.setPassword2,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             fontFamily: "Ranade",
@@ -244,7 +246,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         if(mounted) Navigator.pop(context);
                       },
                       child: Text( isOldPasswordCorrect?
-                        "Set Password": "Check",
+                        localization.setPassword : localization.check,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
