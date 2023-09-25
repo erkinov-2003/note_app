@@ -7,7 +7,7 @@ abstract interface class Dependencies {
 }
 
 final class MutableDependencies implements Dependencies {
-  Dependencies freeze() => ImmutableDependencies();
+  Dependencies freeze() => const ImmutableDependencies();
 }
 
 final class ImmutableDependencies implements Dependencies {

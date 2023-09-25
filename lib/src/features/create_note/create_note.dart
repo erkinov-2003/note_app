@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/home_screen/controller/provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
 
+import '../../common/localization/generated/l10n.dart';
 import '../../common/models/note_model.dart';
 import 'mixin/note_mixin.dart';
 
@@ -21,6 +24,8 @@ class CreateNote extends StatefulWidget {
 class _CreateNoteState extends State<CreateNote> with NoteMixin {
   @override
   Widget build(BuildContext context) {
+    final intl = GeneratedLocalization.of(context);
+
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -35,9 +40,9 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
           ),
         ),
         leadingWidth: 40,
-        title: const Text(
-          "Back",
-          style: TextStyle(
+        title: Text(
+          intl.back,
+          style: const TextStyle(
             color: AppColors.black,
             fontSize: 16.5,
           ),
@@ -56,7 +61,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: openDialogLink,
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Image(
@@ -68,31 +73,41 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
       ),
       floatingActionButton: ValueListenableBuilder(
         valueListenable: isDisabled,
-        builder: (context, value, child) {
+        builder: (context, value, _) {
           return SizedBox.square(
             dimension: 75,
-            child: FloatingActionButton(
-              onPressed: onSaved,
-              shape: const CircleBorder(),
-              backgroundColor:
+            child: Consumer<Notes>(
+              builder: (context, model, child) {
+                return FloatingActionButton(
+                  onPressed: () => onSaved(model),
+                  shape: const CircleBorder(),
+                  backgroundColor:
                   value ? AppColors.colorFAB1 : AppColors.colorFAB0,
-              child: const Image(
-                width: 40,
-                height: 40,
-                image: AssetImage(AppIcons.icSave),
-              ),
+                  child: const Image(
+                    width: 40,
+                    height: 40,
+                    image: AssetImage(AppIcons.icSave),
+                  ),
+                );
+              },
             ),
           );
         },
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
+            isImageSelected
+                ? Image(
+                    fit: BoxFit.cover,
+                    image: FileImage(imageFile!),
+                  )
+                : const SizedBox.shrink(),
             ValueListenableBuilder(
                 valueListenable: isDisabled,
-                builder: (context, value, child) {
+                builder: (context, value, _) {
                   return TextField(
                     controller: controllerTitle,
                     onChanged: onChanged,

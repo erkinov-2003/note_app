@@ -5,7 +5,7 @@ class User {
   final String? name;
   final String? surname;
   final String? email;
-  final String? loginPassword;
+  String? loginPassword;
   final String? secretPassword;
   final String? image;
 
@@ -18,6 +18,11 @@ class User {
     this.secretPassword,
     this.image,
   });
+
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, surname: $surname, email: $email, loginPassword: $loginPassword, secretPassword: $secretPassword, image: $image}';
+  }
 
   User copyWith({
     String? id,
