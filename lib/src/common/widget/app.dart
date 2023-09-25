@@ -1,6 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:note_app/src/features/create_note/create_note.dart';
+import 'package:note_app/src/features/home_screen/home_page.dart';
+import '../../features/splash_screen/widget/splash_screen.dart';
+import '../localization/generated/l10n.dart';
+import '../models/user_model.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';

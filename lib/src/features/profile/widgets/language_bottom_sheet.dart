@@ -23,85 +23,102 @@ class LanguageBottomSheet extends StatelessWidget {
     ];
     int index = $storage.getInt(StorageKeys.locale.key) ?? 0;
     ValueNotifier<int> selected = ValueNotifier(index);
-    return BottomSheet(
-      onClosing: () {},
-      builder: (context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 17, top: 20),
-            child: Row(
-              children: [
-                 Text(
-                  localization.language,
-                  style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+    return SizedBox(
+      height: 290,
+      child: DecoratedBox(
+        decoration:  BoxDecoration(
+          color: Colors.black,
+          border: Border.all(width: 2, color: Colors.white),
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(25),
+            topLeft: Radius.circular(25),
+          )
+        ),
+        child: BottomSheet(
+          backgroundColor: Colors.black,
+          onClosing: () {},
+          builder: (context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 17, top: 20),
+                child: Row(
+                  children: [
+                     Text(
+                      localization.language,
+                      style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                    ),
+                    const SizedBox(width: 20),
+                    const Image(
+                      image: AssetImage(AppIcons.globe),
+                      color: AppColors.white,
+                      height: 20,
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.cancel, color: Colors.white,),
+                    ),
+                    const SizedBox(width: 20),
+                  ],
                 ),
-                const SizedBox(width: 20),
-                const Image(
-                  image: AssetImage(AppIcons.globe),
-                  color: AppColors.black,
-                  height: 20,
-                ),
-                const Spacer(),
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.cancel),
-                ),
-                const SizedBox(width: 20),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          ValueListenableBuilder(
-              valueListenable: selected,
-              builder: (context, value, child) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                        title: SizedBox(
-                      height: 45,
-                      width: 100,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: index == value
-                              ? AppColors.selectedLanguageColor
-                              : AppColors.unSelectedLanguageColor,
-                        ),
-                        onPressed: () async {
-                          selected.value = index;
-                          await $storage.setInt(StorageKeys.locale.key, index);
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              list[index],
-                              style: const TextStyle(color: AppColors.white),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ValueListenableBuilder(
+                  valueListenable: selected,
+                  builder: (context, value, child) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 3,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                            title: SizedBox(
+                          height: 45,
+                          width: 100,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              backgroundColor: index == value
+                                  ? AppColors.selectedLanguageColor
+                                  : AppColors.unSelectedLanguageColor,
                             ),
-                            Image(
-                              height: 40,
-                              width: 40,
-                              image: AssetImage(imagesPath[index]),
+                            onPressed: () async {
+                              selected.value = index;
+                              await $storage.setInt(StorageKeys.locale.key, index);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  list[index],
+                                  style: const TextStyle(color: AppColors.white),
+                                ),
+                                Image(
+                                  height: 40,
+                                  width: 40,
+                                  image: AssetImage(imagesPath[index]),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ));
-                  },
-                );
-              }),
-          const SizedBox(
-            height: 15,
+                          ),
+                        ));
+                      },
+                    );
+                  }),
+              const SizedBox(
+                height: 15,
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

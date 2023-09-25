@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../common/constants/app_icons.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/utils/storage.dart';
@@ -12,6 +11,8 @@ class CustomLogOutDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
     return AlertDialog(
+      shadowColor: Colors.white,
+      iconColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
@@ -21,19 +22,19 @@ class CustomLogOutDialog extends StatelessWidget {
             localization.logOut,
             style: const TextStyle(
               fontSize: 20,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           const SizedBox(width: 20),
           const Image(
             width: 25,
             height: 25,
-            color: Colors.black,
+            color: Colors.white,
             image: AssetImage(AppIcons.logOut),
           ),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       actionsAlignment: MainAxisAlignment.spaceAround,
       actions: [
         TextButton(
@@ -44,7 +45,7 @@ class CustomLogOutDialog extends StatelessWidget {
             "Cancel",
             style: TextStyle(
               fontSize: 15,
-              color: Color(0xFF575758),
+              color: Colors.white,
             ),
           ),
         ),
