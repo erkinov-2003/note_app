@@ -13,8 +13,8 @@ class LanguageBottomSheet extends StatelessWidget {
     final localization=GeneratedLocalization();
     List<String> list = [
       "English",
-      "Russia",
-      "Uzbek",
+      "Русский",
+      "O'zbek",
     ];
     List<String> imagesPath = [
       AppIcons.ukFlag,
