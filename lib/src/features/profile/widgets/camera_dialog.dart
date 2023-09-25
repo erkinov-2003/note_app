@@ -1,6 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:note_app/src/features/auth/controller/main_controller.dart';
+import 'package:note_app/src/features/forgot_password/model/model.dart';
+import 'package:note_app/src/features/profile/controller/profile_controller.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
@@ -13,9 +17,6 @@ class CameraBottomSheet extends StatefulWidget {
 }
 
 class _CameraBottomSheetState extends State<CameraBottomSheet> {
-  ImagePicker picker = ImagePicker();
-  XFile? image;
-
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
@@ -65,9 +66,8 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF36BFFA)),
-                onPressed: () async {
-                  image = await picker.pickImage(source: ImageSource.gallery);
-                  setState(() {});
+                onPressed: (){
+                  context.read<ProfileController>().openGallery();
                 },
                 child: Text(
                   localization.openGallery,
@@ -88,9 +88,8 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF36BFFA),
                 ),
-                onPressed: () async {
-                  image = await picker.pickImage(source: ImageSource.camera);
-                  setState(() {});
+                onPressed: (){
+                  context.read<ProfileController>().openCamera();
                 },
                 child: Text(
                   localization.openCamera,
