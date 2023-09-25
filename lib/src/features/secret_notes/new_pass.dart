@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
+import 'package:note_app/src/features/profile/profile_page.dart';
 
 class NewSecretPassword extends StatefulWidget {
   const NewSecretPassword({Key? key}) : super(key: key);
@@ -37,11 +39,12 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints:BoxConstraints(maxWidth: 450),
+            constraints: BoxConstraints(maxWidth: 450),
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
+                  padding: EdgeInsets.only(
+                      top: 50.0, left: 22, right: 22, bottom: 30),
                   child: Text(
                     "Create your secret\nNotes password",
                     style: TextStyle(
@@ -53,7 +56,8 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 25),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 60, horizontal: 25),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(4, (index) {
@@ -89,11 +93,13 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                               onChanged: (text) {
                                 if (text.isNotEmpty) {
                                   if (index < controllers.length - 1) {
-                                    FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+                                    FocusScope.of(context)
+                                        .requestFocus(focusNodes[index + 1]);
                                   }
                                 } else if (text.isEmpty) {
                                   if (index > 0) {
-                                    FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+                                    FocusScope.of(context)
+                                        .requestFocus(focusNodes[index - 1]);
                                   }
                                 }
                               },
@@ -112,9 +118,16 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.lightBlueAccent,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                       ),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final pass =
+                            controllers.map((e) => e.text).toList().join("");
+                        await $secureStorage.write(
+                            key: StorageKeys.notesPassword.key, value: pass);
+                        if (mounted) Navigator.pop(context);
+                      },
                       child: const Text(
                         "Set Password",
                         textAlign: TextAlign.center,
@@ -136,4 +149,3 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
     );
   }
 }
-

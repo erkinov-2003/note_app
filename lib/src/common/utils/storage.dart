@@ -12,7 +12,8 @@ enum StorageKeys {
   users("users"),
   locale("locale"),
   theme("is_dark"),
-  notes("notes");
+  notes("notes"),
+  notesPassword("notesPassword");
 
   const StorageKeys(this.key);
 

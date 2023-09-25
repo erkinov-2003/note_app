@@ -121,7 +121,7 @@ class MainController with ChangeNotifier {
   void forgotPassword(context) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ForgotWithModel(),
+          builder: (context) => const ForgotWithModel(),
         ),
       );
 
@@ -140,7 +140,7 @@ class MainController with ChangeNotifier {
           isFounded = true;
         }
       }
-      if (!isFounded) {
+      if (!isFounded && context.mounted) {
         ScaffoldMessenger.of(context)
           ..clearSnackBars()
           ..showSnackBar(
@@ -156,22 +156,26 @@ class MainController with ChangeNotifier {
               user.toJson(),
             ),
           );
+          $secureStorage.write(key: "isLogged", value: "true");
           if (context.mounted) {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
               ),
+              (route) => false,
             );
           }
         } else {
-          ScaffoldMessenger.of(context)
-            ..clearSnackBars()
-            ..showSnackBar(
-              const SnackBar(
-                content: Text("Wrong password"),
-              ),
-            );
+         if(context.mounted) {
+           ScaffoldMessenger.of(context)
+             ..clearSnackBars()
+             ..showSnackBar(
+               const SnackBar(
+                 content: Text("Wrong password"),
+               ),
+             );
+         }
         }
       }
     }
@@ -197,11 +201,13 @@ class MainController with ChangeNotifier {
           users.map((e) => e.toJson()).toList(),
         ),
       );
-      Navigator.push(
+      $secureStorage.write(key: "isLogged", value: "true");
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(),
         ),
+        (route) => false,
       );
     }
   }

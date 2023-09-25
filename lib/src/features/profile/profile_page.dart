@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
-import 'package:provider/provider.dart';
+import 'package:note_app/src/features/secret_notes/new_pass.dart';
+import 'package:note_app/src/features/secret_notes/update_pass.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
@@ -24,13 +24,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ValueNotifier<String> name = ValueNotifier("");
-  String noValue = jsonEncode(User(name: "Your anme").toJson());
 
   @override
   void didChangeDependencies() async {
     name.value = User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    noValue))
+                    "Your Name"))
             .name ??
         "";
     super.didChangeDependencies();
@@ -80,10 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => ProfileController(),
-                                child: const CameraBottomSheet(),
-                              ),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
@@ -167,7 +163,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     height: 25,
                     image: AssetImage(AppIcons.lockIcon),
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    if((await $secureStorage.read(key: StorageKeys.notesPassword.key))==null&&mounted){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const NewSecretPassword()));
+                    } else {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const UpdatePassword()));
+                    }
+                  },
                 ),
                 const Spacer(),
                 CustomListTile(

@@ -32,7 +32,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of(context);
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
@@ -63,7 +63,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ),
                 Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -147,7 +147,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             ),
                           ),
                           onPressed: () =>
-                              model.openHomePage(context, _formKey),
+                              model.openHomePage(context, formKey),
                           child: Text(
                             "Enter",
                             style: TextStyle(
