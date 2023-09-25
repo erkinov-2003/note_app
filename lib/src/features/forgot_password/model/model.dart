@@ -42,7 +42,7 @@ class Model with ChangeNotifier {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Provider(
+          builder: (context) => ProviderForgot(
             model: Model(
               email: email,
               password: password,
@@ -59,7 +59,7 @@ class Model with ChangeNotifier {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => Provider(
+        builder: (context) => ProviderForgot(
           model: Model(
             email: email,
             password: password,
@@ -103,8 +103,8 @@ class Model with ChangeNotifier {
   }
 }
 
-class Provider extends InheritedNotifier<Model> {
-  const Provider({
+class ProviderForgot extends InheritedNotifier<Model> {
+  const ProviderForgot({
     super.key,
     required super.child,
     required final Model model,
@@ -113,11 +113,11 @@ class Provider extends InheritedNotifier<Model> {
   static Model of(BuildContext context, {bool listen = false}) =>
       maybeOf(context, listen: listen)?.notifier ?? _noInheritedWidgetError();
 
-  static Provider? maybeOf(BuildContext context, {bool listen = false}) =>
+  static ProviderForgot? maybeOf(BuildContext context, {bool listen = false}) =>
       listen
-          ? context.dependOnInheritedWidgetOfExactType<Provider>()
-          : context.getElementForInheritedWidgetOfExactType<Provider>()?.widget
-              as Provider?;
+          ? context.dependOnInheritedWidgetOfExactType<ProviderForgot>()
+          : context.getElementForInheritedWidgetOfExactType<ProviderForgot>()?.widget
+              as ProviderForgot?;
 
   static Never _noInheritedWidgetError() => throw ArgumentError(
       "No fount Inherited of type Provider", "out_of_scope");
