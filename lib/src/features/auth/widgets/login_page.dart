@@ -36,7 +36,7 @@ class _LogInState extends State<LogIn> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 240,
+            height: 220,
             child: Form(
               key: formKey,
               child: Column(
