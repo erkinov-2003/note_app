@@ -153,6 +153,7 @@ class MainController with ChangeNotifier {
               user.toJson(),
             ),
           );
+          $secureStorage.write(key: "isLogged", value: "true");
           if (context.mounted) {
             Navigator.push(
               context,
@@ -194,6 +195,7 @@ class MainController with ChangeNotifier {
           users.map((e) => e.toJson()).toList(),
         ),
       );
+      $secureStorage.write(key: "isLogged", value: "true");
       Navigator.push(
         context,
         MaterialPageRoute(

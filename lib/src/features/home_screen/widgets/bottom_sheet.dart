@@ -144,7 +144,9 @@ Object customBottomSheet({
                   ),
                 ),
                 onPressed: () {
-                  $notes.removeNote(note);
+                  if(!note.isSecret){
+                    $notes.removeNote(note);
+                  }
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
