@@ -19,6 +19,9 @@ class MainController with ChangeNotifier {
     required this.pageController,
   });
 
+
+
+
   String? validatePassword(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
       return "Password is too short, it must be at least 8 characters";

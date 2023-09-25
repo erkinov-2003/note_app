@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
@@ -22,12 +24,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ValueNotifier<String> name = ValueNotifier("");
+  String noValue = jsonEncode(User(name: "Your anme").toJson());
 
   @override
   void didChangeDependencies() async {
     name.value = User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    "Your Name"))
+                    noValue))
             .name ??
         "";
     super.didChangeDependencies();
@@ -77,7 +80,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => const CameraBottomSheet(),
+                              builder: (context) => ChangeNotifierProvider(
+                                create: (context) => ProfileController(),
+                                child: const CameraBottomSheet(),
+                              ),
                             );
                           },
                           child: const SizedBox(
