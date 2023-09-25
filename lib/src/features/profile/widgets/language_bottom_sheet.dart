@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/common/providers/lang_provider.dart';
 import 'package:note_app/src/common/utils/storage.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
@@ -21,8 +23,6 @@ class LanguageBottomSheet extends StatelessWidget {
       AppIcons.ruFlag,
       AppIcons.uzFlag,
     ];
-    int index = $storage.getInt(StorageKeys.locale.key) ?? 0;
-    ValueNotifier<int> selected = ValueNotifier(index);
     return SizedBox(
       height: 290,
       child: DecoratedBox(
@@ -47,7 +47,7 @@ class LanguageBottomSheet extends StatelessWidget {
                   children: [
                      Text(
                       localization.language,
-                      style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                      style:const TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white,),
                     ),
                     const SizedBox(width: 20),
                     const Image(
@@ -69,49 +69,52 @@ class LanguageBottomSheet extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              ValueListenableBuilder(
-                  valueListenable: selected,
-                  builder: (context, value, child) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 3,
-                      itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                            title: SizedBox(
-                          height: 45,
-                          width: 100,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
+              Consumer<LangProvider>(builder:  (context, value, child) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  String locale = switch(index){
+                    0=>"en",
+                    1=>"ru",
+                    2=>"uz",
+                    _=>"en",
+                  };
+                  return ListTile(
+                      title: SizedBox(
+                        height: 45,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)
-                              ),
-                              backgroundColor: index == value
-                                  ? AppColors.selectedLanguageColor
-                                  : AppColors.unSelectedLanguageColor,
                             ),
-                            onPressed: () async {
-                              selected.value = index;
-                              await $storage.setInt(StorageKeys.locale.key, index);
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  list[index],
-                                  style: const TextStyle(color: AppColors.white),
-                                ),
-                                Image(
-                                  height: 40,
-                                  width: 40,
-                                  image: AssetImage(imagesPath[index]),
-                                ),
-                              ],
-                            ),
+                            backgroundColor: locale == value.current!.languageCode
+                                ? AppColors.selectedLanguageColor
+                                : AppColors.unSelectedLanguageColor,
                           ),
-                        ));
-                      },
-                    );
-                  }),
+                          onPressed: () async {
+                           value.changeLocale(Locale(locale));
+                            await $storage.setString(StorageKeys.locale.key, locale );
+                            if(context.mounted) Navigator.pop(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                list[index].toString(),
+                                style: const TextStyle(color: AppColors.white),
+                              ),
+                              Image(
+                                height: 40,
+                                width: 40,
+                                image: AssetImage(imagesPath[index]),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ));
+                },
+              )),
               const SizedBox(
                 height: 15,
               ),

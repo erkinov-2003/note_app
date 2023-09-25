@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/common/providers/theme_provider.dart';
 import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
 import 'package:note_app/src/features/secret_notes/new_pass.dart';
@@ -29,16 +30,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void didChangeDependencies() async {
+    final User first = User(name: GeneratedLocalization.of(context).yourName);
+
     name.value = User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    "Your Name"))
+                    jsonEncode(first.toJson())))
             .name ??
         "";
+
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context);
     final localization = GeneratedLocalization();
     final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
@@ -46,26 +51,24 @@ class _ProfilePageState extends State<ProfilePage> {
         maxWidth: 450,
       ),
       child: Scaffold(
-        backgroundColor: const Color(0xFF000000),
         appBar: AppBar(
           leading: BackButton(
-            color: AppColors.white,
+            color: theme.primaryColor,
             onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: const Color(0xFF000000),
+          backgroundColor: theme.scaffoldBackgroundColor,
           title: Text(
             localization.profile,
-            style: const TextStyle(
+            style:  TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: theme.primaryColor,
             ),
           ),
         ),
         body: SafeArea(
           child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
               children: [
                 const SizedBox(height: 15),
                 Row(
@@ -94,13 +97,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        child: const CircleAvatar(
-                          backgroundColor: Colors.white,
+                        child:  CircleAvatar(
+                          backgroundColor: theme.primaryColor,
                           radius: 50,
                           child: Center(
                             child: Icon(
                               Icons.person,
-                              color: Colors.black,
+                              color: theme.scaffoldBackgroundColor,
                               size: 80,
                             ),
                           ),
@@ -116,9 +119,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             value,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontSize: 25,
-                              color: Colors.white,
+                              color: theme.primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -134,12 +137,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         );
                       },
-                      child: const Padding(
-                        padding: EdgeInsets.only(right: 40),
+                      child:  Padding(
+                        padding:const EdgeInsets.only(right: 40),
                         child: Image(
                           height: 40,
                           width: 40,
-                          image: AssetImage(AppIcons.editIcon),
+                          color: theme.primaryColor,
+                          image:const AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
@@ -148,6 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
+
                   title: localization.language,
                   trailing: const Image(
                     width: 25,
@@ -185,7 +190,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     }
                   },
                 ),
-                const Spacer(),
+                SizedBox(height: screenSize.height * .1),
                 CustomListTile(
                   title: localization.logOut,
                   trailing: const Image(
@@ -201,13 +206,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 const SizedBox(height: 30),
-                const Center(
+                Center(
                   child: Text(
                     "Note App for IOS\nv01.0.1(2023) by Flutter G7",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
-                      color: Color(0xFF262629),
+                      // color: Color(0xFF262629),
+                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -230,20 +236,33 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
+  // bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
+
+  void onChanged(bool newValue, ThemeProvider value) {
+    value.changeTheme(newValue);
+    $storage.setBool(StorageKeys.theme.key, newValue);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CustomListTile(
-      title: "Theme",
-      trailing: Switch(
-        value: switchValue,
-        onChanged: (value) {
-          switchValue = value;
-          $storage.setBool(StorageKeys.theme.key, switchValue);
-          setState(() {});
-        },
-      ),
-      onTap: () {},
-    );
+    final localization = GeneratedLocalization();
+    return Consumer<ThemeProvider>(builder: (context, value, child) {
+      return CustomListTile(
+        title: localization.theme,
+        trailing: Switch(
+            value: value.themeMode == ThemeMode.dark,
+            onChanged: (newValue) => onChanged(!newValue, value)),
+        onTap: () => onChanged(value.themeMode == ThemeMode.dark, value),
+      );
+
+      //   SwitchListTile.adaptive(
+      //   title: Text(localization.theme),
+      //   value: value.themeMode == ThemeMode.light,
+      //   onChanged: (newValue) {
+      //     value.changeTheme(newValue);
+      //     $storage.setBool(StorageKeys.theme.key, newValue);
+      //   },
+      // );
+    });
   }
 }
