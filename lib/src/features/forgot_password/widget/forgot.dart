@@ -57,6 +57,7 @@ class _ForgotState extends State<Forgot> {
 
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context);
     final localization = GeneratedLocalization();
     final email = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
@@ -67,8 +68,8 @@ class _ForgotState extends State<Forgot> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.black,
-        leading: const BackButton(
-          color: AppColors.white,
+        leading: BackButton(
+          color: theme.primaryColor,
         ),
       ),
       body: Center(
@@ -87,7 +88,7 @@ class _ForgotState extends State<Forgot> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
-                      color: AppColors.white,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),
@@ -159,3 +160,4 @@ class _ForgotState extends State<Forgot> {
     );
   }
 }
+

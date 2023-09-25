@@ -32,6 +32,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final theme= Theme.of(context);
     final localization = GeneratedLocalization();
     final model = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
@@ -60,7 +61,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
-                      color: Colors.white,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),

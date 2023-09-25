@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPassword": MessageLookupByLibrary.simpleMessage("Parol Qo\'shish"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Fotosurat Qo\'shing"),
         "back": MessageLookupByLibrary.simpleMessage("Ortga"),
+        "check": MessageLookupByLibrary.simpleMessage("Tekshirish"),
         "delete": MessageLookupByLibrary.simpleMessage("O\'chirish"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("Elektron pochta manzili"),
@@ -38,7 +39,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "logIn": MessageLookupByLibrary.simpleMessage("Kirish"),
         "logOut": MessageLookupByLibrary.simpleMessage("Tizimdan chiqish"),
         "newNote": MessageLookupByLibrary.simpleMessage("Yangi eslatma"),
+        "newSecretPass":
+            MessageLookupByLibrary.simpleMessage("Yangi maxfiy parol yarating"),
         "next": MessageLookupByLibrary.simpleMessage("Keyingi"),
+        "oldPassword":
+            MessageLookupByLibrary.simpleMessage("Sizning eski parolingiz"),
         "openCamera": MessageLookupByLibrary.simpleMessage("Camera Ochish"),
         "openGallery": MessageLookupByLibrary.simpleMessage("Galareya Ochish"),
         "password": MessageLookupByLibrary.simpleMessage("Parol"),
@@ -48,7 +53,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "secretPassword":
             MessageLookupByLibrary.simpleMessage("Maxfiy eslatma uchun parol"),
         "setPassword":
-            MessageLookupByLibrary.simpleMessage("Parolni o\'rnating"),
+            MessageLookupByLibrary.simpleMessage("Parolni o\'rnatish"),
+        "setPassword2":
+            MessageLookupByLibrary.simpleMessage("Yangi parolni o\'rnatish"),
         "signIn": MessageLookupByLibrary.simpleMessage("Tizimga kirish"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
             "ESLATMANGIZNI qaytarib olishga xush kelibsiz..."),
@@ -57,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sizning eslatmangiz bu erda..."),
         "theme": MessageLookupByLibrary.simpleMessage("Tema"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Mavzu Ilovasi"),
+        "updateSecretPass": MessageLookupByLibrary.simpleMessage(
+            "Maxfiy parolingizni yangilang"),
         "yourName": MessageLookupByLibrary.simpleMessage("Sizning Ismingiz")
       };
 }
