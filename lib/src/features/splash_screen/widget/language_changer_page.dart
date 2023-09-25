@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/providers/lang_provider.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Language APP",
+                  GeneratedLocalization.of(context).languageApp,
                   style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),

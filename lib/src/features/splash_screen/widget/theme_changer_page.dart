@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Theme APP",
+                  GeneratedLocalization.of(context).themeApp,
                   style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
@@ -47,7 +48,7 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                   value: value.themeMode == ThemeMode.light,
                   onChanged: value.changeTheme,
                   title: Text(
-                    "Theme",
+                    GeneratedLocalization.of(context).theme,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
