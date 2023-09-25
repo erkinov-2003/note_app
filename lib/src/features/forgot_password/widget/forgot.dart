@@ -57,7 +57,7 @@ class _ForgotState extends State<Forgot> {
   @override
   Widget build(BuildContext context) {
     final email = Provider.of(context);
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
@@ -101,7 +101,7 @@ class _ForgotState extends State<Forgot> {
                   ),
                 ),
                 Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Column(
                     children: [
                       Padding(
@@ -135,7 +135,7 @@ class _ForgotState extends State<Forgot> {
                             ),
                           ),
                           onPressed: () =>
-                              email.openChangePasswordPage(_formKey, context),
+                              email.openChangePasswordPage(formKey, context),
                           child: Text(
                             "Send code",
                             style: TextStyle(

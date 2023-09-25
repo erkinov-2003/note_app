@@ -31,7 +31,7 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
     ),
   ];
 
-  LanguageModel _selectedFruit = const LanguageModel(
+  LanguageModel selectedFruit = const LanguageModel(
     languageName: "Uzbek",
     icon: AppIcons.icUzb,
     value: "uz",
@@ -85,7 +85,7 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
                   ),
                   onSelectedItemChanged: (int selectedItem) {
                     setState(() {
-                      _selectedFruit = languages[selectedItem];
+                      selectedFruit = languages[selectedItem];
                     });
                   },
                   children: List<Widget>.generate(languages.length, (int index) {

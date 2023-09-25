@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/src/common/models/note_model.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../common/constants/app_colors.dart';
 import 'bottom_sheet.dart';
@@ -92,7 +91,7 @@ class _NoteState extends State<Note> {
                               ..onTap = () async {
                                 String? url = e.link;
                                 if (!url!.startsWith("https://")) {
-                                  url = "https://" + url;
+                                  url = "https://$url";
                                 }
                                 if (!await launchUrl(
                                   Uri.parse(url),
