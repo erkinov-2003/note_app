@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/constants/app_colors.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
@@ -117,11 +118,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.push(
+                    $storage.setBool("isLogged", true);
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),
                       ),
+                      (route) => false,
                     );
                   }
                 },
