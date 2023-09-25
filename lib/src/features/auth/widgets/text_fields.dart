@@ -82,6 +82,14 @@ class _TextFieldsState extends State<TextFields> {
                       Radius.circular(10),
                     ),
                   ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.white,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                  ),
                   filled: true,
                   fillColor: AppColors.fillColor,
                   suffixIcon: showPassword != null

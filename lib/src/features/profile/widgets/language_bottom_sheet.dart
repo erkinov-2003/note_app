@@ -13,8 +13,8 @@ class LanguageBottomSheet extends StatelessWidget {
     final localization=GeneratedLocalization();
     List<String> list = [
       "English",
-      "Russia",
-      "Uzbek",
+      "Русский",
+      "O'zbek",
     ];
     List<String> imagesPath = [
       AppIcons.ukFlag,
@@ -27,7 +27,6 @@ class LanguageBottomSheet extends StatelessWidget {
       height: 290,
       child: DecoratedBox(
         decoration:  BoxDecoration(
-          color: Colors.black,
           border: Border.all(width: 2, color: Colors.white),
           borderRadius: const BorderRadius.only(
             topRight: Radius.circular(25),

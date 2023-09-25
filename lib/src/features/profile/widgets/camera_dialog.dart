@@ -20,7 +20,7 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
     final sizeH = MediaQuery.sizeOf(context).height;
     final sizeW = MediaQuery.sizeOf(context).width;
     return SizedBox(
-      height: 250,
+      height: 180,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.black,

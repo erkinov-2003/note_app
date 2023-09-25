@@ -340,6 +340,56 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Update your secret\nNotes password`
+  String get updateSecretPass {
+    return Intl.message(
+      'Update your secret\nNotes password',
+      name: 'updateSecretPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create your secret\nNotes password`
+  String get newSecretPass {
+    return Intl.message(
+      'Create your secret\nNotes password',
+      name: 'newSecretPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check`
+  String get check {
+    return Intl.message(
+      'Check',
+      name: 'check',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set new password`
+  String get setPassword2 {
+    return Intl.message(
+      'Set new password',
+      name: 'setPassword2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your old password`
+  String get oldPassword {
+    return Intl.message(
+      'Your old password',
+      name: 'oldPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

@@ -49,7 +49,6 @@ mixin NoteMixin on State<CreateNote> {
 
       $savedLinks.clear();
 
-
     final noteModel = NoteModel(
       noteId: noteId,
       userId: userId,
