@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import '../../auth/widgets/registr_page_controller.dart';
 import 'language_changer_page.dart';
 import 'theme_changer_page.dart';
@@ -80,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: const Text(
                         "Next",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),

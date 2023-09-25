@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:note_app/src/common/providers/theme_provider.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';
 import 'package:note_app/src/features/profile/profile_page.dart';
 import '../../features/splash_screen/widget/splash_screen.dart';
@@ -19,16 +20,15 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => LangProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
       ],
-      child: Consumer<LangProvider>(
-        builder: (context, value, child) {
+      child: Consumer2<LangProvider, ThemeProvider>(
+        builder: (context, langProvider, themeProvider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Note App",
-            theme: ThemeData(
-              useMaterial3: true,
-              fontFamily: "Ranade",
-            ),
             localizationsDelegates: const <LocalizationsDelegate<Object>>[
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
@@ -36,11 +36,13 @@ class App extends StatelessWidget {
               GeneratedLocalization.delegate,
             ],
             supportedLocales: GeneratedLocalization.delegate.supportedLocales,
-            darkTheme: ThemeData.dark(useMaterial3: true),
+            theme: ThemeProvider.lightTheme,
+            darkTheme: ThemeProvider.darkTheme,
+            themeMode: themeProvider.themeMode,
             home: $notes.isLogged == "true"
                 ? const HomePage()
                 : const ProfilePage(),
-            locale: value.getLocale(),
+            locale: langProvider.getLocale(),
           );
         },
       ),

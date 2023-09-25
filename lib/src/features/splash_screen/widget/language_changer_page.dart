@@ -36,14 +36,11 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Language APP",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
               ),
               const Expanded(
@@ -90,7 +87,11 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
                     },
                     children:
                         List<Widget>.generate(languages.length, (int index) {
-                      return Center(child: Text(languages[index].languageName));
+                      return Center(
+                          child: Text(
+                        languages[index].languageName,
+                            style: Theme.of(context).primaryTextTheme.titleMedium,
+                      ));
                     }),
                   );
                 }),
