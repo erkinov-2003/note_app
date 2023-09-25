@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 
 class UpdatePassword extends StatefulWidget {
   const UpdatePassword({Key? key}) : super(key: key);
@@ -40,8 +41,9 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     super.dispose();
   }
 
-  void checkOldPassword() {
-    final correctOldPassword = "1234";
+  void checkOldPassword() async {
+    // $secureStorage.delete(key: StorageKeys.notePassword.key);
+    final correctOldPassword = await $secureStorage.read(key: StorageKeys.notesPassword.key);
     final enteredOldPassword = oldControllers
         .map((controller) => controller.text)
         .join();
@@ -51,7 +53,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     });
 
     if (isOldPasswordCorrect) {
-      FocusScope.of(context).requestFocus(focusNodes1[0]);
+      if(mounted) FocusScope.of(context).requestFocus(focusNodes1[0]);
     }
   }
 
@@ -236,7 +238,11 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: checkOldPassword,
+                      onPressed: !isOldPasswordCorrect ? checkOldPassword : () async{
+                        final updatePass = newControllers.map((e) => e.text).toList().join("");
+                        await $secureStorage.write(key: StorageKeys.notesPassword.key, value: updatePass);
+                        if(mounted) Navigator.pop(context);
+                      },
                       child: Text( isOldPasswordCorrect?
                         "Set Password": "Check",
                         textAlign: TextAlign.center,
