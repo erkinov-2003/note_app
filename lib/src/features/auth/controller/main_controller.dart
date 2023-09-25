@@ -19,6 +19,9 @@ class MainController with ChangeNotifier {
     required this.pageController,
   });
 
+
+
+
   String? validatePassword(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
       return "Password is too short, it must be at least 8 characters";
@@ -153,6 +156,7 @@ class MainController with ChangeNotifier {
               user.toJson(),
             ),
           );
+          $secureStorage.write(key: "isLogged", value: "true");
           if (context.mounted) {
             Navigator.push(
               context,
@@ -194,6 +198,7 @@ class MainController with ChangeNotifier {
           users.map((e) => e.toJson()).toList(),
         ),
       );
+      $secureStorage.write(key: "isLogged", value: "true");
       Navigator.push(
         context,
         MaterialPageRoute(

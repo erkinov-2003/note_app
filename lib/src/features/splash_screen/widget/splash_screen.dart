@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../common/models/user_model.dart';
 import '../../auth/widgets/registr_page_controller.dart';
-import '../../home_screen/home_page.dart';
 import 'language_changer_page.dart';
 import 'theme_changer_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  final List<User> users;
 
-  const SplashScreen({super.key, required this.users});
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -31,9 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.users.isNotEmpty
-        ? const HomePage()
-        : Scaffold(
+    return Scaffold(
             body: SizedBox.expand(
               child: Column(
                 children: [
@@ -77,9 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => widget.users.isNotEmpty
-                                  ? const HomePage()
-                                  : const RegistrationPageController(),
+                              builder: (context) => const RegistrationPageController(),
                             ),
                           );
                         }

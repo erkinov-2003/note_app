@@ -11,7 +11,6 @@ import '../utils/logger.dart';
 import '../utils/storage.dart';
 
 Future<Dependencies>? _initializeApp;
-
 Future<Dependencies> $initializeApp({
   void Function(int percent, String message)? onProgress,
   FutureOr<void> Function(Dependencies dependencies)? onSuccess,
@@ -69,8 +68,11 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
   (
     'Initializing Notes',
     (dependencies) async {
-      $storage.clear();
+      // $storage.clear();
       // print($storage.getString("notes"));
+
+      $notes.isLogged = (await $secureStorage.read(key: "isLogged"))  ?? "false";
+
       $notes.setNotes(
         $storage.getString("notes") != null
             ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()
