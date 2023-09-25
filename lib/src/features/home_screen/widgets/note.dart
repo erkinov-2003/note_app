@@ -21,10 +21,20 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
+
+  late TextEditingController textEditingController;
+
   @override
   void initState() {
+    textEditingController = TextEditingController();
     parser();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
   }
 
   String formatted = "";
@@ -39,7 +49,7 @@ class _NoteState extends State<Note> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        customBottomSheet(context, widget.noteModel);
+        customBottomSheet(context: context, note:  widget.noteModel,textEditingController: textEditingController);
         setState(() {});
       },
       onTap: () {},

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:note_app/src/common/models/note_model.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 
-Object customBottomSheet(
-  BuildContext context,
-  NoteModel note,
-) {
+Object customBottomSheet({
+  required TextEditingController textEditingController,
+  required BuildContext context,
+  required NoteModel note,
+}) {
+
   ValueNotifier<bool> isChecked = ValueNotifier<bool>(false);
   return showBottomSheet(
     context: context,
@@ -40,43 +42,93 @@ Object customBottomSheet(
                 child: ValueListenableBuilder(
                   valueListenable: isChecked,
                   builder: (context, value, child) {
-                    return value
+                    return note.isSecret
                         ? TextField(
+                            controller: textEditingController,
                             decoration: InputDecoration(
                               hintText: "Enter Password",
                               suffixIcon: IconButton(
-                                onPressed: () {
-                                  if(!note.isSecret) {
-                                    $notes.changeSecure(note);
-                                  }else {
-                                    $notes.changeSecureSet(note);
+                                onPressed: () async {
+                                  String? password =
+                                      await $secureStorage.read(key: "ass");
+                                  if (textEditingController.text == password &&
+                                      password != null) {
+                                    if (!note.isSecret) {
+                                      $notes.changeSecure(note);
+                                    } else {
+                                      $notes.changeSecureSet(note);
+                                    }
+                                  } else {
+                                    SnackBar text = SnackBar(
+                                      content: const Text(
+                                        "Parolni Hato Kiritdingiz",
+                                        style: TextStyle(fontSize: 20,color: Colors.black),
+                                      ),
+                                      backgroundColor: Colors.white,
+                                      dismissDirection: DismissDirection.up,
+                                      behavior: SnackBarBehavior.floating,
+                                      margin: EdgeInsets.only(
+                                        bottom: MediaQuery.sizeOf(context).height - 120,
+                                        left: 10,
+                                        right: 10,
+                                      ),
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(text);
                                   }
+                                  textEditingController.clear();
                                   Navigator.pop(context);
                                 },
-                                icon: const Icon(Icons.done,color: Colors.green,),
+                                icon: const Icon(
+                                  Icons.done,
+                                  color: Colors.green,
+                                ),
                               ),
                             ),
                           )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Add Password",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 21,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () => {},
-                                icon: const Image(
-                                  image: AssetImage("assets/icons/lock.png"),
-                                  height: 24,
+                        : value
+                            ? TextField(
+                                controller: textEditingController,
+                                decoration: InputDecoration(
+                                  hintText: "Enter Password",
+                                  suffixIcon: IconButton(
+                                    onPressed: () async {
+                                      if (!note.isSecret) {
+                                        $notes.changeSecure(note);
+                                      } else {
+                                        $notes.changeSecureSet(note);
+                                      }
+                                      textEditingController.clear();
+                                      Navigator.pop(context);
+                                    },
+                                    icon: const Icon(
+                                      Icons.done,
+                                      color: Colors.green,
+                                    ),
+                                  ),
                                 ),
                               )
-                            ],
-                          );
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "Add Password",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 21,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () => {},
+                                    icon: const Image(
+                                      image:
+                                          AssetImage("assets/icons/lock.png"),
+                                      height: 24,
+                                    ),
+                                  )
+                                ],
+                              );
                   },
                 ),
               ),
