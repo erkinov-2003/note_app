@@ -35,7 +35,7 @@ class _ForgotWithModelState extends State<ForgotWithModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ProviderForgot(
       model: model,
       child: const Forgot(),
     );
@@ -58,7 +58,7 @@ class _ForgotState extends State<Forgot> {
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
-    final email = Provider.of(context);
+    final email = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 

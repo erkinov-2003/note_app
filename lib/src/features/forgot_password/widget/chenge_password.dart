@@ -33,7 +33,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
-    final model = Provider.of(context);
+    final model = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
