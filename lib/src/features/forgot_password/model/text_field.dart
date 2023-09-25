@@ -30,7 +30,7 @@ class _TextEditState extends State<TextEdit> {
 
   @override
   Widget build(BuildContext context) {
-    final model=Provider.of(context);
+    final model=ProviderForgot.of(context);
     FocusNode focusNode = FocusNode();
     return TextFormField(
       onChanged: widget.isPassword?(value) => model.updatePassword(controller.text):null,

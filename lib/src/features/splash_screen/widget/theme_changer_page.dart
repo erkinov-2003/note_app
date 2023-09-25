@@ -41,7 +41,14 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                   ),
                 ),
               ),
-              const Image(image: AssetImage(AppImages.themeBgImage)),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Image(
+                    image: AssetImage(AppImages.themeBgImage),
+                  ),
+                ),
+              ),
               SwitchListTile.adaptive(
                 activeColor: Colors.black,
                 activeTrackColor: Colors.white,

@@ -68,10 +68,19 @@ class _TextFieldsState extends State<TextFields> {
                 obscuringCharacter: "•",
                 obscureText: showPassword ?? false,
                 decoration: InputDecoration(
+
                   errorStyle: const TextStyle(
                     color: AppColors.errorBorder,
                     fontSize: 12,
                     fontWeight: FontWeight.w100,
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.black,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
                   focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
