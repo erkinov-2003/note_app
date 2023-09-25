@@ -6,8 +6,10 @@ import '/src/common/initialize/inherited_dependencies.dart';
 import '/src/common/initialize/initialize.dart';
 import '/src/common/widget/splash_screen.dart';
 
+import 'src/common/models/user_model.dart';
 import 'src/common/widget/app.dart';
 import 'src/common/widget/error_app.dart';
+List<User> users = [];
 
 void main() {
   final progress = ValueNotifier<
@@ -18,10 +20,12 @@ void main() {
   runApp(SplashScreen(progress: progress));
 
   $initializeApp(
-    onProgress: (percent, message) => progress.value = (
+    onProgress: (percent, message) {
+      progress.value = (
       percent: percent,
       message: message,
-    ),
+    );
+    },
     onSuccess: (dependencies) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
@@ -39,3 +43,4 @@ void main() {
     ),
   ).ignore();
 }
+

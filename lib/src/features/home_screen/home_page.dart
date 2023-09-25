@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:note_app/src/features/home_screen/widgets/new_noter.dart';
+import 'package:note_app/src/features/profile/profile_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
@@ -27,7 +28,14 @@ class _HomePage extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10, top: 10),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfilePage(),
+                  ),
+                );
+              },
               child: const SizedBox(
                 width: 57,
                 height: 57,

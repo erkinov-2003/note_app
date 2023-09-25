@@ -35,20 +35,20 @@ class Model with ChangeNotifier {
   }
 
   void openChangePasswordPage(
-    GlobalKey<FormState> _formKey,
+    GlobalKey<FormState> formKey,
     BuildContext context,
   ) {
-    if (_formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => Provider(
-            child: ChangePassword(),
+          builder: (context) => ProviderForgot(
             model: Model(
               email: email,
               password: password,
               allUsers: allUsers,
             ),
+            child: const ChangePassword(),
           ),
         ),
       );
@@ -59,13 +59,13 @@ class Model with ChangeNotifier {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => Provider(
-          child: const Forgot(),
+        builder: (context) => ProviderForgot(
           model: Model(
             email: email,
             password: password,
             allUsers: allUsers,
           ),
+          child: const Forgot(),
         ),
       ),
     );
@@ -82,9 +82,9 @@ class Model with ChangeNotifier {
 
   void openHomePage(
     BuildContext context,
-    GlobalKey<FormState> _formKey,
+    GlobalKey<FormState> formKey,
   ) async {
-    if (_formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       List<User> foundUsers =
           allUsers.where((element) => element.email == email).toList();
       int index = allUsers.indexOf(foundUsers.first);
@@ -97,14 +97,14 @@ class Model with ChangeNotifier {
           ),
         );
       }
-        notifyListeners();
-      }
-    Navigator.pop(context);
+      notifyListeners();
+    }
+    if (context.mounted) Navigator.pop(context);
   }
 }
 
-class Provider extends InheritedNotifier<Model> {
-  const Provider({
+class ProviderForgot extends InheritedNotifier<Model> {
+  const ProviderForgot({
     super.key,
     required super.child,
     required final Model model,
@@ -113,11 +113,11 @@ class Provider extends InheritedNotifier<Model> {
   static Model of(BuildContext context, {bool listen = false}) =>
       maybeOf(context, listen: listen)?.notifier ?? _noInheritedWidgetError();
 
-  static Provider? maybeOf(BuildContext context, {bool listen = false}) =>
+  static ProviderForgot? maybeOf(BuildContext context, {bool listen = false}) =>
       listen
-          ? context.dependOnInheritedWidgetOfExactType<Provider>()
-          : context.getElementForInheritedWidgetOfExactType<Provider>()?.widget
-              as Provider?;
+          ? context.dependOnInheritedWidgetOfExactType<ProviderForgot>()
+          : context.getElementForInheritedWidgetOfExactType<ProviderForgot>()?.widget
+              as ProviderForgot?;
 
   static Never _noInheritedWidgetError() => throw ArgumentError(
       "No fount Inherited of type Provider", "out_of_scope");

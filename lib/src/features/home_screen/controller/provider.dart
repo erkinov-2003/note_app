@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +6,7 @@ import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/models/note_model.dart';
 
 class Notes with ChangeNotifier {
+  String isLogged = "false";
   List<NoteModel> _notes = [];
   List<NoteModel> _secureNotes = [];
 
@@ -14,11 +14,19 @@ class Notes with ChangeNotifier {
 
   List<NoteModel> get secureNotes => _secureNotes;
 
-  List<NoteModel> get allNotes => [...notes, ..._secureNotes]..sort((a, b) => b.dateTime.compareTo(a.dateTime));
+  List<NoteModel> get allNotes => [...notes, ..._secureNotes]..sort(
+      (a, b) => b.dateTime.compareTo(a.dateTime),
+    );
 
   void changeSecure(NoteModel note) {
     removeNote(note);
     addNote(note.copyWith(isSecret: !note.isSecret));
+  }
+
+  void changeSecureSet(NoteModel note) {
+    removeNote(note);
+    addNote(note.copyWith(isSecret: false));
+    notifyListeners();
   }
 
   void setNotes(List<NoteModel> newNote) {
@@ -41,8 +49,13 @@ class Notes with ChangeNotifier {
   }
 
   void addNote(NoteModel note) {
-    _notes.add(note);
-    save();
+    if(!note.isSecret){
+      _notes.add(note);
+      save();
+    }else{
+      _secureNotes.add(note);
+      saveSecured();
+    }
     notifyListeners();
   }
 

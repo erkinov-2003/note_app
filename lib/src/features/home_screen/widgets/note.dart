@@ -5,9 +5,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/src/common/models/note_model.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/constants/app_colors.dart';
+import 'bottom_sheet.dart';
 
 class Note extends StatefulWidget {
   final NoteModel noteModel;
@@ -19,10 +20,20 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
+
+  late TextEditingController textEditingController;
+
   @override
   void initState() {
+    textEditingController = TextEditingController();
     parser();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
   }
 
   String formatted = "";
@@ -32,10 +43,14 @@ class _NoteState extends State<Note> {
     formatted = format.format(widget.noteModel.dateTime);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {},
+      onLongPress: () {
+        customBottomSheet(context: context, note:  widget.noteModel,textEditingController: textEditingController);
+        setState(() {});
+      },
       onTap: () {},
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -74,9 +89,15 @@ class _NoteState extends State<Note> {
                             text: "${e.name} ",
                             recognizer: TapGestureRecognizer()
                               ..onTap = () async {
-                                final url = e.link;
-                                if (await canLaunchUrlString(url!)) {
-                                  await launchUrlString(url);
+                                String? url = e.link;
+                                if (!url!.startsWith("https://")) {
+                                  url = "https://$url";
+                                }
+                                if (!await launchUrl(
+                                  Uri.parse(url),
+                                  mode: LaunchMode.platformDefault,
+                                )) {
+                                  throw Exception('Could not launch $url');
                                 }
                               },
                           );
@@ -110,7 +131,8 @@ class _NoteState extends State<Note> {
                 ],
               ),
             ),
-            if(widget.noteModel.isSecret) Center(
+            if (widget.noteModel.isSecret)
+              Center(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   child: BackdropFilter(

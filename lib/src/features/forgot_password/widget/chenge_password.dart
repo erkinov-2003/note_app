@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../model/model.dart';
 import '../model/text_field.dart';
 
@@ -31,8 +32,9 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of(context);
-    final _formKey = GlobalKey<FormState>();
+    final localization = GeneratedLocalization();
+    final model = ProviderForgot.of(context);
+    final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
@@ -54,7 +56,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.005),
                   child: Text(
-                    "Set Password",
+                    localization.setPassword,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
@@ -63,7 +65,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   ),
                 ),
                 Form(
-                  key: _formKey,
+                  key: formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -147,7 +149,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             ),
                           ),
                           onPressed: () =>
-                              model.openHomePage(context, _formKey),
+                              model.openHomePage(context, formKey),
                           child: Text(
                             "Enter",
                             style: TextStyle(

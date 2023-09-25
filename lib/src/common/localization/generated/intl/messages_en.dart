@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addPassword": MessageLookupByLibrary.simpleMessage("Add Password"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "check": MessageLookupByLibrary.simpleMessage("Check"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enterEmailAddress":
@@ -37,7 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "newNote": MessageLookupByLibrary.simpleMessage("New Note"),
+        "newSecretPass": MessageLookupByLibrary.simpleMessage(
+            "Create your secret\nNotes password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "oldPassword":
+            MessageLookupByLibrary.simpleMessage("Your old password"),
         "openCamera": MessageLookupByLibrary.simpleMessage("Open Camera"),
         "openGallery": MessageLookupByLibrary.simpleMessage("Open Gallery"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -47,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "secretPassword":
             MessageLookupByLibrary.simpleMessage("Secret note Password"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
+        "setPassword2":
+            MessageLookupByLibrary.simpleMessage("Set new password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
             "Welcome to back Your NOTE..."),
@@ -55,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Your NOTE in the here..."),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
+        "updateSecretPass": MessageLookupByLibrary.simpleMessage(
+            "Update your secret\nNotes password"),
         "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
       };
 }

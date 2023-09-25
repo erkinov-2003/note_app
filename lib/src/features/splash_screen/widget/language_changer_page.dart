@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../common/constants/app_icons.dart';
+import 'package:note_app/src/common/providers/lang_provider.dart';
+import 'package:note_app/src/common/utils/storage.dart';
+import 'package:provider/provider.dart';
 import '../../../common/constants/app_images.dart';
 import '../models/language_model.dart';
 
@@ -13,31 +14,14 @@ class LanguageChangerPage extends StatefulWidget {
 }
 
 class _LanguageChangerPageState extends State<LanguageChangerPage> {
-  List<LanguageModel> languages = const [
-    LanguageModel(
-      languageName: "English",
-      icon: AppIcons.icEng,
-      value: "en",
-    ),
-    LanguageModel(
-      languageName: "Russian",
-      icon: AppIcons.icRus,
-      value: "ru",
-    ),
-    LanguageModel(
-      languageName: "Uzbek",
-      icon: AppIcons.icUzb,
-      value: "uz",
-    ),
-  ];
+  late List<LanguageModel> languages;
+  late Locale selectedLocale;
 
-  LanguageModel _selectedFruit = const LanguageModel(
-    languageName: "Uzbek",
-    icon: AppIcons.icUzb,
-    value: "uz",
-  );
-
-  String value = "en";
+  @override
+  void initState() {
+    super.initState();
+    languages = LangProvider.languages;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,46 +36,65 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "Language APP",
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w600,
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
+                ),
+              ),
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 24),
+                  child: Image(
+                    image: AssetImage(AppImages.languageBgImage),
                   ),
                 ),
               ),
-              const Image(image: AssetImage(AppImages.languageBgImage)),
               SizedBox(
                 height: 120,
-                child: CupertinoPicker(
-                  magnification: 1.3,
-                  useMagnifier: true,
-                  itemExtent: 50,
-                  selectionOverlay: const SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Divider(),
-                        Divider(),
-                      ],
+                child: Builder(builder: (context) {
+                  final LangProvider langProvider =
+                      Provider.of<LangProvider>(context, listen: false);
+                  return CupertinoPicker(
+                    magnification: 1.3,
+                    useMagnifier: true,
+                    itemExtent: 50,
+                    selectionOverlay: const SizedBox(
+                      height: 50,
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Divider(),
+                          Divider(),
+                        ],
+                      ),
                     ),
-                  ),
-                  scrollController: FixedExtentScrollController(
-                    initialItem: 1
-                  ),
-                  onSelectedItemChanged: (int selectedItem) {
-                    setState(() {
-                      _selectedFruit = languages[selectedItem];
-                    });
-                  },
-                  children: List<Widget>.generate(languages.length, (int index) {
-                    return Center(child: Text(languages[index].languageName));
-                  }),
-                ),
+                    scrollController: FixedExtentScrollController(
+                        initialItem: switch (
+                            langProvider.current?.languageCode) {
+                      "en" => 0,
+                      "ru" => 1,
+                      "uz" => 2,
+                      _ => -1,
+                    }),
+                    onSelectedItemChanged: (int selectedItem) {
+                      final selectedLocale = languages[selectedItem];
+                      langProvider.changeLocale(Locale(selectedLocale.value));
+                      $storage.setString(
+                          StorageKeys.locale.key, selectedLocale.value);
+                    },
+                    children:
+                        List<Widget>.generate(languages.length, (int index) {
+                      return Center(
+                          child: Text(
+                        languages[index].languageName,
+                            style: Theme.of(context).primaryTextTheme.titleMedium,
+                      ));
+                    }),
+                  );
+                }),
               ),
             ],
           ),
