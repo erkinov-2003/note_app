@@ -36,13 +36,13 @@ class _LogInState extends State<LogIn> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 230,
+            height: 220,
             child: Form(
               key: formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox.square(dimension: 10),
+                  const SizedBox(height: 10),
                   TextFields(
                     validator: validateEmail,
                     controller: emailController,
@@ -51,7 +51,6 @@ class _LogInState extends State<LogIn> {
                     exampleText: "you@example.com",
                     infoText: "Email address",
                   ),
-
                   TextFields(
                     controller: passwordController,
                     validator: validatePassword,
@@ -65,7 +64,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 30),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
@@ -93,7 +92,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           Center(
             child: GestureDetector(
               onTap: () => forgotPassword(context),
