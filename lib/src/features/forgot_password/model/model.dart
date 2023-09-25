@@ -35,20 +35,20 @@ class Model with ChangeNotifier {
   }
 
   void openChangePasswordPage(
-    GlobalKey<FormState> _formKey,
+    GlobalKey<FormState> formKey,
     BuildContext context,
   ) {
-    if (_formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Provider(
-            child: ChangePassword(),
             model: Model(
               email: email,
               password: password,
               allUsers: allUsers,
             ),
+            child: const ChangePassword(),
           ),
         ),
       );
@@ -60,12 +60,12 @@ class Model with ChangeNotifier {
       context,
       MaterialPageRoute(
         builder: (context) => Provider(
-          child: const Forgot(),
           model: Model(
             email: email,
             password: password,
             allUsers: allUsers,
           ),
+          child: const Forgot(),
         ),
       ),
     );
@@ -82,9 +82,9 @@ class Model with ChangeNotifier {
 
   void openHomePage(
     BuildContext context,
-    GlobalKey<FormState> _formKey,
+    GlobalKey<FormState> formKey,
   ) async {
-    if (_formKey.currentState!.validate()) {
+    if (formKey.currentState!.validate()) {
       List<User> foundUsers =
           allUsers.where((element) => element.email == email).toList();
       int index = allUsers.indexOf(foundUsers.first);
@@ -97,9 +97,9 @@ class Model with ChangeNotifier {
           ),
         );
       }
-        notifyListeners();
-      }
-    Navigator.pop(context);
+      notifyListeners();
+    }
+    if (context.mounted) Navigator.pop(context);
   }
 }
 

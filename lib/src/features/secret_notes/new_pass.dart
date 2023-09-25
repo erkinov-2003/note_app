@@ -37,7 +37,7 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints:BoxConstraints(maxWidth: 450),
+            constraints:const BoxConstraints(maxWidth: 450),
             child: Column(
               children: [
                 const Padding(
