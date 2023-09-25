@@ -62,10 +62,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size  = MediaQuery.sizeOf(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: SizedBox(
-        height: 350,
+        height: size.height*0.46,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
