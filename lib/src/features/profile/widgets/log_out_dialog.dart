@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/auth/widgets/registration_page.dart';
 
 import '../../../common/constants/app_icons.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/utils/storage.dart';
+import '../../auth/widgets/registr_page_controller.dart';
 
 class CustomLogOutDialog extends StatelessWidget {
   const CustomLogOutDialog({super.key});
@@ -51,7 +53,11 @@ class CustomLogOutDialog extends StatelessWidget {
           onPressed: () async {
             await $secureStorage.delete(key: StorageKeys.oneUser.key);
             // ignore: use_build_context_synchronously
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const RegistrationPageController(),
+                ));
           },
           child: Text(
             localization.logOut,

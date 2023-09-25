@@ -24,12 +24,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ValueNotifier<String> name = ValueNotifier("");
+  String noValue = jsonEncode(User(name: "Your anme").toJson());
 
   @override
   void didChangeDependencies() async {
     name.value = User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    "Your Name"))
+                    noValue))
             .name ??
         "";
     super.didChangeDependencies();
