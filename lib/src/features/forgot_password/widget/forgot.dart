@@ -64,10 +64,9 @@ class _ForgotState extends State<Forgot> {
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        backgroundColor: theme.scaffoldBackgroundColor,
         leading: BackButton(
           color: theme.primaryColor,
         ),

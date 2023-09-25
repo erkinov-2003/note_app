@@ -30,6 +30,7 @@ class _TextEditState extends State<TextEdit> {
 
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context);
     final model=ProviderForgot.of(context);
     FocusNode focusNode = FocusNode();
     return TextFormField(
@@ -41,10 +42,10 @@ class _TextEditState extends State<TextEdit> {
       readOnly: widget.isRead,
       onTapOutside: (event) => focusNode.unfocus(),
       textInputAction: TextInputAction.send,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.w500,
-        color: Colors.white,
+        color: theme.primaryColor,
       ),
       validator: widget.isRead ? null : widget.validateEmail,
       decoration: InputDecoration(
@@ -67,7 +68,7 @@ class _TextEditState extends State<TextEdit> {
           color: Color(0xFF575758),
         ),
         filled: true,
-        fillColor: const Color(0xFF262629),
+        fillColor: theme.cardColor,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(10),

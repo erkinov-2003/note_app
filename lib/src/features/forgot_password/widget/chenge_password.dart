@@ -39,10 +39,9 @@ class _ChangePasswordState extends State<ChangePassword> {
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        backgroundColor: theme.scaffoldBackgroundColor,
         leading: BackButton(
           onPressed: ()=> model.openForgotPage(context),
         ),
