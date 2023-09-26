@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/common/models/note_model.dart';
-import 'package:note_app/src/common/utils/storage.dart';
+
+import '../../common/localization/generated/l10n.dart';
+import '../../common/utils/storage.dart';
 
 class NewSecretPassword extends StatefulWidget {
   final NoteModel? note;

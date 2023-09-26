@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_icons.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_icons.dart';
+import '../../../common/localization/generated/l10n.dart';
 import 'icons_button.dart';
 
 class SignInWith extends StatelessWidget {
-  const SignInWith({Key? key}) : super(key: key);
+  SignInWith({Key? key}) : super(key: key);
+
+  final localization = GeneratedLocalization();
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Text(
-          "Sign in with ",
-          style: TextStyle(
+         localization.signInWith,
+          style: const TextStyle(
             fontSize: 14,
             color: AppColors.textColor,
           ),
         ),
-        SizedBox(height: 8),
-        SizedBox(
+        const SizedBox(height: 8),
+        const SizedBox(
           width: 160,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

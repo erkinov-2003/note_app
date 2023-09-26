@@ -22,18 +22,44 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addLink": MessageLookupByLibrary.simpleMessage("Добавить ссылку"),
         "addPassword": MessageLookupByLibrary.simpleMessage("Добавить Пароль"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Добавить Фотографию"),
+        "alreadyRegister":
+            MessageLookupByLibrary.simpleMessage("Вы уже зарегистрированы"),
         "back": MessageLookupByLibrary.simpleMessage("Назад"),
+        "bodyText": MessageLookupByLibrary.simpleMessage(
+            "Здесь будет ваша заметка. Оно будет размещено здесь. Вы сохраните свою заметку здесь. Введите сюда свои воспоминания. Запишите свои мысли."),
+        "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "changeYourName":
+            MessageLookupByLibrary.simpleMessage("Измените свое имя"),
         "check": MessageLookupByLibrary.simpleMessage("Проверить"),
+        "checkPasswordAgain": MessageLookupByLibrary.simpleMessage(
+            "Пожалуйста, проверьте пароль еще раз"),
+        "couldNotLaunch":
+            MessageLookupByLibrary.simpleMessage("Не удалось запустить"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("Адрес электронной почты"),
+        "enjoyNote": MessageLookupByLibrary.simpleMessage(
+            "Наслаждайтесь заметками с друзьями"),
+        "enter": MessageLookupByLibrary.simpleMessage("Входить"),
+        "enterAgain": MessageLookupByLibrary.simpleMessage("Войдите еще раз"),
         "enterEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Введите адрес электронной почты"),
+        "enterNewPassword":
+            MessageLookupByLibrary.simpleMessage("Введите новый пароль"),
+        "enterPassword": MessageLookupByLibrary.simpleMessage("Введите пароль"),
+        "enterTitle":
+            MessageLookupByLibrary.simpleMessage("Введите название заметки..."),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Забыли пароль?"),
         "fullName": MessageLookupByLibrary.simpleMessage("Полное имя"),
+        "incorrectlyPassword":
+            MessageLookupByLibrary.simpleMessage("Вы ввели пароль неправильно"),
+        "invalidEmail": MessageLookupByLibrary.simpleMessage(
+            "Неверный адрес электронной почты!"),
+        "invalidName": MessageLookupByLibrary.simpleMessage("Неверное имя!"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "languageApp":
             MessageLookupByLibrary.simpleMessage("Языковое ПРИЛОЖЕНИЕ"),
@@ -48,12 +74,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "openCamera": MessageLookupByLibrary.simpleMessage("Открытая Камера"),
         "openGallery": MessageLookupByLibrary.simpleMessage("Открытая Галерея"),
         "password": MessageLookupByLibrary.simpleMessage("Пароль"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Пароль должен содержать хотя бы одну заглавную букву"),
+        "passwordLength": MessageLookupByLibrary.simpleMessage(
+            "Пароль слишком короткий, он должен содержать не менее 8 символов."),
+        "passwordLetter": MessageLookupByLibrary.simpleMessage(
+            "Пароль должен содержать хотя бы одну букву"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Пароль должен содержать хотя бы одну цифру"),
+        "passwordSpace": MessageLookupByLibrary.simpleMessage(
+            "Пароль не должен содержать пробела"),
         "profile": MessageLookupByLibrary.simpleMessage("Профиль"),
         "profileImage":
             MessageLookupByLibrary.simpleMessage("Изображение Профиля"),
         "register": MessageLookupByLibrary.simpleMessage("Зарегистрировать"),
+        "save": MessageLookupByLibrary.simpleMessage("Сохранять"),
         "secretPassword": MessageLookupByLibrary.simpleMessage(
             "Пароль для секретной заметки"),
+        "sendCode": MessageLookupByLibrary.simpleMessage("Отправить код"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Установить пароль"),
         "setPassword2":
@@ -61,13 +99,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "signIn": MessageLookupByLibrary.simpleMessage("Bойти в Cистему"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать, чтобы отозвать свою ЗАМЕТКУ..."),
+        "signInWith":
+            MessageLookupByLibrary.simpleMessage("Войти в систему с "),
         "signUp": MessageLookupByLibrary.simpleMessage("Подписывать"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Ваша ЗАМЕТКА здесь..."),
+        "textWithLink":
+            MessageLookupByLibrary.simpleMessage("Текст со ссылкой"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Тема Приложение"),
         "updateSecretPass": MessageLookupByLibrary.simpleMessage(
             "Обновите свой секретный пароль"),
+        "wrongPassword":
+            MessageLookupByLibrary.simpleMessage("Неправильный пароль"),
+        "yourEmailAddress":
+            MessageLookupByLibrary.simpleMessage("Ваш электронный адрес"),
         "yourName": MessageLookupByLibrary.simpleMessage("Ваше Имя")
       };
 }

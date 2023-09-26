@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
 
+import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../controller/main_controller.dart';
 
 class PageWidget extends StatefulWidget {
@@ -11,6 +12,8 @@ class PageWidget extends StatefulWidget {
 }
 
 class _PageWidgetState extends State<PageWidget> {
+  final localization = GeneratedLocalization();
+
   @override
   Widget build(BuildContext context) {
     final isRegistration = ProviderRegistration.of(context, listen: true).isRegistration;
@@ -54,10 +57,10 @@ class _PageWidgetState extends State<PageWidget> {
                           ),
                         ),
                       )
-                    : const Center(
+                    :  Center(
                         child: Text(
-                          "Register",
-                          style: TextStyle(
+                          localization.register,
+                          style: const TextStyle(
                             fontSize: 14,
                             color: AppColors.textColor,
                           ),
@@ -71,8 +74,8 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: !isRegistration
-                    ?  const DecoratedBox(
-                        decoration: BoxDecoration(
+                    ?   DecoratedBox(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.black54,
@@ -85,18 +88,18 @@ class _PageWidgetState extends State<PageWidget> {
                         ),
                         child: Center(
                           child: Text(
-                            "Log in",
-                            style: TextStyle(
+                            localization.logIn,
+                            style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.white,
                             ),
                           ),
                         ),
                       )
-                    : const Center(
+                    :  Center(
                         child: Text(
-                          "Log in",
-                          style: TextStyle(
+                          localization.logIn,
+                          style: const TextStyle(
                             fontSize: 14,
                             color: AppColors.textColor,
                           ),

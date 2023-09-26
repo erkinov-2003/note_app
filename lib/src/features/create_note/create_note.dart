@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
@@ -7,6 +6,7 @@ import '../../common/constants/app_icons.dart';
 
 import '../../common/localization/generated/l10n.dart';
 import '../../common/models/note_model.dart';
+import '../home_screen/controller/provider.dart';
 import 'mixin/note_mixin.dart';
 
 class CreateNote extends StatefulWidget {
@@ -123,11 +123,11 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                     maxLines: 4,
                     minLines: 1,
                     maxLength: 60,
-                    decoration: const InputDecoration(
-                      helperStyle: TextStyle(color: Colors.transparent),
+                    decoration: InputDecoration(
+                      helperStyle: const TextStyle(color: Colors.transparent),
                       border: InputBorder.none,
-                      hintText: "Enter title of note...",
-                      hintStyle: TextStyle(
+                      hintText: intl.enterTitle,
+                      hintStyle: const TextStyle(
                         color: Color(0xFFE4E7EC),
                         fontSize: 32,
                         fontWeight: FontWeight.w500,
@@ -150,11 +150,11 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                   cursorColor: AppColors.transparent,
                   cursorRadius: const Radius.circular(5),
                   maxLines: value || controllerBody.text.isEmpty ? 5 : null,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText:
-                        "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.",
-                    hintStyle: TextStyle(
+                        intl.bodyText,
+                    hintStyle: const TextStyle(
                       color: AppColors.hintColor,
                       fontSize: 18,
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
+import '../../../common/utils/storage.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
 
@@ -17,6 +18,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
   late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  final localization = GeneratedLocalization();
+
   @override
   void initState() {
     nameController = TextEditingController();
@@ -27,19 +30,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   String? validatePassword(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return "Password is too short, it must be at least 8 characters";
+      return localization.passwordLength;
     }
     if (value != null && value.contains(" ")) {
-      return "Password shouldn't have space";
+      return localization.passwordSpace;
     }
     if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return "Password must have at least one number";
+      return localization.passwordNumber;
     }
     if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return "Password must have at least one letter";
+      return localization.passwordLetter;
     }
     if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return "Password must have at least one Capital letter";
+      return localization.passwordCapitalLetter;
     }
     return null;
   }
@@ -48,14 +51,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
     if (value != null &&
         !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
             .hasMatch(value)) {
-      return "Invalid email address!";
+      return localization.invalidEmail;
     }
     return null;
   }
 
   String? validateName(String? value) {
     if (value != null && value.length <= 3) {
-      return "Invalid name!";
+      return localization.invalidName;
     }
     return null;
   }
@@ -129,10 +132,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     );
                   }
                 },
-                child: const Center(
+                child: Center(
                   child: Text(
-                    "Sign In",
-                    style: TextStyle(
+                    localization.signIn,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),

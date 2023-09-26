@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
+import '../controller/profile_controller.dart';
 
 class CameraBottomSheet extends StatefulWidget {
   const CameraBottomSheet({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class CameraBottomSheet extends StatefulWidget {
 class _CameraBottomSheetState extends State<CameraBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    final image = context.read<ProfileController>().image;
     final localization = GeneratedLocalization();
     final sizeH = MediaQuery.sizeOf(context).height;
     final sizeW = MediaQuery.sizeOf(context).width;

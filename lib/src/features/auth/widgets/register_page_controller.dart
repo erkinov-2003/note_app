@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
+import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../controller/main_controller.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
@@ -52,6 +53,9 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
+
+  final localization = GeneratedLocalization();
+
   @override
   Widget build(BuildContext context) {
     final isRegistration = ProviderRegistration.of(context, listen: true).isRegistration;
@@ -78,17 +82,17 @@ class _ViewState extends State<View> {
                       children: [
                         const SizedBox(height: 5),
                         isRegistration
-                            ? const Text(
-                                "Your NOTE in the here...",
-                                style: TextStyle(
+                            ?  Text(
+                                localization.signUpTitle,
+                                style: const TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 28,
                                 ),
                               )
-                            : const Text(
-                                "Welcome to back\nYour NOTE...",
-                                style: TextStyle(
+                            :  Text(
+                                localization.signInTitle,
+                                style: const TextStyle(
                                   color: AppColors.white,
                                   fontWeight: FontWeight.w700,
                                   fontSize: 28,
@@ -113,14 +117,14 @@ class _ViewState extends State<View> {
                     ],
                   ),
                 ),
-                const Expanded(
+                 Expanded(
                   flex: 2,
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+                        const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                     child: Column(
                       children: [
-                        Spacer(),
+                        const Spacer(),
                         Center(
                           child: SignInWith(),
                         )
