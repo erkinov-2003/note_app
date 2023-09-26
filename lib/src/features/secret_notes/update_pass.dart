@@ -115,8 +115,16 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(4, (index) {
                       return SizedBox(
-                        width: size <= 340 ? 55 : size<=375? 70 : 80,
-                        height: size <= 340 ? 55 : size<=375? 70 : 80,
+                        width: size <= 340
+                            ? 55
+                            : size <= 375
+                                ? 70
+                                : 80,
+                        height: size <= 340
+                            ? 55
+                            : size <= 375
+                                ? 70
+                                : 80,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             color: const Color(0xff262629),
@@ -128,44 +136,38 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               width: 2,
                             ),
                           ),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: TextFormField(
-                              cursorColor: Colors.white,
-                              cursorHeight: 30,
-                              autofocus: false,
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              maxLength: 1,
-                              controller: oldControllers[index],
-                              focusNode: focusNodes[index],
-                              decoration: const InputDecoration(
+                          child: TextFormField(
+                            cursorColor: Colors.white,
+                            textAlignVertical: TextAlignVertical.bottom,
+                            cursorHeight: 30,
+                            autofocus: false,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            maxLength: 1,
+                            controller: oldControllers[index],
+                            focusNode: focusNodes[index],
+                            decoration: const InputDecoration(
                                 border: InputBorder.none,
-                                helperText: "",
-                                helperStyle: TextStyle(
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: "Ranade",
-                                fontSize: 30,
-                              ),
-                              onChanged: (text) {
-                                if (text.isNotEmpty) {
-                                  if (index < oldControllers.length - 1) {
-                                    FocusScope.of(context)
-                                        .requestFocus(focusNodes[index + 1]);
-                                  }
-                                } else if (text.isEmpty) {
-                                  if (index > 0) {
-                                    FocusScope.of(context)
-                                        .requestFocus(focusNodes[index - 1]);
-                                  }
-                                }
-                              },
+                                counter: SizedBox.shrink()),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Ranade",
+                              fontSize: 30,
                             ),
+                            onChanged: (text) {
+                              if (text.isNotEmpty) {
+                                if (index < oldControllers.length - 1) {
+                                  FocusScope.of(context)
+                                      .requestFocus(focusNodes[index + 1]);
+                                }
+                              } else if (text.isEmpty) {
+                                if (index > 0) {
+                                  FocusScope.of(context)
+                                      .requestFocus(focusNodes[index - 1]);
+                                }
+                              }
+                            },
                           ),
                         ),
                       );
@@ -197,8 +199,16 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: SizedBox(
-                                width: size <= 340 ? 55 : size<=375? 70 : 80,
-                                height: size <= 340 ? 55 : size<=375? 70 : 80,
+                                width: size <= 340
+                                    ? 55
+                                    : size <= 375
+                                        ? 70
+                                        : 80,
+                                height: size <= 340
+                                    ? 55
+                                    : size <= 375
+                                        ? 70
+                                        : 80,
                                 child: ColoredBox(
                                   color: const Color(0xff262629),
                                   child: Align(
@@ -206,6 +216,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                     child: TextFormField(
                                       cursorColor: Colors.white,
                                       cursorHeight: 30,
+                                      textAlignVertical:
+                                          TextAlignVertical.center,
                                       autofocus: false,
                                       keyboardType: TextInputType.number,
                                       textAlign: TextAlign.center,
@@ -213,12 +225,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                       controller: newControllers[index],
                                       focusNode: focusNodes1[index],
                                       decoration: const InputDecoration(
-                                        border: InputBorder.none,
-                                        helperText: "",
-                                        helperStyle: TextStyle(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
+                                          border: InputBorder.none,
+                                          counter: SizedBox.shrink()),
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
@@ -227,7 +235,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                       ),
                                       onChanged: (text) {
                                         if (text.isNotEmpty) {
-                                          if (index < newControllers.length - 1) {
+                                          if (index <
+                                              newControllers.length - 1) {
                                             FocusScope.of(context).requestFocus(
                                                 focusNodes1[index + 1]);
                                           }

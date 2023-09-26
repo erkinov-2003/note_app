@@ -108,14 +108,12 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                                 autofocus: true,
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
+                                textAlignVertical: TextAlignVertical.center,
                                 maxLength: 1,
                                 controller: controllers[index],
                                 focusNode: focusNodes[index],
                                 decoration: const InputDecoration(
-                                  helperText: "",
-                                  helperStyle: TextStyle(
-                                    color: Colors.transparent,
-                                  ),
+                                  counter: SizedBox.shrink(),
                                   border: InputBorder.none,
                                 ),
                                 style: const TextStyle(
