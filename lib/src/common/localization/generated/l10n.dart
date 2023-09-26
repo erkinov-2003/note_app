@@ -641,10 +641,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Enter Password`
+  /// `Enter password`
   String get enterPassword {
     return Intl.message(
-      'Enter Password',
+      'Enter password',
       name: 'enterPassword',
       desc: '',
       args: [],
