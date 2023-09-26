@@ -83,10 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => ProfileController(),
-                                child: const CameraBottomSheet(),
-                              ),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
