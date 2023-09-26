@@ -69,9 +69,11 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
     'Initializing Notes',
     (dependencies) async {
       // $storage.clear();
-      // $secureStorage.delete(key: "notes");
-      // $secureStorage.delete(key: StorageKeys.notesPassword.key);
-      $notes.isLogged = (await $secureStorage.read(key: "isLogged"))  ?? "false";
+      // print($storage.getString("notes"));
+
+      $notes.isLogged = $storage.getBool("isLogged") ?? false;
+      print($notes.isLogged);
+
       $notes.setNotes(
         $storage.getString("notes") != null
             ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()

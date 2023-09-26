@@ -30,8 +30,10 @@ class CustomListTile extends StatelessWidget {
           tileColor: const Color(0xFF262629),
           title: Text(
             title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 15,
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),

@@ -6,7 +6,7 @@ import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/models/note_model.dart';
 
 class Notes with ChangeNotifier {
-  String isLogged = "false";
+  late bool isLogged;
   List<NoteModel> _notes = [];
   List<NoteModel> _secureNotes = [];
 

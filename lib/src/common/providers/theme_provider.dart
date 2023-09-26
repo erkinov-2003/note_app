@@ -30,6 +30,7 @@ class ThemeProvider with ChangeNotifier {
         )),
     useMaterial3: true,
     fontFamily: "Ranade",
+    cardColor: const Color(0xFF26262A),
   );
 
   static final lightTheme = ThemeData(
@@ -47,5 +48,6 @@ class ThemeProvider with ChangeNotifier {
     ),
     useMaterial3: true,
     fontFamily: "Ranade",
+    cardColor: Color(0x4DDEDEDF),
   );
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 
@@ -28,15 +29,16 @@ class _NameDialogState extends State<NameDialog> {
 
   @override
   void didChangeDependencies() async {
+    final User first=User(name:GeneratedLocalization.of(context).yourName);
     nameController.text =
         User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    "Your Name"))
+                    jsonEncode(first.toJson())))
             .name ??
         "";
     user = User.fromJson(jsonDecode(
         await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-            "Your Name"));
+            jsonEncode(first.toJson()),),);
     super.didChangeDependencies();
   }
 
@@ -61,8 +63,10 @@ class _NameDialogState extends State<NameDialog> {
       ),
       backgroundColor: Colors.white,
       actionsAlignment: MainAxisAlignment.spaceAround,
+
       actions: [
         TextField(
+          autofocus: true,
           controller: nameController,
           decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(

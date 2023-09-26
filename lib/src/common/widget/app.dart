@@ -37,7 +37,9 @@ class App extends StatelessWidget {
             theme: ThemeProvider.lightTheme,
             darkTheme: ThemeProvider.darkTheme,
             themeMode: themeProvider.themeMode,
-            home: HomePage(),
+            home: $notes.isLogged == "true"
+                ? const HomePage()
+                : const ProfilePage(),
             locale: langProvider.getLocale(),
           );
         },
