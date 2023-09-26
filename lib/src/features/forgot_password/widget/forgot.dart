@@ -139,7 +139,7 @@ class _ForgotState extends State<Forgot> {
                           onPressed: () =>
                               email.openChangePasswordPage(formKey, context),
                           child: Text(
-                            "Send code",
+                            localization.sendCode,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,

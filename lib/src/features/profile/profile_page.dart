@@ -151,7 +151,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
-
                   title: localization.language,
                   trailing: const Image(
                     width: 25,

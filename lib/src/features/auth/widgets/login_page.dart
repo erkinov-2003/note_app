@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../controller/main_controller.dart';
 import 'text_fields.dart';
 
@@ -15,6 +16,8 @@ class _LogInState extends State<LogIn> {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final localization = GeneratedLocalization();
 
   @override
   void initState() {
@@ -81,10 +84,10 @@ class _LogInState extends State<LogIn> {
                 emailController,
                 passwordController,
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "Sign In",
-                  style: TextStyle(
+                  localization.signIn,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -96,9 +99,9 @@ class _LogInState extends State<LogIn> {
           Center(
             child: GestureDetector(
               onTap: () => forgotPassword(context),
-              child: const Text(
-                "Forgot password?",
-                style: TextStyle(
+              child: Text(
+                localization.forgotPassword,
+                style: const TextStyle(
                   fontSize: 16,
                   color: AppColors.airColor,
                   fontWeight: FontWeight.w600,

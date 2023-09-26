@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
 import '../../../common/utils/storage.dart';
 
@@ -10,6 +11,9 @@ Object customBottomSheet({
 }) {
 
   ValueNotifier<bool> isChecked = ValueNotifier<bool>(false);
+
+  final localization = GeneratedLocalization();
+
   return showBottomSheet(
     context: context,
     builder: (context) {
@@ -70,9 +74,9 @@ Object customBottomSheet({
                                       }
                                     } else {
                                       SnackBar text = SnackBar(
-                                        content: const Text(
-                                          "You entered the password incorrectly",
-                                          style: TextStyle(fontSize: 20,color: Colors.black),
+                                        content: Text(
+                                          localization.incorrectlyPassword,
+                                          style: const TextStyle(fontSize: 20,color: Colors.black),
                                         ),
                                         backgroundColor: Colors.white,
                                         dismissDirection: DismissDirection.up,
@@ -121,9 +125,9 @@ Object customBottomSheet({
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      "Add Password",
-                                      style: TextStyle(
+                                    Text(
+                                      localization.addPassword,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 21,
@@ -159,9 +163,9 @@ Object customBottomSheet({
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Delete",
-                        style: TextStyle(
+                      Text(
+                        localization.delete,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 21,

@@ -71,9 +71,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.059),
-                        child: const Text(
-                          "Your email address",
-                          style: TextStyle(
+                        child: Text(
+                          localization.yourEmailAddress,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -90,9 +90,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: const Text(
-                          "Enter new password",
-                          style: TextStyle(
+                        child: Text(
+                          localization.enterNewPassword,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -110,9 +110,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: const Text(
-                          "Enter again",
-                          style: TextStyle(
+                        child: Text(
+                          localization.enterAgain,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -151,7 +151,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           onPressed: () =>
                               model.openHomePage(context, formKey),
                           child: Text(
-                            "Enter",
+                            localization.enter,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,

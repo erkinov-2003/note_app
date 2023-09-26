@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
 import 'bottom_sheet.dart';
 
@@ -43,6 +44,7 @@ class _NoteState extends State<Note> {
     formatted = format.format(widget.noteModel.dateTime);
   }
 
+  final localization = GeneratedLocalization();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +99,7 @@ class _NoteState extends State<Note> {
                                   Uri.parse(url),
                                   mode: LaunchMode.platformDefault,
                                 )) {
-                                  throw Exception('Could not launch $url');
+                                  throw Exception('${localization.couldNotLaunch} $url');
                                 }
                               },
                           );

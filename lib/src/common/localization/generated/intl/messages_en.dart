@@ -39,6 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Could not launch"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "didNotImage": MessageLookupByLibrary.simpleMessage(
+            "User didn\'t take any image."),
+        "didNotPicture": MessageLookupByLibrary.simpleMessage(
+            "User didn\'t take any picture."),
+        "dontHave":
+            MessageLookupByLibrary.simpleMessage("You don\'t have Account"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
             "Enjoy note taking with friends"),

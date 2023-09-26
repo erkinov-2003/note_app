@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
 import '../../../common/utils/logger.dart';
 import '../../home_screen/controller/provider.dart';
@@ -17,6 +18,8 @@ mixin NoteMixin on State<CreateNote> {
   final isDisabled = ValueNotifier<bool>(true);
   final controllerTitle = TextEditingController();
   final controllerBody = TextEditingController();
+
+  final localization = GeneratedLocalization();
 
   int noteId = 0;
   String userId = "0";
@@ -80,7 +83,7 @@ mixin NoteMixin on State<CreateNote> {
         setState(() {});
         return pickedImage.path;
       } else {
-        info("User didn't pick any image.");
+        info(localization.didNotImage);
       }
     } catch (e, s) {
       shout("$e");
@@ -100,7 +103,7 @@ mixin NoteMixin on State<CreateNote> {
         setState(() {});
         return pickedImage.path;
       } else {
-        info("User didn't take any picture.");
+        info(localization.didNotPicture);
       }
     } catch (e, s) {
       shout("$e");

@@ -471,7 +471,15 @@ class GeneratedLocalization {
     );
   }
 
-  // skipped getter for the 'don\'tHave' key
+  /// `You don't have Account`
+  String get dontHave {
+    return Intl.message(
+      'You don\'t have Account',
+      name: 'dontHave',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Wrong password`
   String get wrongPassword {
@@ -523,9 +531,25 @@ class GeneratedLocalization {
     );
   }
 
-  // skipped getter for the 'didn\'tPicture' key
+  /// `User didn't take any picture.`
+  String get didNotPicture {
+    return Intl.message(
+      'User didn\'t take any picture.',
+      name: 'didNotPicture',
+      desc: '',
+      args: [],
+    );
+  }
 
-  // skipped getter for the 'didn\'tImage' key
+  /// `User didn't take any image.`
+  String get didNotImage {
+    return Intl.message(
+      'User didn\'t take any image.',
+      name: 'didNotImage',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Enter title of note...`
   String get enterTitle {

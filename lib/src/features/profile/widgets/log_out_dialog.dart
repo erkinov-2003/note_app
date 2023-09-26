@@ -41,9 +41,9 @@ class CustomLogOutDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
-            "Cancel",
-            style: TextStyle(
+          child: Text(
+            localization.cancel,
+            style: const TextStyle(
               fontSize: 15,
               color: Colors.white,
             ),
