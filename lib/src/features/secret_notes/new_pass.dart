@@ -35,6 +35,9 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -45,12 +48,16 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                      top: 50.0, left: 22, right: 22, bottom: 30),
+                  padding: EdgeInsets.only(
+                    top: screenHeight * 0.1,
+                    left: 22,
+                    right: 22,
+                    bottom: 30,
+                  ),
                   child: Text(
                     localization.newSecretPass,
-                    style: const TextStyle(
-                      fontSize: 35,
+                    style: TextStyle(
+                      fontSize: isLandscape ? 28 : 35,
                       fontWeight: FontWeight.w600,
                       fontFamily: "Ranade",
                       color: Colors.white,
@@ -58,21 +65,23 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 60, horizontal: 25),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isLandscape ? 30 : 60,
+                    horizontal: 25,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(4, (index) {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: SizedBox(
-                          width: 80,
-                          height: 80,
+                          width: isLandscape ? 60 : 80,
+                          height: isLandscape ? 60 : 80,
                           child: ColoredBox(
                             color: const Color(0xff262629),
                             child: TextField(
                               cursorColor: Colors.lightBlueAccent,
-                              cursorHeight: 40,
+                              cursorHeight: isLandscape ? 30 : 40,
                               autofocus: true,
                               keyboardType: TextInputType.number,
                               textAlign: TextAlign.center,
@@ -86,11 +95,11 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                                 ),
                                 border: InputBorder.none,
                               ),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: "Ranade",
-                                fontSize: 35,
+                                fontSize: isLandscape ? 24 : 35,
                               ),
                               onChanged: (text) {
                                 if (text.isNotEmpty) {
@@ -113,7 +122,11 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25, top: 330),
+                  padding: EdgeInsets.only(
+                    left: 25,
+                    right: 25,
+                    top: isLandscape ? screenHeight * 0.15 : screenHeight * 0.44,
+                  ),
                   child: SizedBox(
                     width: double.infinity,
                     height: 60,
@@ -125,7 +138,7 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                       ),
                       onPressed: () async {
                         final pass =
-                            controllers.map((e) => e.text).toList().join("");
+                        controllers.map((e) => e.text).toList().join("");
                         await $secureStorage.write(
                             key: StorageKeys.notesPassword.key, value: pass);
                         if (mounted) Navigator.pop(context);
@@ -151,3 +164,4 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
     );
   }
 }
+

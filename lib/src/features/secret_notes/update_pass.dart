@@ -44,7 +44,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   }
 
   void checkOldPassword() async {
-    // $secureStorage.delete(key: StorageKeys.notePassword.key);
     final correctOldPassword = await $secureStorage.read(key: StorageKeys.notesPassword.key);
     final enteredOldPassword = oldControllers
         .map((controller) => controller.text)
@@ -55,29 +54,32 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     });
 
     if (isOldPasswordCorrect) {
-      if(mounted) FocusScope.of(context).requestFocus(focusNodes1[0]);
+      if (mounted) FocusScope.of(context).requestFocus(focusNodes1[0]);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: BoxConstraints(
+              maxWidth: isLandscape ? 600 : 450,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                  const EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
+                  padding: const EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
                   child: Text(
                     localization.updateSecretPass,
-                    style: const TextStyle(
-                      fontSize: 35,
+                    style: TextStyle(
+                      fontSize: isLandscape ? 28 : 35,
                       fontWeight: FontWeight.w600,
                       fontFamily: "Ranade",
                       color: Colors.white,
@@ -111,7 +113,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                             border: Border.all(
                               color: isOldPasswordCorrect ? const Color(0xff262629) : Colors.red,
                               width: 2,
-                            )
+                            ),
                           ),
                           child: TextField(
                             cursorColor: Colors.lightBlueAccent,
@@ -228,8 +230,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     ],
                   ),
                 Padding(
-                  padding:
-                   EdgeInsets.only(left: 25, right: 25, top: isOldPasswordCorrect? 215 : 350),
+                  padding: EdgeInsets.only(
+                      left: 25, right: 25, top: isOldPasswordCorrect ? 215 : 350),
                   child: SizedBox(
                     width: double.infinity,
                     height: 60,
@@ -237,22 +239,22 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.lightBlueAccent,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: !isOldPasswordCorrect ? checkOldPassword : () async{
+                      onPressed: !isOldPasswordCorrect ? checkOldPassword : () async {
                         final updatePass = newControllers.map((e) => e.text).toList().join("");
                         await $secureStorage.write(key: StorageKeys.notesPassword.key, value: updatePass);
-                        if(mounted) Navigator.pop(context);
+                        if (mounted) Navigator.pop(context);
                       },
-                      child: Text( isOldPasswordCorrect?
-                        localization.setPassword : localization.check,
+                      child: Text(
+                        isOldPasswordCorrect ? localization.setPassword : localization.check,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
+                          fontSize: isLandscape ? 16 : 20,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontFamily: "Ranade",
-                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -266,4 +268,3 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     );
   }
 }
-
