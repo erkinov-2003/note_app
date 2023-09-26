@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
+import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
@@ -65,11 +68,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size  = MediaQuery.sizeOf(context);
+    final size = MediaQuery.sizeOf(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: SizedBox(
-        height: size.height*0.46,
+        height: size.height * 0.46,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -120,8 +123,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (formKey.currentState!.validate()) {
+                    User userOne = User(
+                      name: nameController.text,
+                      email: emailController.text,
+                      loginPassword: passwordController.text,
+                    );
+
+                    await $secureStorage.write(
+                        key: StorageKeys.oneUser.key,
+                        value: jsonEncode(userOne.toJson()));
                     $storage.setBool("isLogged", true);
                     Navigator.pushAndRemoveUntil(
                       context,

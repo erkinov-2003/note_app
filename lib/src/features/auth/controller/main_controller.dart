@@ -144,7 +144,7 @@ class MainController with ChangeNotifier {
         ScaffoldMessenger.of(context)
           ..clearSnackBars()
           ..showSnackBar(
-             SnackBar(
+            SnackBar(
               content: Text(localization.dontHave),
             ),
           );
@@ -167,15 +167,15 @@ class MainController with ChangeNotifier {
             );
           }
         } else {
-         if(context.mounted) {
-           ScaffoldMessenger.of(context)
-             ..clearSnackBars()
-             ..showSnackBar(
+          if (context.mounted) {
+            ScaffoldMessenger.of(context)
+              ..clearSnackBars()
+              ..showSnackBar(
                 SnackBar(
-                 content: Text(localization.wrongPassword),
-               ),
-             );
-         }
+                  content: Text(localization.wrongPassword),
+                ),
+              );
+          }
         }
       }
     }
@@ -187,29 +187,34 @@ class MainController with ChangeNotifier {
     TextEditingController emailController,
     TextEditingController passwordController,
     BuildContext context,
-  ) {
+  ) async {
     if (formKey.currentState!.validate()) {
       User userOne = User(
         name: nameController.text,
         email: emailController.text,
         loginPassword: passwordController.text,
       );
+      await $secureStorage.write(
+          key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
+      print($secureStorage.read(key: StorageKeys.oneUser.key));
       users.add(userOne);
-      $secureStorage.write(
+      await $secureStorage.write(
         key: StorageKeys.users.key,
         value: jsonEncode(
           users.map((e) => e.toJson()).toList(),
         ),
       );
-      $storage.setBool("isLogged", true);
+      await $storage.setBool("isLogged", true);
       print("object2");
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-        (route) => false,
-      );
+      if (context.mounted) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+          (route) => false,
+        );
+      }
     }
   }
 }

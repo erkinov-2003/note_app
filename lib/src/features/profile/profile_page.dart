@@ -83,7 +83,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => const CameraBottomSheet(),
+                              builder: (context) => ChangeNotifierProvider(
+                                create: (context) => ProfileController(),
+                                child: const CameraBottomSheet(),
+                              ),
                             );
                           },
                           child: const SizedBox(
@@ -240,7 +243,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final localization = GeneratedLocalization();
+    final localization = GeneratedLocalization.of(context);
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,
