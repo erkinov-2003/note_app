@@ -59,20 +59,20 @@ class Notes with ChangeNotifier {
     notifyListeners();
   }
 
-  void update(int id, NoteModel note) {
+  void update(NoteModel old, NoteModel note) {
     if (note.isSecret) {
-      int index = _secureNotes.indexOf(note);
+      final index = _secureNotes.indexOf(old);
       _secureNotes[index] = note;
       saveSecured();
     } else {
-      int index = _notes.indexOf(note);
+      int index = _notes.indexOf(old);
       _notes[index] = note;
       save();
     }
     notifyListeners();
   }
 
-  void delete(String id, NoteModel note) {
+  void delete(NoteModel note) {
     if (note.isSecret) {
       _secureNotes.remove(note);
       saveSecured();
