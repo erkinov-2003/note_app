@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
+import 'package:note_app/src/common/models/note_model.dart';
 import 'package:note_app/src/common/utils/storage.dart';
-import 'package:note_app/src/features/profile/profile_page.dart';
 
 class NewSecretPassword extends StatefulWidget {
-  const NewSecretPassword({Key? key}) : super(key: key);
+  final NoteModel? note;
+  final bool? isChecked;
+
+  const NewSecretPassword({
+    Key? key,
+    this.note,
+    this.isChecked,
+  }) : super(key: key);
 
   @override
   NewSecretPasswordState createState() => NewSecretPasswordState();
@@ -48,7 +55,9 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                   padding: const EdgeInsets.only(
                       top: 50.0, left: 22, right: 22, bottom: 30),
                   child: Text(
-                    localization.newSecretPass,
+                    widget.note != null
+                        ? "Enter Password"
+                        : localization.newSecretPass,
                     style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w600,
@@ -126,9 +135,25 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                       onPressed: () async {
                         final pass =
                             controllers.map((e) => e.text).toList().join("");
-                        await $secureStorage.write(
-                            key: StorageKeys.notesPassword.key, value: pass);
-                        if (mounted) Navigator.pop(context);
+
+                        if (widget.note == null) {
+                          await $secureStorage.write(
+                              key: StorageKeys.notesPassword.key, value: pass);
+                          if (mounted) Navigator.pop(context, true);
+                        } else {
+                          final password = await $secureStorage.read(
+                              key: StorageKeys.notesPassword.key);
+                          if (password == pass) {
+                            if (widget.note != null && widget.isChecked != null) {
+                              $notes.delete(widget.note!);
+                            } else {
+                              $notes.changeSecure(widget.note!);
+                            }
+                            Navigator.pop(context);
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        }
                       },
                       child: Text(
                         localization.setPassword,
