@@ -9,7 +9,6 @@ import 'package:note_app/src/features/secret_notes/new_pass.dart';
 import 'package:note_app/src/features/secret_notes/update_pass.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
 import '../../common/models/user_model.dart';
 import '../../common/utils/storage.dart';
@@ -43,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
+    final theme = Theme.of(context);
     final localization = GeneratedLocalization();
     final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
@@ -59,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
           backgroundColor: theme.scaffoldBackgroundColor,
           title: Text(
             localization.profile,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.w600,
               color: theme.primaryColor,
@@ -97,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        child:  CircleAvatar(
+                        child: CircleAvatar(
                           backgroundColor: theme.primaryColor,
                           radius: 50,
                           child: Center(
@@ -119,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             value,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style:  TextStyle(
+                            style: TextStyle(
                               fontSize: 25,
                               color: theme.primaryColor,
                               fontWeight: FontWeight.w600,
@@ -137,13 +136,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         );
                       },
-                      child:  Padding(
-                        padding:const EdgeInsets.only(right: 40),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 40),
                         child: Image(
                           height: 40,
                           width: 40,
                           color: theme.primaryColor,
-                          image:const AssetImage(AppIcons.editIcon),
+                          image: const AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
@@ -152,7 +151,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
-
                   title: localization.language,
                   trailing: const Image(
                     width: 25,
