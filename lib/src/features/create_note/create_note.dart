@@ -6,7 +6,6 @@ import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
 import '../../common/models/note_model.dart';
 import '../../common/providers/photo_provider.dart';
-import '../../common/providers/theme_provider.dart';
 import '../home_screen/controller/provider.dart';
 import '../profile/widgets/camera_dialog.dart';
 import 'mixin/note_mixin.dart';
@@ -68,10 +67,12 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
               : const SizedBox.shrink(),
           GestureDetector(
             onTap: () async {
-              imagePath = await showModalBottomSheet(
+              imagePath = await showModalBottomSheet<String?>(
                 context: context,
                 builder: (context) => const CameraBottomSheet(),
               );
+              print(
+                  "=================================== $imagePath ===================================");
             },
             child: Padding(
               padding: const EdgeInsets.all(15),
@@ -125,6 +126,8 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
             ValueListenableBuilder(
                 valueListenable: provider.imageFile,
                 builder: (context, value, _) {
+                  print(
+                      "-------------------  $value -----------------------------");
                   return value != null
                       ? Image(
                           fit: BoxFit.cover,

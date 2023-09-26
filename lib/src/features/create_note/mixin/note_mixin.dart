@@ -55,6 +55,7 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
+    body.clear();
     final list = controllerBody.text.split(" ");
     for (int i = 0; i < list.length; i++) {
       body.add(LinkModel(name: list[i], link: $savedLinks[i + 1]));

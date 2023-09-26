@@ -75,8 +75,11 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       backgroundColor: const Color(0xFF36BFFA)),
-                  onPressed: () {
-                    context.read<PhotoProvider>().pickImageFromGallery();
+                  onPressed: () async {
+                    final image = await context
+                        .read<PhotoProvider>()
+                        .pickImageFromGallery();
+                    Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openGallery,
@@ -100,8 +103,11 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                     ),
                     backgroundColor: const Color(0xFF36BFFA),
                   ),
-                  onPressed: () {
-                    context.read<PhotoProvider>().pickImageFromCamera();
+                  onPressed: () async {
+                    final image = await context
+                        .read<PhotoProvider>()
+                        .pickImageFromGallery();
+                    Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openCamera,

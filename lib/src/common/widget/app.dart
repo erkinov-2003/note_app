@@ -9,6 +9,8 @@ import 'package:note_app/src/common/providers/lang_provider.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/photo_provider.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
