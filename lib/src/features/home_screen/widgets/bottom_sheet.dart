@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../common/localization/generated/l10n.dart';
-import '../../../common/models/note_model.dart';
-import '../../../common/utils/storage.dart';
+import 'package:note_app/src/common/models/note_model.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 
 Object customBottomSheet({
   required TextEditingController textEditingController,
@@ -11,9 +9,6 @@ Object customBottomSheet({
 }) {
 
   ValueNotifier<bool> isChecked = ValueNotifier<bool>(false);
-
-  final localization = GeneratedLocalization();
-
   return showBottomSheet(
     context: context,
     builder: (context) {
@@ -30,13 +25,12 @@ Object customBottomSheet({
           width: double.infinity,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              color: Colors.black,
-              border: Border.all(color: Colors.white, width: 2),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(25),
-                topRight: Radius.circular(25),
-              )
-            ),
+                color: Colors.black,
+                border: Border.all(color: Colors.white, width: 2),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                )),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -74,9 +68,9 @@ Object customBottomSheet({
                                       }
                                     } else {
                                       SnackBar text = SnackBar(
-                                        content: Text(
-                                          localization.incorrectlyPassword,
-                                          style: const TextStyle(fontSize: 20,color: Colors.black),
+                                        content: const Text(
+                                          "Parolni Hato Kiritdingiz",
+                                          style: TextStyle(fontSize: 20,color: Colors.black),
                                         ),
                                         backgroundColor: Colors.white,
                                         dismissDirection: DismissDirection.up,
@@ -125,9 +119,9 @@ Object customBottomSheet({
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      localization.addPassword,
-                                      style: const TextStyle(
+                                    const Text(
+                                      "Add Password",
+                                      style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500,
                                         fontSize: 21,
@@ -163,9 +157,9 @@ Object customBottomSheet({
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        localization.delete,
-                        style: const TextStyle(
+                      const Text(
+                        "Delete",
+                        style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 21,

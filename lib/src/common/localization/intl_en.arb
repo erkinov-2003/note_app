@@ -31,6 +31,7 @@
   "updateSecretPass": "Update your secret\nNotes password",
   "newSecretPass": "Create your secret\nNotes password",
   "check": "Check",
+  "setPassword": "Set Password",
   "setPassword2": "Set new password",
   "oldPassword": "Your old password",
   "passwordLength":"Password is too short, it must be at least 8 characters",
@@ -63,4 +64,6 @@
   "enjoyNote": "Enjoy note taking with friends",
   "save": "Save",
   "changeYourName": "Change Your Name"
+  "oldPassword": "Your old password"
+  "enterPassword": "Enter Password"
 }
