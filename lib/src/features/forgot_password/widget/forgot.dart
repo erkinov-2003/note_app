@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/forgot_password/model/model.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
+import '../model/model.dart';
 import '../model/text_field.dart';
 
 class ForgotWithModel extends StatefulWidget {

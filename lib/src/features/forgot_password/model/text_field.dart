@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/forgot_password/model/model.dart';
+
+import 'model.dart';
 
 class TextEdit extends StatefulWidget {
   final String? Function(String? value)? validateEmail;

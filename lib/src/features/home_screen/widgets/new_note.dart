@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/create_note/create_note.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
+import '../../create_note/create_note.dart';
 
 class CustomNewNote extends StatelessWidget {
   const CustomNewNote({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/common/providers/theme_provider.dart';
-import 'package:provider/provider.dart';
 
+import 'package:provider/provider.dart';
 import '../../../common/constants/app_images.dart';
+import '../../../common/localization/generated/l10n.dart';
+import '../../../common/providers/theme_provider.dart';
 
 class ThemeChangerPage extends StatefulWidget {
   const ThemeChangerPage({super.key});

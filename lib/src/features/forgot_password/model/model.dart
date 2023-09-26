@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
-import '../widget/chenge_password.dart';
+import '../widget/change_password.dart';
 import '../widget/forgot.dart';
 
 class Model with ChangeNotifier {
@@ -72,8 +72,8 @@ class Model with ChangeNotifier {
   }
 
   String? validateEmail(String value, BuildContext context) {
-    bool isSighnedIn = allUsers.any((element) => element.email == value);
-    if (!isSighnedIn) {
+    bool isSignedIn = allUsers.any((element) => element.email == value);
+    if (!isSignedIn) {
       return "Bunday foydalanuvchi yo'q";
     }
     update(value);

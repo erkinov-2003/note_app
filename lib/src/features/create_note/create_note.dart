@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
@@ -7,6 +6,7 @@ import '../../common/constants/app_icons.dart';
 
 import '../../common/localization/generated/l10n.dart';
 import '../../common/models/note_model.dart';
+import '../home_screen/controller/provider.dart';
 import 'mixin/note_mixin.dart';
 
 class CreateNote extends StatefulWidget {
@@ -153,7 +153,9 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText:
-                        "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.",
+                        "This is where your note will be. It’ll be housed here. "
+                            "You’ll save your note here. Type your memories here. "
+                            "Write down your thoughts.",
                     hintStyle: TextStyle(
                       color: AppColors.hintColor,
                       fontSize: 18,

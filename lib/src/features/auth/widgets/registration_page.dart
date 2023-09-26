@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/constants/app_colors.dart';
+import '../../../common/utils/storage.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
 

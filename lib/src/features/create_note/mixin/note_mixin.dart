@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
 
 import '../../../common/models/note_model.dart';
 import '../../../common/utils/logger.dart';
+import '../../home_screen/controller/provider.dart';
 import '../components/link_dialog.dart';
 import '../create_note.dart';
 import '../models/link_model.dart';

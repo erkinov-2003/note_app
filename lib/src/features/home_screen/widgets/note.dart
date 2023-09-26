@@ -4,10 +4,10 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:note_app/src/common/models/note_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/models/note_model.dart';
 import 'bottom_sheet.dart';
 
 class Note extends StatefulWidget {

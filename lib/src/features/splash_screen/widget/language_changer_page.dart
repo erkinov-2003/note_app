@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/common/providers/lang_provider.dart';
-import 'package:note_app/src/common/utils/storage.dart';
+
 import 'package:provider/provider.dart';
 import '../../../common/constants/app_images.dart';
+import '../../../common/localization/generated/l10n.dart';
+import '../../../common/providers/lang_provider.dart';
+import '../../../common/utils/storage.dart';
 import '../models/language_model.dart';
 
 class LanguageChangerPage extends StatefulWidget {

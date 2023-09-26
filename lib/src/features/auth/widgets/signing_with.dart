@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_icons.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/constants/app_icons.dart';
 import 'icons_button.dart';
 
 class SignInWith extends StatelessWidget {

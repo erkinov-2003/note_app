@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/models/note_model.dart';
-import 'package:note_app/src/common/utils/storage.dart';
+
+import '../../../common/models/note_model.dart';
+import '../../../common/utils/storage.dart';
 
 Object customBottomSheet({
   required TextEditingController textEditingController,
@@ -70,7 +71,7 @@ Object customBottomSheet({
                                     } else {
                                       SnackBar text = SnackBar(
                                         content: const Text(
-                                          "Parolni Hato Kiritdingiz",
+                                          "You entered the password incorrectly",
                                           style: TextStyle(fontSize: 20,color: Colors.black),
                                         ),
                                         backgroundColor: Colors.white,

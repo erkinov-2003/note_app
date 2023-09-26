@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/constants/app_colors.dart';
+
+import '../../../common/constants/app_colors.dart';
 
 class IconsButton extends StatefulWidget {
   final String image;

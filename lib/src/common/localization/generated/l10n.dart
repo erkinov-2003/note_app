@@ -390,6 +390,282 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Password is too short, it must be at least 8 characters`
+  String get passwordLength {
+    return Intl.message(
+      'Password is too short, it must be at least 8 characters',
+      name: 'passwordLength',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password shouldn't have space`
+  String get passwordSpace {
+    return Intl.message(
+      'Password shouldn\'t have space',
+      name: 'passwordSpace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least one number`
+  String get passwordNumber {
+    return Intl.message(
+      'Password must have at least one number',
+      name: 'passwordNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least one letter`
+  String get passwordLetter {
+    return Intl.message(
+      'Password must have at least one letter',
+      name: 'passwordLetter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least one Capital letter`
+  String get passwordCapitalLetter {
+    return Intl.message(
+      'Password must have at least one Capital letter',
+      name: 'passwordCapitalLetter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email address!`
+  String get invalidEmail {
+    return Intl.message(
+      'Invalid email address!',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are already Registered`
+  String get alreadyRegister {
+    return Intl.message(
+      'You are already Registered',
+      name: 'alreadyRegister',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid name!`
+  String get invalidName {
+    return Intl.message(
+      'Invalid name!',
+      name: 'invalidName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'don\'tHave' key
+
+  /// `Wrong password`
+  String get wrongPassword {
+    return Intl.message(
+      'Wrong password',
+      name: 'wrongPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with `
+  String get signInWith {
+    return Intl.message(
+      'Sign in with ',
+      name: 'signInWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text with link`
+  String get textWithLink {
+    return Intl.message(
+      'Text with link',
+      name: 'textWithLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Link`
+  String get addLink {
+    return Intl.message(
+      'Add Link',
+      name: 'addLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'didn\'tPicture' key
+
+  // skipped getter for the 'didn\'tImage' key
+
+  /// `Enter title of note...`
+  String get enterTitle {
+    return Intl.message(
+      'Enter title of note...',
+      name: 'enterTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.`
+  String get bodyText {
+    return Intl.message(
+      'This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.',
+      name: 'bodyText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check the password again`
+  String get checkPasswordAgain {
+    return Intl.message(
+      'Please check the password again',
+      name: 'checkPasswordAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your email address`
+  String get yourEmailAddress {
+    return Intl.message(
+      'Your email address',
+      name: 'yourEmailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter new password`
+  String get enterNewPassword {
+    return Intl.message(
+      'Enter new password',
+      name: 'enterNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter again`
+  String get enterAgain {
+    return Intl.message(
+      'Enter again',
+      name: 'enterAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter`
+  String get enter {
+    return Intl.message(
+      'Enter',
+      name: 'enter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send code`
+  String get sendCode {
+    return Intl.message(
+      'Send code',
+      name: 'sendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You entered the password incorrectly`
+  String get incorrectlyPassword {
+    return Intl.message(
+      'You entered the password incorrectly',
+      name: 'incorrectlyPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not launch`
+  String get couldNotLaunch {
+    return Intl.message(
+      'Could not launch',
+      name: 'couldNotLaunch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enjoy note taking with friends`
+  String get enjoyNote {
+    return Intl.message(
+      'Enjoy note taking with friends',
+      name: 'enjoyNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Your Name`
+  String get changeYourName {
+    return Intl.message(
+      'Change Your Name',
+      name: 'changeYourName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

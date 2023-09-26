@@ -35,6 +35,8 @@ flutter:
 
   uses-material-design: true
 
+  generate: true
+
   assets:
     - assets/images/
     - assets/icons/
@@ -46,9 +48,11 @@ flutter:
           weight: 600
 
 flutter_intl:
-  enabled: true
   class_name: GeneratedLocalization
+  enabled: true
   main_locale: en
   arb_dir: lib/src/common/localization
+  template-arb-file: intl_en.arb
   output_dir: lib/src/common/localization/generated
   use_deferred_loading: false
+

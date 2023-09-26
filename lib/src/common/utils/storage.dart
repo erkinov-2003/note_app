@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../features/home_screen/controller/provider.dart';
 
 
 

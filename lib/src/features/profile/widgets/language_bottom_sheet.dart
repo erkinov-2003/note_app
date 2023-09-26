@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/common/providers/lang_provider.dart';
-import 'package:note_app/src/common/utils/storage.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
+import '../../../common/localization/generated/l10n.dart';
+import '../../../common/providers/lang_provider.dart';
+import '../../../common/utils/storage.dart';
 
 class LanguageBottomSheet extends StatelessWidget {
   const LanguageBottomSheet({super.key});
