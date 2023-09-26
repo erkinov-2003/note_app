@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
 import '../../../common/providers/photo_provider.dart';
+import '../../../common/utils/logger.dart';
 import '../../home_screen/controller/provider.dart';
 import '../components/link_dialog.dart';
 import '../create_note.dart';
@@ -59,12 +61,6 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
-    final list = controllerBody.text.split(" ");
-    for (int i = 0; i < list.length; i++) {
-      body.add(LinkModel(name: list[i], link: $savedLinks[i + 1]));
-    }
-
-    $savedLinks.clear();
     body.clear();
     final list = controllerBody.text.split(" ");
     for (int i = 0; i < list.length; i++) {

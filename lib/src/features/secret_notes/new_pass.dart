@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common/localization/generated/l10n.dart';
+import '../../common/models/note_model.dart';
 import '../../common/utils/storage.dart';
 
 class NewSecretPassword extends StatefulWidget {
@@ -144,7 +145,8 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                           final password = await $secureStorage.read(
                               key: StorageKeys.notesPassword.key);
                           if (password == pass) {
-                            if (widget.note != null && widget.isChecked != null) {
+                            if (widget.note != null &&
+                                widget.isChecked != null) {
                               $notes.delete(widget.note!);
                             } else {
                               $notes.changeSecure(widget.note!);

@@ -161,7 +161,10 @@ class _NoteState extends State<Note> {
                                     color: Colors.white, fontSize: 25),
                               ),
                               const SizedBox(height: 10),
-                              const Icon(Icons.lock,color: Colors.white,),
+                              const Icon(
+                                Icons.lock,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ),

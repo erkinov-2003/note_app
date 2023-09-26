@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
@@ -8,7 +10,6 @@ import '../../common/models/note_model.dart';
 import '../../common/providers/photo_provider.dart';
 import '../home_screen/controller/provider.dart';
 import '../profile/widgets/camera_dialog.dart';
-import '../home_screen/controller/provider.dart';
 import 'mixin/note_mixin.dart';
 
 class CreateNote extends StatefulWidget {
@@ -67,14 +68,14 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                 )
               : const SizedBox.shrink(),
           GestureDetector(
-            onTap: () async {
-              imagePath = await showModalBottomSheet<String?>(
-                context: context,
-                builder: (context) => const CameraBottomSheet(),
-              );
-              print(
-                  "=================================== $imagePath ===================================");
-            },
+            onTap: !readOnly
+                ? () async {
+                    imagePath = await showModalBottomSheet<String?>(
+                      context: context,
+                      builder: (context) => const CameraBottomSheet(),
+                    );
+                  }
+                : () {},
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Image(
@@ -84,7 +85,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
             ),
           ),
           GestureDetector(
-            onTap: openDialogLink,
+            onTap: !readOnly ? openDialogLink : () {},
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Image(
@@ -127,8 +128,6 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
             ValueListenableBuilder(
                 valueListenable: provider.imageFile,
                 builder: (context, value, _) {
-                  print(
-                      "-------------------  $value -----------------------------");
                   return value != null
                       ? Image(
                           fit: BoxFit.cover,
@@ -161,10 +160,6 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                       border: InputBorder.none,
                       hintText: intl.enterTitle,
                       hintStyle: const TextStyle(
-                        color: Color(0xFFE4E7EC),
-                        fontSize: 32,
-                      hintText: "Enter title of note...",
-                      hintStyle: TextStyle(
                         color: AppColors.iconColor,
                         fontSize: 30,
                         fontWeight: FontWeight.w500,
@@ -175,30 +170,67 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
             ValueListenableBuilder(
               valueListenable: isDisabled,
               builder: (context, value, child) {
-                return TextField(
-                  controller: controllerBody,
-                  readOnly: readOnly,
-                  onChanged: onChanged,
-                  textCapitalization: TextCapitalization.sentences,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: theme.primaryColor,
-                    decorationThickness: 0,
-                  ),
-                  keyboardType: TextInputType.multiline,
-                  cursorColor: theme.primaryColor,
-                  cursorRadius: const Radius.circular(5),
-                  maxLines: value || controllerBody.text.isEmpty ? 5 : null,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText:
-                        intl.bodyText,
-                    hintStyle: const TextStyle(
-                      color: AppColors.hintColor,
-                      fontSize: 18,
-                    ),
-                  ),
-                );
+                return !readOnly
+                    ? TextField(
+                        controller: controllerBody,
+                        readOnly: readOnly,
+                        onChanged: onChanged,
+                        textCapitalization: TextCapitalization.sentences,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: theme.primaryColor,
+                          decorationThickness: 0,
+                        ),
+                        keyboardType: TextInputType.multiline,
+                        cursorColor: theme.primaryColor,
+                        cursorRadius: const Radius.circular(5),
+                        maxLines:
+                            value || controllerBody.text.isEmpty ? 5 : null,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: intl.bodyText,
+                          hintStyle: const TextStyle(
+                            color: AppColors.iconColor,
+                            fontSize: 18,
+                          ),
+                        ),
+                      )
+                    : RichText(
+                        text: TextSpan(
+                          style: const TextStyle(fontSize: 18),
+                          children: body.map<TextSpan>((e) {
+                            if (e.link != null) {
+                              return TextSpan(
+                                style: const TextStyle(
+                                  color: AppColors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                text: "${e.name} ",
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    String? url = e.link;
+                                    if (!url!.startsWith("https://")) {
+                                      url = "https://$url";
+                                    }
+                                    if (!await launchUrl(
+                                      Uri.parse(url),
+                                      mode: LaunchMode.platformDefault,
+                                    )) {
+                                      throw Exception('Could not launch $url');
+                                    }
+                                  },
+                              );
+                            } else {
+                              return TextSpan(
+                                style: TextStyle(
+                                  color: theme.primaryColor,
+                                ),
+                                text: "${e.name} ",
+                              );
+                            }
+                          }).toList(),
+                        ),
+                      );
               },
             ),
           ],

@@ -1,18 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/localization/generated/l10n.dart';
-import 'package:note_app/src/common/providers/theme_provider.dart';
-import 'package:note_app/src/features/profile/controller/profile_controller.dart';
-import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
-import 'package:note_app/src/features/secret_notes/new_pass.dart';
-import 'package:note_app/src/features/secret_notes/update_pass.dart';
 import 'package:provider/provider.dart';
 
-import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
+import '../../common/localization/generated/l10n.dart';
 import '../../common/models/user_model.dart';
+import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
+import '../secret_notes/new_pass.dart';
+import '../secret_notes/update_pass.dart';
+
+import 'widgets/camera_dialog.dart';
 import 'widgets/log_out_dialog.dart';
 import 'widgets/custom_list_tile.dart';
 import 'widgets/language_bottom_sheet.dart';
@@ -84,10 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => ProfileController(),
-                                child: const CameraBottomSheet(),
-                              ),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
@@ -152,20 +148,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SizedBox(height: 40),
                 const CustomSwitch(),
                 CustomListTile(
-    final theme = Theme.of(context);
-            style: TextStyle(
                   title: localization.language,
-                  trailing: const Image(
-                    width: 25,
-                    height: 25,
-                    image: AssetImage(AppIcons.globe),
-                  ),
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => const LanguageBottomSheet(),
                     );
                   },
+                  trailing: const Image(
+                    width: 25,
+                    height: 25,
+                    image: AssetImage(AppIcons.lockIcon),
+                  ),
                 ),
                 CustomListTile(
                   title: localization.secretPassword,

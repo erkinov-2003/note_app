@@ -106,7 +106,7 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                   onPressed: () async {
                     final image = await context
                         .read<PhotoProvider>()
-                        .pickImageFromGallery();
+                        .pickImageFromCamera();
                     Navigator.pop(context, image);
                   },
                   child: Text(
