@@ -42,9 +42,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize=MediaQuery.sizeOf(context);
     final theme=Theme.of(context);
     final localization = GeneratedLocalization();
-    final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
       constraints: const BoxConstraints(
         maxWidth: 450,
@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Badge(
-                        largeSize: 30,
+                        largeSize:screenSize.width>320? 30:20,
                         backgroundColor: const Color(0xFF797979),
                         alignment: const Alignment(.8, 1.2),
                         label: GestureDetector(
@@ -89,21 +89,20 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             );
                           },
-                          child: const SizedBox(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                            ),
+                          child:  Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.white,
+                            size: screenSize.width>320?25:18,
                           ),
                         ),
                         child:  CircleAvatar(
                           backgroundColor: theme.primaryColor,
-                          radius: 50,
+                          radius:screenSize.width>320? 40:30,
                           child: Center(
                             child: Icon(
                               Icons.person,
                               color: theme.scaffoldBackgroundColor,
-                              size: 80,
+                              size:screenSize.width>320? 80:50,
                             ),
                           ),
                         ),
@@ -119,7 +118,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
                             style:  TextStyle(
-                              fontSize: 25,
+                              fontSize:screenSize.width>320? 25:15,
                               color: theme.primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -139,8 +138,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       child:  Padding(
                         padding:const EdgeInsets.only(right: 40),
                         child: Image(
-                          height: 40,
-                          width: 40,
+                          // height: 40,
+                          width:screenSize.width>320? 40:25,
                           color: theme.primaryColor,
                           image:const AssetImage(AppIcons.editIcon),
                         ),
