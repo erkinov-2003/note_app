@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 import '../../../common/constants/app_colors.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
@@ -61,10 +62,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size  = MediaQuery.sizeOf(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: SizedBox(
-        height: 350,
+        height: size.height*0.46,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,11 +119,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.push(
+                    $storage.setBool("isLogged", true);
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),
                       ),
+                      (route) => false,
                     );
                   }
                 },

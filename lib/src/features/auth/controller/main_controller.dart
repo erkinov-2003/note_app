@@ -156,7 +156,7 @@ class MainController with ChangeNotifier {
               user.toJson(),
             ),
           );
-          $secureStorage.write(key: "isLogged", value: "true");
+          $storage.setBool("isLogged", true);
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(
               context,
@@ -201,7 +201,8 @@ class MainController with ChangeNotifier {
           users.map((e) => e.toJson()).toList(),
         ),
       );
-      $secureStorage.write(key: "isLogged", value: "true");
+      $storage.setBool("isLogged", true);
+      print("object2");
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(

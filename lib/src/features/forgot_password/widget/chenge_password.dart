@@ -32,16 +32,16 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
+    final theme= Theme.of(context);
     final localization = GeneratedLocalization();
     final model = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        backgroundColor: theme.scaffoldBackgroundColor,
         leading: BackButton(
           onPressed: ()=> model.openForgotPage(context),
         ),
@@ -60,7 +60,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: size.height * 0.041,
-                      color: Colors.white,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),

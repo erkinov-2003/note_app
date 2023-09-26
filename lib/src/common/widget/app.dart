@@ -39,9 +39,10 @@ class App extends StatelessWidget {
             theme: ThemeProvider.lightTheme,
             darkTheme: ThemeProvider.darkTheme,
             themeMode: themeProvider.themeMode,
-            home: $notes.isLogged == "true"
-                ? const HomePage()
-                : const ProfilePage(),
+            // home: $notes.isLogged == true
+            //     ? const HomePage()
+            //     : const SplashScreen(),
+            home:const ProfilePage(),
             locale: langProvider.getLocale(),
           );
         },
