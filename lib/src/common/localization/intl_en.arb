@@ -34,4 +34,5 @@
   "setPassword": "Set Password",
   "setPassword2": "Set new password",
   "oldPassword": "Your old password"
+  "enterPassword": "Enter Password"
 }

@@ -63,7 +63,7 @@ mixin NoteMixin on State<CreateNote> {
     if (widget.note == null) {
       notes.addNote(noteModel);
     } else {
-      notes.update(widget.note!.noteId, noteModel);
+      notes.update(widget.note!, noteModel);
     }
 
     Navigator.pop(context);
