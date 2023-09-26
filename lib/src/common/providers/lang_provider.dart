@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/common/utils/storage.dart';
 
 import '../../features/splash_screen/models/language_model.dart';
 import '../constants/app_icons.dart';
+import '../utils/storage.dart';
 
 class LangProvider with ChangeNotifier {
   Locale? current;

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:note_app/src/common/utils/storage.dart';
 
 import '../../../common/models/note_model.dart';
+import '../../../common/utils/storage.dart';
 
 class Notes with ChangeNotifier {
   late bool isLogged;

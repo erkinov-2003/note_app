@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
-import 'package:note_app/src/features/home_screen/widgets/new_noter.dart';
-import 'package:note_app/src/features/profile/profile_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
+import '../../common/localization/generated/l10n.dart';
+import '../profile/profile_page.dart';
+import 'controller/provider.dart';
+import 'widgets/new_note.dart';
 import 'widgets/note.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +17,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+
+  final localization = GeneratedLocalization();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,16 +59,16 @@ class _HomePage extends State<HomePage> {
             ),
           ),
         ],
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Note.d",
               style: TextStyle(color: AppColors.white, fontSize: 24),
             ),
             Text(
-              "Enjoy note taking with friends",
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              localization.enjoyNote,
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
             ),
           ],
         ),
@@ -79,7 +83,7 @@ class _HomePage extends State<HomePage> {
             itemCount: value.allNotes.length + 1,
             itemBuilder: (context, index) {
               return index == 0
-                  ? const CustomNewNote()
+                  ? CustomNewNote()
                   : Note(noteModel: value.allNotes[index - 1]);
             },
           );

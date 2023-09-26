@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/constants/app_colors.dart';
+import '../../../common/localization/generated/l10n.dart';
 import '../mixin/note_mixin.dart';
 
 class LinkDialog extends StatefulWidget {
@@ -18,6 +19,8 @@ class LinkDialog extends StatefulWidget {
 class _LinkDialogState extends State<LinkDialog> {
   late final TextEditingController controllerLink;
   late final TextEditingController controllerLinkName;
+
+  final localization = GeneratedLocalization();
 
   @override
   void initState() {
@@ -50,9 +53,9 @@ class _LinkDialogState extends State<LinkDialog> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text(
-                "Text with link",
-                style: TextStyle(
+              Text(
+                localization.textWithLink,
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
@@ -115,9 +118,9 @@ class _LinkDialogState extends State<LinkDialog> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    child: const Text(
-                      "Cancel",
-                      style: TextStyle(
+                    child: Text(
+                      localization.cancel,
+                      style: const TextStyle(
                         color: AppColors.gray,
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
@@ -138,9 +141,9 @@ class _LinkDialogState extends State<LinkDialog> {
                       $savedLinks[lastIndex] = controllerLinkName.text;
                       Navigator.pop(context);
                     },
-                    child: const Text(
-                      "Add Link",
-                      style: TextStyle(
+                    child: Text(
+                      localization.addLink,
+                      style: const TextStyle(
                         color: AppColors.blue,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,

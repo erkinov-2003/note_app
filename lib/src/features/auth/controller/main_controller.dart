@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
+import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 import '../../forgot_password/widget/forgot.dart';
@@ -19,24 +20,23 @@ class MainController with ChangeNotifier {
     required this.pageController,
   });
 
-
-
+  final localization = GeneratedLocalization();
 
   String? validatePassword(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return "Password is too short, it must be at least 8 characters";
+      return localization.passwordLength;
     }
     if (value != null && value.contains(" ")) {
-      return "Password shouldn't have space";
+      return localization.passwordSpace;
     }
     if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return "Password must have at least one number";
+      return localization.passwordNumber;
     }
     if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return "Password must have at least one letter";
+      return localization.passwordLetter;
     }
     if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return "Password must have at least one Capital letter";
+      return localization.passwordCapitalLetter;
     }
     return null;
   }
@@ -45,45 +45,45 @@ class MainController with ChangeNotifier {
     if (value != null &&
         !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
             .hasMatch(value)) {
-      return "Invalid email address!";
+      return localization.invalidEmail;
     }
     return null;
   }
 
   String? validatePasswordR(String? value) {
     if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return "Password is too short, it must be at least 8 characters";
+      return localization.passwordLength;
     }
     if (value != null && value.contains(" ")) {
-      return "Password shouldn't have space";
+      return localization.passwordSpace;
     }
     if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return "Password must have at least one number";
+      return localization.passwordNumber;
     }
     if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return "Password must have at least one letter";
+      return localization.passwordLetter;
     }
     if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return "Password must have at least one Capital letter";
+      return localization.passwordCapitalLetter;
     }
     return null;
   }
 
   String? validateEmailR(String? value) {
     if (users.any((e) => e.email == value)) {
-      return "You are already Registered";
+      return localization.alreadyRegister;
     }
     if (value != null &&
         !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
             .hasMatch(value)) {
-      return "Invalid email address!";
+      return localization.invalidEmail;
     }
     return null;
   }
 
   String? validateName(String? value) {
     if (value != null && value.length <= 3) {
-      return "Invalid name!";
+      return localization.invalidName;
     }
 
     return null;
@@ -144,8 +144,8 @@ class MainController with ChangeNotifier {
         ScaffoldMessenger.of(context)
           ..clearSnackBars()
           ..showSnackBar(
-            const SnackBar(
-              content: Text("You don't have Account"),
+             SnackBar(
+              content: Text(localization.dontHave),
             ),
           );
       } else {
@@ -171,8 +171,8 @@ class MainController with ChangeNotifier {
            ScaffoldMessenger.of(context)
              ..clearSnackBars()
              ..showSnackBar(
-               const SnackBar(
-                 content: Text("Wrong password"),
+                SnackBar(
+                 content: Text(localization.wrongPassword),
                ),
              );
          }

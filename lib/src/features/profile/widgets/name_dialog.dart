@@ -21,6 +21,8 @@ class _NameDialogState extends State<NameDialog> {
   late final TextEditingController nameController;
   User user = User();
 
+  final localization = GeneratedLocalization();
+
   @override
   void initState() {
     nameController = TextEditingController();
@@ -54,9 +56,9 @@ class _NameDialogState extends State<NameDialog> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
-      title: const Text(
-        "Change Your Name",
-        style: TextStyle(
+      title: Text(
+        localization.changeYourName,
+        style: const TextStyle(
           fontSize: 20,
           color: Colors.black,
         ),
@@ -86,9 +88,9 @@ class _NameDialogState extends State<NameDialog> {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
-            "Cancel",
-            style: TextStyle(
+          child: Text(
+            localization.cancel,
+            style: const TextStyle(
               fontSize: 15,
               color: Color(0xFF575758),
             ),
@@ -107,9 +109,9 @@ class _NameDialogState extends State<NameDialog> {
             // ignore: use_build_context_synchronously
             Navigator.pop(context);
           },
-          child: const Text(
-            "Save",
-            style: TextStyle(
+          child: Text(
+            localization.save,
+            style: const TextStyle(
               fontSize: 15,
               color: Color(0xFFFF0000),
             ),

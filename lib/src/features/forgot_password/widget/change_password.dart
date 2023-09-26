@@ -17,7 +17,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   String? validatePasswordOne(String? value) {
     if (value!.length < 8) {
-      return "Parol kamida 8 ta belgi bo'lishi shart";
+      return "Password is too short, it must be at least 8 characters";
     }
     password = value;
     return null;
@@ -25,7 +25,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   String? validatePasswordTwo(String? value) {
     if (value != password) {
-      return "Parolni qayta tekshirib ko'ring";
+      return "Please check the password again";
     }
     return null;
   }
@@ -33,7 +33,7 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     final theme= Theme.of(context);
-    final localization = GeneratedLocalization();
+    final localization = GeneratedLocalization.of(context);
     final model = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
@@ -71,9 +71,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.059),
-                        child: const Text(
-                          "Your email address",
-                          style: TextStyle(
+                        child: Text(
+                          localization.yourEmailAddress,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -90,9 +90,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: const Text(
-                          "Enter new password",
-                          style: TextStyle(
+                        child: Text(
+                          localization.enterNewPassword,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -110,9 +110,9 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: const Text(
-                          "Enter again",
-                          style: TextStyle(
+                        child: Text(
+                          localization.enterAgain,
+                          style: const TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w500,
                             color: Color(0xFF575758),
@@ -151,7 +151,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           onPressed: () =>
                               model.openHomePage(context, formKey),
                           child: Text(
-                            "Enter",
+                            localization.enter,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: size.height * 0.019,
