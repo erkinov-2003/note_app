@@ -243,7 +243,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final localization = GeneratedLocalization();
+    final localization = GeneratedLocalization.of(context);
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,
