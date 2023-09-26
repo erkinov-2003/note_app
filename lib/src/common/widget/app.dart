@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:note_app/src/common/providers/photo_provider.dart';
 import 'package:note_app/src/common/providers/theme_provider.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';
-import 'package:note_app/src/features/profile/profile_page.dart';
 import '../../features/splash_screen/widget/splash_screen.dart';
 import '../localization/generated/l10n.dart';
 import 'package:note_app/src/common/providers/lang_provider.dart';
@@ -23,6 +23,9 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => PhotoProvider(),
+        ),
       ],
       child: Consumer2<LangProvider, ThemeProvider>(
         builder: (context, langProvider, themeProvider, child) {
@@ -42,7 +45,7 @@ class App extends StatelessWidget {
             // home: $notes.isLogged == true
             //     ? const HomePage()
             //     : const SplashScreen(),
-            home:const ProfilePage(),
+            home: const SplashScreen(),
             locale: langProvider.getLocale(),
           );
         },

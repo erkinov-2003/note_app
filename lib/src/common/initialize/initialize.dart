@@ -47,8 +47,6 @@ Future<Dependencies> $initializeApp({
       },
     );
 
-
-
 final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
     _initializationSteps = [
   (
@@ -76,7 +74,10 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
 
       $notes.setNotes(
         $storage.getString("notes") != null
-            ? List<Map<String, Object?>>.from(jsonDecode($storage.getString("notes")!) as List).map(NoteModel.fromJson).toList()
+            ? List<Map<String, Object?>>.from(
+                    jsonDecode($storage.getString("notes")!) as List)
+                .map(NoteModel.fromJson)
+                .toList()
             : <NoteModel>[],
       );
       String? notes = await $secureStorage.read(key: "notes");

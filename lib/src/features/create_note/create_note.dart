@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/src/features/home_screen/controller/provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/constants/app_icons.dart';
-
 import '../../common/localization/generated/l10n.dart';
 import '../../common/models/note_model.dart';
+import '../../common/providers/photo_provider.dart';
+import '../../common/providers/theme_provider.dart';
+import '../home_screen/controller/provider.dart';
+import '../profile/widgets/camera_dialog.dart';
 import 'mixin/note_mixin.dart';
 
 class CreateNote extends StatefulWidget {
@@ -25,47 +27,67 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
   @override
   Widget build(BuildContext context) {
     final intl = GeneratedLocalization.of(context);
+    final provider = context.read<PhotoProvider>();
+    final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.white,
+        backgroundColor: theme.scaffoldBackgroundColor,
         leading: Theme(
           data: ThemeData(
             splashColor: AppColors.transparent,
           ),
-          child: const BackButton(
-            color: AppColors.black,
+          child: BackButton(
+            color: theme.primaryColor,
           ),
         ),
         leadingWidth: 40,
         title: Text(
           intl.back,
-          style: const TextStyle(
-            color: AppColors.black,
+          style: TextStyle(
+            color: theme.primaryColor,
             fontSize: 16.5,
           ),
         ),
         titleSpacing: 0,
         actions: [
+          isEditing
+              ? GestureDetector(
+                  onTap: () => setState(() => readOnly = false),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.edit_note,
+                      color: theme.primaryColor,
+                      size: 38,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
           GestureDetector(
             onTap: () async {
-              await pickImageFromGallery();
+              imagePath = await showModalBottomSheet(
+                context: context,
+                builder: (context) => const CameraBottomSheet(),
+              );
             },
-            child: const Padding(
-              padding: EdgeInsets.all(15),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
               child: Image(
-                image: AssetImage(AppIcons.icGallery),
+                color: theme.primaryColor,
+                image: const AssetImage(AppIcons.icGallery),
               ),
             ),
           ),
           GestureDetector(
             onTap: openDialogLink,
-            child: const Padding(
-              padding: EdgeInsets.all(15),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
               child: Image(
-                image: AssetImage(AppIcons.icLink),
+                color: theme.primaryColor,
+                image: const AssetImage(AppIcons.icLink),
               ),
             ),
           ),
@@ -82,11 +104,12 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                   onPressed: () => onSaved(model),
                   shape: const CircleBorder(),
                   backgroundColor:
-                  value ? AppColors.colorFAB1 : AppColors.colorFAB0,
-                  child: const Image(
+                      value ? AppColors.colorFAB1 : AppColors.white,
+                  child: Image(
                     width: 40,
                     height: 40,
-                    image: AssetImage(AppIcons.icSave),
+                    color: value ? AppColors.white : AppColors.black,
+                    image: const AssetImage(AppIcons.icSave),
                   ),
                 );
               },
@@ -99,24 +122,30 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
-            isImageSelected
-                ? Image(
-                    fit: BoxFit.cover,
-                    image: FileImage(imageFile!),
-                  )
-                : const SizedBox.shrink(),
+            ValueListenableBuilder(
+                valueListenable: provider.imageFile,
+                builder: (context, value, _) {
+                  return value != null
+                      ? Image(
+                          fit: BoxFit.cover,
+                          image: FileImage(value),
+                        )
+                      : const SizedBox.shrink();
+                }),
             ValueListenableBuilder(
                 valueListenable: isDisabled,
                 builder: (context, value, _) {
                   return TextField(
                     controller: controllerTitle,
+                    readOnly: readOnly,
                     onChanged: onChanged,
-                    style: const TextStyle(
-                      color: AppColors.black,
-                      fontSize: 32,
+                    textCapitalization: TextCapitalization.sentences,
+                    style: TextStyle(
+                      color: theme.primaryColor,
+                      fontSize: 30,
                       decorationThickness: 0,
                     ),
-                    cursorColor: AppColors.transparent,
+                    cursorColor: theme.primaryColor,
                     cursorHeight: 50,
                     textAlignVertical: TextAlignVertical.center,
                     cursorRadius: const Radius.circular(10),
@@ -128,8 +157,8 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                       border: InputBorder.none,
                       hintText: "Enter title of note...",
                       hintStyle: TextStyle(
-                        color: Color(0xFFE4E7EC),
-                        fontSize: 32,
+                        color: AppColors.iconColor,
+                        fontSize: 30,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -140,14 +169,16 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
               builder: (context, value, child) {
                 return TextField(
                   controller: controllerBody,
+                  readOnly: readOnly,
                   onChanged: onChanged,
-                  style: const TextStyle(
+                  textCapitalization: TextCapitalization.sentences,
+                  style: TextStyle(
                     fontSize: 18,
-                    color: AppColors.black,
+                    color: theme.primaryColor,
                     decorationThickness: 0,
                   ),
                   keyboardType: TextInputType.multiline,
-                  cursorColor: AppColors.transparent,
+                  cursorColor: theme.primaryColor,
                   cursorRadius: const Radius.circular(5),
                   maxLines: value || controllerBody.text.isEmpty ? 5 : null,
                   decoration: const InputDecoration(
@@ -155,7 +186,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                     hintText:
                         "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts.",
                     hintStyle: TextStyle(
-                      color: AppColors.hintColor,
+                      color: AppColors.iconColor,
                       fontSize: 18,
                     ),
                   ),

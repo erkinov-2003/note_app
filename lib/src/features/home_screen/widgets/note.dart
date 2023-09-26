@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/src/common/models/note_model.dart';
+import 'package:note_app/src/features/create_note/create_note.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/constants/app_colors.dart';
@@ -20,7 +21,6 @@ class Note extends StatefulWidget {
 }
 
 class _NoteState extends State<Note> {
-
   late TextEditingController textEditingController;
 
   @override
@@ -43,15 +43,23 @@ class _NoteState extends State<Note> {
     formatted = format.format(widget.noteModel.dateTime);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-        customBottomSheet(context: context, note:  widget.noteModel,textEditingController: textEditingController);
+        customBottomSheet(
+            context: context,
+            note: widget.noteModel,
+            textEditingController: textEditingController);
         setState(() {});
       },
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CreateNote(note: widget.noteModel),
+          ),
+        );
+      },
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),

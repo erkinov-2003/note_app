@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/localization/generated/l10n.dart';
 import 'package:note_app/src/common/providers/theme_provider.dart';
-import 'package:note_app/src/features/profile/controller/profile_controller.dart';
 import 'package:note_app/src/features/profile/widgets/camera_dialog.dart';
 import 'package:note_app/src/features/secret_notes/new_pass.dart';
 import 'package:note_app/src/features/secret_notes/update_pass.dart';
@@ -83,10 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => ProfileController(),
-                                child: const CameraBottomSheet(),
-                              ),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
