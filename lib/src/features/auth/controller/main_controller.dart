@@ -90,8 +90,19 @@ class MainController with ChangeNotifier {
   }
 
   Future<void> getAllUsers() async {
-    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
+    String json =
+        await ($secureStorage.read(key: StorageKeys.users.key)) ?? "[]";
     users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
+  }
+
+  Future<void> setUsers(User user) async {
+    users.add(user);
+    await $secureStorage.write(
+      key: StorageKeys.users.key,
+      value: jsonEncode(
+        users.map((e) => e.toJson()).toList(),
+      ),
+    );
   }
 
   void onTap(int pageNumber) {
@@ -196,7 +207,7 @@ class MainController with ChangeNotifier {
       );
       await $secureStorage.write(
           key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
-      print($secureStorage.read(key: StorageKeys.oneUser.key));
+
       users.add(userOne);
       $secureStorage.write(
         key: StorageKeys.users.key,
@@ -205,7 +216,6 @@ class MainController with ChangeNotifier {
         ),
       );
       await $storage.setBool("isLogged", true);
-      print("object2");
       if (context.mounted) {
         Navigator.pushAndRemoveUntil(
           context,
