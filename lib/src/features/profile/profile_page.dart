@@ -30,7 +30,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void didChangeDependencies() async {
     final User first = User(name: GeneratedLocalization.of(context).yourName);
-
     name.value = User.fromJson(jsonDecode(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
                     jsonEncode(first.toJson())))
@@ -42,8 +41,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize=MediaQuery.sizeOf(context);
-    final theme=Theme.of(context);
+    final screenSize = MediaQuery.sizeOf(context);
+    final theme = Theme.of(context);
     final localization = GeneratedLocalization();
     return ConstrainedBox(
       constraints: const BoxConstraints(
@@ -58,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
           backgroundColor: theme.scaffoldBackgroundColor,
           title: Text(
             localization.profile,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.w600,
               color: theme.primaryColor,
@@ -76,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Badge(
-                        largeSize:screenSize.width>320? 30:20,
+                        largeSize: screenSize.width > 320 ? 30 : 20,
                         backgroundColor: const Color(0xFF797979),
                         alignment: const Alignment(.8, 1.2),
                         label: GestureDetector(
@@ -89,20 +88,20 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             );
                           },
-                          child:  Icon(
+                          child: Icon(
                             Icons.camera_alt_outlined,
                             color: Colors.white,
-                            size: screenSize.width>320?25:18,
+                            size: screenSize.width > 320 ? 25 : 18,
                           ),
                         ),
-                        child:  CircleAvatar(
+                        child: CircleAvatar(
                           backgroundColor: theme.primaryColor,
-                          radius:screenSize.width>320? 40:30,
+                          radius: screenSize.width > 320 ? 40 : 30,
                           child: Center(
                             child: Icon(
                               Icons.person,
                               color: theme.scaffoldBackgroundColor,
-                              size:screenSize.width>320? 80:50,
+                              size: screenSize.width > 320 ? 80 : 50,
                             ),
                           ),
                         ),
@@ -117,8 +116,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             value,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style:  TextStyle(
-                              fontSize:screenSize.width>320? 25:15,
+                            style: TextStyle(
+                              fontSize: screenSize.width > 320 ? 25 : 15,
                               color: theme.primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -135,13 +134,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         );
                       },
-                      child:  Padding(
-                        padding:const EdgeInsets.only(right: 40),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 40),
                         child: Image(
                           // height: 40,
-                          width:screenSize.width>320? 40:25,
+                          width: screenSize.width > 320 ? 40 : 25,
                           color: theme.primaryColor,
-                          image:const AssetImage(AppIcons.editIcon),
+                          image: const AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
