@@ -44,10 +44,10 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   }
 
   void checkOldPassword() async {
-    final correctOldPassword = await $secureStorage.read(key: StorageKeys.notesPassword.key);
-    final enteredOldPassword = oldControllers
-        .map((controller) => controller.text)
-        .join();
+    final correctOldPassword =
+        await $secureStorage.read(key: StorageKeys.notesPassword.key);
+    final enteredOldPassword =
+        oldControllers.map((controller) => controller.text).join();
 
     setState(() {
       isOldPasswordCorrect = enteredOldPassword == correctOldPassword;
@@ -60,13 +60,15 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final size = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: Center(
+        child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: isLandscape ? 600 : 450,
@@ -75,7 +77,12 @@ class _UpdatePasswordState extends State<UpdatePassword> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, left: 22, right: 22, bottom: 30),
+                  padding: EdgeInsets.only(
+                    top: isLandscape ? 20 : 50,
+                    left: 22,
+                    right: 22,
+                    bottom: isLandscape ? 10 : 30,
+                  ),
                   child: Text(
                     localization.updateSecretPass,
                     style: TextStyle(
@@ -90,8 +97,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                   padding: const EdgeInsets.only(left: 35, top: 45),
                   child: Text(
                     localization.oldPassword,
-                    style: const TextStyle(
-                      fontSize: 13,
+                    style: TextStyle(
+                      fontSize: isLandscape ? 13 : 15,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Ranade",
                       color: Colors.grey,
@@ -99,57 +106,65 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isLandscape ? 10 : 25,
+                    horizontal: 10,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(4, (index) {
                       return SizedBox(
-                        width: 80,
-                        height: 80,
+                        width: size <= 340 ? 55 : size<=375? 70 : 80,
+                        height: size <= 340 ? 55 : size<=375? 70 : 80,
                         child: DecoratedBox(
                           decoration: BoxDecoration(
                             color: const Color(0xff262629),
                             borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color: isOldPasswordCorrect ? const Color(0xff262629) : Colors.red,
+                              color: isOldPasswordCorrect
+                                  ? const Color(0xff262629)
+                                  : Colors.red,
                               width: 2,
                             ),
                           ),
-                          child: TextField(
-                            cursorColor: Colors.lightBlueAccent,
-                            cursorHeight: 40,
-                            autofocus: false,
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 1,
-                            controller: oldControllers[index],
-                            focusNode: focusNodes[index],
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                              helperText: "",
-                              helperStyle: TextStyle(
-                                color: Colors.transparent,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: TextFormField(
+                              cursorColor: Colors.white,
+                              cursorHeight: 30,
+                              autofocus: false,
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.center,
+                              maxLength: 1,
+                              controller: oldControllers[index],
+                              focusNode: focusNodes[index],
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                                helperText: "",
+                                helperStyle: TextStyle(
+                                  color: Colors.transparent,
+                                ),
                               ),
-                            ),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Ranade",
-                              fontSize: 35,
-                            ),
-                            onChanged: (text) {
-                              if (text.isNotEmpty) {
-                                if (index < oldControllers.length - 1) {
-                                  FocusScope.of(context)
-                                      .requestFocus(focusNodes[index + 1]);
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: "Ranade",
+                                fontSize: 30,
+                              ),
+                              onChanged: (text) {
+                                if (text.isNotEmpty) {
+                                  if (index < oldControllers.length - 1) {
+                                    FocusScope.of(context)
+                                        .requestFocus(focusNodes[index + 1]);
+                                  }
+                                } else if (text.isEmpty) {
+                                  if (index > 0) {
+                                    FocusScope.of(context)
+                                        .requestFocus(focusNodes[index - 1]);
+                                  }
                                 }
-                              } else if (text.isEmpty) {
-                                if (index > 0) {
-                                  FocusScope.of(context)
-                                      .requestFocus(focusNodes[index - 1]);
-                                }
-                              }
-                            },
+                              },
+                            ),
                           ),
                         ),
                       );
@@ -161,11 +176,11 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15, left: 35),
+                        padding: const EdgeInsets.only(top: 35, left: 25),
                         child: Text(
                           localization.setPassword2,
-                          style: const TextStyle(
-                            fontSize: 13,
+                          style: TextStyle(
+                            fontSize: isLandscape ? 13 : 15,
                             fontWeight: FontWeight.w500,
                             fontFamily: "Ranade",
                             color: Colors.grey,
@@ -173,53 +188,56 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 25),
+                        padding: EdgeInsets.symmetric(
+                            vertical: isLandscape ? 10 : 25, horizontal: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: List.generate(4, (index) {
                             return ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: SizedBox(
-                                width: 80,
-                                height: 80,
+                                width: size <= 340 ? 55 : size<=375? 70 : 80,
+                                height: size <= 340 ? 55 : size<=375? 70 : 80,
                                 child: ColoredBox(
                                   color: const Color(0xff262629),
-                                  child: TextField(
-                                    cursorColor: Colors.lightBlueAccent,
-                                    cursorHeight: 40,
-                                    autofocus: false,
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    maxLength: 1,
-                                    controller: newControllers[index],
-                                    focusNode: focusNodes1[index],
-                                    decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      helperText: "",
-                                      helperStyle: TextStyle(
-                                        color: Colors.transparent,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: TextFormField(
+                                      cursorColor: Colors.white,
+                                      cursorHeight: 30,
+                                      autofocus: false,
+                                      keyboardType: TextInputType.number,
+                                      textAlign: TextAlign.center,
+                                      maxLength: 1,
+                                      controller: newControllers[index],
+                                      focusNode: focusNodes1[index],
+                                      decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        helperText: "",
+                                        helperStyle: TextStyle(
+                                          color: Colors.transparent,
+                                        ),
                                       ),
-                                    ),
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "Ranade",
-                                      fontSize: 35,
-                                    ),
-                                    onChanged: (text) {
-                                      if (text.isNotEmpty) {
-                                        if (index < newControllers.length - 1) {
-                                          FocusScope.of(context).requestFocus(
-                                              focusNodes1[index + 1]);
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: "Ranade",
+                                        fontSize: 30,
+                                      ),
+                                      onChanged: (text) {
+                                        if (text.isNotEmpty) {
+                                          if (index < newControllers.length - 1) {
+                                            FocusScope.of(context).requestFocus(
+                                                focusNodes1[index + 1]);
+                                          }
+                                        } else if (text.isEmpty) {
+                                          if (index > 0) {
+                                            FocusScope.of(context).requestFocus(
+                                                focusNodes1[index - 1]);
+                                          }
                                         }
-                                      } else if (text.isEmpty) {
-                                        if (index > 0) {
-                                          FocusScope.of(context).requestFocus(
-                                              focusNodes1[index - 1]);
-                                        }
-                                      }
-                                    },
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
@@ -231,7 +249,10 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                   ),
                 Padding(
                   padding: EdgeInsets.only(
-                      left: 25, right: 25, top: isOldPasswordCorrect ? 215 : 350),
+                    left: 25,
+                    right: 25,
+                    top: isOldPasswordCorrect ? 215 : 350,
+                  ),
                   child: SizedBox(
                     width: double.infinity,
                     height: 60,
@@ -242,13 +263,23 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: !isOldPasswordCorrect ? checkOldPassword : () async {
-                        final updatePass = newControllers.map((e) => e.text).toList().join("");
-                        await $secureStorage.write(key: StorageKeys.notesPassword.key, value: updatePass);
-                        if (mounted) Navigator.pop(context);
-                      },
+                      onPressed: !isOldPasswordCorrect
+                          ? checkOldPassword
+                          : () async {
+                              final updatePass = newControllers
+                                  .map((e) => e.text)
+                                  .toList()
+                                  .join("");
+                              await $secureStorage.write(
+                                key: StorageKeys.notesPassword.key,
+                                value: updatePass,
+                              );
+                              if (mounted) Navigator.pop(context);
+                            },
                       child: Text(
-                        isOldPasswordCorrect ? localization.setPassword : localization.check,
+                        isOldPasswordCorrect
+                            ? localization.setPassword
+                            : localization.check,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: isLandscape ? 16 : 20,
@@ -260,6 +291,9 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 20,
+                )
               ],
             ),
           ),

@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enterEmailAddress":
             MessageLookupByLibrary.simpleMessage("Enter email address"),
+        "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
@@ -39,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "newNote": MessageLookupByLibrary.simpleMessage("New Note"),
         "newSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Create your secret\nNotes password"),
+            "Create your secret Notes password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("Your old password"),
@@ -63,7 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
         "updateSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Update your secret\nNotes password"),
+            "Update your secret Notes password"),
         "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
       };
 }

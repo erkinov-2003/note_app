@@ -28,11 +28,10 @@
   "language": "Language",
   "profileImage": "Profile Image",
   "newNote": "New Note",
-  "updateSecretPass": "Update your secret\nNotes password",
-  "newSecretPass": "Create your secret\nNotes password",
+  "updateSecretPass": "Update your secret Notes password",
+  "newSecretPass": "Create your secret Notes password",
   "check": "Check",
-  "setPassword": "Set Password",
   "setPassword2": "Set new password",
-  "oldPassword": "Your old password"
+  "oldPassword": "Your old password",
   "enterPassword": "Enter Password"
 }

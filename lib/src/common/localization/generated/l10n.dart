@@ -341,20 +341,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Update your secret\nNotes password`
+  /// `Update your secret Notes password`
   String get updateSecretPass {
     return Intl.message(
-      'Update your secret\nNotes password',
+      'Update your secret Notes password',
       name: 'updateSecretPass',
       desc: '',
       args: [],
     );
   }
 
-  /// `Create your secret\nNotes password`
+  /// `Create your secret Notes password`
   String get newSecretPass {
     return Intl.message(
-      'Create your secret\nNotes password',
+      'Create your secret Notes password',
       name: 'newSecretPass',
       desc: '',
       args: [],
@@ -386,6 +386,16 @@ class GeneratedLocalization {
     return Intl.message(
       'Your old password',
       name: 'oldPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter Password',
+      name: 'enterPassword',
       desc: '',
       args: [],
     );
