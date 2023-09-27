@@ -66,7 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Elektron pochta manzili yaroqsiz!"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Ism noto\'g\'ri!"),
         "language": MessageLookupByLibrary.simpleMessage("Til"),
-        "languageApp": MessageLookupByLibrary.simpleMessage("Til ilovasi"),
+        "languageApp": MessageLookupByLibrary.simpleMessage("Ilova tili"),
         "logIn": MessageLookupByLibrary.simpleMessage("Kirish"),
         "logOut": MessageLookupByLibrary.simpleMessage("Tizimdan chiqish"),
         "newNote": MessageLookupByLibrary.simpleMessage("Yangi eslatma"),
@@ -109,13 +109,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Havola bilan matn"),
         "theme": MessageLookupByLibrary.simpleMessage("Mavzu"),
-        "themeApp": MessageLookupByLibrary.simpleMessage("Mavzu Ilovasi"),
+        "themeApp": MessageLookupByLibrary.simpleMessage("Ilova mavzusi"),
         "updateSecretPass":
             MessageLookupByLibrary.simpleMessage("Maxfiy parolinni yangilash"),
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("Noto\'g\'ri parol"),
         "yourEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Sizning e-pochta manzilingiz"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Sizning ismingiz")
+        "yourFullName": MessageLookupByLibrary.simpleMessage("To\'liq ism"),
+        "yourName": MessageLookupByLibrary.simpleMessage("Sizning ismingiz"),
+        "yourPassword":
+            MessageLookupByLibrary.simpleMessage("Sizning parolingiz")
       };
 }

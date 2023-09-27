@@ -56,9 +56,11 @@ class _PageWidgetState extends State<PageWidget> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10)),
                             ),
-                            child: const Center(
+                            child:  Center(
                               child: Text(
-                                "Register",
+                                localization.register,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: AppColors.white,
@@ -69,6 +71,8 @@ class _PageWidgetState extends State<PageWidget> {
                         : Center(
                             child: Text(
                               localization.register,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: AppColors.textColor,
@@ -100,6 +104,8 @@ class _PageWidgetState extends State<PageWidget> {
                             ),
                             child: Center(
                               child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 localization.logIn,
                                 style: const TextStyle(
                                   fontSize: 14,
@@ -110,6 +116,8 @@ class _PageWidgetState extends State<PageWidget> {
                           )
                         : Center(
                             child: Text(
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               localization.logIn,
                               style: const TextStyle(
                                 fontSize: 14,

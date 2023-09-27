@@ -75,7 +75,7 @@ class _ViewState extends State<View> {
                     height: size.height * 0.17,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                          EdgeInsets.symmetric(horizontal: size.width * 0.04),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +86,7 @@ class _ViewState extends State<View> {
                                   style:  TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 28,
+                                    fontSize: 24,
                                   ),
                                 )
                               : Text(
@@ -94,7 +94,7 @@ class _ViewState extends State<View> {
                                   style:  TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 28,
+                                    fontSize: 24,
                                   ),
                                 ),
                           const PageWidget(),

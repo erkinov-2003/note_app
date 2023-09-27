@@ -24,12 +24,12 @@ class LangProvider with ChangeNotifier {
       value: "en",
     ),
     LanguageModel(
-      languageName: "Russian",
+      languageName: "Русский",
       icon: AppIcons.icRus,
       value: "ru",
     ),
     LanguageModel(
-      languageName: "Uzbek",
+      languageName: "O'zbek",
       icon: AppIcons.icUzb,
       value: "uz",
     ),

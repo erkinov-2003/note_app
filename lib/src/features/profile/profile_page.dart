@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
 import '../../common/models/user_model.dart';
+import '../../common/providers/photo_provider.dart';
 import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
 import '../secret_notes/new_pass.dart';
@@ -31,13 +32,27 @@ class _ProfilePageState extends State<ProfilePage> {
   void didChangeDependencies() async {
     final User first = User(name: GeneratedLocalization.of(context).yourName);
 
-    name.value = User.fromJson(jsonDecode(
+    name.value = User.fromJson(
                 await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    jsonEncode(first.toJson())))
+                    jsonEncode(first.toJson()))
             .name ??
         "";
 
     super.didChangeDependencies();
+  }
+
+  void read(String imagePath) async {
+    final readUser = await $secureStorage.read(
+      key: StorageKeys.oneUser.key,
+    );
+
+    User user = User.fromJson(readUser!);
+    User userImage = user.copyWith(image: imagePath);
+
+    $secureStorage.write(
+      key: StorageKeys.oneUser.key,
+      value: userImage.toJson(),
+    );
   }
 
   @override
@@ -93,17 +108,26 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        child: CircleAvatar(
-                          backgroundColor: theme.primaryColor,
-                          radius: 50,
-                          child: Center(
-                            child: Icon(
-                              Icons.person,
-                              color: theme.scaffoldBackgroundColor,
-                              size: 80,
-                            ),
-                          ),
-                        ),
+                        child: ValueListenableBuilder(
+                            valueListenable:
+                                context.read<PhotoProvider>().imageFile,
+                            builder: (context, value, _) {
+                              if (value != null) read(value.path);
+
+                              return CircleAvatar(
+                                backgroundColor: theme.primaryColor,
+                                foregroundImage:
+                                    value != null ? FileImage(value) : null,
+                                radius: 50,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.person,
+                                    color: theme.scaffoldBackgroundColor,
+                                    size: 80,
+                                  ),
+                                ),
+                              );
+                            }),
                       ),
                     ),
                     ValueListenableBuilder(
@@ -158,7 +182,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage(AppIcons.lockIcon),
+                    image: AssetImage(AppIcons.globe),
                   ),
                 ),
                 CustomListTile(

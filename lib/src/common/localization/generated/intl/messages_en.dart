@@ -22,17 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "addLink": MessageLookupByLibrary.simpleMessage("Add Link"),
+        "addLink": MessageLookupByLibrary.simpleMessage("Add link"),
         "addPassword": MessageLookupByLibrary.simpleMessage("Add Password"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "alreadyRegister":
-            MessageLookupByLibrary.simpleMessage("You are already Registered"),
+            MessageLookupByLibrary.simpleMessage("You are already registered"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "bodyText": MessageLookupByLibrary.simpleMessage(
             "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts."),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeYourName":
-            MessageLookupByLibrary.simpleMessage("Change Your Name"),
+            MessageLookupByLibrary.simpleMessage("Change your name"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkPasswordAgain": MessageLookupByLibrary.simpleMessage(
             "Please check the password again"),
@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotPicture": MessageLookupByLibrary.simpleMessage(
             "User didn\'t take any picture."),
         "doNotHave":
-            MessageLookupByLibrary.simpleMessage("You don\'t have Account"),
+            MessageLookupByLibrary.simpleMessage("You don\'t have account"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
             "Enjoy note taking with friends"),
@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter email address"),
         "enterNewPassword":
             MessageLookupByLibrary.simpleMessage("Enter new password"),
-        "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
+        "enterPassword": MessageLookupByLibrary.simpleMessage("Enter password"),
         "enterTitle":
             MessageLookupByLibrary.simpleMessage("Enter title of note..."),
         "forgotPassword":
@@ -66,12 +66,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid email address!"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Invalid name!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "languageApp": MessageLookupByLibrary.simpleMessage("Language APP"),
+        "languageApp": MessageLookupByLibrary.simpleMessage("App\'s language"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
-        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
-        "newNote": MessageLookupByLibrary.simpleMessage("New Note"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
+        "newNote": MessageLookupByLibrary.simpleMessage("New note"),
         "newSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Create your secret\nNotes password"),
+            "Create your secret notes password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("Your old password"),
@@ -87,32 +87,34 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordNumber": MessageLookupByLibrary.simpleMessage(
             "Password must have at least one number"),
         "passwordSpace": MessageLookupByLibrary.simpleMessage(
-            "Password shouldn\'t have space"),
+            "Password should not have space"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-        "profileImage": MessageLookupByLibrary.simpleMessage("Profile Image"),
+        "profileImage": MessageLookupByLibrary.simpleMessage("Profile image"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "secretPassword":
-            MessageLookupByLibrary.simpleMessage("Secret note Password"),
+            MessageLookupByLibrary.simpleMessage("Secret note password"),
         "sendCode": MessageLookupByLibrary.simpleMessage("Send code"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPassword2":
             MessageLookupByLibrary.simpleMessage("Set new password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
-            "Welcome to back Your NOTE..."),
+            "Welcome to back your note..."),
         "signInWith": MessageLookupByLibrary.simpleMessage("Sign in with "),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
-            MessageLookupByLibrary.simpleMessage("Your NOTE is here..."),
+            MessageLookupByLibrary.simpleMessage("Your note is here..."),
         "textWithLink": MessageLookupByLibrary.simpleMessage("Text with link"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
         "updateSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Update your secret\nNotes password"),
+            "Update your secret notes password"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Wrong password"),
         "yourEmailAddress":
             MessageLookupByLibrary.simpleMessage("Your email address"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
+        "yourFullName": MessageLookupByLibrary.simpleMessage("Your full name"),
+        "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),
+        "yourPassword": MessageLookupByLibrary.simpleMessage("Your password")
       };
 }

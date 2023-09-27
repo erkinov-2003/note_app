@@ -39,30 +39,33 @@ class _LogInState extends State<LogIn> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(height: size.height * 0.01),
-                TextFields(
-                  validator: validateEmail,
-                  controller: emailController,
-                  textInputAction: TextInputAction.next,
-                  keyboardType: TextInputType.emailAddress,
-                  exampleText: "you@example.com",
-                  infoText: "Email address",
-                ),
-                TextFields(
-                  controller: passwordController,
-                  validator: validatePassword,
-                  textInputAction: TextInputAction.go,
-                  keyboardType: TextInputType.visiblePassword,
-                  exampleText: "Your password",
-                  infoText: "Password",
-                  isObscure: true,
-                ),
-              ],
+          SizedBox(
+            height: 230,
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(height: 10),
+                  TextFields(
+                    validator: validateEmail,
+                    controller: emailController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.emailAddress,
+                    exampleText: "you@example.com",
+                    infoText: "Email address",
+                  ),
+                  TextFields(
+                    controller: passwordController,
+                    validator: validatePassword,
+                    textInputAction: TextInputAction.go,
+                    keyboardType: TextInputType.visiblePassword,
+                    exampleText: "Your password",
+                    infoText: "Password",
+                    isObscure: true,
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: size.height * 0.03),
@@ -108,6 +111,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

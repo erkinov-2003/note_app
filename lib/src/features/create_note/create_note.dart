@@ -177,7 +177,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                         onChanged: onChanged,
                         textCapitalization: TextCapitalization.sentences,
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color: theme.primaryColor,
                           decorationThickness: 0,
                         ),
@@ -191,44 +191,51 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                           hintText: intl.bodyText,
                           hintStyle: const TextStyle(
                             color: AppColors.iconColor,
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                       )
-                    : RichText(
-                        text: TextSpan(
-                          style: const TextStyle(fontSize: 18),
-                          children: body.map<TextSpan>((e) {
-                            if (e.link != null) {
-                              return TextSpan(
-                                style: const TextStyle(
-                                  color: AppColors.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                text: "${e.name} ",
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () async {
-                                    String? url = e.link;
-                                    if (!url!.startsWith("https://")) {
-                                      url = "https://$url";
-                                    }
-                                    if (!await launchUrl(
-                                      Uri.parse(url),
-                                      mode: LaunchMode.platformDefault,
-                                    )) {
-                                      throw Exception('Could not launch $url');
-                                    }
-                                  },
-                              );
-                            } else {
-                              return TextSpan(
-                                style: TextStyle(
-                                  color: theme.primaryColor,
-                                ),
-                                text: "${e.name} ",
-                              );
-                            }
-                          }).toList(),
+                    : Padding(
+                        padding: const EdgeInsets.only(top: 14),
+                        child: RichText(
+                          text: TextSpan(
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontFamily: "Ranade",
+                            ),
+                            children: body.map<TextSpan>((e) {
+                              if (e.link != null) {
+                                return TextSpan(
+                                  style: const TextStyle(
+                                    color: AppColors.blue,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  text: "${e.name} ",
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () async {
+                                      String? url = e.link;
+                                      if (!url!.startsWith("https://")) {
+                                        url = "https://$url";
+                                      }
+                                      if (!await launchUrl(
+                                        Uri.parse(url),
+                                        mode: LaunchMode.platformDefault,
+                                      )) {
+                                        throw Exception(
+                                            'Could not launch $url');
+                                      }
+                                    },
+                                );
+                              } else {
+                                return TextSpan(
+                                  style: TextStyle(
+                                    color: theme.primaryColor,
+                                  ),
+                                  text: "${e.name} ",
+                                );
+                              }
+                            }).toList(),
+                          ),
                         ),
                       );
               },
