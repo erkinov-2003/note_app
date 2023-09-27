@@ -196,7 +196,6 @@ class MainController with ChangeNotifier {
       );
       await $secureStorage.write(
           key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
-      print($secureStorage.read(key: StorageKeys.oneUser.key));
       users.add(userOne);
       $secureStorage.write(
         key: StorageKeys.users.key,
@@ -205,7 +204,6 @@ class MainController with ChangeNotifier {
         ),
       );
       await $storage.setBool("isLogged", true);
-      print("object2");
       if (context.mounted) {
         Navigator.pushAndRemoveUntil(
           context,
