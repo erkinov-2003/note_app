@@ -144,8 +144,8 @@ class MainController with ChangeNotifier {
         ScaffoldMessenger.of(context)
           ..clearSnackBars()
           ..showSnackBar(
-            SnackBar(
-              content: Text(localization.dontHave),
+             SnackBar(
+              content: Text(localization.doNotHave),
             ),
           );
       } else {
@@ -167,21 +167,21 @@ class MainController with ChangeNotifier {
             );
           }
         } else {
-          if (context.mounted) {
-            ScaffoldMessenger.of(context)
-              ..clearSnackBars()
-              ..showSnackBar(
+         if(context.mounted) {
+           ScaffoldMessenger.of(context)
+             ..clearSnackBars()
+             ..showSnackBar(
                 SnackBar(
-                  content: Text(localization.wrongPassword),
-                ),
-              );
-          }
+                 content: Text(localization.wrongPassword),
+               ),
+             );
+         }
         }
       }
     }
   }
 
-  void checkRegistration(
+  Future<void> checkRegistration(
     GlobalKey<FormState> formKey,
     TextEditingController nameController,
     TextEditingController emailController,
@@ -196,16 +196,14 @@ class MainController with ChangeNotifier {
       );
       await $secureStorage.write(
           key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
-      print($secureStorage.read(key: StorageKeys.oneUser.key));
       users.add(userOne);
-      await $secureStorage.write(
+      $secureStorage.write(
         key: StorageKeys.users.key,
         value: jsonEncode(
           users.map((e) => e.toJson()).toList(),
         ),
       );
       await $storage.setBool("isLogged", true);
-      print("object2");
       if (context.mounted) {
         Navigator.pushAndRemoveUntil(
           context,

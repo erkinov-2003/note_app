@@ -39,6 +39,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Не удалось запустить"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "didNotImage": MessageLookupByLibrary.simpleMessage(
+            "Пользователь не сделал ни одного изображения."),
+        "didNotPicture": MessageLookupByLibrary.simpleMessage(
+            "Пользователь не сделал ни одной фотографии."),
+        "doNotHave": MessageLookupByLibrary.simpleMessage("У вас нет аккаунта"),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("Адрес электронной почты"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
@@ -101,7 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Добро пожаловать, чтобы отозвать свою ЗАМЕТКУ..."),
         "signInWith":
             MessageLookupByLibrary.simpleMessage("Войти в систему с "),
-        "signUp": MessageLookupByLibrary.simpleMessage("Подписывать"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Ваша ЗАМЕТКА здесь..."),
         "textWithLink":

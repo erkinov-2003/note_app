@@ -121,10 +121,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Your NOTE in the here...`
+  /// `Your NOTE is here...`
   String get signUpTitle {
     return Intl.message(
-      'Your NOTE in the here...',
+      'Your NOTE is here...',
       name: 'signUpTitle',
       desc: '',
       args: [],
@@ -472,10 +472,10 @@ class GeneratedLocalization {
   }
 
   /// `You don't have Account`
-  String get dontHave {
+  String get doNotHave {
     return Intl.message(
       'You don\'t have Account',
-      name: 'dontHave',
+      name: 'doNotHave',
       desc: '',
       args: [],
     );
