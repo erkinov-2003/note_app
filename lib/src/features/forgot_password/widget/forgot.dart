@@ -63,95 +63,106 @@ class _ForgotState extends State<Forgot> {
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: theme.scaffoldBackgroundColor,
-        leading: BackButton(
-          color: theme.primaryColor,
-        ),
-      ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 400,
+    return Form(
+      key: formKey,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size(500, 40),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+                maxWidth: 400,
+              ),
+              child: AppBar(
+                elevation: 0,
+                backgroundColor: theme.scaffoldBackgroundColor,
+                leading: BackButton(
+                  color: theme.primaryColor,
+                ),
+              ),
+            ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.051),
-            child: ListView(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.09),
-                  child: Text(
-                    localization.forgotPassword,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: size.height * 0.041,
-                      color: theme.primaryColor,
+        ),
+        body: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: 500,
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.051),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.09),
+                    child: Text(
+                      localization.forgotPassword,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: size.height * 0.041,
+                        color: theme.primaryColor,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: size.height * 0.02),
-                  child: Text(
-                    localization.enterEmailAddress,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.textColor,
-                    ),
-                  ),
-                ),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: size.height * 0.012),
-                        child: TextEdit(
-                          value: "you@example.com",
-                          validateEmail: (value) =>
-                              email.validateEmail(value!, context),
-                          isPassword: false,
-                          isRead: false,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: size.height * 0.02),
+                      child: Text(
+                        localization.enterEmailAddress,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.textColor,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: size.height * 0.45),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor:
-                                const MaterialStatePropertyAll<Color>(
-                              AppColors.airColor,
-                            ),
-                            fixedSize: MaterialStatePropertyAll<Size>(
-                              Size(
-                                size.width * 0.85,
-                                size.height * 0.071,
-                              ),
-                            ),
-                            shape: MaterialStatePropertyAll<OutlinedBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: size.height * 0.012),
+                    child: TextEdit(
+                      value: "you@example.com",
+                      validateEmail: (value) =>
+                          email.validateEmail(value!, context),
+                      isPassword: false,
+                      isRead: false,
+                    ),
+                  ),
+                  const Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: size.height*0.08),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            const MaterialStatePropertyAll<Color>(
+                          AppColors.airColor,
+                        ),
+                        fixedSize: MaterialStatePropertyAll<Size>(
+                          Size(
+                            size.width * 0.85,
+                            size.height * 0.071,
                           ),
-                          onPressed: () =>
-                              email.openChangePasswordPage(formKey, context),
-                          child: Text(
-                            localization.sendCode,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: size.height * 0.019,
-                              color: AppColors.white,
-                            ),
+                        ),
+                        shape: MaterialStatePropertyAll<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                )
-              ],
+                      onPressed: () =>
+                          email.openChangePasswordPage(formKey, context),
+                      child: Text(
+                        localization.sendCode,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: size.height * 0.019,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
