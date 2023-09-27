@@ -74,19 +74,19 @@ class _TextFieldsState extends State<TextFields> {
                     fontSize: 12,
                     fontWeight: FontWeight.w100,
                   ),
-                  enabledBorder: const OutlineInputBorder(
+                  enabledBorder:  OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: AppColors.black,
+                      color:  Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
-                  focusedBorder: const OutlineInputBorder(
+                  focusedBorder:  OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: AppColors.white,
+                      color: Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
