@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
 import '../../../common/localization/generated/l10n.dart';
 import 'icons_button.dart';
@@ -16,9 +15,9 @@ class SignInWith extends StatelessWidget {
       children: [
         Text(
          localization.signInWith,
-          style: const TextStyle(
+          style:  TextStyle(
             fontSize: 14,
-            color: AppColors.textColor,
+            color: Theme.of(context).primaryColor,
           ),
         ),
         const SizedBox(height: 8),

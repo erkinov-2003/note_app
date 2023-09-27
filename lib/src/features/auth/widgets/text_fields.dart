@@ -69,30 +69,29 @@ class _TextFieldsState extends State<TextFields> {
                 obscuringCharacter: "•",
                 obscureText: showPassword ?? false,
                 decoration: InputDecoration(
-
                   errorStyle: const TextStyle(
                     color: AppColors.errorBorder,
                     fontSize: 12,
                     fontWeight: FontWeight.w100,
                   ),
-                  enabledBorder: const OutlineInputBorder(
+                  enabledBorder:  OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: AppColors.black,
+                      color:  Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
-                  focusedBorder: const OutlineInputBorder(
+                  focusedBorder:  OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: AppColors.white,
+                      color: Theme.of(context).primaryColor,
                     ),
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
                   filled: true,
-                  fillColor: AppColors.fillColor,
+                  fillColor: Theme.of(context).cardColor,
                   suffixIcon: showPassword != null
                       ? GestureDetector(
                           onTap: changeObscure,
@@ -117,8 +116,8 @@ class _TextFieldsState extends State<TextFields> {
                 ),
                 showCursor: true,
                 cursorColor: AppColors.white,
-                style: const TextStyle(
-                  color: AppColors.white,
+                style:  TextStyle(
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),

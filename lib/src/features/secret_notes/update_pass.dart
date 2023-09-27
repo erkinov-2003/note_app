@@ -69,243 +69,234 @@ class _UpdatePasswordState extends State<UpdatePassword> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: isLandscape ? 600 : 450,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: isLandscape ? 20 : 50,
-                    left: 22,
-                    right: 22,
-                    bottom: isLandscape ? 10 : 30,
-                  ),
-                  child: Text(
-                    localization.updateSecretPass,
-                    style: TextStyle(
-                      fontSize: isLandscape ? 28 : 35,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: "Ranade",
-                      color: Colors.white,
-                    ),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: isLandscape ? 600 : 450,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 22,
+                  right: 22,
+                ),
+                child: Text(
+                  localization.updateSecretPass,
+                  style: TextStyle(
+                    fontSize: isLandscape ? 28 : 35,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 35, top: 45),
-                  child: Text(
-                    localization.oldPassword,
-                    style: TextStyle(
-                      fontSize: isLandscape ? 13 : 15,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Ranade",
-                      color: Colors.grey,
-                    ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 35, top: 45),
+                child: Text(
+                  localization.oldPassword,
+                  style: TextStyle(
+                    fontSize: isLandscape ? 13 : 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey,
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: isLandscape ? 10 : 25,
-                    horizontal: 10,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(4, (index) {
-                      return SizedBox(
-                        width: size <= 340
-                            ? 55
-                            : size <= 375
-                                ? 70
-                                : 80,
-                        height: size <= 340
-                            ? 55
-                            : size <= 375
-                                ? 70
-                                : 80,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: const Color(0xff262629),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: isOldPasswordCorrect
-                                  ? const Color(0xff262629)
-                                  : Colors.red,
-                              width: 2,
-                            ),
-                          ),
-                          child: TextFormField(
-                            cursorColor: Colors.white,
-                            textAlignVertical: TextAlignVertical.bottom,
-                            cursorHeight: 30,
-                            autofocus: false,
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            maxLength: 1,
-                            controller: oldControllers[index],
-                            focusNode: focusNodes[index],
-                            decoration: const InputDecoration(
-                                border: InputBorder.none,
-                                counter: SizedBox.shrink()),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: "Ranade",
-                              fontSize: 30,
-                            ),
-                            onChanged: (text) {
-                              if (text.isNotEmpty) {
-                                if (index < oldControllers.length - 1) {
-                                  FocusScope.of(context)
-                                      .requestFocus(focusNodes[index + 1]);
-                                }
-                              } else if (text.isEmpty) {
-                                if (index > 0) {
-                                  FocusScope.of(context)
-                                      .requestFocus(focusNodes[index - 1]);
-                                }
-                              }
-                            },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(4, (index) {
+                    return SizedBox(
+                      width: size <= 340
+                          ? 55
+                          : size <= 375
+                              ? 70
+                              : 80,
+                      height: size <= 340
+                          ? 55
+                          : size <= 375
+                              ? 70
+                              : 80,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: const Color(0xff262629),
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            color: isOldPasswordCorrect
+                                ? const Color(0xff262629)
+                                : Colors.red,
+                            width: 2,
                           ),
                         ),
-                      );
-                    }),
-                  ),
-                ),
-                if (isOldPasswordCorrect)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 35, left: 25),
-                        child: Text(
-                          localization.setPassword2,
-                          style: TextStyle(
-                            fontSize: isLandscape ? 13 : 15,
-                            fontWeight: FontWeight.w500,
+                        child: TextFormField(
+                          cursorColor: Colors.white,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          cursorHeight: 30,
+                          autofocus: false,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          maxLength: 1,
+                          controller: oldControllers[index],
+                          focusNode: focusNodes[index],
+                          decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              counter: SizedBox.shrink()),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
                             fontFamily: "Ranade",
-                            color: Colors.grey,
+                            fontSize: 30,
                           ),
+                          onChanged: (text) {
+                            if (text.isNotEmpty) {
+                              if (index < oldControllers.length - 1) {
+                                FocusScope.of(context)
+                                    .requestFocus(focusNodes[index + 1]);
+                              }
+                            } else if (text.isEmpty) {
+                              if (index > 0) {
+                                FocusScope.of(context)
+                                    .requestFocus(focusNodes[index - 1]);
+                              }
+                            }
+                          },
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: isLandscape ? 10 : 25, horizontal: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(4, (index) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: SizedBox(
-                                width: size <= 340
-                                    ? 55
-                                    : size <= 375
-                                        ? 70
-                                        : 80,
-                                height: size <= 340
-                                    ? 55
-                                    : size <= 375
-                                        ? 70
-                                        : 80,
-                                child: ColoredBox(
-                                  color: const Color(0xff262629),
-                                  child: Align(
-                                    alignment: Alignment.center,
-                                    child: TextFormField(
-                                      cursorColor: Colors.white,
-                                      cursorHeight: 30,
-                                      textAlignVertical:
-                                          TextAlignVertical.center,
-                                      autofocus: false,
-                                      keyboardType: TextInputType.number,
-                                      textAlign: TextAlign.center,
-                                      maxLength: 1,
-                                      controller: newControllers[index],
-                                      focusNode: focusNodes1[index],
-                                      decoration: const InputDecoration(
-                                          border: InputBorder.none,
-                                          counter: SizedBox.shrink()),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: "Ranade",
-                                        fontSize: 30,
-                                      ),
-                                      onChanged: (text) {
-                                        if (text.isNotEmpty) {
-                                          if (index <
-                                              newControllers.length - 1) {
-                                            FocusScope.of(context).requestFocus(
-                                                focusNodes1[index + 1]);
-                                          }
-                                        } else if (text.isEmpty) {
-                                          if (index > 0) {
-                                            FocusScope.of(context).requestFocus(
-                                                focusNodes1[index - 1]);
-                                          }
-                                        }
-                                      },
+                    );
+                  }),
+                ),
+              ),
+              if (isOldPasswordCorrect)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 35, left: 25),
+                      child: Text(
+                        localization.setPassword2,
+                        style: TextStyle(
+                          fontSize: isLandscape ? 13 : 15,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "Ranade",
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: isLandscape ? 10 : 25, horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(4, (index) {
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: SizedBox(
+                              width: size <= 340
+                                  ? 55
+                                  : size <= 375
+                                      ? 70
+                                      : 80,
+                              height: size <= 340
+                                  ? 55
+                                  : size <= 375
+                                      ? 70
+                                      : 80,
+                              child: ColoredBox(
+                                color: const Color(0xff262629),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: TextFormField(
+                                    cursorColor: Colors.white,
+                                    cursorHeight: 30,
+                                    textAlignVertical: TextAlignVertical.center,
+                                    autofocus: false,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    maxLength: 1,
+                                    controller: newControllers[index],
+                                    focusNode: focusNodes1[index],
+                                    decoration: const InputDecoration(
+                                        border: InputBorder.none,
+                                        counter: SizedBox.shrink()),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: "Ranade",
+                                      fontSize: 30,
                                     ),
+                                    onChanged: (text) {
+                                      if (text.isNotEmpty) {
+                                        if (index < newControllers.length - 1) {
+                                          FocusScope.of(context).requestFocus(
+                                              focusNodes1[index + 1]);
+                                        }
+                                      } else if (text.isEmpty) {
+                                        if (index > 0) {
+                                          FocusScope.of(context).requestFocus(
+                                              focusNodes1[index - 1]);
+                                        }
+                                      }
+                                    },
                                   ),
                                 ),
                               ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 25,
+                  right: 25,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 60,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.lightBlueAccent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: !isOldPasswordCorrect
+                        ? checkOldPassword
+                        : () async {
+                            final updatePass = newControllers
+                                .map((e) => e.text)
+                                .toList()
+                                .join("");
+                            await $secureStorage.write(
+                              key: StorageKeys.notesPassword.key,
+                              value: updatePass,
                             );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 25,
-                    right: 25,
-                    top: isOldPasswordCorrect ? 215 : 350,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.lightBlueAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: !isOldPasswordCorrect
-                          ? checkOldPassword
-                          : () async {
-                              final updatePass = newControllers
-                                  .map((e) => e.text)
-                                  .toList()
-                                  .join("");
-                              await $secureStorage.write(
-                                key: StorageKeys.notesPassword.key,
-                                value: updatePass,
-                              );
-                              if (mounted) Navigator.pop(context);
-                            },
-                      child: Text(
-                        isOldPasswordCorrect
-                            ? localization.setPassword
-                            : localization.check,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: isLandscape ? 16 : 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Ranade",
-                        ),
+                            if (mounted) Navigator.pop(context);
+                          },
+                    child: Text(
+                      isOldPasswordCorrect
+                          ? localization.setPassword
+                          : localization.check,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: isLandscape ? 16 : 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "Ranade",
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                )
-              ],
-            ),
+              ),
+              const SizedBox(
+                height: 40,
+              )
+            ],
           ),
         ),
       ),

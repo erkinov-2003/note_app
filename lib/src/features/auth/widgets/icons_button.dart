@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/constants/app_colors.dart';
 
 class IconsButton extends StatefulWidget {
   final String image;
@@ -21,9 +20,9 @@ class _IconsButtonState extends State<IconsButton> {
       height: 44,
       width: 44,
       child: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: AppColors.buttonColor,
-          borderRadius: BorderRadius.all(Radius.circular(14)),
+        decoration:  BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.all(Radius.circular(14)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(5),

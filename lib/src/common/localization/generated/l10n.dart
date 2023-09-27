@@ -181,6 +181,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Set Password`
+  String get setPassword {
+    return Intl.message(
+      'Set Password',
+      name: 'setPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Delete`
   String get delete {
     return Intl.message(
@@ -356,16 +366,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Check',
       name: 'check',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Set Password`
-  String get setPassword {
-    return Intl.message(
-      'Set Password',
-      name: 'setPassword',
       desc: '',
       args: [],
     );
@@ -631,6 +631,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Enter password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Could not launch`
   String get couldNotLaunch {
     return Intl.message(
@@ -661,51 +671,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Change your name`
+  /// `Change Your Name`
   String get changeYourName {
     return Intl.message(
-      'Change your name',
+      'Change Your Name',
       name: 'changeYourName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your old password`
-  String get oldPassword {
-    return Intl.message(
-      'Your old password',
-      name: 'oldPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter password`
+  /// `Enter Password`
   String get enterPassword {
     return Intl.message(
-      'Enter password',
+      'Enter Password',
       name: 'enterPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your password`
-  String get yourPassword {
-    return Intl.message(
-      'Your password',
-      name: 'yourPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your full name`
-  String get yourFullName {
-    return Intl.message(
-      'Your full name',
-      name: 'yourFullName',
       desc: '',
       args: [],
     );

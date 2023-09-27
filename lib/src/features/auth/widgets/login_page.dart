@@ -32,9 +32,10 @@ class _LogInState extends State<LogIn> {
     final validateEmail = ProviderRegistration.of(context).validateEmail;
     final forgotPassword = ProviderRegistration.of(context).forgotPassword;
     final checkLogin = ProviderRegistration.of(context).checkLogin;
+    final size = MediaQuery.sizeOf(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -52,27 +53,27 @@ class _LogInState extends State<LogIn> {
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                     exampleText: "you@example.com",
-                    infoText: localization.emailAddress,
+                    infoText: "Email address",
                   ),
                   TextFields(
                     controller: passwordController,
                     validator: validatePassword,
                     textInputAction: TextInputAction.go,
                     keyboardType: TextInputType.visiblePassword,
-                    exampleText: localization.yourPassword,
-                    infoText: localization.password,
+                    exampleText: "Your password",
+                    infoText: "Password",
                     isObscure: true,
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 30),
+          SizedBox(height: size.height * 0.03),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
-                maximumSize: const Size(400, 60),
-                minimumSize: const Size(400, 60),
+                maximumSize: Size(size.width * 0.9, size.height * 0.07),
+                minimumSize: Size(size.width * 0.9, size.height * 0.07),
                 backgroundColor: AppColors.airColor,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -87,7 +88,8 @@ class _LogInState extends State<LogIn> {
               child: Center(
                 child: Text(
                   localization.signIn,
-                  style: const TextStyle(
+                  style:  TextStyle(
+                    color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -95,7 +97,7 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: size.height * 0.03),
           Center(
             child: GestureDetector(
               onTap: () => forgotPassword(context),
