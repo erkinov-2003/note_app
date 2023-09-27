@@ -66,7 +66,7 @@ class _ViewState extends State<View> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 450),
+            constraints: const BoxConstraints(maxWidth: 500),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

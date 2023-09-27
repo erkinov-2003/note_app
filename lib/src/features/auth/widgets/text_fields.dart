@@ -116,8 +116,8 @@ class _TextFieldsState extends State<TextFields> {
                 ),
                 showCursor: true,
                 cursorColor: AppColors.white,
-                style: const TextStyle(
-                  color: AppColors.white,
+                style:  TextStyle(
+                  color: Theme.of(context).primaryColor,
                 ),
               ),
             ),
