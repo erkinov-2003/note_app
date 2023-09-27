@@ -1,7 +1,7 @@
 {
   "theme": "Mavzu",
-  "themeApp": "Mavzu Ilovasi",
-  "languageApp": "Til ilovasi",
+  "themeApp": "Ilova mavzusi",
+  "languageApp": "Ilova tili",
   "next": "Keyingi",
   "signIn" : "Tizimga kirish",
   "signUp" : "Ro'yxatdan o'tish",
@@ -62,5 +62,9 @@
   "couldNotLaunch": "Ishga tushirilmadi",
   "enjoyNote": "Do'stlaringiz bilan eslatma olishdan zavqlaning",
   "save": "Saqlash",
-  "changeYourName": "Ismni o'zgartirish"
+  "changeYourName": "Ismni o'zgartirish",
+  "yourPassword": "Sizning parolingiz",
+  "yourFullName": "To'liq ism"
+
+
 }
