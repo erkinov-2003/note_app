@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_colors.dart';
 import '../../common/localization/generated/l10n.dart';
+import '../../common/models/user_model.dart';
+import '../../common/providers/photo_provider.dart';
 import '../profile/profile_page.dart';
 import 'controller/provider.dart';
 import 'widgets/new_note.dart';
@@ -17,11 +20,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  User user = User();
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+  }
 
   final localization = GeneratedLocalization();
 
+  void read() async {
+    String readUser =
+        await $secureStorage.read(key: StorageKeys.oneUser.key) ?? "";
+    if (readUser.isNotEmpty) {
+      user = User.fromJson(readUser);
+    }
+
+    print("==================================================");
+    print(readUser);
+  }
+
   @override
   Widget build(BuildContext context) {
+    read();
+
     return Scaffold(
       backgroundColor: AppColors.black,
       appBar: AppBar(
@@ -40,22 +62,46 @@ class _HomePage extends State<HomePage> {
                   ),
                 );
               },
-              child: const SizedBox(
-                width: 57,
-                height: 57,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Image(
-                      image: AssetImage("assets/images/person.png"),
-                    ),
-                  ),
-                ),
-              ),
+              child: ValueListenableBuilder(
+                  valueListenable: context.read<PhotoProvider>().imageFile,
+                  builder: (context, value, _) {
+                    return CircleAvatar(
+                      backgroundColor: AppColors.blueGrey,
+                      radius: 28,
+                      foregroundImage: value != null ? FileImage(value) : null,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: value == null
+                            ? const Image(
+                                image: AssetImage("assets/images/person.png"),
+                              )
+                            : null,
+                        // child: FutureBuilder(
+                        //   future: $secureStorage.read(key: StorageKeys.oneUser.key),
+                        //   builder: (context, snapShot) {
+                        //     print("=====================================");
+                        //     print(snapShot.data);
+                        //     User user = User.fromJson(
+                        //       jsonDecode(snapShot.data ?? ""),
+                        //     )
+                        //
+                        //     if (snapShot.connectionState == ConnectionState.done &&
+                        //         user.image != null) {
+                        //       return Image(
+                        //         image: FileImage(
+                        //           File(user.image!),
+                        //         ),
+                        //       );
+                        //     } else {
+                        //       return const Image(
+                        //         image: AssetImage("assets/images/person.png"),
+                        //       );
+                        //     }
+                        //   },
+                        // ),
+                      ),
+                    );
+                  }),
             ),
           ),
         ],
