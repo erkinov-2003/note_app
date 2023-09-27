@@ -145,7 +145,7 @@ class MainController with ChangeNotifier {
           ..clearSnackBars()
           ..showSnackBar(
              SnackBar(
-              content: Text(localization.dontHave),
+              content: Text(localization.doNotHave),
             ),
           );
       } else {
@@ -181,13 +181,13 @@ class MainController with ChangeNotifier {
     }
   }
 
-  void checkRegistration(
+  Future<void> checkRegistration(
     GlobalKey<FormState> formKey,
     TextEditingController nameController,
     TextEditingController emailController,
     TextEditingController passwordController,
     BuildContext context,
-  ) {
+  ) async {
     if (formKey.currentState!.validate()) {
       User userOne = User(
         name: nameController.text,

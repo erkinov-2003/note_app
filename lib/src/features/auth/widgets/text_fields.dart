@@ -69,7 +69,6 @@ class _TextFieldsState extends State<TextFields> {
                 obscuringCharacter: "•",
                 obscureText: showPassword ?? false,
                 decoration: InputDecoration(
-
                   errorStyle: const TextStyle(
                     color: AppColors.errorBorder,
                     fontSize: 12,
@@ -92,7 +91,7 @@ class _TextFieldsState extends State<TextFields> {
                     ),
                   ),
                   filled: true,
-                  fillColor: AppColors.fillColor,
+                  fillColor: Theme.of(context).cardColor,
                   suffixIcon: showPassword != null
                       ? GestureDetector(
                           onTap: changeObscure,
