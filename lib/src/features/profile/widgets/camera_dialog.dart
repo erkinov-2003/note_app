@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
-import '../controller/profile_controller.dart';
+import '../../../common/providers/photo_provider.dart';
 
 class CameraBottomSheet extends StatefulWidget {
   const CameraBottomSheet({Key? key}) : super(key: key);
@@ -18,6 +18,7 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
     final localization = GeneratedLocalization();
     final sizeH = MediaQuery.sizeOf(context).height;
     final sizeW = MediaQuery.sizeOf(context).width;
+
     return SizedBox(
       height: 180,
       child: DecoratedBox(
@@ -74,8 +75,11 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       backgroundColor: const Color(0xFF36BFFA)),
-                  onPressed: () {
-                    context.read<ProfileController>().openGallery();
+                  onPressed: () async {
+                    final image = await context
+                        .read<PhotoProvider>()
+                        .pickImageFromGallery();
+                    Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openGallery,
@@ -99,8 +103,11 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                     ),
                     backgroundColor: const Color(0xFF36BFFA),
                   ),
-                  onPressed: () {
-                    context.read<ProfileController>().openCamera();
+                  onPressed: () async {
+                    final image = await context
+                        .read<PhotoProvider>()
+                        .pickImageFromCamera();
+                    Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openCamera,

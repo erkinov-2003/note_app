@@ -10,7 +10,7 @@ import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
 import '../secret_notes/new_pass.dart';
 import '../secret_notes/update_pass.dart';
-import 'controller/profile_controller.dart';
+
 import 'widgets/camera_dialog.dart';
 import 'widgets/log_out_dialog.dart';
 import 'widgets/custom_list_tile.dart';
@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
+    final theme = Theme.of(context);
     final localization = GeneratedLocalization();
     final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
           backgroundColor: theme.scaffoldBackgroundColor,
           title: Text(
             localization.profile,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 35,
               fontWeight: FontWeight.w600,
               color: theme.primaryColor,
@@ -83,10 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           onTap: () {
                             showModalBottomSheet(
                               context: context,
-                              builder: (context) => ChangeNotifierProvider(
-                                create: (context) => ProfileController(),
-                                child: const CameraBottomSheet(),
-                              ),
+                              builder: (context) => const CameraBottomSheet(),
                             );
                           },
                           child: const SizedBox(
@@ -96,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        child:  CircleAvatar(
+                        child: CircleAvatar(
                           backgroundColor: theme.primaryColor,
                           radius: 50,
                           child: Center(
@@ -118,7 +115,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             value,
                             textAlign: TextAlign.center,
                             overflow: TextOverflow.ellipsis,
-                            style:  TextStyle(
+                            style: TextStyle(
                               fontSize: 25,
                               color: theme.primaryColor,
                               fontWeight: FontWeight.w600,
@@ -136,13 +133,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         );
                       },
-                      child:  Padding(
-                        padding:const EdgeInsets.only(right: 40),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 40),
                         child: Image(
                           height: 40,
                           width: 40,
                           color: theme.primaryColor,
-                          image:const AssetImage(AppIcons.editIcon),
+                          image: const AssetImage(AppIcons.editIcon),
                         ),
                       ),
                     ),
@@ -152,17 +149,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 const CustomSwitch(),
                 CustomListTile(
                   title: localization.language,
-                  trailing: const Image(
-                    width: 25,
-                    height: 25,
-                    image: AssetImage(AppIcons.globe),
-                  ),
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => const LanguageBottomSheet(),
                     );
                   },
+                  trailing: const Image(
+                    width: 25,
+                    height: 25,
+                    image: AssetImage(AppIcons.lockIcon),
+                  ),
                 ),
                 CustomListTile(
                   title: localization.secretPassword,
@@ -243,7 +240,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final localization = GeneratedLocalization();
+    final localization = GeneratedLocalization.of(context);
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,

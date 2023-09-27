@@ -12,6 +12,7 @@
   "emailAddress": "Email address",
   "password": "Password",
   "enterEmailAddress": "Enter email address",
+  "setPassword": "Set Password",
   "delete": "Delete",
   "addPassword": "Add Password",
   "back": "Back",
@@ -58,9 +59,11 @@
   "enter": "Enter",
   "sendCode": "Send code",
   "incorrectlyPassword": "You entered the password incorrectly",
+  "enterPassword": "Enter password",
   "couldNotLaunch": "Could not launch",
   "enjoyNote": "Enjoy note taking with friends",
   "save": "Save",
-  "changeYourName": "Change Your Name",
+  "changeYourName": "Change Your Name"
+  "oldPassword": "Your old password"
   "enterPassword": "Enter Password"
 }

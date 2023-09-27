@@ -3,9 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
+import '../../../common/providers/photo_provider.dart';
 import '../../../common/utils/logger.dart';
 import '../../home_screen/controller/provider.dart';
 import '../components/link_dialog.dart';
@@ -32,9 +34,24 @@ mixin NoteMixin on State<CreateNote> {
   bool isImageSelected = false;
   File? imageFile;
 
+  bool readOnly = false;
+  bool isEditing = false;
+
   @override
   void didChangeDependencies() {
-    widget.note?.title = controllerTitle.text;
+    context.read<PhotoProvider>().imageFile = ValueNotifier(null);
+    final note = widget.note;
+    if (note != null) {
+      readOnly = true;
+      isEditing = true;
+
+      title = note.title;
+      body = note.body!;
+      imagePath = note.image;
+
+      controllerTitle.text = note.title!;
+      controllerBody.text = note.body!.map((e) => e.name).join(" ");
+    }
 
     super.didChangeDependencies();
   }
@@ -44,13 +61,12 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
-
-      final list = controllerBody.text.split(" ");
-      for(int i = 0; i < list.length; i++) {
-        body.add(LinkModel(name: list[i],link: $savedLinks[i+1]));
-      }
-
-      $savedLinks.clear();
+    body.clear();
+    final list = controllerBody.text.split(" ");
+    for (int i = 0; i < list.length; i++) {
+      body.add(LinkModel(name: list[i], link: $savedLinks[i + 1]));
+    }
+    $savedLinks.clear();
 
     final noteModel = NoteModel(
       noteId: noteId,
@@ -62,6 +78,8 @@ mixin NoteMixin on State<CreateNote> {
       link: link,
       isSecret: isSecret,
     );
+
+    print(noteModel);
 
     if (widget.note == null) {
       notes.addNote(noteModel);
