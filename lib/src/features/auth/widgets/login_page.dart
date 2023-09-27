@@ -86,7 +86,7 @@ class _LogInState extends State<LogIn> {
                 child: Text(
                   localization.signIn,
                   style:  TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),

@@ -145,7 +145,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Text(
                   localization.signIn,
                   style:  TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
