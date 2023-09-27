@@ -120,7 +120,7 @@ class _ViewState extends State<View> {
                     height: size.height * 0.15,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: size.height * 0.01),
+                          EdgeInsets.symmetric(vertical: size.height * 0.005),
                       child: Center(
                         child: SignInWith(),
                       ),

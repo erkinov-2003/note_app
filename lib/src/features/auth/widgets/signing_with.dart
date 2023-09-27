@@ -13,6 +13,7 @@ class SignInWith extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Spacer(),
         Text(
          localization.signInWith,
           style:  TextStyle(
