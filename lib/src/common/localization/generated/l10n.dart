@@ -181,6 +181,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Set Password`
+  String get setPassword {
+    return Intl.message(
+      'Set Password',
+      name: 'setPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Delete`
   String get delete {
     return Intl.message(
@@ -356,16 +366,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Check',
       name: 'check',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Set Password`
-  String get setPassword {
-    return Intl.message(
-      'Set Password',
-      name: 'setPassword',
       desc: '',
       args: [],
     );
@@ -641,6 +641,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Enter password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Could not launch`
   String get couldNotLaunch {
     return Intl.message(
@@ -676,16 +686,6 @@ class GeneratedLocalization {
     return Intl.message(
       'Change Your Name',
       name: 'changeYourName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter Password`
-  String get enterPassword {
-    return Intl.message(
-      'Enter Password',
-      name: 'enterPassword',
       desc: '',
       args: [],
     );

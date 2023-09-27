@@ -158,7 +158,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage(AppIcons.lockIcon),
+                    image: AssetImage(AppIcons.globe),
                   ),
                 ),
                 CustomListTile(
