@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:note_app/src/common/utils/functions.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
-import '../../../common/providers/photo_provider.dart';
 
 class CameraBottomSheet extends StatefulWidget {
   const CameraBottomSheet({Key? key}) : super(key: key);
@@ -76,10 +75,8 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                       ),
                       backgroundColor: const Color(0xFF36BFFA)),
                   onPressed: () async {
-                    final image = await context
-                        .read<PhotoProvider>()
-                        .pickImageFromGallery();
-                    Navigator.pop(context, image);
+                    String? image = await pickImageFromGallery();
+                    if (mounted) Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openGallery,
@@ -104,10 +101,8 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                     backgroundColor: const Color(0xFF36BFFA),
                   ),
                   onPressed: () async {
-                    final image = await context
-                        .read<PhotoProvider>()
-                        .pickImageFromCamera();
-                    Navigator.pop(context, image);
+                    final image = await pickImageFromCamera();
+                    if (mounted) Navigator.pop(context, image);
                   },
                   child: Text(
                     localization.openCamera,

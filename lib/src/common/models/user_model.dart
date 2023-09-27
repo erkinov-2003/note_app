@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:uuid/uuid.dart';
 
-import '../../features/home_screen/controller/provider.dart';
+import '../../features/home_screen/controller/notes.dart';
 
 class User {
   final String? id;

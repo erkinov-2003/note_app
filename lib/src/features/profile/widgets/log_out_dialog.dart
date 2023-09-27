@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../common/constants/app_icons.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/utils/storage.dart';
-import '../../auth/widgets/register_page_controller.dart';
+import '../../auth/register_page_controller.dart';
 
 class CustomLogOutDialog extends StatelessWidget {
   const CustomLogOutDialog({super.key});

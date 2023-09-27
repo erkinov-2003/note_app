@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../common/localization/generated/l10n.dart';
+import 'package:note_app/src/common/utils/translate.dart';
 import '../model/model.dart';
 import '../model/text_field.dart';
 
@@ -33,7 +33,6 @@ class _ChangePasswordState extends State<ChangePassword> {
   @override
   Widget build(BuildContext context) {
     final theme= Theme.of(context);
-    final localization = GeneratedLocalization.of(context);
     final model = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
@@ -55,13 +54,17 @@ class _ChangePasswordState extends State<ChangePassword> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.005),
-                  child: Text(
-                    localization.setPassword,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: size.height * 0.041,
-                      color: theme.primaryColor,
-                    ),
+                  child: Translate(
+                    builder: (context, localization, child) {
+                      return Text(
+                        localization.setPassword,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: size.height * 0.041,
+                          color: theme.primaryColor,
+                        ),
+                      );
+                    }
                   ),
                 ),
                 Form(
@@ -71,13 +74,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.059),
-                        child: Text(
-                          localization.yourEmailAddress,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575758),
-                          ),
+                        child: Translate(
+                          builder: (context, localization, child) {
+                            return Text(
+                              localization.yourEmailAddress,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF575758),
+                              ),
+                            );
+                          }
                         ),
                       ),
                       Padding(
@@ -90,13 +97,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: Text(
-                          localization.enterNewPassword,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575758),
-                          ),
+                        child: Translate(
+                          builder: (context,localization, child) {
+                            return Text(
+                              localization.enterNewPassword,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF575758),
+                              ),
+                            );
+                          }
                         ),
                       ),
                       Padding(
@@ -110,13 +121,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: Text(
-                          localization.enterAgain,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: Color(0xFF575758),
-                          ),
+                        child: Translate(
+                          builder: (context,localization, child) {
+                            return Text(
+                              localization.enterAgain,
+                              style: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF575758),
+                              ),
+                            );
+                          }
                         ),
                       ),
                       Padding(
@@ -150,13 +165,17 @@ class _ChangePasswordState extends State<ChangePassword> {
                           ),
                           onPressed: () =>
                               model.openHomePage(context, formKey),
-                          child: Text(
-                            localization.enter,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: size.height * 0.019,
-                              color: Colors.white,
-                            ),
+                          child: Translate(
+                            builder: (context,localization, child) {
+                              return Text(
+                                localization.enter,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: size.height * 0.019,
+                                  color: Colors.white,
+                                ),
+                              );
+                            }
                           ),
                         ),
                       ),

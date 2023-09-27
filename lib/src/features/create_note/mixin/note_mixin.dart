@@ -3,13 +3,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
-import '../../../common/providers/photo_provider.dart';
 import '../../../common/utils/logger.dart';
-import '../../home_screen/controller/provider.dart';
+import '../../home_screen/controller/notes.dart';
 import '../components/link_dialog.dart';
 import '../create_note.dart';
 import '../models/link_model.dart';
@@ -39,7 +37,6 @@ mixin NoteMixin on State<CreateNote> {
 
   @override
   void didChangeDependencies() {
-    context.read<PhotoProvider>().imageFile = ValueNotifier(null);
     final note = widget.note;
     if (note != null) {
       readOnly = true;

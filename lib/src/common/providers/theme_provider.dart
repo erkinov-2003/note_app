@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 
 import '../constants/app_colors.dart';
 
 class ThemeProvider with ChangeNotifier {
-  late ThemeData currentTheme;
   ThemeMode themeMode;
+  late bool isDark;
 
   ThemeProvider({ThemeMode? themeMode})
       : themeMode = themeMode ?? ThemeMode.system;
 
   void changeTheme(bool mode) {
-    themeMode = switch (mode) {
-      false => ThemeMode.dark,
-      true => ThemeMode.light,
-    };
+    $storage.setBool(StorageKeys.theme.key, !mode);
     notifyListeners();
+  }
+
+  ThemeMode getTheme() {
+    isDark = $storage.getBool(StorageKeys.theme.key) ?? true;
+    themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    return themeMode;
   }
 
   static final darkTheme = ThemeData(
@@ -32,7 +36,7 @@ class ThemeProvider with ChangeNotifier {
     useMaterial3: true,
     fontFamily: "Ranade",
     cardColor: const Color(0xFF1A1A1B),
-    colorScheme: ColorScheme.dark(background: Color(0xFF262629))
+    colorScheme: const ColorScheme.dark(background: Color(0xFF262629))
   );
 
   static final lightTheme = ThemeData(
@@ -50,8 +54,8 @@ class ThemeProvider with ChangeNotifier {
     ),
     useMaterial3: true,
     fontFamily: "Ranade",
-    cardColor: Color(0x4DDEDEDF),
+    cardColor: const Color(0x4DDEDEDF),
 
-      colorScheme: ColorScheme.light(background: Color(0xFFBDBDBD))
+      colorScheme: const ColorScheme.light(background: Color(0xFFBDBDBD))
   );
 }

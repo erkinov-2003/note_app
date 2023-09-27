@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../common/constants/app_colors.dart';
 import '../../common/localization/generated/l10n.dart';
 import '../profile/profile_page.dart';
-import 'controller/provider.dart';
+import 'controller/notes.dart';
 import 'widgets/new_note.dart';
 import 'widgets/note.dart';
 

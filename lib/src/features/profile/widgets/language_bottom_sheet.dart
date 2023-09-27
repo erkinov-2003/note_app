@@ -88,7 +88,7 @@ class LanguageBottomSheet extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)
                             ),
-                            backgroundColor: locale == value.current!.languageCode
+                            backgroundColor: locale == value.current.languageCode
                                 ? AppColors.selectedLanguageColor
                                 : AppColors.unSelectedLanguageColor,
                           ),

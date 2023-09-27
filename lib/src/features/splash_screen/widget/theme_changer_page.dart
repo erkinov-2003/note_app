@@ -15,6 +15,7 @@ class ThemeChangerPage extends StatefulWidget {
 class _ThemeChangerPageState extends State<ThemeChangerPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,7 +31,7 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   GeneratedLocalization.of(context).themeApp,
-                  style: Theme.of(context).primaryTextTheme.titleLarge,
+                  style: theme.primaryTextTheme.titleLarge,
                 ),
               ),
               const Expanded(
@@ -44,22 +45,22 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
               Consumer<ThemeProvider>(
                 builder: (context, value, child) => SwitchListTile.adaptive(
                   activeColor: Colors.black,
-                  activeTrackColor: Colors.white,
-                  value: value.themeMode == ThemeMode.light,
+                  activeTrackColor: theme.cardColor,
+                  value: !value.isDark,
                   onChanged: value.changeTheme,
                   title: Text(
                     GeneratedLocalization.of(context).theme,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                     ),
                   ),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
                       width: 1,
-                      color: Colors.white,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),

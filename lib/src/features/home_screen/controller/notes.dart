@@ -43,7 +43,6 @@ class Notes with ChangeNotifier {
   }
 
   Future<void> setAllNotes() async {
-    print("=====================================================================");
     List<NoteModel> a = List<Map<String,Object?>>.from(jsonDecode($storage.getString($users.currentUser.id!) ?? "[]")).map(NoteModel.fromJson).toList();
     String bString = (await $secureStorage.read(key: $users.currentUser.id!,)) ?? "[]";
     List<NoteModel> b = List<Map<String,Object?>>.from(jsonDecode(bString)).map(NoteModel.fromJson).toList();

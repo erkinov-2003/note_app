@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:note_app/src/common/providers/photo_provider.dart';
 import 'package:note_app/src/common/providers/theme_provider.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';
 import 'package:note_app/src/features/splash_screen/widget/splash_screen.dart';
@@ -25,9 +24,6 @@ class App extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => PhotoProvider(),
-        ),
       ],
       child: Consumer2<LangProvider, ThemeProvider>(
         builder: (context, langProvider, themeProvider, child) {
@@ -43,7 +39,7 @@ class App extends StatelessWidget {
             supportedLocales: GeneratedLocalization.delegate.supportedLocales,
             theme: ThemeProvider.lightTheme,
             darkTheme: ThemeProvider.darkTheme,
-            themeMode: themeProvider.themeMode,
+            themeMode: themeProvider.getTheme(),
             home: $users.isLogged == true
                 ? const HomePage()
                 : const SplashScreen(),

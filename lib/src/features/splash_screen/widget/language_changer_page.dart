@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../common/constants/app_images.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/providers/lang_provider.dart';
-import '../../../common/utils/storage.dart';
 import '../models/language_model.dart';
 
 class LanguageChangerPage extends StatefulWidget {
@@ -75,17 +74,15 @@ class _LanguageChangerPageState extends State<LanguageChangerPage> {
                     ),
                     scrollController: FixedExtentScrollController(
                         initialItem: switch (
-                            langProvider.current?.languageCode) {
+                            langProvider.current.languageCode) {
                       "en" => 0,
                       "ru" => 1,
                       "uz" => 2,
                       _ => -1,
                     }),
                     onSelectedItemChanged: (int selectedItem) {
-                      final selectedLocale = languages[selectedItem];
-                      langProvider.changeLocale(Locale(selectedLocale.value));
-                      $storage.setString(
-                          StorageKeys.locale.key, selectedLocale.value);
+                      langProvider.changeLocale(Locale(languages[selectedItem].value));
+
                     },
                     children:
                         List<Widget>.generate(languages.length, (int index) {
