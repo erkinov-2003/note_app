@@ -203,9 +203,7 @@ class MainController with ChangeNotifier {
           users.map((e) => e.toJson()).toList(),
         ),
       );
-      print($secureStorage.read(key: StorageKeys.users.key));
       await $storage.setBool("isLogged", true);
-      print("object2");
       if (context.mounted) {
         Navigator.pushAndRemoveUntil(
           context,
