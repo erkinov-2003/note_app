@@ -23,8 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addLink": MessageLookupByLibrary.simpleMessage("Link qo\'shish"),
-        "addPassword": MessageLookupByLibrary.simpleMessage("Parol Qo\'shish"),
-        "addPhoto": MessageLookupByLibrary.simpleMessage("Fotosurat Qo\'shing"),
+        "addPassword": MessageLookupByLibrary.simpleMessage("Parol qo\'shish"),
+        "addPhoto": MessageLookupByLibrary.simpleMessage("Fotosurat qo\'shing"),
         "alreadyRegister": MessageLookupByLibrary.simpleMessage(
             "Siz allaqachon ro\'yxatdan o\'tgansiz"),
         "back": MessageLookupByLibrary.simpleMessage("Ortga"),
@@ -39,11 +39,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "couldNotLaunch":
             MessageLookupByLibrary.simpleMessage("Ishga tushirilmadi"),
         "delete": MessageLookupByLibrary.simpleMessage("O\'chirish"),
+        "didNotImage": MessageLookupByLibrary.simpleMessage(
+            "Foydalanuvchi hech qanday rasm olmadi."),
+        "didNotPicture": MessageLookupByLibrary.simpleMessage(
+            "Foydalanuvchi hech qanday rasmga tushmadi."),
         "emailAddress":
             MessageLookupByLibrary.simpleMessage("Elektron pochta manzili"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
             "Do\'stlaringiz bilan eslatma olishdan zavqlaning"),
-        "enter": MessageLookupByLibrary.simpleMessage("kiriting"),
+        "enter": MessageLookupByLibrary.simpleMessage("Kiriting"),
         "enterAgain": MessageLookupByLibrary.simpleMessage("Qaytadan kiriting"),
         "enterEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Elektron pochta manzilini kiriting"),
@@ -60,33 +64,32 @@ class MessageLookup extends MessageLookupByLibrary {
             "Noto\'g\'ri parol kiritdingiz"),
         "invalidEmail": MessageLookupByLibrary.simpleMessage(
             "Elektron pochta manzili yaroqsiz!"),
-        "invalidName":
-            MessageLookupByLibrary.simpleMessage("Nomi noto\'g\'ri!"),
+        "invalidName": MessageLookupByLibrary.simpleMessage("Ism noto\'g\'ri!"),
         "language": MessageLookupByLibrary.simpleMessage("Til"),
         "languageApp": MessageLookupByLibrary.simpleMessage("Til ilovasi"),
         "logIn": MessageLookupByLibrary.simpleMessage("Kirish"),
         "logOut": MessageLookupByLibrary.simpleMessage("Tizimdan chiqish"),
         "newNote": MessageLookupByLibrary.simpleMessage("Yangi eslatma"),
         "newSecretPass":
-            MessageLookupByLibrary.simpleMessage("Yangi maxfiy parol yarating"),
+            MessageLookupByLibrary.simpleMessage("Yangi maxfiy parol yaratish"),
         "next": MessageLookupByLibrary.simpleMessage("Keyingi"),
-        "oldPassword":
-            MessageLookupByLibrary.simpleMessage("Sizning eski parolingiz"),
-        "openCamera": MessageLookupByLibrary.simpleMessage("Camera Ochish"),
-        "openGallery": MessageLookupByLibrary.simpleMessage("Galareya Ochish"),
+        "oldPassword": MessageLookupByLibrary.simpleMessage("Eski parol"),
+        "openCamera": MessageLookupByLibrary.simpleMessage("Kamerani ochish"),
+        "openGallery":
+            MessageLookupByLibrary.simpleMessage("Galareyani ochish"),
         "password": MessageLookupByLibrary.simpleMessage("Parol"),
         "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
             "Parolda kamida bitta katta harf bo\'lishi kerak"),
         "passwordLength": MessageLookupByLibrary.simpleMessage(
             "Parol juda qisqa, u kamida 8 ta belgidan iborat boʻlishi kerak"),
         "passwordLetter": MessageLookupByLibrary.simpleMessage(
-            "Parol kamida bitta harfdan iborat bo\'lishi kerak"),
+            "Parol kamida kichik bitta harfdan iborat bo\'lishi kerak"),
         "passwordNumber": MessageLookupByLibrary.simpleMessage(
             "Parolda kamida bitta raqam bo\'lishi kerak"),
         "passwordSpace": MessageLookupByLibrary.simpleMessage(
             "Parolda bo\'sh joy bo\'lmasligi kerak"),
         "profile": MessageLookupByLibrary.simpleMessage("Profil"),
-        "profileImage": MessageLookupByLibrary.simpleMessage("Profil Rasmi"),
+        "profileImage": MessageLookupByLibrary.simpleMessage("Profil rasmi"),
         "register": MessageLookupByLibrary.simpleMessage("Ro\'yxatdan o\'tish"),
         "save": MessageLookupByLibrary.simpleMessage("Saqlash"),
         "secretPassword":
@@ -98,21 +101,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Yangi parolni o\'rnatish"),
         "signIn": MessageLookupByLibrary.simpleMessage("Tizimga kirish"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
-            "ESLATMANGIZNI qaytarib olishga xush kelibsiz..."),
+            "Eslatmangizga xush kelibsiz..."),
         "signInWith": MessageLookupByLibrary.simpleMessage("Tizimga kirish"),
-        "signUp": MessageLookupByLibrary.simpleMessage("Imzolash"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Ro\'yxatdan o\'tish"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
-            "Sizning eslatmangiz bu erda..."),
+            "Sizning eslatmangiz bu yerda..."),
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Havola bilan matn"),
-        "theme": MessageLookupByLibrary.simpleMessage("Tema"),
+        "theme": MessageLookupByLibrary.simpleMessage("Mavzu"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Mavzu Ilovasi"),
-        "updateSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Maxfiy parolingizni yangilang"),
+        "updateSecretPass":
+            MessageLookupByLibrary.simpleMessage("Maxfiy parolinni yangilash"),
         "wrongPassword":
             MessageLookupByLibrary.simpleMessage("Noto\'g\'ri parol"),
         "yourEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Sizning e-pochta manzilingiz"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Sizning Ismingiz")
+        "yourName": MessageLookupByLibrary.simpleMessage("Sizning ismingiz")
       };
 }

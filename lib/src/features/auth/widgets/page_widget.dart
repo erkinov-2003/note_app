@@ -35,8 +35,8 @@ class _PageWidgetState extends State<PageWidget> {
                 height: 40,
                 width: 100,
                 child: isRegistration
-                    ?  const DecoratedBox(
-                        decoration: BoxDecoration(
+                    ?   DecoratedBox(
+                        decoration: const BoxDecoration(
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.black54,
@@ -49,8 +49,8 @@ class _PageWidgetState extends State<PageWidget> {
                         ),
                         child: Center(
                           child: Text(
-                            "Register",
-                            style: TextStyle(
+                            localization.register,
+                            style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.white,
                             ),

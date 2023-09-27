@@ -6,13 +6,12 @@
   "signIn" : "Sign In",
   "signUp" : "Sign Up",
   "signInTitle": "Welcome to back Your NOTE...",
-  "signUpTitle": "Your NOTE in the here...",
+  "signUpTitle": "Your NOTE is here...",
   "forgotPassword": "Forgot password?",
   "fullName": "Full Name",
   "emailAddress": "Email address",
   "password": "Password",
   "enterEmailAddress": "Enter email address",
-  "setPassword": "Set Password",
   "delete": "Delete",
   "addPassword": "Add Password",
   "back": "Back",
@@ -42,7 +41,7 @@
   "invalidEmail": "Invalid email address!",
   "alreadyRegister": "You are already Registered",
   "invalidName": "Invalid name!",
-  "dontHave": "You don't have Account",
+  "doNotHave": "You don't have Account",
   "wrongPassword": "Wrong password",
   "signInWith": "Sign in with ",
   "textWithLink": "Text with link",
@@ -59,11 +58,9 @@
   "enter": "Enter",
   "sendCode": "Send code",
   "incorrectlyPassword": "You entered the password incorrectly",
-  "enterPassword": "Enter password",
   "couldNotLaunch": "Could not launch",
   "enjoyNote": "Enjoy note taking with friends",
   "save": "Save",
-  "changeYourName": "Change Your Name"
-  "oldPassword": "Your old password"
+  "changeYourName": "Change Your Name",
   "enterPassword": "Enter Password"
 }

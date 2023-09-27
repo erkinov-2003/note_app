@@ -145,7 +145,7 @@ class MainController with ChangeNotifier {
           ..clearSnackBars()
           ..showSnackBar(
              SnackBar(
-              content: Text(localization.dontHave),
+              content: Text(localization.doNotHave),
             ),
           );
       } else {

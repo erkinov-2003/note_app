@@ -43,7 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "User didn\'t take any image."),
         "didNotPicture": MessageLookupByLibrary.simpleMessage(
             "User didn\'t take any picture."),
-        "dontHave":
+        "doNotHave":
             MessageLookupByLibrary.simpleMessage("You don\'t have Account"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter email address"),
         "enterNewPassword":
             MessageLookupByLibrary.simpleMessage("Enter new password"),
-        "enterPassword": MessageLookupByLibrary.simpleMessage("Enter password"),
+        "enterPassword": MessageLookupByLibrary.simpleMessage("Enter Password"),
         "enterTitle":
             MessageLookupByLibrary.simpleMessage("Enter title of note..."),
         "forgotPassword":
@@ -104,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signInWith": MessageLookupByLibrary.simpleMessage("Sign in with "),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
-            MessageLookupByLibrary.simpleMessage("Your NOTE in the here..."),
+            MessageLookupByLibrary.simpleMessage("Your NOTE is here..."),
         "textWithLink": MessageLookupByLibrary.simpleMessage("Text with link"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
