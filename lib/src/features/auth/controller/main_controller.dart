@@ -89,11 +89,6 @@ class MainController with ChangeNotifier {
     return null;
   }
 
-  Future<void> getAllUsers() async {
-    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
-    users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
-  }
-
   void onTap(int pageNumber) {
     pageController.animateToPage(
       pageNumber,
@@ -132,7 +127,8 @@ class MainController with ChangeNotifier {
     TextEditingController passwordController,
   ) async {
     if (formKey.currentState!.validate()) {
-      await getAllUsers();
+      users = $users.users;
+      print(users);
       bool isFounded = false;
       for (int i = 0; i < users.length; i++) {
         if (users[i].email == emailController.text.trim()) {
@@ -152,10 +148,10 @@ class MainController with ChangeNotifier {
         if (user.loginPassword == passwordController.text.trim()) {
           await $secureStorage.write(
             key: StorageKeys.oneUser.key,
-            value: jsonEncode(
-              user.toJson(),
-            ),
+            value: user.toJson(),
           );
+          await $users.getOneUser();
+          await $users.currentUser.notes?.setAllNotes();
           $storage.setBool("isLogged", true);
           if (context.mounted) {
             Navigator.pushAndRemoveUntil(
@@ -196,7 +192,6 @@ class MainController with ChangeNotifier {
       );
       await $secureStorage.write(
           key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
-      print($secureStorage.read(key: StorageKeys.oneUser.key));
       users.add(userOne);
       $secureStorage.write(
         key: StorageKeys.users.key,
@@ -205,7 +200,6 @@ class MainController with ChangeNotifier {
         ),
       );
       await $storage.setBool("isLogged", true);
-      print("object2");
       if (context.mounted) {
         Navigator.pushAndRemoveUntil(
           context,

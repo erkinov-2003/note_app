@@ -6,17 +6,30 @@ import '../../../common/models/note_model.dart';
 import '../../../common/utils/storage.dart';
 
 class Notes with ChangeNotifier {
-  late bool isLogged;
-  List<NoteModel> _notes = [];
+  Notes({
+    List<NoteModel>? notes,
+    List<NoteModel>? secureNote,
+  })  : _notes = notes ?? [],
+        _secureNotes = secureNote ?? [];
+
+
+  List<NoteModel> _notes;
   List<NoteModel> _secureNotes = [];
-
   List<NoteModel> get notes => _notes.reversed.toList();
-
   List<NoteModel> get secureNotes => _secureNotes;
-
   List<NoteModel> get allNotes => [...notes, ..._secureNotes]..sort(
       (a, b) => b.dateTime.compareTo(a.dateTime),
     );
+
+  factory Notes.fromJson(Map<String,Object?> json) => Notes(
+    notes: json["notes"] != null ? List<Map<String, Object?>>.from(json["notes"] as List).map(NoteModel.fromJson).toList() : null,
+    secureNote: json["secureNote"] != null ? List<Map<String, Object?>>.from(json["secureNote"] as List).map(NoteModel.fromJson).toList() : null,
+  );
+
+  Map<String,Object?> toJson() => {
+    "notes": notes.map((e) => e.toJson()).toList(),
+    "secureNote": notes.map((e) => e.toJson()).toList(),
+  };
 
   void changeSecure(NoteModel note) {
     removeNote(note);
@@ -26,6 +39,16 @@ class Notes with ChangeNotifier {
   void changeSecureSet(NoteModel note) {
     removeNote(note);
     addNote(note.copyWith(isSecret: false));
+    notifyListeners();
+  }
+
+  Future<void> setAllNotes() async {
+    print("=====================================================================");
+    List<NoteModel> a = List<Map<String,Object?>>.from(jsonDecode($storage.getString($users.currentUser.id!) ?? "[]")).map(NoteModel.fromJson).toList();
+    String bString = (await $secureStorage.read(key: $users.currentUser.id!,)) ?? "[]";
+    List<NoteModel> b = List<Map<String,Object?>>.from(jsonDecode(bString)).map(NoteModel.fromJson).toList();
+    setSecureNotes(b);
+    setNotes(a);
     notifyListeners();
   }
 
@@ -49,10 +72,10 @@ class Notes with ChangeNotifier {
   }
 
   void addNote(NoteModel note) {
-    if(!note.isSecret){
+    if (!note.isSecret) {
       _notes.add(note);
       save();
-    }else{
+    } else {
       _secureNotes.add(note);
       saveSecured();
     }
@@ -90,11 +113,16 @@ class Notes with ChangeNotifier {
   }
 
   void save() {
-    $storage.setString("notes", _notes.listEncode());
+    $storage.setString($users.currentUser.id!, _notes.listEncode());
   }
 
   void saveSecured() {
-    $secureStorage.write(key: "notes", value: _secureNotes.listEncode());
+    $secureStorage.write(key: $users.currentUser.id!, value: _secureNotes.listEncode());
+  }
+
+  @override
+  String toString() {
+    return 'Notes{_notes: ${_notes.map((e) => e.toString())}, _secureNotes: ${_secureNotes.map((e) => e.toString())}}';
   }
 }
 

@@ -16,7 +16,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: $notes),
+        ChangeNotifierProvider.value(
+          value: $users,
+        ),
         ChangeNotifierProvider(
           create: (context) => LangProvider(),
         ),
@@ -42,7 +44,7 @@ class App extends StatelessWidget {
             theme: ThemeProvider.lightTheme,
             darkTheme: ThemeProvider.darkTheme,
             themeMode: themeProvider.themeMode,
-            home: $notes.isLogged == true
+            home: $users.isLogged == true
                 ? const HomePage()
                 : const SplashScreen(),
             locale: langProvider.getLocale(),

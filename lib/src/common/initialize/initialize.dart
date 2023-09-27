@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:note_app/src/common/models/controller/user_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/home_screen/controller/provider.dart';
 import '../models/dependencies.dart';
-import '../models/note_model.dart';
 import '../utils/logger.dart';
 import '../utils/storage.dart';
 
@@ -60,33 +58,22 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
     (dependencies) async {
       $storage = await SharedPreferences.getInstance();
       $secureStorage = const FlutterSecureStorage();
-      $notes = Notes();
+      $users = Users();
     },
   ),
   (
     'Initializing Notes',
     (dependencies) async {
-      $storage.clear();
-      // print($storage.getString("notes"));
+      // $storage.clear();
 
-      $notes.isLogged = $storage.getBool("isLogged") ?? false;
-      print($notes.isLogged);
+      await $users.getAllUser();
+      $users.isLogged = $storage.getBool("isLogged") ?? false;
 
-      $notes.setNotes(
-        $storage.getString("notes") != null
-            ? List<Map<String, Object?>>.from(
-                    jsonDecode($storage.getString("notes")!) as List)
-                .map(NoteModel.fromJson)
-                .toList()
-            : <NoteModel>[],
-      );
-      String? notes = await $secureStorage.read(key: "notes");
-      $notes.setSecureNotes(notes != null
-          ? List<Map<String, Object?>>.from(jsonDecode(notes) as List)
-              .map(NoteModel.fromJson)
-              .toList()
-          : <NoteModel>[]);
-    },
+      if($users.isLogged){
+        await $users.getOneUser();
+        await $users.currentUser.notes!.setAllNotes();
+       }
+      }
   ),
   (
     'Custom Delay 1',

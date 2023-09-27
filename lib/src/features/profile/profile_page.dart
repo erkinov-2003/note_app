@@ -1,11 +1,10 @@
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
-import '../../common/models/user_model.dart';
 import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
 import '../secret_notes/new_pass.dart';
@@ -26,18 +25,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ValueNotifier<String> name = ValueNotifier("");
+  ValueNotifier<String?> profileImage = ValueNotifier(null);
 
   @override
-  void didChangeDependencies() async {
-    final User first = User(name: GeneratedLocalization.of(context).yourName);
-
-    name.value = User.fromJson(jsonDecode(
-                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    jsonEncode(first.toJson())))
-            .name ??
-        "";
-
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    profileImage.value = $users.currentUser.image;
+    name.value = $users.currentUser.name ?? "";
   }
 
   @override
@@ -75,36 +69,49 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Badge(
-                        largeSize: 30,
-                        backgroundColor: const Color(0xFF797979),
-                        alignment: const Alignment(.8, 1.2),
-                        label: GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const CameraBottomSheet(),
+                      child: ValueListenableBuilder(
+                          valueListenable: profileImage,
+                          builder: (context, value, child) {
+                            return Badge(
+                              largeSize: 30,
+                              backgroundColor: const Color(0xFF797979),
+                              alignment: const Alignment(.8, 1.2),
+                              label: GestureDetector(
+                                onTap: () async {
+                                  String? image = await showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) =>
+                                        const CameraBottomSheet(),
+                                  );
+                                  $users.updateUser($users.currentUser
+                                      .copyWith(image: image));
+                                  profileImage.value = image;
+                                },
+                                child: const SizedBox(
+                                  child: Icon(
+                                    Icons.camera_alt_outlined,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage: value != null
+                                    ? FileImage(File(value))
+                                    : null,
+                                backgroundColor: theme.primaryColor,
+                                radius: 50,
+                                child: value == null
+                                    ? Center(
+                                        child: Icon(
+                                          Icons.person,
+                                          color: theme.scaffoldBackgroundColor,
+                                          size: 80,
+                                        ),
+                                      )
+                                    : null,
+                              ),
                             );
-                          },
-                          child: const SizedBox(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        child: CircleAvatar(
-                          backgroundColor: theme.primaryColor,
-                          radius: 50,
-                          child: Center(
-                            child: Icon(
-                              Icons.person,
-                              color: theme.scaffoldBackgroundColor,
-                              size: 80,
-                            ),
-                          ),
-                        ),
-                      ),
+                          }),
                     ),
                     ValueListenableBuilder(
                       valueListenable: name,

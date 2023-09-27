@@ -5,6 +5,7 @@ import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
+import '../../home_screen/controller/provider.dart';
 import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
 
@@ -127,10 +128,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     name: nameController.text,
                     email: emailController.text,
                     loginPassword: passwordController.text,
+                    notes: Notes(),
                   );
                   await $secureStorage.write(
-                      key: StorageKeys.oneUser.key,
-                      value: jsonEncode(userOne.toJson()));
+                    key: StorageKeys.oneUser.key,
+                    value: jsonEncode(userOne.toMap()),
+                  );
+                  await $users.setUsers();
+                  await $users.currentUser.notes?.setAllNotes();
                   $storage.setBool("isLogged", true);
                   Navigator.pushAndRemoveUntil(
                     context,
@@ -144,7 +149,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: Center(
                 child: Text(
                   localization.signIn,
-                  style:  TextStyle(
+                  style: TextStyle(
                     color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
