@@ -94,6 +94,16 @@ class MainController with ChangeNotifier {
     users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
   }
 
+  Future<void> setUsers(User user) async {
+    users.add(user);
+    await $secureStorage.write(
+      key: StorageKeys.users.key,
+      value: jsonEncode(
+        users.map((e) => e.toJson()).toList(),
+      ),
+    );
+  }
+
   void onTap(int pageNumber) {
     pageController.animateToPage(
       pageNumber,
@@ -196,6 +206,7 @@ class MainController with ChangeNotifier {
       );
       await $secureStorage.write(
           key: StorageKeys.oneUser.key, value: jsonEncode(userOne.toJson()));
+
       users.add(userOne);
       $secureStorage.write(
         key: StorageKeys.users.key,
