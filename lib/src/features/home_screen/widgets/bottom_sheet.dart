@@ -34,134 +34,138 @@ Object customBottomSheet({
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FutureBuilder(
-                    future: $secureStorage.read(
-                        key: StorageKeys.notesPassword.key),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        final isChecked = snapshot.data;
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                            const Color.fromARGB(255, 87, 87, 88),
-                            fixedSize: const Size(340, 48),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
+                  future:
+                      $secureStorage.read(key: StorageKeys.notesPassword.key),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      final isChecked = snapshot.data;
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 87, 87, 88),
+                          fixedSize: const Size(340, 48),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
                             ),
                           ),
-                          onPressed: () async {
-                            Navigator.pop(context);
-                            if (isChecked == null) {
-                              final bool? isTrue = await Navigator.push<bool>(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (
-                                      context) => const NewSecretPassword(),
-                                ),
-                              );
-                              if (isTrue ?? false) {
-                                $users.currentUser.notes!.changeSecure(note);
-                              }
-                            } else {
-                              if (note.isSecret) {
-                                Navigator.push<bool>(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        NewSecretPassword(note: note,),
-                                  ),
-                                );
-                              } else {
-                                $users.currentUser.notes!.changeSecure(note);
-                              }
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                          if (isChecked == null) {
+                            final bool? isTrue = await Navigator.push<bool>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const NewSecretPassword(),
+                              ),
+                            );
+                            if (isTrue ?? false) {
+                              $users.currentUser.notes!.changeSecure(note);
                             }
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                isChecked == null ? "Add Password" : note
-                                    .isSecret ? "Unlock" : "Lock",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 21,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Image(
-                                  image: AssetImage("assets/icons/lock.png"),
-                                  height: 24,
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    }
-                ),
-                const SizedBox(height: 10),
-                FutureBuilder(
-                    future: $secureStorage.read(
-                        key: StorageKeys.notesPassword.key),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                                255, 87, 87, 88),
-                            fixedSize: const Size(340, 48),
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: () async {
-                            Navigator.pop(context);
+                          } else {
                             if (note.isSecret) {
                               Navigator.push<bool>(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      NewSecretPassword(note: note,isChecked: true),
+                                  builder: (context) => NewSecretPassword(
+                                    note: note,
+                                  ),
                                 ),
                               );
-                            }else{
-                              $users.currentUser.notes!.delete(note);
+                            } else {
+                              $users.currentUser.notes!.changeSecure(note);
                             }
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Delete",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 21,
-                                ),
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              isChecked == null
+                                  ? "Add Password"
+                                  : note.isSecret
+                                      ? "Unlock"
+                                      : "Lock",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 21,
                               ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                  size: 35,
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),);
-                      }
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Image(
+                                image: AssetImage("assets/icons/lock.png"),
+                                height: 24,
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
                     }
+                  },
+                ),
+                const SizedBox(height: 10),
+                FutureBuilder(
+                  future:
+                      $secureStorage.read(key: StorageKeys.notesPassword.key),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 87, 87, 88),
+                          fixedSize: const Size(340, 48),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                          if (note.isSecret) {
+                            Navigator.push<bool>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewSecretPassword(
+                                    note: note, isChecked: true),
+                              ),
+                            );
+                          } else {
+                            $users.currentUser.notes!.delete(note);
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Delete",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 21,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -171,4 +175,3 @@ Object customBottomSheet({
     },
   );
 }
-
