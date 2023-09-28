@@ -110,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Iltimos, barcha maydonlarni to\'ldiring."),
         "snackBar2": MessageLookupByLibrary.simpleMessage(
             "Noto\'g\'ri parol. Iltimos, yana bir bor urinib ko\'ring."),
+        "snackBar3": MessageLookupByLibrary.simpleMessage(
+            "Iltimos, yangi 4 xonali parolni kiriting."),
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Havola bilan matn"),
         "theme": MessageLookupByLibrary.simpleMessage("Mavzu"),

@@ -53,7 +53,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     );
   }
 
-  void checkOldPassword() async {
+  void _checkPassword() async {
     final correctOldPassword =
         await $secureStorage.read(key: StorageKeys.notesPassword.key);
     final enteredOldPassword =
@@ -66,23 +66,38 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     if (isOldPasswordCorrect) {
       if (mounted) FocusScope.of(context).requestFocus(focusNodes1[0]);
     } else {
-      showSnackBar(localization.snackBar2);
+      showSnackBar("Incorrect old password. Please try again.");
     }
   }
 
-  void updatePassword() async{
-    if(!isOldPasswordCorrect){
-      showSnackBar(localization.snackBar);
+  bool isAllDigits(String text) {
+    return text.isNotEmpty &&
+        text.runes.every((element) =>
+            "0".compareTo(String.fromCharCode(element)) <= 0 &&
+            "9".compareTo(String.fromCharCode(element)) >= 0);
+  }
+
+  void _updatePassword() async {
+    if (!isOldPasswordCorrect) {
+      showSnackBar("Please enter the correct old password.");
       return;
     }
 
     final updatePass = newControllers.map((e) => e.text).toList().join("");
 
-    if(updatePass.isEmpty){
-      showSnackBar(localization.snackBar);
+    if (updatePass.length != 4 || !isAllDigits(updatePass)) {
+      showSnackBar(localization.snackBar3);
+      return;
+    }
+
+    if (updatePass.isEmpty) {
+      showSnackBar("Please fill in all fields.");
     } else {
-      await $secureStorage.write(key: StorageKeys.notesPassword.key, value: updatePass);
-      if(mounted) Navigator.pop(context);
+      await $secureStorage.write(
+        key: StorageKeys.notesPassword.key,
+        value: updatePass,
+      );
+      if (mounted) Navigator.pop(context);
     }
   }
 
@@ -293,8 +308,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                       ),
                     ),
                     onPressed: !isOldPasswordCorrect
-                        ? checkOldPassword
-                        : updatePassword,
+                        ? _checkPassword
+                        : _updatePassword,
                     child: Text(
                       isOldPasswordCorrect
                           ? localization.setPassword

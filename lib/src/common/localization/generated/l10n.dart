@@ -710,6 +710,16 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Please enter a 4-digit new password.`
+  String get snackBar3 {
+    return Intl.message(
+      'Please enter a 4-digit new password.',
+      name: 'snackBar3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

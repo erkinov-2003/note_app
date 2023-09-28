@@ -112,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пожалуйста заполните все поля."),
         "snackBar2": MessageLookupByLibrary.simpleMessage(
             "Неверный пароль. Пожалуйста, попробуйте еще раз."),
+        "snackBar3": MessageLookupByLibrary.simpleMessage(
+            "Пожалуйста, введите новый пароль из 4 цифр."),
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Текст со ссылкой"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),

@@ -109,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please fill all fields."),
         "snackBar2": MessageLookupByLibrary.simpleMessage(
             "Incorrect password. Please try again."),
+        "snackBar3": MessageLookupByLibrary.simpleMessage(
+            "Please enter a 4-digit new password."),
         "textWithLink": MessageLookupByLibrary.simpleMessage("Text with link"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),

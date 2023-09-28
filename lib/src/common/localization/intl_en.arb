@@ -64,5 +64,6 @@
   "save": "Save",
   "changeYourName": "Change Your Name",
   "snackBar": "Please fill all fields.",
-  "snackBar2": "Incorrect password. Please try again."
+  "snackBar2": "Incorrect password. Please try again.",
+  "snackBar3": "Please enter a 4-digit new password."
 }
