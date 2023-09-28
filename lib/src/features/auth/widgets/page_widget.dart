@@ -61,7 +61,7 @@ class _PageWidgetState extends State<PageWidget> {
                                 localization.register,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   color: AppColors.white,
                                 ),

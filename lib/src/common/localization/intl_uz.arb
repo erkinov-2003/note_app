@@ -64,7 +64,7 @@
   "save": "Saqlash",
   "changeYourName": "Ismni o'zgartirish",
   "yourPassword": "Sizning parolingiz",
-  "yourFullName": "To'liq ism"
-
-
+  "yourFullName": "To'liq ism",
+  "snackBar": "Iltimos, barcha maydonlarni to'ldiring.",
+  "snackBar2": "Noto'g'ri parol. Iltimos, yana bir bor urinib ko'ring."
 }

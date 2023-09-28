@@ -23,6 +23,15 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
   late final List<FocusNode> focusNodes;
   final localization = GeneratedLocalization();
 
+  void _showSnackbar(String message) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +59,6 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
       body: SafeArea(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 450),
@@ -71,7 +79,6 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                     fontSize: 35,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Ranade",
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -96,12 +103,16 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                             : size <= 375
                                 ? 70
                                 : 80,
-                        child: ColoredBox(
-                          color: const Color(0xff262629),
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                width: 1.5,
+                                color: Colors.grey,
+                              )),
                           child: Align(
                             alignment: Alignment.center,
                             child: TextFormField(
-                              cursorColor: Colors.white,
                               cursorHeight: isLandscape ? 25 : 40,
                               autofocus: true,
                               keyboardType: TextInputType.number,
@@ -115,7 +126,6 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                                 border: InputBorder.none,
                               ),
                               style: const TextStyle(
-                                color: Colors.white,
                                 fontWeight: FontWeight.w600,
                                 fontFamily: "Ranade",
                                 fontSize: 30,
@@ -143,10 +153,9 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
               ),
               const Spacer(),
               Padding(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 25,
                   right: 25,
-
                 ),
                 child: SizedBox(
                   width: double.infinity,
@@ -161,24 +170,27 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                     onPressed: () async {
                       final pass =
                           controllers.map((e) => e.text).toList().join("");
-
-                      if (widget.note == null) {
-                        await $secureStorage.write(
-                            key: StorageKeys.notesPassword.key, value: pass);
-                        if (mounted) Navigator.pop(context, true);
+                      if (pass.isEmpty || pass.length < controllers.length) {
+                        _showSnackbar(localization.snackBar);
                       } else {
-                        final password = await $secureStorage.read(
-                            key: StorageKeys.notesPassword.key);
-                        if (password == pass) {
-                          if (widget.note != null &&
-                              widget.isChecked != null) {
-                            $notes.delete(widget.note!);
-                          } else {
-                            $notes.changeSecure(widget.note!);
-                          }
-                          if (mounted) Navigator.pop(context);
+                        if (widget.note == null) {
+                          await $secureStorage.write(
+                              key: StorageKeys.notesPassword.key, value: pass);
+                          if (mounted) Navigator.pop(context, true);
                         } else {
-                          if (mounted) Navigator.pop(context);
+                          final password = await $secureStorage.read(
+                              key: StorageKeys.notesPassword.key);
+                          if (password == pass) {
+                            if (widget.note != null &&
+                                widget.isChecked != null) {
+                              $notes.delete(widget.note!);
+                            } else {
+                              $notes.changeSecure(widget.note!);
+                            }
+                            if (mounted) Navigator.pop(context);
+                          } else {
+                            _showSnackbar(localization.snackBar2);
+                          }
                         }
                       }
                     },
@@ -195,7 +207,9 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
             ],
           ),
         ),

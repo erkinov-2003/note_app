@@ -31,7 +31,6 @@
   "updateSecretPass": "Update your secret notes password",
   "newSecretPass": "Create your secret notes password",
   "check": "Check",
-  "setPassword": "Set Password",
   "setPassword2": "Set new password",
   "oldPassword": "Your old password",
   "passwordLength":"Password is too short, it must be at least 8 characters",
@@ -63,5 +62,7 @@
   "couldNotLaunch": "Could not launch",
   "enjoyNote": "Enjoy note taking with friends",
   "save": "Save",
-  "changeYourName": "Change Your Name"
+  "changeYourName": "Change Your Name",
+  "snackBar": "Please fill all fields.",
+  "snackBar2": "Incorrect password. Please try again."
 }

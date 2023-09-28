@@ -35,9 +35,6 @@ class _HomePage extends State<HomePage> {
     if (readUser.isNotEmpty) {
       user = User.fromJson(readUser);
     }
-
-    print("==================================================");
-    print(readUser);
   }
 
   @override

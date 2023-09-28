@@ -111,20 +111,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Welcome to back your note...`
+  /// `Welcome to back Your NOTE...`
   String get signInTitle {
     return Intl.message(
-      'Welcome to back Your note...',
+      'Welcome to back Your NOTE...',
       name: 'signInTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your note is here...`
+  /// `Your NOTE is here...`
   String get signUpTitle {
     return Intl.message(
-      'Your note is here...',
+      'Your NOTE is here...',
       name: 'signUpTitle',
       desc: '',
       args: [],
@@ -376,6 +376,16 @@ class GeneratedLocalization {
     return Intl.message(
       'Set new password',
       name: 'setPassword2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your old password`
+  String get oldPassword {
+    return Intl.message(
+      'Your old password',
+      name: 'oldPassword',
       desc: '',
       args: [],
     );
@@ -681,8 +691,25 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Enter Password`
+  /// `Please fill all fields.`
+  String get snackBar {
+    return Intl.message(
+      'Please fill all fields.',
+      name: 'snackBar',
+      desc: '',
+      args: [],
+    );
+  }
 
+  /// `Incorrect password. Please try again.`
+  String get snackBar2 {
+    return Intl.message(
+      'Incorrect password. Please try again.',
+      name: 'snackBar2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

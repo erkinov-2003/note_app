@@ -70,7 +70,6 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
       // print($storage.getString("notes"));
 
       $notes.isLogged = $storage.getBool("isLogged") ?? false;
-      print($notes.isLogged);
 
       $notes.setNotes(
         $storage.getString("notes") != null

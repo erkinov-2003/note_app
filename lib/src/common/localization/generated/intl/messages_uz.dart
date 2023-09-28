@@ -106,6 +106,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Ro\'yxatdan o\'tish"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage(
             "Sizning eslatmangiz bu yerda..."),
+        "snackBar": MessageLookupByLibrary.simpleMessage(
+            "Iltimos, barcha maydonlarni to\'ldiring."),
+        "snackBar2": MessageLookupByLibrary.simpleMessage(
+            "Noto\'g\'ri parol. Iltimos, yana bir bor urinib ko\'ring."),
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Havola bilan matn"),
         "theme": MessageLookupByLibrary.simpleMessage("Mavzu"),
@@ -116,9 +120,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Noto\'g\'ri parol"),
         "yourEmailAddress": MessageLookupByLibrary.simpleMessage(
             "Sizning e-pochta manzilingiz"),
-        "yourFullName": MessageLookupByLibrary.simpleMessage("To\'liq ism"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Sizning ismingiz"),
-        "yourPassword":
-            MessageLookupByLibrary.simpleMessage("Sizning parolingiz")
+        "yourName": MessageLookupByLibrary.simpleMessage("Sizning ismingiz")
       };
 }

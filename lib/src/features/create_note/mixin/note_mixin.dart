@@ -79,8 +79,6 @@ mixin NoteMixin on State<CreateNote> {
       isSecret: isSecret,
     );
 
-    print(noteModel);
-
     if (widget.note == null) {
       notes.addNote(noteModel);
     } else {

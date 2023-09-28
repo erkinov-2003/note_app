@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts."),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeYourName":
-            MessageLookupByLibrary.simpleMessage("Change your name"),
+            MessageLookupByLibrary.simpleMessage("Change Your Name"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkPasswordAgain": MessageLookupByLibrary.simpleMessage(
             "Please check the password again"),
@@ -100,11 +100,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Set new password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
         "signInTitle": MessageLookupByLibrary.simpleMessage(
-            "Welcome to back your note..."),
+            "Welcome to back Your NOTE..."),
         "signInWith": MessageLookupByLibrary.simpleMessage("Sign in with "),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
-            MessageLookupByLibrary.simpleMessage("Your note is here..."),
+            MessageLookupByLibrary.simpleMessage("Your NOTE is here..."),
+        "snackBar":
+            MessageLookupByLibrary.simpleMessage("Please fill all fields."),
+        "snackBar2": MessageLookupByLibrary.simpleMessage(
+            "Incorrect password. Please try again."),
         "textWithLink": MessageLookupByLibrary.simpleMessage("Text with link"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
@@ -113,8 +117,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Wrong password"),
         "yourEmailAddress":
             MessageLookupByLibrary.simpleMessage("Your email address"),
-        "yourFullName": MessageLookupByLibrary.simpleMessage("Your full name"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Your Name"),
-        "yourPassword": MessageLookupByLibrary.simpleMessage("Your password")
+        "yourName": MessageLookupByLibrary.simpleMessage("Your Name")
       };
 }

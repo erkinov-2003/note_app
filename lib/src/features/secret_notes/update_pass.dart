@@ -44,6 +44,15 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     super.dispose();
   }
 
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
   void checkOldPassword() async {
     final correctOldPassword =
         await $secureStorage.read(key: StorageKeys.notesPassword.key);
@@ -56,6 +65,24 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
     if (isOldPasswordCorrect) {
       if (mounted) FocusScope.of(context).requestFocus(focusNodes1[0]);
+    } else {
+      showSnackBar(localization.snackBar2);
+    }
+  }
+
+  void updatePassword() async{
+    if(!isOldPasswordCorrect){
+      showSnackBar(localization.snackBar);
+      return;
+    }
+
+    final updatePass = newControllers.map((e) => e.text).toList().join("");
+
+    if(updatePass.isEmpty){
+      showSnackBar(localization.snackBar);
+    } else {
+      await $secureStorage.write(key: StorageKeys.notesPassword.key, value: updatePass);
+      if(mounted) Navigator.pop(context);
     }
   }
 
@@ -67,7 +94,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
       body: SafeArea(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -86,7 +112,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                   style: TextStyle(
                     fontSize: isLandscape ? 28 : 35,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
                   ),
                 ),
               ),
@@ -121,7 +146,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               : 80,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                          color: const Color(0xff262629),
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: isOldPasswordCorrect
@@ -144,7 +168,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                               border: InputBorder.none,
                               counter: SizedBox.shrink()),
                           style: const TextStyle(
-                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontFamily: "Ranade",
                             fontSize: 30,
@@ -203,12 +226,17 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                   : size <= 375
                                       ? 70
                                       : 80,
-                              child: ColoredBox(
-                                color: const Color(0xff262629),
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.5,
+                                  ),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: TextFormField(
-                                    cursorColor: Colors.white,
                                     cursorHeight: 30,
                                     textAlignVertical: TextAlignVertical.center,
                                     autofocus: false,
@@ -221,7 +249,6 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                         border: InputBorder.none,
                                         counter: SizedBox.shrink()),
                                     style: const TextStyle(
-                                      color: Colors.white,
                                       fontWeight: FontWeight.w600,
                                       fontFamily: "Ranade",
                                       fontSize: 30,
@@ -267,17 +294,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                     ),
                     onPressed: !isOldPasswordCorrect
                         ? checkOldPassword
-                        : () async {
-                            final updatePass = newControllers
-                                .map((e) => e.text)
-                                .toList()
-                                .join("");
-                            await $secureStorage.write(
-                              key: StorageKeys.notesPassword.key,
-                              value: updatePass,
-                            );
-                            if (mounted) Navigator.pop(context);
-                          },
+                        : updatePassword,
                     child: Text(
                       isOldPasswordCorrect
                           ? localization.setPassword

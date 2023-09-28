@@ -108,6 +108,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Зарегистрироваться"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Ваши заметки здесь..."),
+        "snackBar": MessageLookupByLibrary.simpleMessage(
+            "Пожалуйста заполните все поля."),
+        "snackBar2": MessageLookupByLibrary.simpleMessage(
+            "Неверный пароль. Пожалуйста, попробуйте еще раз."),
         "textWithLink":
             MessageLookupByLibrary.simpleMessage("Текст со ссылкой"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
@@ -118,8 +122,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неправильный пароль"),
         "yourEmailAddress":
             MessageLookupByLibrary.simpleMessage("Ваш электронный адрес"),
-        "yourFullName": MessageLookupByLibrary.simpleMessage("Ваше полное имя"),
-        "yourName": MessageLookupByLibrary.simpleMessage("Ваше имя"),
-        "yourPassword": MessageLookupByLibrary.simpleMessage("Ваш пароль")
+        "yourName": MessageLookupByLibrary.simpleMessage("Ваше имя")
       };
 }
