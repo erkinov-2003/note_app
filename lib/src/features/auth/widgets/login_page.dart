@@ -39,41 +39,38 @@ class _LogInState extends State<LogIn> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 230,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox(height: 10),
-                  TextFields(
-                    validator: validateEmail,
-                    controller: emailController,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.emailAddress,
-                    exampleText: "you@example.com",
-                    infoText: "Email address",
-                  ),
-                  TextFields(
-                    controller: passwordController,
-                    validator: validatePassword,
-                    textInputAction: TextInputAction.go,
-                    keyboardType: TextInputType.visiblePassword,
-                    exampleText: "Your password",
-                    infoText: "Password",
-                    isObscure: true,
-                  ),
-                ],
-              ),
+          Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(height: 10),
+                TextFields(
+                  validator: validateEmail,
+                  controller: emailController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.emailAddress,
+                  exampleText: "you@example.com",
+                  infoText: "Email address",
+                ),
+                TextFields(
+                  controller: passwordController,
+                  validator: validatePassword,
+                  textInputAction: TextInputAction.go,
+                  keyboardType: TextInputType.visiblePassword,
+                  exampleText: "Your password",
+                  infoText: "Password",
+                  isObscure: true,
+                ),
+              ],
             ),
           ),
           SizedBox(height: size.height * 0.03),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
-                maximumSize: Size(size.width * 0.9, size.height * 0.07),
-                minimumSize: Size(size.width * 0.9, size.height * 0.07),
+                maximumSize:  Size(size.width * 0.9, size.height * 0.07),
+                minimumSize:  Size(size.width * 0.9, size.height * 0.07),
                 backgroundColor: AppColors.airColor,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -88,7 +85,7 @@ class _LogInState extends State<LogIn> {
               child: Center(
                 child: Text(
                   localization.signIn,
-                  style:  TextStyle(
+                  style:  const TextStyle(
                     color: AppColors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -111,7 +108,6 @@ class _LogInState extends State<LogIn> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
         ],
       ),
     );

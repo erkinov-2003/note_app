@@ -93,7 +93,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
               Padding(
                 padding: const EdgeInsets.only(left: 35, top: 45),
                 child: Text(
-                  localization.oldPassword,
+                  localization.addPassword,
                   style: TextStyle(
                     fontSize: isLandscape ? 13 : 15,
                     fontWeight: FontWeight.w500,

@@ -43,8 +43,9 @@ class _TextFieldsState extends State<TextFields> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      height: 110,
+      height: size.height * 0.12,
       child: Column(
         children: [
           Align(
@@ -58,68 +59,64 @@ class _TextFieldsState extends State<TextFields> {
             ),
           ),
           const SizedBox(height: 5),
-          Expanded(
-            child: SizedBox(
-              height: 50,
-              child: TextFormField(
-                controller: widget.controller,
-                validator: widget.validator,
-                keyboardType: widget.keyboardType,
-                textInputAction: widget.textInputAction,
-                obscuringCharacter: "•",
-                obscureText: showPassword ?? false,
-                decoration: InputDecoration(
-                  errorStyle: const TextStyle(
-                    color: AppColors.errorBorder,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w100,
-                  ),
-                  enabledBorder:  OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color:  Theme.of(context).primaryColor,
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  focusedBorder:  OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: Theme.of(context).cardColor,
-                  suffixIcon: showPassword != null
-                      ? GestureDetector(
-                          onTap: changeObscure,
-                          child: Icon(
-                            showPassword!
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: AppColors.iconColor,
-                          ),
-                        )
-                      : null,
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  hintText: widget.exampleText,
-                  hintStyle: const TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 13,
-                  ),
+          TextFormField(
+            controller: widget.controller,
+            validator: widget.validator,
+            keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
+            obscuringCharacter: "•",
+            obscureText: showPassword ?? false,
+            decoration: InputDecoration(
+              contentPadding:  EdgeInsets.symmetric(horizontal: size.height * 0.01),
+              errorStyle: const TextStyle(
+                color: AppColors.errorBorder,
+                fontSize: 12,
+                fontWeight: FontWeight.w100,
+              ),
+              enabledBorder:  OutlineInputBorder(
+                borderSide: BorderSide(
+                  color:  Theme.of(context).primaryColor,
                 ),
-                showCursor: true,
-                cursorColor: AppColors.white,
-                style:  TextStyle(
-                  color: Theme.of(context).primaryColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
                 ),
               ),
+              focusedBorder:  OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).primaryColor,
+                ),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              filled: true,
+              fillColor: Theme.of(context).cardColor,
+              suffixIcon: showPassword != null
+                  ? GestureDetector(
+                      onTap: changeObscure,
+                      child: Icon(
+                        showPassword!
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: AppColors.iconColor,
+                      ),
+                    )
+                  : null,
+              border: const OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              hintText: widget.exampleText,
+              hintStyle: const TextStyle(
+                color: AppColors.textColor,
+                fontSize: 13,
+              ),
+            ),
+            showCursor: true,
+            cursorColor: AppColors.white,
+            style:  TextStyle(
+              color: Theme.of(context).primaryColor,
             ),
           )
         ],

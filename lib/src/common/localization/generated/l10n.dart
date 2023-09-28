@@ -114,7 +114,7 @@ class GeneratedLocalization {
   /// `Welcome to back your note...`
   String get signInTitle {
     return Intl.message(
-      'Welcome to back your note...',
+      'Welcome to back Your note...',
       name: 'signInTitle',
       desc: '',
       args: [],
@@ -682,14 +682,7 @@ class GeneratedLocalization {
   }
 
   /// `Enter Password`
-  String get enterPassword {
-    return Intl.message(
-      'Enter Password',
-      name: 'enterPassword',
-      desc: '',
-      args: [],
-    );
-  }
+
 }
 
 class AppLocalizationDelegate

@@ -73,6 +73,7 @@ class _ViewState extends State<View> {
                 children: [
                   SizedBox(
                     height: size.height * 0.17,
+                    width: size.width,
                     child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width * 0.04),
@@ -80,13 +81,14 @@ class _ViewState extends State<View> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height: size.height * 0.01),
                           isRegistration
                               ? Text(
                                   localization.signUpTitle,
                                   style:  TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.w700,
-                                    fontSize: 24,
+                                    fontSize: 28,
                                   ),
                                 )
                               : Text(
@@ -115,17 +117,12 @@ class _ViewState extends State<View> {
                     ),
                   ),
                   SizedBox(
-                    height: size.height * 0.2,
+                    height: size.height * 0.15,
                     child: Padding(
                       padding:
-                          EdgeInsets.symmetric(vertical: size.height * 0.01),
-                      child: Column(
-                        children: [
-                          const Spacer(),
-                          Center(
-                            child: SignInWith(),
-                          )
-                        ],
+                          EdgeInsets.symmetric(vertical: size.height * 0.005),
+                      child: Center(
+                        child: SignInWith(),
                       ),
                     ),
                   )
