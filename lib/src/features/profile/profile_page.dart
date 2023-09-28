@@ -1,15 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
 import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
 import '../secret_notes/new_pass.dart';
 import '../secret_notes/update_pass.dart';
-
 import 'widgets/camera_dialog.dart';
 import 'widgets/log_out_dialog.dart';
 import 'widgets/custom_list_tile.dart';

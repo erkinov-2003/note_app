@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:note_app/src/common/constants/app_images.dart';
 import 'package:note_app/src/common/models/controller/user_controller.dart';
 import 'package:note_app/src/common/utils/storage.dart';
 import 'package:provider/provider.dart';
@@ -45,29 +46,26 @@ class _HomePage extends State<HomePage> {
                     ),
                   );
                 },
-                child: SizedBox(
-                  width: 57,
-                  height: 57,
-                  child: DecoratedBox(
-                      decoration: const BoxDecoration(
-                        color: Colors.blueGrey,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Consumer<Users>(
-                        builder: (context, value, child) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: value.currentUser.image == null
-                                ? const Image(
-                                    image:
-                                        AssetImage("assets/images/person.png"),
-                                  )
-                                : Image.file(
-                                    File($users.currentUser.image!),
-                                  ),
-                          );
-                        },
-                      )),
+                child: CircleAvatar(
+                  radius: 38,
+                  backgroundColor: Colors.white,
+                  child: Consumer<Users>(
+                    builder: (context, value, child) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: value.currentUser.image == null
+                            ? const Image(
+                                fit: BoxFit.cover,
+                                height: 40,
+                                image: AssetImage(AppImages.person),
+                              )
+                            : Image.file(
+                                fit: BoxFit.cover,
+                                File($users.currentUser.image!),
+                              ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -97,7 +95,9 @@ class _HomePage extends State<HomePage> {
               itemBuilder: (context, index) {
                 return index == 0
                     ? CustomNewNote()
-                    : Note(noteModel: value.allNotes[index - 1]);
+                    : Note(
+                        noteModel: value.allNotes[index - 1],
+                      );
               },
             );
           },

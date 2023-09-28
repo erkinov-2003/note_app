@@ -54,11 +54,14 @@ class _NoteState extends State<Note> {
         setState(() {});
       },
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CreateNote(note: widget.noteModel),
-          ),
-        );
+        if (widget.noteModel.isSecret) {
+        } else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CreateNote(note: widget.noteModel),
+            ),
+          );
+        }
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
