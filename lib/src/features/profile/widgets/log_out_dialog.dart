@@ -11,10 +11,10 @@ class CustomLogOutDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization();
     return AlertDialog(
-      shadowColor: Colors.white,
       iconColor: Colors.white,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        side: BorderSide(color: Colors.white, width: 2),
       ),
       title: Row(
         children: [
