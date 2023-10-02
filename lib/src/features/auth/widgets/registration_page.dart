@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -108,7 +110,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ],
             ),
           ),
-          SizedBox(height: size.height * 0.03),
+          SizedBox(height: size.height * 0.02),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
@@ -145,8 +147,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: Center(
                 child: Text(
                   localization.signIn,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontSize: 16,
+                    color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

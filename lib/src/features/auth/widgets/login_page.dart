@@ -65,7 +65,7 @@ class _LogInState extends State<LogIn> {
               ],
             ),
           ),
-          SizedBox(height: size.height * 0.03),
+          SizedBox(height: size.height * 0.02),
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(

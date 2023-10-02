@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class IconsButton extends StatefulWidget {
   final String image;
 
@@ -19,18 +18,22 @@ class _IconsButtonState extends State<IconsButton> {
     return SizedBox(
       height: 44,
       width: 44,
-      child: DecoratedBox(
-        decoration:  BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.all(Radius.circular(14)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: Center(
-            child: Image(
-              width: 24,
-              height: 24,
-              image: AssetImage(widget.image),
+      child: InkWell(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        onTap: () {        },
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.all(Radius.circular(14)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Center(
+              child: Image(
+                width: 24,
+                height: 24,
+                image: AssetImage(widget.image),
+              ),
             ),
           ),
         ),

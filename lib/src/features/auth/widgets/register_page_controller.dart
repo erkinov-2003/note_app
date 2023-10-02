@@ -70,38 +70,39 @@ class _ViewState extends State<View> {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: size.height * 0.17,
+                    height: size.height * 0.1,
                     width: size.width,
                     child: Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: size.height * 0.01),
-                          isRegistration
-                              ? Text(
-                                  localization.signUpTitle,
-                                  style:  TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 28,
-                                  ),
-                                )
-                              : Text(
-                                  localization.signInTitle,
-                                  style:  TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24,
-                                  ),
-                                ),
-                          const PageWidget(),
-                        ],
-                      ),
+                      child: isRegistration
+                          ? Text(
+                              localization.signUpTitle,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 28,
+                              ),
+                            )
+                          : Text(
+                              localization.signInTitle,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24,
+                              ),
+                            ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.05,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.04),
+                      child: const PageWidget(),
                     ),
                   ),
                   SizedBox(
@@ -116,8 +117,9 @@ class _ViewState extends State<View> {
                       ],
                     ),
                   ),
+                  SizedBox(height:size.height > 800 ?  size.height * 0.2 : size.height *0.05),
                   SizedBox(
-                    height: size.height * 0.15,
+                    // height: size.height * 0,
                     child: Padding(
                       padding:
                           EdgeInsets.symmetric(vertical: size.height * 0.005),
