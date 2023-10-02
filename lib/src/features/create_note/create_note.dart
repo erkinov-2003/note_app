@@ -60,8 +60,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
               builder: (context, localization, child) {
                 return Text(
                   localization.back,
-                  style: TextStyle(
-                    color: theme.primaryColor,
+                  style: const TextStyle(
                     fontSize: 16.5,
                   ),
                 );

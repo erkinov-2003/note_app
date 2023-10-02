@@ -181,16 +181,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Set Password`
-  String get setPassword {
-    return Intl.message(
-      'Set Password',
-      name: 'setPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Delete`
   String get delete {
     return Intl.message(
@@ -371,21 +361,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Set new password`
-  String get setPassword2 {
+  /// `Set Password`
+  String get setPassword {
     return Intl.message(
-      'Set new password',
-      name: 'setPassword2',
+      'Set Password',
+      name: 'setPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your old password`
-  String get oldPassword {
+  /// `Set new password`
+  String get setPassword2 {
     return Intl.message(
-      'Your old password',
-      name: 'oldPassword',
+      'Set new password',
+      name: 'setPassword2',
       desc: '',
       args: [],
     );
@@ -641,10 +631,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Enter Password`
+  /// `Enter password`
   String get enterPassword {
     return Intl.message(
-      'Enter Password',
+      'Enter password',
       name: 'enterPassword',
       desc: '',
       args: [],
@@ -681,11 +671,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Change Your Name`
+  /// `Change Your name`
   String get changeYourName {
     return Intl.message(
-      'Change Your Name',
+      'Change Your name',
       name: 'changeYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your old password`
+  String get oldPassword {
+    return Intl.message(
+      'Your old password',
+      name: 'oldPassword',
       desc: '',
       args: [],
     );

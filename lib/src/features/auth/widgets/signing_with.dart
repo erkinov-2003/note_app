@@ -14,9 +14,8 @@ class SignInWith extends StatelessWidget {
           builder: (context, localization, child) {
             return Text(
              localization.signInWith,
-              style:  TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: Theme.of(context).primaryColor,
               ),
             );
           }

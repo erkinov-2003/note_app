@@ -29,14 +29,13 @@ class _HomePage extends State<HomePage> {
     return ChangeNotifierProvider.value(
       value: $users.currentUser.notes,
       child: Scaffold(
-        backgroundColor: AppColors.black,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: AppColors.black,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           toolbarHeight: 80,
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 10, top: 10),
+              padding: const EdgeInsets.only(right: 20, top: 10),
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -46,25 +45,35 @@ class _HomePage extends State<HomePage> {
                     ),
                   );
                 },
-                child: CircleAvatar(
-                  radius: 38,
-                  backgroundColor: Colors.white,
-                  child: Consumer<Users>(
-                    builder: (context, value, child) {
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: value.currentUser.image == null
-                            ? const Image(
-                                fit: BoxFit.cover,
-                                height: 40,
-                                image: AssetImage(AppImages.person),
-                              )
-                            : Image.file(
-                                fit: BoxFit.cover,
-                                File($users.currentUser.image!),
-                              ),
-                      );
-                    },
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.blue,
+                      width: 2,
+                      strokeAlign: BorderSide.strokeAlignOutside,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: CircleAvatar(
+                    radius: 28,
+                    backgroundColor: Colors.white,
+                    child: Consumer<Users>(
+                      builder: (context, value, child) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: value.currentUser.image == null
+                              ? const Image(
+                                  fit: BoxFit.cover,
+                                  height: 40,
+                                  image: AssetImage(AppImages.person),
+                                )
+                              : Image.file(
+                                  fit: BoxFit.cover,
+                                  File($users.currentUser.image!),
+                                ),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -75,7 +84,9 @@ class _HomePage extends State<HomePage> {
             children: [
               const Text(
                 "Note.d",
-                style: TextStyle(color: AppColors.white, fontSize: 24),
+                style: TextStyle(
+                  fontSize: 24,
+                ),
               ),
               Text(
                 localization.enjoyNote,
@@ -94,7 +105,7 @@ class _HomePage extends State<HomePage> {
               itemCount: value.allNotes.length + 1,
               itemBuilder: (context, index) {
                 return index == 0
-                    ? CustomNewNote()
+                    ? const CustomNewNote()
                     : Note(
                         noteModel: value.allNotes[index - 1],
                       );

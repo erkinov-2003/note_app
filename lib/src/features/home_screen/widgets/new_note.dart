@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/translate.dart';
 
-import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_icons.dart';
-import '../../../common/localization/generated/l10n.dart';
 import '../../create_note/create_note.dart';
 
 class CustomNewNote extends StatelessWidget {
-  CustomNewNote({Key? key}) : super(key: key);
-
-  final localization = GeneratedLocalization();
+  const CustomNewNote({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +20,8 @@ class CustomNewNote extends StatelessWidget {
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: AppColors.black,
-          border: Border.all(color: AppColors.white),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          border: Border.all(color: Theme.of(context).primaryColor),
           borderRadius: const BorderRadius.all(
             Radius.circular(8),
           ),
@@ -40,12 +37,15 @@ class CustomNewNote extends StatelessWidget {
                 height: 50,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * .01),
-              Text(
-                localization.newNote,
-                style: const TextStyle(
-                  color: AppColors.white,
-                  fontSize: 15,
-                ),
+              Translate(
+                builder: (context, localization, child) {
+                  return Text(
+                    localization.newNote,
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  );
+                }
               ),
             ],
           ),
