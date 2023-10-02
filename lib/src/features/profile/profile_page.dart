@@ -198,14 +198,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             null &&
                         mounted) {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NewSecretPassword()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const NewSecretPassword(),
+                        ),
+                      );
                     } else {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UpdatePassword()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const UpdatePassword(),
+                        ),
+                      );
                     }
                   },
                 ),
@@ -255,23 +259,14 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  // bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
-
-  void onChanged(bool newValue, ThemeProvider value) {
-    value.changeTheme(newValue);
-    $storage.setBool(StorageKeys.theme.key, newValue);
-  }
-
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization.of(context);
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,
-        trailing: Switch(
-            value: value.themeMode == ThemeMode.dark,
-            onChanged: (newValue) => onChanged(!newValue, value)),
-        onTap: () => onChanged(value.themeMode == ThemeMode.dark, value),
+        trailing: Switch(value: !value.isDark, onChanged: value.changeTheme),
+        onTap: () => value.changeTheme(value.isDark),
       );
 
       //   SwitchListTile.adaptive(

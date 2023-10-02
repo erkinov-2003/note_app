@@ -42,7 +42,7 @@ class App extends StatelessWidget {
             supportedLocales: GeneratedLocalization.delegate.supportedLocales,
             theme: ThemeProvider.lightTheme,
             darkTheme: ThemeProvider.darkTheme,
-            themeMode: themeProvider.themeMode,
+            themeMode: themeProvider.getTheme(),
             home: $notes.isLogged
                 ? const HomePage()
                 : const SplashScreen(),

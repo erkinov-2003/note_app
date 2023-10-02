@@ -38,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   Expanded(
                     child: PageView(
                       controller: pageController,
-                      physics: const NeverScrollableScrollPhysics(),
                       children: const [
                         ThemeChangerPage(),
                         LanguageChangerPage(),

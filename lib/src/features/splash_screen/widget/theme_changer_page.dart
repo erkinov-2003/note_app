@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import '../../../common/constants/app_colors.dart';
 import '../../../common/constants/app_images.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/providers/theme_provider.dart';
@@ -43,23 +44,22 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
               ),
               Consumer<ThemeProvider>(
                 builder: (context, value, child) => SwitchListTile.adaptive(
-                  activeColor: Colors.black,
-                  activeTrackColor: Colors.white,
-                  value: value.themeMode == ThemeMode.light,
+                  activeColor: AppColors.white,
+                  activeTrackColor: AppColors.airColor,
+                  value: !value.isDark,
                   onChanged: value.changeTheme,
                   title: Text(
                     GeneratedLocalization.of(context).theme,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 24,
-                      color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
                       width: 1,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),

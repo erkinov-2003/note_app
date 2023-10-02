@@ -52,7 +52,6 @@ class CustomLogOutDialog extends StatelessWidget {
         TextButton(
           onPressed: () async {
             // await $secureStorage.delete(key: StorageKeys.oneUser.key);
-            // ignore: use_build_context_synchronously
             $storage.setBool("isLogged", false);
             if (context.mounted) {
               Navigator.pushAndRemoveUntil(

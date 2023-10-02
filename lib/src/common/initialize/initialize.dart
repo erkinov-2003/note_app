@@ -66,7 +66,7 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
   (
     'Initializing Notes',
     (dependencies) async {
-      $storage.clear();
+      // $storage.clear();
       // print($storage.getString("notes"));
 
       $notes.isLogged = $storage.getBool("isLogged") ?? false;

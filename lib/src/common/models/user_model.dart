@@ -21,7 +21,9 @@ class User {
 
   @override
   String toString() {
-    return 'User{id: $id, name: $name, surname: $surname, email: $email, loginPassword: $loginPassword, secretPassword: $secretPassword, image: $image}';
+    return 'User{id: $id, name: $name, surname: $surname, email: $email,'
+        ' loginPassword: $loginPassword, secretPassword: $secretPassword, '
+        'image: $image}';
   }
 
   User copyWith({
@@ -43,27 +45,28 @@ class User {
         image: image ?? this.image,
       );
 
-  factory User.fromJson(String str) => User.fromMap(json.decode(str));
+  factory User.fromJson(String str) =>
+      User.fromMap(Map<String, Object?>.from(json.decode(str)));
 
   String toJson() => json.encode(toMap());
 
   factory User.fromMap(Map<String, Object?> json) => User(
-    id: json["id"] as String?,
-    name: json["name"] as String?,
-    surname: json["surname"] as String?,
-    email: json["email"] as String?,
-    loginPassword: json["loginPassword"] as String?,
-    secretPassword: json["secretPassword"] as String?,
-    image: json["image"] as String?,
-  );
+        id: json["id"] as String?,
+        name: json["name"] as String?,
+        surname: json["surname"] as String?,
+        email: json["email"] as String?,
+        loginPassword: json["loginPassword"] as String?,
+        secretPassword: json["secretPassword"] as String?,
+        image: json["image"] as String?,
+      );
 
   Map<String, Object?> toMap() => {
-    "id": id,
-    "name": name,
-    "surname": surname,
-    "email": email,
-    "loginPassword": loginPassword,
-    "secretPassword": secretPassword,
-    "image": image,
-  };
+        "id": id,
+        "name": name,
+        "surname": surname,
+        "email": email,
+        "loginPassword": loginPassword,
+        "secretPassword": secretPassword,
+        "image": image,
+      };
 }
