@@ -86,8 +86,12 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                     ? () async {
                         imagePath = await showModalBottomSheet<String?>(
                           context: context,
+                          elevation: 0,
+                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          showDragHandle: true,
                           builder: (context) => const CameraBottomSheet(),
                         );
+                        image.value = imagePath ?? image.value;
                       }
                     : () {},
                 child: Padding(
