@@ -60,112 +60,122 @@ class _ProfilePageState extends State<ProfilePage> {
     final theme = Theme.of(context);
     final localization = GeneratedLocalization();
     final screenSize = MediaQuery.sizeOf(context);
-    return ConstrainedBox(
-      constraints: const BoxConstraints(
-        maxWidth: 450,
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: theme.primaryColor,
-            onPressed: () => Navigator.pop(context),
-          ),
-          backgroundColor: theme.scaffoldBackgroundColor,
-          title: Text(
-            localization.profile,
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.w600,
-              color: theme.primaryColor,
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: 500,
             ),
-          ),
-        ),
-        body: SafeArea(
-          child: Center(
             child: ListView(
               children: [
                 const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Badge(
-                        largeSize: 30,
-                        backgroundColor: const Color(0xFF797979),
-                        alignment: const Alignment(.8, 1.2),
-                        label: GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const CameraBottomSheet(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BackButton(
+                          color: theme.primaryColor,
+                          onPressed: () => Navigator.pop(context),
+                        ),
+                        Text(
+                          localization.profile,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            color: theme.primaryColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Badge(
+                            largeSize: 30,
+                            backgroundColor: const Color(0xFF797979),
+                            alignment: const Alignment(.8, 1.2),
+                            label: GestureDetector(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (context) =>
+                                      const CameraBottomSheet(),
+                                );
+                              },
+                              child: const SizedBox(
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            child: ValueListenableBuilder(
+                                valueListenable:
+                                    context.read<PhotoProvider>().imageFile,
+                                builder: (context, value, _) {
+                                  if (value != null) read(value.path);
+
+                                  return CircleAvatar(
+                                    backgroundColor: theme.primaryColor,
+                                    foregroundImage:
+                                        value != null ? FileImage(value) : null,
+                                    radius: 50,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.person,
+                                        color: theme.scaffoldBackgroundColor,
+                                        size: 80,
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ),
+                        ValueListenableBuilder(
+                          valueListenable: name,
+                          builder: (context, value, _) {
+                            return SizedBox(
+                              width: screenSize.width * .1,
+                              child: Text(
+                                value,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  color: theme.primaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             );
                           },
-                          child: const SizedBox(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
                         ),
-                        child: ValueListenableBuilder(
-                            valueListenable:
-                                context.read<PhotoProvider>().imageFile,
-                            builder: (context, value, _) {
-                              if (value != null) read(value.path);
-
-                              return CircleAvatar(
-                                backgroundColor: theme.primaryColor,
-                                foregroundImage:
-                                    value != null ? FileImage(value) : null,
-                                radius: 50,
-                                child: Center(
-                                  child: Icon(
-                                    Icons.person,
-                                    color: theme.scaffoldBackgroundColor,
-                                    size: 80,
-                                  ),
-                                ),
-                              );
-                            }),
-                      ),
-                    ),
-                    ValueListenableBuilder(
-                      valueListenable: name,
-                      builder: (context, value, _) {
-                        return SizedBox(
-                          width: screenSize.width * .4,
-                          child: Text(
-                            value,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 25,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => NameDialog(
+                                name: name,
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 40),
+                            child: Image(
+                              height: 40,
+                              width: 40,
                               color: theme.primaryColor,
-                              fontWeight: FontWeight.w600,
+                              image: const AssetImage(AppIcons.editIcon),
                             ),
                           ),
-                        );
-                      },
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => NameDialog(
-                            name: name,
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 40),
-                        child: Image(
-                          height: 40,
-                          width: 40,
-                          color: theme.primaryColor,
-                          image: const AssetImage(AppIcons.editIcon),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
