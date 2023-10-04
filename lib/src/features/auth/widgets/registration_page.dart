@@ -114,8 +114,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
           Center(
             child: FilledButton(
               style: FilledButton.styleFrom(
-                maximumSize:  Size(size.width * 0.9, size.height * 0.07),
-                minimumSize:  Size(size.width * 0.9, size.height * 0.07),
+                maximumSize: Size(size.width * 0.9, size.height * 0.07),
+                minimumSize: Size(size.width * 0.9, size.height * 0.07),
                 backgroundColor: AppColors.airColor,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -147,9 +147,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: Center(
                 child: Text(
                   localization.signIn,
-                  style:  TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
-                    color: Theme.of(context).primaryColor,
+                    color: AppColors.white,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
