@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:note_app/src/common/utils/functions.dart';
+import 'package:note_app/src/common/utils/translate.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../../common/localization/generated/l10n.dart';
-import '../../../common/providers/photo_provider.dart';
 
 class CameraBottomSheet extends StatefulWidget {
   const CameraBottomSheet({Key? key}) : super(key: key);
@@ -15,15 +14,14 @@ class CameraBottomSheet extends StatefulWidget {
 class _CameraBottomSheetState extends State<CameraBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    final localization = GeneratedLocalization();
     final sizeH = MediaQuery.sizeOf(context).height;
     final sizeW = MediaQuery.sizeOf(context).width;
 
     return SizedBox(
-      height: 180,
+      height: 210,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Theme.of(context).scaffoldBackgroundColor,
           border: Border.all(width: 1, color: Colors.white),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(25),
@@ -37,27 +35,30 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 25, right: 15),
-                  child: Text(
-                    localization.addPhoto,
-                    style: const TextStyle(
-                      color: AppColors.white,
-                      fontSize: 20,
-                    ),
+                  child: Translate(
+                    builder: (context, localization, child) {
+                      return Text(
+                        localization.addPhoto,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      );
+                    }
                   ),
                 ),
-                const Icon(
+                Icon(
                   Icons.camera_alt,
-                  color: AppColors.white,
+                  color: Theme.of(context).primaryColor,
                   size: 25,
                 ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(
+                    onPressed: () => Navigator.pop(context, null),
+                    icon: Icon(
                       Icons.cancel,
-                      color: AppColors.white,
+                      color: Theme.of(context).primaryColor,
                       size: 25,
                     ),
                   ),
@@ -76,17 +77,19 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                       ),
                       backgroundColor: const Color(0xFF36BFFA)),
                   onPressed: () async {
-                    final image = await context
-                        .read<PhotoProvider>()
-                        .pickImageFromGallery();
-                    Navigator.pop(context, image);
+                    String? image = await pickImageFromGallery();
+                    if (mounted) Navigator.pop(context, image);
                   },
-                  child: Text(
-                    localization.openGallery,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      color: AppColors.white,
-                    ),
+                  child: Translate(
+                    builder: (context, localization, child) {
+                      return Text(
+                        localization.openGallery,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: AppColors.white
+                        ),
+                      );
+                    }
                   ),
                 ),
               ),
@@ -104,17 +107,19 @@ class _CameraBottomSheetState extends State<CameraBottomSheet> {
                     backgroundColor: const Color(0xFF36BFFA),
                   ),
                   onPressed: () async {
-                    final image = await context
-                        .read<PhotoProvider>()
-                        .pickImageFromCamera();
-                    Navigator.pop(context, image);
+                    final image = await pickImageFromCamera();
+                    if (mounted) Navigator.pop(context, image);
                   },
-                  child: Text(
-                    localization.openCamera,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      color: AppColors.white,
-                    ),
+                  child: Translate(
+                    builder: (context, localization, child) {
+                      return Text(
+                        localization.openCamera,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          color: AppColors.white
+                        ),
+                      );
+                    }
                   ),
                 ),
               ),

@@ -183,9 +183,9 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                           if (password == pass) {
                             if (widget.note != null &&
                                 widget.isChecked != null) {
-                              $notes.delete(widget.note!);
+                              $users.currentUser.notes!.delete(widget.note!);
                             } else {
-                              $notes.changeSecure(widget.note!);
+                              $users.currentUser.notes!.changeSecure(widget.note!);
                             }
                             if (mounted) Navigator.pop(context);
                           } else {

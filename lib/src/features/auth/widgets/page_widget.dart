@@ -18,9 +18,6 @@ class _PageWidgetState extends State<PageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isRegistration =
-        ProviderRegistration.of(context, listen: true).isRegistration;
-    final onTap = ProviderRegistration.of(context).onTap2;
     return SizedBox(
       height: 50,
       width: 220,
@@ -36,95 +33,107 @@ class _PageWidgetState extends State<PageWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                  onTap: onTap,
-                  child: SizedBox(
-                    height: 40,
-                    width: 100,
-                    child: isRegistration
-                        ? DecoratedBox(
-                            decoration: BoxDecoration(
-                              boxShadow: isDark
-                                  ? [
-                                      const BoxShadow(
-                                        color: AppColors.black54,
-                                        offset: Offset(0, 4),
-                                        blurRadius: 2,
-                                      ),
-                                    ]
-                                  : null,
-                              color: Theme.of(context).colorScheme.background,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child:  Center(
-                              child: Text(
-                                localization.register,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: AppColors.white,
+                  onTap: context.read<MainController>().onTap2,
+                  child: Selector<MainController, bool>(
+                    builder: (context, isRegistration, child) {
+                      return SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: isRegistration
+                            ? DecoratedBox(
+                                decoration: BoxDecoration(
+                                  boxShadow: isDark
+                                      ? [
+                                          const BoxShadow(
+                                            color: AppColors.black54,
+                                            offset: Offset(0, 4),
+                                            blurRadius: 2,
+                                          ),
+                                        ]
+                                      : null,
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    localization.register,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  localization.register,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.textColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : Center(
-                            child: Text(
-                              localization.register,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: AppColors.textColor,
-                              ),
-                            ),
-                          ),
+                      );
+                    },
+                    selector: (_, model) => model.isRegistration,
                   ),
                 ),
                 GestureDetector(
-                  onTap: onTap,
-                  child: SizedBox(
-                    height: 40,
-                    width: 100,
-                    child: !isRegistration
-                        ? DecoratedBox(
-                            decoration: BoxDecoration(
-                              boxShadow: isDark
-                                  ? [
-                                      const BoxShadow(
-                                        color: AppColors.black54,
-                                        offset: Offset(0, 4),
-                                        blurRadius: 2,
-                                      ),
-                                    ]
-                                  : null,
-                              color: Theme.of(context).colorScheme.background,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Center(
-                              child: Text(
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                localization.logIn,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  color: AppColors.white,
+                  onTap: context.read<MainController>().onTap2,
+                  child: Selector<MainController, bool>(
+                    builder: (context, isRegistration, child) {
+                      return SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: !isRegistration
+                            ? DecoratedBox(
+                                decoration: BoxDecoration(
+                                  boxShadow: isDark
+                                      ? [
+                                          const BoxShadow(
+                                            color: AppColors.black54,
+                                            offset: Offset(0, 4),
+                                            blurRadius: 2,
+                                          ),
+                                        ]
+                                      : null,
+                                  color:
+                                      Theme.of(context).colorScheme.background,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    localization.logIn,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: AppColors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Center(
+                                child: Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  localization.logIn,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: AppColors.textColor,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : Center(
-                            child: Text(
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              localization.logIn,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: AppColors.textColor,
-                              ),
-                            ),
-                          ),
+                      );
+                    },
+                    selector: (_, model) => model.isRegistration,
                   ),
                 ),
               ],

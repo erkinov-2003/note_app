@@ -1,15 +1,12 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:note_app/src/features/home_screen/controller/notes.dart';
 
 import '../../../common/localization/generated/l10n.dart';
 import '../../../common/models/note_model.dart';
-import '../../../common/providers/photo_provider.dart';
-import '../../../common/utils/logger.dart';
-import '../../home_screen/controller/provider.dart';
+
+
 import '../components/link_dialog.dart';
 import '../create_note.dart';
 import '../models/link_model.dart';
@@ -37,9 +34,17 @@ mixin NoteMixin on State<CreateNote> {
   bool readOnly = false;
   bool isEditing = false;
 
+  ValueNotifier<String?> image = ValueNotifier(null);
+
+  @override
+  void initState() {
+    super.initState();
+    image.value = widget.note?.image;
+  }
+
   @override
   void didChangeDependencies() {
-    context.read<PhotoProvider>().imageFile = ValueNotifier(null);
+
     final note = widget.note;
     if (note != null) {
       readOnly = true;
@@ -52,7 +57,6 @@ mixin NoteMixin on State<CreateNote> {
       controllerTitle.text = note.title!;
       controllerBody.text = note.body!.map((e) => e.name).join(" ");
     }
-
     super.didChangeDependencies();
   }
 
@@ -61,6 +65,7 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
+    if(controllerTitle.text.isEmpty || controllerBody.text.isEmpty) return;
     body.clear();
     final list = controllerBody.text.split(" ");
     for (int i = 0; i < list.length; i++) {
@@ -74,10 +79,11 @@ mixin NoteMixin on State<CreateNote> {
       dateTime: DateTime.now(),
       title: controllerTitle.text,
       body: body,
-      image: imagePath,
+      image: image.value,
       link: link,
       isSecret: isSecret,
     );
+
 
     if (widget.note == null) {
       notes.addNote(noteModel);
@@ -88,46 +94,6 @@ mixin NoteMixin on State<CreateNote> {
     Navigator.pop(context);
   }
 
-  FutureOr<String> pickImageFromGallery() async {
-    try {
-      final pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        imagePath = pickedImage.path;
-        imageFile = File(pickedImage.path);
-        isImageSelected = true;
-        setState(() {});
-        return pickedImage.path;
-      } else {
-        info(localization.didNotImage);
-      }
-    } catch (e, s) {
-      shout("$e");
-      info("$s");
-    }
-    return "";
-  }
-
-  FutureOr<String> pickImageFromCamera() async {
-    try {
-      final pickedImage =
-          await ImagePicker().pickImage(source: ImageSource.camera);
-      if (pickedImage != null) {
-        imagePath = pickedImage.path;
-        imageFile = File(pickedImage.path);
-        isImageSelected = true;
-        setState(() {});
-        return pickedImage.path;
-      } else {
-        info(localization.didNotPicture);
-      }
-    } catch (e, s) {
-      shout("$e");
-      shout("$s");
-    }
-
-    return "";
-  }
 
   void openDialogLink() {
     showDialog<String>(

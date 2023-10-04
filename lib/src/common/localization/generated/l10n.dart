@@ -71,10 +71,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `App's language`
+  /// `Language APP`
   String get languageApp {
     return Intl.message(
-      'App\'s language',
+      'Language APP',
       name: 'languageApp',
       desc: '',
       args: [],
@@ -181,16 +181,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Set Password`
-  String get setPassword {
-    return Intl.message(
-      'Set Password',
-      name: 'setPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Delete`
   String get delete {
     return Intl.message(
@@ -291,20 +281,20 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Secret note password`
+  /// `Secret note Password`
   String get secretPassword {
     return Intl.message(
-      'Secret note password',
+      'Secret note Password',
       name: 'secretPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Log out`
+  /// `Log Out`
   String get logOut {
     return Intl.message(
-      'Log out',
+      'Log Out',
       name: 'logOut',
       desc: '',
       args: [],
@@ -321,40 +311,40 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Profile image`
+  /// `Profile Image`
   String get profileImage {
     return Intl.message(
-      'Profile image',
+      'Profile Image',
       name: 'profileImage',
       desc: '',
       args: [],
     );
   }
 
-  /// `New note`
+  /// `New Note`
   String get newNote {
     return Intl.message(
-      'New note',
+      'New Note',
       name: 'newNote',
       desc: '',
       args: [],
     );
   }
 
-  /// `Update your secret notes password`
+  /// `Update your secret\nNotes password`
   String get updateSecretPass {
     return Intl.message(
-      'Update your secret notes password',
+      'Update your secret\nNotes password',
       name: 'updateSecretPass',
       desc: '',
       args: [],
     );
   }
 
-  /// `Create your secret notes password`
+  /// `Create your secret\nNotes password`
   String get newSecretPass {
     return Intl.message(
-      'Create your secret notes password',
+      'Create your secret\nNotes password',
       name: 'newSecretPass',
       desc: '',
       args: [],
@@ -371,21 +361,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Set new password`
-  String get setPassword2 {
+  /// `Set Password`
+  String get setPassword {
     return Intl.message(
-      'Set new password',
-      name: 'setPassword2',
+      'Set Password',
+      name: 'setPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Your old password`
-  String get oldPassword {
+  /// `Set new password`
+  String get setPassword2 {
     return Intl.message(
-      'Your old password',
-      name: 'oldPassword',
+      'Set new password',
+      name: 'setPassword2',
       desc: '',
       args: [],
     );
@@ -401,10 +391,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Password should not have space`
+  /// `Password shouldn't have space`
   String get passwordSpace {
     return Intl.message(
-      'Password should not have space',
+      'Password shouldn\'t have space',
       name: 'passwordSpace',
       desc: '',
       args: [],
@@ -451,10 +441,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `You are already registered`
+  /// `You are already Registered`
   String get alreadyRegister {
     return Intl.message(
-      'You are already registered',
+      'You are already Registered',
       name: 'alreadyRegister',
       desc: '',
       args: [],
@@ -471,10 +461,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `You don't have account`
+  /// `You don't have Account`
   String get doNotHave {
     return Intl.message(
-      'You don\'t have account',
+      'You don\'t have Account',
       name: 'doNotHave',
       desc: '',
       args: [],
@@ -521,10 +511,10 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Add link`
+  /// `Add Link`
   String get addLink {
     return Intl.message(
-      'Add link',
+      'Add Link',
       name: 'addLink',
       desc: '',
       args: [],
@@ -681,11 +671,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Change Your Name`
+  /// `Change Your name`
   String get changeYourName {
     return Intl.message(
-      'Change Your Name',
+      'Change Your name',
       name: 'changeYourName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your old password`
+  String get oldPassword {
+    return Intl.message(
+      'Your old password',
+      name: 'oldPassword',
       desc: '',
       args: [],
     );

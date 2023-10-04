@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/translate.dart';
+import 'package:note_app/src/features/auth/validator/text_field_validator.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../../common/localization/generated/l10n.dart';
 import '../controller/main_controller.dart';
 import 'text_fields.dart';
 
@@ -13,25 +15,20 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final localization = GeneratedLocalization();
-
-  @override
-  void initState() {
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    super.initState();
+ @override
+  void didChangeDependencies() {
+    context.read<MainController>().emailController = TextEditingController();
+    context.read<MainController>().passwordController = TextEditingController();
+    super.didChangeDependencies();
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
-    final validatePassword = ProviderRegistration.of(context).validatePassword;
-    final validateEmail = ProviderRegistration.of(context).validateEmail;
-    final forgotPassword = ProviderRegistration.of(context).forgotPassword;
-    final checkLogin = ProviderRegistration.of(context).checkLogin;
     final size = MediaQuery.sizeOf(context);
 
     return Padding(
@@ -46,16 +43,16 @@ class _LogInState extends State<LogIn> {
               children: [
                 const SizedBox(height: 10),
                 TextFields(
-                  validator: validateEmail,
-                  controller: emailController,
+                  validator: (value) => TextFieldValidator.validateEmail(context, value),
+                  controller: context.read<MainController>().emailController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
                   exampleText: "you@example.com",
                   infoText: "Email address",
                 ),
                 TextFields(
-                  controller: passwordController,
-                  validator: validatePassword,
+                  controller: context.read<MainController>().passwordController,
+                  validator: (value) => TextFieldValidator.validatePassword(context, value),
                   textInputAction: TextInputAction.go,
                   keyboardType: TextInputType.visiblePassword,
                   exampleText: "Your password",
@@ -76,20 +73,22 @@ class _LogInState extends State<LogIn> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
               ),
-              onPressed: () => checkLogin(
+              onPressed: () => context.read<MainController>().checkLogin(
                 context,
                 formKey,
-                emailController,
-                passwordController,
               ),
               child: Center(
-                child: Text(
-                  localization.signIn,
-                  style:  const TextStyle(
-                    color: AppColors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Translate(
+                  builder: (context,localization, _) {
+                    return Text(
+                      localization.signIn,
+                      style:  const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  }
                 ),
               ),
             ),
@@ -97,14 +96,18 @@ class _LogInState extends State<LogIn> {
           SizedBox(height: size.height * 0.03),
           Center(
             child: GestureDetector(
-              onTap: () => forgotPassword(context),
-              child: Text(
-                localization.forgotPassword,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: AppColors.airColor,
-                  fontWeight: FontWeight.w600,
-                ),
+              onTap: () => context.read<MainController>().forgotPassword(context),
+              child: Translate(
+                builder: (context, localization, _) {
+                  return Text(
+                    localization.forgotPassword,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.airColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  );
+                }
               ),
             ),
           ),

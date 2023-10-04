@@ -1,13 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/translate.dart';
+import 'package:note_app/src/features/auth/controller/main_controller.dart';
+import 'package:note_app/src/features/auth/validator/text_field_validator.dart';
+import 'package:provider/provider.dart';
 import '../../../common/constants/app_colors.dart';
-import '../../../common/localization/generated/l10n.dart';
-import '../../../common/models/user_model.dart';
-import '../../../common/utils/storage.dart';
-import '../../home_screen/home_page.dart';
 import 'text_fields.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -18,55 +17,17 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  late TextEditingController nameController;
-  late TextEditingController emailController;
-  late TextEditingController passwordController;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final localization = GeneratedLocalization();
-
   @override
-  void initState() {
-    nameController = TextEditingController();
-    emailController = TextEditingController();
-    passwordController = TextEditingController();
-    super.initState();
+  void didChangeDependencies() {
+    context.read<MainController>().nameController = TextEditingController();
+    context.read<MainController>().emailController = TextEditingController();
+    context.read<MainController>().passwordController = TextEditingController();
+    super.didChangeDependencies();
   }
 
-  String? validatePassword(String? value) {
-    if (value != null && !RegExp(r".{8,}").hasMatch(value)) {
-      return localization.passwordLength;
-    }
-    if (value != null && value.contains(" ")) {
-      return localization.passwordSpace;
-    }
-    if (value != null && !RegExp(r"\d").hasMatch(value)) {
-      return localization.passwordNumber;
-    }
-    if (value != null && !RegExp(r"[a-z]").hasMatch(value)) {
-      return localization.passwordLetter;
-    }
-    if (value != null && !RegExp(r"[A-Z]").hasMatch(value)) {
-      return localization.passwordCapitalLetter;
-    }
-    return null;
-  }
-
-  String? validateEmail(String? value) {
-    if (value != null &&
-        !RegExp(r"^[a-zA-Z][a-zA-Z0-9]*@[a-zA-Z0-9]+\.[a-zA-Z]{2,6}$")
-            .hasMatch(value)) {
-      return localization.invalidEmail;
-    }
-    return null;
-  }
-
-  String? validateName(String? value) {
-    if (value != null && value.length <= 3) {
-      return localization.invalidName;
-    }
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,24 +44,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
               children: [
                 const SizedBox(height: 10),
                 TextFields(
-                  controller: nameController,
-                  validator: validateName,
+                  controller: context.read<MainController>().nameController,
+                  validator: (value) => TextFieldValidator.validateName(context, value),
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.name,
                   exampleText: "Your Full Name",
                   infoText: "Full Name",
                 ),
                 TextFields(
-                  validator: validateEmail,
-                  controller: emailController,
+                  validator: (value) => TextFieldValidator.validateEmail(context, value),
+                  controller: context.read<MainController>().emailController,
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.emailAddress,
                   exampleText: "you@example.com",
                   infoText: "Email address",
                 ),
                 TextFields(
-                  controller: passwordController,
-                  validator: validatePassword,
+                  controller: context.read<MainController>().passwordController,
+                  validator: (value) => TextFieldValidator.validatePassword(context, value),
                   textInputAction: TextInputAction.go,
                   keyboardType: TextInputType.visiblePassword,
                   exampleText: "Your password",
@@ -123,35 +84,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
               ),
-              onPressed: () async {
-                if (formKey.currentState!.validate()) {
-                  User userOne = User(
-                    name: nameController.text,
-                    email: emailController.text,
-                    loginPassword: passwordController.text,
-                  );
-
-                  await $secureStorage.write(
-                      key: StorageKeys.oneUser.key,
-                      value: jsonEncode(userOne.toJson()));
-                  $storage.setBool("isLogged", true);
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                    (route) => false,
-                  );
-                }
-              },
+              onPressed: () => context.read<MainController>().checkRegistration(formKey, context),
               child: Center(
-                child: Text(
-                  localization.signIn,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: AppColors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
+                child: Translate(
+                  builder: (context, localization, _) {
+                    return Text(
+                      localization.signIn,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: AppColors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    );
+                  }
                 ),
               ),
             ),

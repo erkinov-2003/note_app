@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import '../../../common/localization/generated/l10n.dart';
+import 'package:note_app/src/common/utils/translate.dart';
+import 'package:provider/provider.dart';
 import '../controller/main_controller.dart';
 import 'login_page.dart';
 import 'registration_page.dart';
@@ -17,29 +18,10 @@ class RegistrationPageController extends StatefulWidget {
 
 class _RegistrationPageControllerState
     extends State<RegistrationPageController> {
-  late MainController controller;
-  late PageController pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController = PageController();
-    controller = MainController(
-      pageController: pageController,
-    );
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    pageController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return ProviderRegistration(
-      controller: controller,
+    return ChangeNotifierProvider(
+      create: (context) => MainController(),
       child: const View(),
     );
   }
@@ -53,14 +35,14 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
-  final localization = GeneratedLocalization();
+  @override
+  void didChangeDependencies() {
+    context.read<MainController>().pageController = PageController();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isRegistration =
-        ProviderRegistration.of(context, listen: true).isRegistration;
-    final onTap = ProviderRegistration.of(context).onTap;
-    final pageController = ProviderRegistration.of(context).pageController;
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
@@ -77,26 +59,26 @@ class _ViewState extends State<View> {
                   SizedBox(
                     height: size.height * 0.1,
                     width: size.width,
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                      child: isRegistration
-                          ? Text(
-                              localization.signUpTitle,
+                    child: Selector<MainController, bool>(
+                      builder: (context, isRegistration, child) {
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: size.width * 0.04),
+                          child: Translate(builder: (context, localization, _) {
+                            return Text(
+                              isRegistration
+                                  ? localization.signUpTitle
+                                  : localization.signInTitle,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 28,
+                                fontSize: isRegistration ? 28 : 24,
                               ),
-                            )
-                          : Text(
-                              localization.signInTitle,
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.w700,
-                                fontSize: 24,
-                              ),
-                            ),
+                            );
+                          }),
+                        );
+                      },
+                      selector: (_, model) => model.isRegistration,
                     ),
                   ),
                   SizedBox(
@@ -111,21 +93,23 @@ class _ViewState extends State<View> {
                     height: size.height * 0.5,
                     child: PageView(
                       physics: const NeverScrollableScrollPhysics(),
-                      onPageChanged: onTap,
-                      controller: pageController,
+                      controller: context.read<MainController>().pageController,
                       children: const [
                         RegistrationPage(),
                         LogIn(),
                       ],
                     ),
                   ),
-                  SizedBox(height:size.height > 800 ?  size.height * 0.2 : size.height *0.05),
+                  SizedBox(
+                      height: size.height > 800
+                          ? size.height * 0.2
+                          : size.height * 0.05),
                   SizedBox(
                     // height: size.height * 0,
                     child: Padding(
                       padding:
                           EdgeInsets.symmetric(vertical: size.height * 0.005),
-                      child: Center(
+                      child: const Center(
                         child: SignInWith(),
                       ),
                     ),
