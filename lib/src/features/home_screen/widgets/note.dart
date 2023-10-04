@@ -54,18 +54,22 @@ class _NoteState extends State<Note> {
         setState(() {});
       },
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CreateNote(note: widget.noteModel),
-          ),
-        );
+        if (widget.noteModel.isSecret) {
+        } else {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => CreateNote(note: widget.noteModel),
+            ),
+          );
+        }
       },
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           border: Border.all(
-              color: AppColors.white,
-              strokeAlign: BorderSide.strokeAlignOutside),
+            color: Theme.of(context).primaryColor,
+            strokeAlign: BorderSide.strokeAlignOutside,
+          ),
         ),
         child: Stack(
           children: [
@@ -79,7 +83,6 @@ class _NoteState extends State<Note> {
                     style: const TextStyle(
                       fontSize: 27,
                       overflow: TextOverflow.ellipsis,
-                      color: AppColors.white,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -111,8 +114,8 @@ class _NoteState extends State<Note> {
                           );
                         } else {
                           return TextSpan(
-                            style: const TextStyle(
-                              color: AppColors.white,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
                             ),
                             text: "${e.name} ",
                           );

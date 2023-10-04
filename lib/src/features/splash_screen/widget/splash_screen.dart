@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/translate.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../../common/localization/generated/l10n.dart';
-import '../../auth/widgets/register_page_controller.dart';
+import '../../auth/register_page_controller.dart';
 import 'language_changer_page.dart';
 import 'theme_changer_page.dart';
 
 class SplashScreen extends StatefulWidget {
-
   const SplashScreen({super.key});
 
   @override

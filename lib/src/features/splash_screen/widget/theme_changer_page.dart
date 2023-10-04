@@ -16,6 +16,7 @@ class ThemeChangerPage extends StatefulWidget {
 class _ThemeChangerPageState extends State<ThemeChangerPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -31,7 +32,7 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   GeneratedLocalization.of(context).themeApp,
-                  style: Theme.of(context).primaryTextTheme.titleLarge,
+                  style: theme.primaryTextTheme.titleLarge,
                 ),
               ),
               const Expanded(
@@ -59,7 +60,7 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     side: BorderSide(
                       width: 1,
-                      color: Theme.of(context).primaryColor,
+                      color: theme.primaryColor,
                     ),
                   ),
                 ),

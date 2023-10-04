@@ -32,7 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts."),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeYourName":
-            MessageLookupByLibrary.simpleMessage("Change Your Name"),
+            MessageLookupByLibrary.simpleMessage("Change Your name"),
         "check": MessageLookupByLibrary.simpleMessage("Check"),
         "checkPasswordAgain": MessageLookupByLibrary.simpleMessage(
             "Please check the password again"),

@@ -1,13 +1,13 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../features/home_screen/controller/provider.dart';
+import '../models/controller/user_controller.dart';
 
 
 
 late final SharedPreferences $storage;
 late final FlutterSecureStorage $secureStorage;
-late final Notes $notes;
+late final Users $users;
 
 
 

@@ -5,15 +5,16 @@ import '../constants/app_icons.dart';
 import '../utils/storage.dart';
 
 class LangProvider with ChangeNotifier {
-  Locale? current;
+  late Locale current;
 
   Locale getLocale() {
     String key = $storage.getString(StorageKeys.locale.key) ?? "en";
     current = Locale(key);
-    return current ?? const Locale("en");
+    return current;
   }
   void changeLocale(Locale newLocale) {
-    current = newLocale;
+    $storage.setString(
+        StorageKeys.locale.key, newLocale.languageCode);
     notifyListeners();
   }
 

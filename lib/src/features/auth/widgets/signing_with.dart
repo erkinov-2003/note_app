@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-
-import '../../../common/constants/app_icons.dart';
-import '../../../common/localization/generated/l10n.dart';
-import 'icons_button.dart';
+import 'package:note_app/src/common/utils/translate.dart';
+import 'package:note_app/src/common/constants/app_icons.dart';
+import 'package:note_app/src/features/auth/widgets/icons_button.dart';
 
 class SignInWith extends StatelessWidget {
-  SignInWith({Key? key}) : super(key: key);
-
-  final localization = GeneratedLocalization();
+  const SignInWith({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-         localization.signInWith,
-          style:  TextStyle(
-            fontSize: 14,
-            color: Theme.of(context).primaryColor,
-          ),
+        Translate(
+          builder: (context, localization, child) {
+            return Text(
+             localization.signInWith,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            );
+          }
         ),
         const SizedBox(height: 8),
         const SizedBox(

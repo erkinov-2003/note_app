@@ -1,17 +1,13 @@
-import 'dart:convert';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import 'package:provider/provider.dart';
-
 import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
-import '../../common/models/user_model.dart';
-import '../../common/providers/photo_provider.dart';
 import '../../common/providers/theme_provider.dart';
 import '../../common/utils/storage.dart';
 import '../secret_notes/new_pass.dart';
 import '../secret_notes/update_pass.dart';
-
 import 'widgets/camera_dialog.dart';
 import 'widgets/log_out_dialog.dart';
 import 'widgets/custom_list_tile.dart';
@@ -27,32 +23,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   ValueNotifier<String> name = ValueNotifier("");
+  ValueNotifier<String?> profileImage = ValueNotifier(null);
 
   @override
-  void didChangeDependencies() async {
-    final User first = User(name: GeneratedLocalization.of(context).yourName);
-
-    name.value = User.fromJson(
-                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    jsonEncode(first.toJson()))
-            .name ??
-        "";
-
-    super.didChangeDependencies();
-  }
-
-  void read(String imagePath) async {
-    final readUser = await $secureStorage.read(
-      key: StorageKeys.oneUser.key,
-    );
-
-    User user = User.fromJson(readUser!);
-    User userImage = user.copyWith(image: imagePath);
-
-    $secureStorage.write(
-      key: StorageKeys.oneUser.key,
-      value: userImage.toJson(),
-    );
+  void initState() {
+    super.initState();
+    profileImage.value = $users.currentUser.image;
+    name.value = $users.currentUser.name ?? "";
   }
 
   @override
@@ -90,45 +67,49 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
-                      child: Badge(
-                        largeSize: 30,
-                        backgroundColor: const Color(0xFF797979),
-                        alignment: const Alignment(.8, 1.2),
-                        label: GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              builder: (context) => const CameraBottomSheet(),
-                            );
-                          },
-                          child: const SizedBox(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        child: ValueListenableBuilder(
-                            valueListenable:
-                                context.read<PhotoProvider>().imageFile,
-                            builder: (context, value, _) {
-                              if (value != null) read(value.path);
-
-                              return CircleAvatar(
-                                backgroundColor: theme.primaryColor,
-                                foregroundImage:
-                                    value != null ? FileImage(value) : null,
-                                radius: 50,
-                                child: Center(
+                      child: ValueListenableBuilder(
+                          valueListenable: profileImage,
+                          builder: (context, value, child) {
+                            return Badge(
+                              largeSize: 30,
+                              backgroundColor: const Color(0xFF797979),
+                              alignment: const Alignment(.8, 1.2),
+                              label: GestureDetector(
+                                onTap: () async {
+                                  String? image = await showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) =>
+                                        const CameraBottomSheet(),
+                                  );
+                                  $users.updateUser($users.currentUser
+                                      .copyWith(image: image));
+                                  profileImage.value = image;
+                                },
+                                child: const SizedBox(
                                   child: Icon(
-                                    Icons.person,
-                                    color: theme.scaffoldBackgroundColor,
-                                    size: 80,
+                                    Icons.camera_alt_outlined,
+                                    color: Colors.white,
                                   ),
                                 ),
-                              );
-                            }),
-                      ),
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage: value != null
+                                    ? FileImage(File(value))
+                                    : null,
+                                backgroundColor: theme.primaryColor,
+                                radius: 50,
+                                child: value == null
+                                    ? Center(
+                                        child: Icon(
+                                          Icons.person,
+                                          color: theme.scaffoldBackgroundColor,
+                                          size: 80,
+                                        ),
+                                      )
+                                    : null,
+                              ),
+                            );
+                          }),
                     ),
                     ValueListenableBuilder(
                       valueListenable: name,
@@ -176,6 +157,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
+                      showDragHandle: true,
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      constraints: const BoxConstraints(maxHeight: 300),
+                      elevation: 0,
                       builder: (context) => const LanguageBottomSheet(),
                     );
                   },
@@ -198,18 +183,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             null &&
                         mounted) {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NewSecretPassword(),
-                        ),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NewSecretPassword()));
                     } else {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const UpdatePassword(),
-                        ),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const UpdatePassword()));
                     }
                   },
                 ),
@@ -229,14 +210,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 const SizedBox(height: 30),
-                Center(
+                const Center(
                   child: Text(
                     "Note App for IOS\nv01.0.1(2023) by Flutter G7",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       // color: Color(0xFF262629),
-                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -265,18 +245,24 @@ class _CustomSwitchState extends State<CustomSwitch> {
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,
-        trailing: Switch(value: !value.isDark, onChanged: value.changeTheme),
+        trailing: SwitchTheme(
+          data: SwitchThemeData(
+
+              thumbColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.hovered)) {
+              return AppColors.airColor;
+            } else {
+              return AppColors.white;
+            }
+          })),
+          child: Switch(
+            activeTrackColor: AppColors.gray,
+            value: !value.isDark,
+            onChanged: value.changeTheme,
+          ),
+        ),
         onTap: () => value.changeTheme(value.isDark),
       );
-
-      //   SwitchListTile.adaptive(
-      //   title: Text(localization.theme),
-      //   value: value.themeMode == ThemeMode.light,
-      //   onChanged: (newValue) {
-      //     value.changeTheme(newValue);
-      //     $storage.setBool(StorageKeys.theme.key, newValue);
-      //   },
-      // );
     });
   }
 }

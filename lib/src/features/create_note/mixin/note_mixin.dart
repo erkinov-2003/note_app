@@ -61,6 +61,7 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
+    if(controllerTitle.text.isEmpty || controllerBody.text.isEmpty) return;
     body.clear();
     final list = controllerBody.text.split(" ");
     for (int i = 0; i < list.length; i++) {
@@ -78,6 +79,7 @@ mixin NoteMixin on State<CreateNote> {
       link: link,
       isSecret: isSecret,
     );
+
 
     if (widget.note == null) {
       notes.addNote(noteModel);
