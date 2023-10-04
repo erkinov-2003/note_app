@@ -54,8 +54,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
   }
 
   void _checkPassword() async {
-    final correctOldPassword =
-        await $secureStorage.read(key: StorageKeys.notesPassword.key);
+    final correctOldPassword = $users.currentUser.secretPassword;
     final enteredOldPassword =
         oldControllers.map((controller) => controller.text).join();
 
@@ -93,7 +92,8 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     if (updatePass.isEmpty) {
       showSnackBar("Please fill in all fields.");
     } else {
-      await $users.updateUser($users.currentUser.copyWith(secretPassword: updatePass));
+      await $users
+          .updateUser($users.currentUser.copyWith(secretPassword: updatePass));
       if (mounted) Navigator.pop(context);
     }
   }

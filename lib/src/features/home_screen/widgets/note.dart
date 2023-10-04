@@ -75,107 +75,110 @@ class _NoteState extends State<Note> {
           children: [
             Padding(
               padding: const EdgeInsets.all(14.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Stack(
                 children: [
-                  Text(
-                    widget.noteModel.title!,
-                    style: const TextStyle(
-                      fontSize: 27,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  RichText(
-                    maxLines: 5,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                      children: widget.noteModel.body!.map<TextSpan>((e) {
-                        if (e.link != null) {
-                          return TextSpan(
-                            style: const TextStyle(
-                              color: AppColors.blue,
-                              decoration: TextDecoration.underline,
-                            ),
-                            text: "${e.name} ",
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () async {
-                                String? url = e.link;
-                                if (!url!.startsWith("https://")) {
-                                  url = "https://$url";
-                                }
-                                if (!await launchUrl(
-                                  Uri.parse(url),
-                                  mode: LaunchMode.platformDefault,
-                                )) {
-                                  throw Exception('Could not launch $url');
-                                }
-                              },
-                          );
-                        } else {
-                          return TextSpan(
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            text: "${e.name} ",
-                          );
-                        }
-                      }).toList(),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  widget.noteModel.image == null
-                      ? const SizedBox()
-                      : ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
-                          child: Image.file(File(widget.noteModel.image!))),
-                  const SizedBox(height: 9),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        formatted,
-                        style: const TextStyle(fontSize: 12),
+                        widget.noteModel.title!,
+                        style: const TextStyle(
+                          fontSize: 27,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      RichText(
+                        maxLines: 5,
+                        overflow: TextOverflow.ellipsis,
+                        text: TextSpan(
+                          children: widget.noteModel.body!.map<TextSpan>((e) {
+                            if (e.link != null) {
+                              return TextSpan(
+                                style: const TextStyle(
+                                  color: AppColors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                                text: "${e.name} ",
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    String? url = e.link;
+                                    if (!url!.startsWith("https://")) {
+                                      url = "https://$url";
+                                    }
+                                    if (!await launchUrl(
+                                      Uri.parse(url),
+                                      mode: LaunchMode.platformDefault,
+                                    )) {
+                                      throw Exception('Could not launch $url');
+                                    }
+                                  },
+                              );
+                            } else {
+                              return TextSpan(
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                text: "${e.name} ",
+                              );
+                            }
+                          }).toList(),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      widget.noteModel.image == null
+                          ? const SizedBox()
+                          : ClipRRect(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              child: Image.file(File(widget.noteModel.image!))),
+                      const SizedBox(height: 9),
+                      Row(
+                        children: [
+                          Text(
+                            formatted,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            if (widget.noteModel.isSecret)
-              Center(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaY: 4, sigmaX: 4),
-                    child: SizedBox(
-                      height: 290,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 14),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                widget.noteModel.title ?? " ",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 25),
+                  if (widget.noteModel.isSecret)
+                    Positioned.fill(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaY: 4, sigmaX: 4),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    widget.noteModel.title ?? " ",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 25),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Icon(
+                                    Icons.lock,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 10),
-                              const Icon(
-                                Icons.lock,
-                                color: Colors.white,
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                ],
               ),
+            ),
           ],
         ),
       ),
