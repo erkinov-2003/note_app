@@ -73,11 +73,11 @@ class _TextFieldsState extends State<TextFields> {
                 fontSize: 12,
                 fontWeight: FontWeight.w100,
               ),
-              enabledBorder:  OutlineInputBorder(
+              enabledBorder:  const OutlineInputBorder(
                 borderSide: BorderSide(
-                  color:  Theme.of(context).primaryColor,
+                  color:  AppColors.transparent,
                 ),
-                borderRadius: const BorderRadius.all(
+                borderRadius: BorderRadius.all(
                   Radius.circular(10),
                 ),
               ),
