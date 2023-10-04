@@ -93,10 +93,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
     if (updatePass.isEmpty) {
       showSnackBar("Please fill in all fields.");
     } else {
-      await $secureStorage.write(
-        key: StorageKeys.notesPassword.key,
-        value: updatePass,
-      );
+      await $users.updateUser($users.currentUser.copyWith(secretPassword: updatePass));
       if (mounted) Navigator.pop(context);
     }
   }

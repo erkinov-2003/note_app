@@ -174,18 +174,16 @@ class NewSecretPasswordState extends State<NewSecretPassword> {
                         _showSnackbar(localization.snackBar);
                       } else {
                         if (widget.note == null) {
-                          await $secureStorage.write(
-                              key: StorageKeys.notesPassword.key, value: pass);
+                          await $users.updateUser($users.currentUser
+                              .copyWith(secretPassword: pass));
                           if (mounted) Navigator.pop(context, true);
                         } else {
-                          final password = await $secureStorage.read(
-                              key: StorageKeys.notesPassword.key);
-                          if (password == pass) {
-                            if (widget.note != null &&
-                                widget.isChecked != null) {
+                          if ($users.currentUser.secretPassword == pass) {
+                            if (widget.isChecked != null) {
                               $users.currentUser.notes!.delete(widget.note!);
                             } else {
-                              $users.currentUser.notes!.changeSecure(widget.note!);
+                              $users.currentUser.notes!
+                                  .changeSecure(widget.note!);
                             }
                             if (mounted) Navigator.pop(context);
                           } else {

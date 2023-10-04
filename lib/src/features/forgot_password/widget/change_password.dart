@@ -59,7 +59,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       ),
       body: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
+          constraints: const BoxConstraints(maxWidth: 500),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.051),
             child: ListView(

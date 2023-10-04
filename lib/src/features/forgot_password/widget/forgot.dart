@@ -50,7 +50,7 @@ class _ForgotState extends State<Forgot> {
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(
-            maxWidth: 400,
+            maxWidth: 500,
           ),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.051),
