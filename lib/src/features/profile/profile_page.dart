@@ -127,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           valueListenable: name,
                           builder: (context, value, _) {
                             return SizedBox(
-                              width: screenSize.width * .4,
+                              width: screenSize.width * .2,
                               child: Text(
                                 value,
                                 textAlign: TextAlign.center,
