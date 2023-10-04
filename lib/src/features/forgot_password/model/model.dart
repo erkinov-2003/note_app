@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../../common/models/user_model.dart';
 import '../../../common/utils/storage.dart';
 import '../widget/change_password.dart';
-import '../widget/forgot.dart';
 
 class Model with ChangeNotifier {
   String email;
@@ -27,13 +26,6 @@ class Model with ChangeNotifier {
     notifyListeners();
   }
 
-  void getAllUsers() async {
-    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
-    allUsers =
-        List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
-    notifyListeners();
-  }
-
   void openChangePasswordPage(
     GlobalKey<FormState> formKey,
     BuildContext context,
@@ -42,33 +34,10 @@ class Model with ChangeNotifier {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => ProviderForgot(
-            model: Model(
-              email: email,
-              password: password,
-              allUsers: allUsers,
-            ),
-            child: const ChangePassword(),
-          ),
+          builder: (context) => const ChangePassword(),
         ),
       );
     }
-  }
-
-  void openForgotPage(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ProviderForgot(
-          model: Model(
-            email: email,
-            password: password,
-            allUsers: allUsers,
-          ),
-          child: const Forgot(),
-        ),
-      ),
-    );
   }
 
   String? validateEmail(String value, BuildContext context) {
@@ -103,22 +72,3 @@ class Model with ChangeNotifier {
   }
 }
 
-class ProviderForgot extends InheritedNotifier<Model> {
-  const ProviderForgot({
-    super.key,
-    required super.child,
-    required final Model model,
-  }) : super(notifier: model);
-
-  static Model of(BuildContext context, {bool listen = false}) =>
-      maybeOf(context, listen: listen)?.notifier ?? _noInheritedWidgetError();
-
-  static ProviderForgot? maybeOf(BuildContext context, {bool listen = false}) =>
-      listen
-          ? context.dependOnInheritedWidgetOfExactType<ProviderForgot>()
-          : context.getElementForInheritedWidgetOfExactType<ProviderForgot>()?.widget
-              as ProviderForgot?;
-
-  static Never _noInheritedWidgetError() => throw ArgumentError(
-      "No fount Inherited of type Provider", "out_of_scope");
-}

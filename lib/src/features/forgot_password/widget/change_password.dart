@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/utils/translate.dart';
-import '../model/model.dart';
 import '../model/text_field.dart';
 
 class ChangePassword extends StatefulWidget {
@@ -32,8 +31,7 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-    final theme= Theme.of(context);
-    final model = ProviderForgot.of(context);
+    final theme = Theme.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
@@ -42,7 +40,7 @@ class _ChangePasswordState extends State<ChangePassword> {
         elevation: 0,
         backgroundColor: theme.scaffoldBackgroundColor,
         leading: BackButton(
-          onPressed: ()=> model.openForgotPage(context),
+          onPressed: () {},
         ),
       ),
       body: Center(
@@ -54,18 +52,16 @@ class _ChangePasswordState extends State<ChangePassword> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: size.height * 0.005),
-                  child: Translate(
-                    builder: (context, localization, child) {
-                      return Text(
-                        localization.setPassword,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: size.height * 0.041,
-                          color: theme.primaryColor,
-                        ),
-                      );
-                    }
-                  ),
+                  child: Translate(builder: (context, localization, child) {
+                    return Text(
+                      localization.setPassword,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: size.height * 0.041,
+                        color: theme.primaryColor,
+                      ),
+                    );
+                  }),
                 ),
                 Form(
                   key: formKey,
@@ -74,41 +70,40 @@ class _ChangePasswordState extends State<ChangePassword> {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.059),
-                        child: Translate(
-                          builder: (context, localization, child) {
-                            return Text(
-                              localization.yourEmailAddress,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575758),
-                              ),
-                            );
-                          }
-                        ),
+                        child:
+                            Translate(builder: (context, localization, child) {
+                          return Text(
+                            localization.yourEmailAddress,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF575758),
+                            ),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.012),
                         child: TextEdit(
-                          value: model.email,
+                          value: "email",
                           isPassword: false,
                           isRead: true,
+                          controller: TextEditingController(),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: Translate(
-                          builder: (context,localization, child) {
-                            return Text(
-                              localization.enterNewPassword,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575758),
-                              ),
-                            );
-                          }
-                        ),
+                        child:
+                            Translate(builder: (context, localization, child) {
+                          return Text(
+                            localization.enterNewPassword,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF575758),
+                            ),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.012),
@@ -117,22 +112,22 @@ class _ChangePasswordState extends State<ChangePassword> {
                           validateEmail: validatePasswordOne,
                           isPassword: true,
                           isRead: false,
+                          controller: TextEditingController(),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.015),
-                        child: Translate(
-                          builder: (context,localization, child) {
-                            return Text(
-                              localization.enterAgain,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF575758),
-                              ),
-                            );
-                          }
-                        ),
+                        child:
+                            Translate(builder: (context, localization, child) {
+                          return Text(
+                            localization.enterAgain,
+                            style: const TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF575758),
+                            ),
+                          );
+                        }),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.012),
@@ -141,6 +136,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                           validateEmail: validatePasswordTwo,
                           isPassword: true,
                           isRead: false,
+                          controller: TextEditingController(),
                         ),
                       ),
                       Padding(
@@ -148,7 +144,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor:
-                            const MaterialStatePropertyAll<Color>(
+                                const MaterialStatePropertyAll<Color>(
                               Color(0xFF36BFFA),
                             ),
                             fixedSize: MaterialStatePropertyAll<Size>(
@@ -163,20 +159,18 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ),
                           ),
-                          onPressed: () =>
-                              model.openHomePage(context, formKey),
+                          onPressed: () {},
                           child: Translate(
-                            builder: (context,localization, child) {
-                              return Text(
-                                localization.enter,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: size.height * 0.019,
-                                  color: Colors.white,
-                                ),
-                              );
-                            }
-                          ),
+                              builder: (context, localization, child) {
+                            return Text(
+                              localization.enter,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: size.height * 0.019,
+                                color: Colors.white,
+                              ),
+                            );
+                          }),
                         ),
                       ),
                     ],

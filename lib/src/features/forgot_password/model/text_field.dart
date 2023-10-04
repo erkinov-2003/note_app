@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'model.dart';
-
 class TextEdit extends StatefulWidget {
   final String? Function(String? value)? validateEmail;
   final String? value;
   final bool isPassword;
   final bool isRead;
+  final TextEditingController controller;
 
   const TextEdit({
     Key? key,
@@ -14,6 +13,7 @@ class TextEdit extends StatefulWidget {
     required this.value,
     required this.isPassword,
     required this.isRead,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,6 @@ class TextEdit extends StatefulWidget {
 }
 
 class _TextEditState extends State<TextEdit> {
-  TextEditingController controller=TextEditingController();
   bool show = false;
 
   void showPassword() {
@@ -31,12 +30,10 @@ class _TextEditState extends State<TextEdit> {
 
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
-    final model=ProviderForgot.of(context);
+    final theme = Theme.of(context);
     FocusNode focusNode = FocusNode();
     return TextFormField(
-      onChanged: widget.isPassword?(value) => model.updatePassword(controller.text):null,
-      controller: controller,
+      controller: widget.controller,
       obscureText: !show && widget.isPassword,
       obscuringCharacter: "*",
       focusNode: focusNode,
@@ -77,7 +74,7 @@ class _TextEditState extends State<TextEdit> {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
-            color: !widget.isRead?Colors.white:Colors.transparent,
+            color: !widget.isRead ? Colors.white : Colors.transparent,
           ),
         ),
         errorBorder: OutlineInputBorder(

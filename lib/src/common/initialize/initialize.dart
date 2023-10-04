@@ -73,6 +73,7 @@ final List<(String, FutureOr<void> Function(MutableDependencies dependencies))>
         await $users.getOneUser();
         await $users.currentUser.notes!.setAllNotes();
        }
+
       }
   ),
   (

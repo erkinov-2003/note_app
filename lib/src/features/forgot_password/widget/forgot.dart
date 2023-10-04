@@ -1,68 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/features/auth/validator/text_field_validator.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
-import '../model/model.dart';
 import '../model/text_field.dart';
 
-class ForgotWithModel extends StatefulWidget {
-
-  const ForgotWithModel({Key? key}) : super(key: key);
-
-  @override
-  State<ForgotWithModel> createState() => _ForgotWithModelState();
-}
-
-class _ForgotWithModelState extends State<ForgotWithModel> {
-  late Model model;
-
-  @override
-  void initState() {
-    super.initState();
-    model = Model(
-      email: "",
-      password: "",
-      allUsers: [],
-    );
-    model.getAllUsers();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    model.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ProviderForgot(
-      model: model,
-      child: const Forgot(),
-    );
-  }
-}
-
 class Forgot extends StatefulWidget {
-  const Forgot({Key? key}) : super(key: key);
+  const Forgot({
+    super.key,
+    required this.initialText,
+  });
+
+  final String initialText;
 
   @override
   State<Forgot> createState() => _ForgotState();
 }
 
 class _ForgotState extends State<Forgot> {
-  void openKey(bool a) {
-    a = !a;
-    setState(() {});
+  late TextEditingController emailController;
+
+  @override
+  void initState() {
+    emailController = TextEditingController(text: widget.initialText);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme=Theme.of(context);
+    final theme = Theme.of(context);
     final localization = GeneratedLocalization();
-    final email = ProviderForgot.of(context);
     final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -111,9 +86,10 @@ class _ForgotState extends State<Forgot> {
                         child: TextEdit(
                           value: "you@example.com",
                           validateEmail: (value) =>
-                              email.validateEmail(value!, context),
+                              TextFieldValidator.validateEmail(context, value),
                           isPassword: false,
                           isRead: false,
+                          controller: emailController,
                         ),
                       ),
                       Padding(
@@ -136,8 +112,11 @@ class _ForgotState extends State<Forgot> {
                               ),
                             ),
                           ),
-                          onPressed: () =>
-                              email.openChangePasswordPage(formKey, context),
+                          onPressed: () async {
+                            if (formKey.currentState?.validate() ?? false) {
+
+                            }
+                          },
                           child: Text(
                             localization.sendCode,
                             style: TextStyle(
@@ -159,4 +138,3 @@ class _ForgotState extends State<Forgot> {
     );
   }
 }
-

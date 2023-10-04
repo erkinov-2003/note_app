@@ -94,12 +94,19 @@ class _LogInState extends State<LogIn> {
           SizedBox(height: size.height * 0.03),
           Center(
             child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ForgotWithModel(),
-                ),
-              ),
+              onTap: () {
+                final controller = context.read<MainController>().emailController;
+                final initial = controller.text;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Forgot(
+                      initialText: initial,
+                    ),
+                  ),
+                );
+                controller.clear();
+              },
               child: Translate(builder: (context, localization, child) {
                 return Text(
                   localization.forgotPassword,
