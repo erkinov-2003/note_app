@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 
 import 'package:provider/provider.dart';
 import '../../../common/constants/app_images.dart';
@@ -44,8 +45,8 @@ class _ThemeChangerPageState extends State<ThemeChangerPage> {
               ),
               Consumer<ThemeProvider>(
                 builder: (context, value, child) => SwitchListTile.adaptive(
-                  activeColor: Colors.black,
-                  activeTrackColor: theme.cardColor,
+                  activeColor: AppColors.white,
+                  activeTrackColor: AppColors.airColor,
                   value: !value.isDark,
                   onChanged: value.changeTheme,
                   title: Text(

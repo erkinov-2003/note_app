@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/constants/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../../common/constants/app_icons.dart';
 import '../../common/localization/generated/l10n.dart';
@@ -156,13 +157,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
+                      showDragHandle: true,
+                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                      constraints: const BoxConstraints(maxHeight: 300),
+                      elevation: 0,
                       builder: (context) => const LanguageBottomSheet(),
                     );
                   },
                   trailing: const Image(
                     width: 25,
                     height: 25,
-                    image: AssetImage(AppIcons.lockIcon),
+                    image: AssetImage(AppIcons.globe),
                   ),
                 ),
                 CustomListTile(
@@ -205,14 +210,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   },
                 ),
                 const SizedBox(height: 30),
-                Center(
+                const Center(
                   child: Text(
                     "Note App for IOS\nv01.0.1(2023) by Flutter G7",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       // color: Color(0xFF262629),
-                      color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -235,33 +239,30 @@ class CustomSwitch extends StatefulWidget {
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  // bool switchValue = $storage.getBool(StorageKeys.theme.key) ?? false;
-
-  void onChanged(bool newValue, ThemeProvider value) {
-    value.changeTheme(newValue);
-    $storage.setBool(StorageKeys.theme.key, newValue);
-  }
-
   @override
   Widget build(BuildContext context) {
     final localization = GeneratedLocalization.of(context);
     return Consumer<ThemeProvider>(builder: (context, value, child) {
       return CustomListTile(
         title: localization.theme,
-        trailing: Switch(
-            value: value.themeMode == ThemeMode.dark,
-            onChanged: (newValue) => onChanged(!newValue, value)),
-        onTap: () => onChanged(value.themeMode == ThemeMode.dark, value),
-      );
+        trailing: SwitchTheme(
+          data: SwitchThemeData(
 
-      //   SwitchListTile.adaptive(
-      //   title: Text(localization.theme),
-      //   value: value.themeMode == ThemeMode.light,
-      //   onChanged: (newValue) {
-      //     value.changeTheme(newValue);
-      //     $storage.setBool(StorageKeys.theme.key, newValue);
-      //   },
-      // );
+              thumbColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.hovered)) {
+              return AppColors.airColor;
+            } else {
+              return AppColors.white;
+            }
+          })),
+          child: Switch(
+            activeTrackColor: AppColors.gray,
+            value: !value.isDark,
+            onChanged: value.changeTheme,
+          ),
+        ),
+        onTap: () => value.changeTheme(value.isDark),
+      );
     });
   }
 }

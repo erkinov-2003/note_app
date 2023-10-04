@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/utils/translate.dart';
-
-import '../../../common/constants/app_icons.dart';
-import 'icons_button.dart';
+import 'package:note_app/src/common/constants/app_icons.dart';
+import 'package:note_app/src/features/auth/widgets/icons_button.dart';
 
 class SignInWith extends StatelessWidget {
   const SignInWith({Key? key}) : super(key: key);
@@ -15,9 +14,8 @@ class SignInWith extends StatelessWidget {
           builder: (context, localization, child) {
             return Text(
              localization.signInWith,
-              style:  TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
-                color: Theme.of(context).primaryColor,
               ),
             );
           }

@@ -381,16 +381,6 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Your old password`
-  String get oldPassword {
-    return Intl.message(
-      'Your old password',
-      name: 'oldPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Password is too short, it must be at least 8 characters`
   String get passwordLength {
     return Intl.message(
@@ -641,6 +631,16 @@ class GeneratedLocalization {
     );
   }
 
+  /// `Enter password`
+  String get enterPassword {
+    return Intl.message(
+      'Enter password',
+      name: 'enterPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Could not launch`
   String get couldNotLaunch {
     return Intl.message(
@@ -671,21 +671,21 @@ class GeneratedLocalization {
     );
   }
 
-  /// `Change Your Name`
+  /// `Change Your name`
   String get changeYourName {
     return Intl.message(
-      'Change Your Name',
+      'Change Your name',
       name: 'changeYourName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Enter Password`
-  String get enterPassword {
+  /// `Your old password`
+  String get oldPassword {
     return Intl.message(
-      'Enter Password',
-      name: 'enterPassword',
+      'Your old password',
+      name: 'oldPassword',
       desc: '',
       args: [],
     );

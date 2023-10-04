@@ -8,12 +8,15 @@ class Translate extends StatelessWidget {
     this.child,
   });
 
-  final Widget Function(BuildContext context,
-      GeneratedLocalization localization, Widget? child) builder;
+  final Widget Function(
+    BuildContext context,
+    GeneratedLocalization localization,
+    Widget? child,
+  ) builder;
+
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) {
-    return builder(context, GeneratedLocalization.of(context), child);
-  }
+  Widget build(BuildContext context) =>
+      builder(context, GeneratedLocalization.of(context), child);
 }

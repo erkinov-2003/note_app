@@ -63,31 +63,32 @@ class _ViewState extends State<View> {
                     child: Padding(
                       padding:
                       EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                      child: Translate(builder: (context, localization, child) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Selector<MainController, bool>(builder: (context, isRegistration, child) {
-                                  return Text(
-                                    isRegistration
-                                        ? localization.signInTitle
-                                        : localization.signUpTitle,
-                                    style: TextStyle(
-                                      color: Theme.of(context).primaryColor,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 24,
-                                    ),
-                                  );
-                                }, selector: (_, model) => model.isRegistration,),
-                              ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Selector<MainController, bool>(builder: (context, isRegistration, child) {
+                                return Translate(
+                                  builder: (context, localization, child) {
+                                    return Text(
+                                      isRegistration
+                                          ? localization.signInTitle
+                                          : localization.signUpTitle,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24,
+                                      ),
+                                    );
+                                  }
+                                );
+                              }, selector: (_, model) => model.isRegistration,),
                             ),
-                            const PageWidget(),
-                          ],
-                        );
-                      }),
+                          ),
+                          const PageWidget(),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(

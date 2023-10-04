@@ -4,6 +4,7 @@ class CustomListTile extends StatelessWidget {
   final String title;
   final Widget trailing;
   final Function() onTap;
+
   const CustomListTile({
     required this.title,
     required this.trailing,
@@ -21,7 +22,7 @@ class CustomListTile extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: ListTile(
-          splashColor:const Color(0xFF262629),
+          splashColor: const Color(0xFF262629),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(10),
@@ -39,7 +40,10 @@ class CustomListTile extends StatelessWidget {
             ),
           ),
           onTap: onTap,
-          trailing: trailing,
+          trailing: SizedBox(
+            width: 65,
+            child: trailing,
+          ),
         ),
       ),
     );

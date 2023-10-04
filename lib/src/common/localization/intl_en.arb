@@ -12,7 +12,6 @@
   "emailAddress": "Email address",
   "password": "Password",
   "enterEmailAddress": "Enter email address",
-  "setPassword": "Set Password",
   "delete": "Delete",
   "addPassword": "Add Password",
   "back": "Back",
@@ -33,7 +32,6 @@
   "check": "Check",
   "setPassword": "Set Password",
   "setPassword2": "Set new password",
-  "oldPassword": "Your old password",
   "passwordLength":"Password is too short, it must be at least 8 characters",
   "passwordSpace": "Password shouldn't have space",
   "passwordNumber": "Password must have at least one number",
@@ -63,7 +61,6 @@
   "couldNotLaunch": "Could not launch",
   "enjoyNote": "Enjoy note taking with friends",
   "save": "Save",
-  "changeYourName": "Change Your Name"
+  "changeYourName": "Change Your name",
   "oldPassword": "Your old password"
-  "enterPassword": "Enter Password"
 }

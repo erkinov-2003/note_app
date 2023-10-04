@@ -1,15 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/src/common/initialize/inherited_dependencies.dart';
 import '/src/common/initialize/initialize.dart';
 import '/src/common/widget/splash_screen.dart';
-
-import 'src/common/models/user_model.dart';
 import 'src/common/widget/app.dart';
 import 'src/common/widget/error_app.dart';
-List<User> users = [];
 
 void main() {
   final progress = ValueNotifier<

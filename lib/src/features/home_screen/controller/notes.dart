@@ -36,12 +36,6 @@ class Notes with ChangeNotifier {
     addNote(note.copyWith(isSecret: !note.isSecret));
   }
 
-  void changeSecureSet(NoteModel note) {
-    removeNote(note);
-    addNote(note.copyWith(isSecret: false));
-    notifyListeners();
-  }
-
   Future<void> setAllNotes() async {
     List<NoteModel> a = List<Map<String,Object?>>.from(jsonDecode($storage.getString($users.currentUser.id!) ?? "[]")).map(NoteModel.fromJson).toList();
     String bString = (await $secureStorage.read(key: $users.currentUser.id!,)) ?? "[]";

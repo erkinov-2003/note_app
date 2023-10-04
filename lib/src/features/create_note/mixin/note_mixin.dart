@@ -58,6 +58,7 @@ mixin NoteMixin on State<CreateNote> {
   }
 
   void onSaved(Notes notes) async {
+    if(controllerTitle.text.isEmpty || controllerBody.text.isEmpty) return;
     body.clear();
     final list = controllerBody.text.split(" ");
     for (int i = 0; i < list.length; i++) {
