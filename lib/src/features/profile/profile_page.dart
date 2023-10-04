@@ -39,190 +39,211 @@ class _ProfilePageState extends State<ProfilePage> {
     final screenSize = MediaQuery.sizeOf(context);
     return ConstrainedBox(
       constraints: const BoxConstraints(
-        maxWidth: 450,
+        maxWidth: 500,
       ),
       child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: theme.primaryColor,
-            onPressed: () => Navigator.pop(context),
-          ),
-          backgroundColor: theme.scaffoldBackgroundColor,
-          title: Text(
-            localization.profile,
-            style: TextStyle(
-              fontSize: 35,
-              fontWeight: FontWeight.w600,
-              color: theme.primaryColor,
-            ),
-          ),
-        ),
         body: SafeArea(
           child: Center(
-            child: ListView(
-              children: [
-                const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: ValueListenableBuilder(
-                          valueListenable: profileImage,
-                          builder: (context, value, child) {
-                            return Badge(
-                              largeSize: 30,
-                              backgroundColor: const Color(0xFF797979),
-                              alignment: const Alignment(.8, 1.2),
-                              label: GestureDetector(
-                                onTap: () async {
-                                  String? image = await showModalBottomSheet(
-                                    context: context,
-                                    builder: (context) =>
-                                        const CameraBottomSheet(),
-                                  );
-                                  $users.updateUser($users.currentUser
-                                      .copyWith(image: image));
-                                  profileImage.value = image;
-                                },
-                                child: const SizedBox(
-                                  child: Icon(
-                                    Icons.camera_alt_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              child: CircleAvatar(
-                                backgroundImage: value != null
-                                    ? FileImage(File(value))
-                                    : null,
-                                backgroundColor: theme.primaryColor,
-                                radius: 50,
-                                child: value == null
-                                    ? Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 500,
+              ),
+              child: ListView(
+                children: [
+                  const SizedBox(height: 15),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          BackButton(
+                            color: theme.primaryColor,
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                          Text(
+                            localization.profile,
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.w600,
+                              color: theme.primaryColor,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 24,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: ValueListenableBuilder(
+                                valueListenable: profileImage,
+                                builder: (context, value, child) {
+                                  return Badge(
+                                    largeSize: 30,
+                                    backgroundColor: const Color(0xFF797979),
+                                    alignment: const Alignment(.8, 1.2),
+                                    label: GestureDetector(
+                                      onTap: () async {
+                                        String? image =
+                                        await showModalBottomSheet(
+                                          context: context,
+                                          builder: (context) =>
+                                          const CameraBottomSheet(),
+                                        );
+                                        $users.updateUser($users.currentUser
+                                            .copyWith(image: image));
+                                        profileImage.value = image;
+                                      },
+                                      child: const SizedBox(
+                                        child: Icon(
+                                          Icons.camera_alt_outlined,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    child: CircleAvatar(
+                                      backgroundImage: value != null
+                                          ? FileImage(File(value))
+                                          : null,
+                                      backgroundColor: theme.primaryColor,
+                                      radius: 50,
+                                      child: value == null
+                                          ? Center(
                                         child: Icon(
                                           Icons.person,
-                                          color: theme.scaffoldBackgroundColor,
+                                          color: theme
+                                              .scaffoldBackgroundColor,
                                           size: 80,
                                         ),
                                       )
-                                    : null,
+                                          : null,
+                                    ),
+                                  );
+                                }),
+                          ),
+                          ValueListenableBuilder(
+                            valueListenable: name,
+                            builder: (context, value, _) {
+                              return SizedBox(
+                                width: screenSize.width * .2,
+                                child: Text(
+                                  value,
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    color: theme.primaryColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    NameDialog(
+                                      name: name,
+                                    ),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 40),
+                              child: Image(
+                                height: 40,
+                                width: 40,
+                                color: theme.primaryColor,
+                                image: const AssetImage(AppIcons.editIcon),
                               ),
-                            );
-                          }),
-                    ),
-                    ValueListenableBuilder(
-                      valueListenable: name,
-                      builder: (context, value, _) {
-                        return SizedBox(
-                          width: screenSize.width * .4,
-                          child: Text(
-                            value,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: theme.primaryColor,
-                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                        );
-                      },
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  const CustomSwitch(),
+                  CustomListTile(
+                    title: localization.language,
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        showDragHandle: true,
+                        backgroundColor:
+                        Theme
+                            .of(context)
+                            .scaffoldBackgroundColor,
+                        constraints: const BoxConstraints(maxHeight: 350),
+                        elevation: 0,
+                        builder: (context) => const LanguageBottomSheet(),
+                      );
+                    },
+                    trailing: const Image(
+                      width: 25,
+                      height: 25,
+                      image: AssetImage(AppIcons.globe),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => NameDialog(
-                            name: name,
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 40),
-                        child: Image(
-                          height: 40,
-                          width: 40,
-                          color: theme.primaryColor,
-                          image: const AssetImage(AppIcons.editIcon),
-                        ),
+                  ),
+                  CustomListTile(
+                    title: localization.secretPassword,
+                    trailing: const Image(
+                      width: 25,
+                      height: 25,
+                      image: AssetImage(AppIcons.lockIcon),
+                    ),
+                    onTap: () async {
+                      if ((await $secureStorage.read(
+                          key: StorageKeys.notesPassword.key)) ==
+                          null &&
+                          mounted) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                const NewSecretPassword()));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const UpdatePassword()));
+                      }
+                    },
+                  ),
+                  SizedBox(height: screenSize.height * .1),
+                  CustomListTile(
+                    title: localization.logOut,
+                    trailing: const Image(
+                      width: 25,
+                      height: 25,
+                      image: AssetImage(AppIcons.logOut),
+                    ),
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => const CustomLogOutDialog(),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  const Center(
+                    child: Text(
+                      "Note App for IOS\nv01.0.1(2023) by Flutter G7",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        // color: Color(0xFF262629),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 40),
-                const CustomSwitch(),
-                CustomListTile(
-                  title: localization.language,
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      showDragHandle: true,
-                      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      constraints: const BoxConstraints(maxHeight: 350),
-                      elevation: 0,
-                      builder: (context) => const LanguageBottomSheet(),
-                    );
-                  },
-                  trailing: const Image(
-                    width: 25,
-                    height: 25,
-                    image: AssetImage(AppIcons.globe),
                   ),
-                ),
-                CustomListTile(
-                  title: localization.secretPassword,
-                  trailing: const Image(
-                    width: 25,
-                    height: 25,
-                    image: AssetImage(AppIcons.lockIcon),
-                  ),
-                  onTap: () async {
-                    if ((await $secureStorage.read(
-                                key: StorageKeys.notesPassword.key)) ==
-                            null &&
-                        mounted) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NewSecretPassword()));
-                    } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const UpdatePassword()));
-                    }
-                  },
-                ),
-                SizedBox(height: screenSize.height * .1),
-                CustomListTile(
-                  title: localization.logOut,
-                  trailing: const Image(
-                    width: 25,
-                    height: 25,
-                    image: AssetImage(AppIcons.logOut),
-                  ),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => const CustomLogOutDialog(),
-                    );
-                  },
-                ),
-                const SizedBox(height: 30),
-                const Center(
-                  child: Text(
-                    "Note App for IOS\nv01.0.1(2023) by Flutter G7",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      // color: Color(0xFF262629),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-              ],
+                  const SizedBox(height: 15),
+                ],
+              ),
             ),
           ),
         ),
@@ -247,14 +268,13 @@ class _CustomSwitchState extends State<CustomSwitch> {
         title: localization.theme,
         trailing: SwitchTheme(
           data: SwitchThemeData(
-
               thumbColor: MaterialStateColor.resolveWith((states) {
-            if (states.contains(MaterialState.hovered)) {
-              return AppColors.airColor;
-            } else {
-              return AppColors.white;
-            }
-          })),
+                if (states.contains(MaterialState.hovered)) {
+                  return AppColors.airColor;
+                } else {
+                  return AppColors.white;
+                }
+              })),
           child: Switch(
             activeTrackColor: AppColors.gray,
             value: !value.isDark,
