@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/src/common/utils/storage.dart';
 import 'package:note_app/src/common/utils/translate.dart';
 import '../model/text_field.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({
     Key? key,
+    required this.initialText,
   }) : super(key: key);
+
+  final String initialText;
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -13,6 +17,7 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   String password = "";
+  final formKey = GlobalKey<FormState>();
 
   String? validatePasswordOne(String? value) {
     if (value!.length < 8) {
@@ -29,10 +34,19 @@ class _ChangePasswordState extends State<ChangePassword> {
     return null;
   }
 
+  void openHomePage() {
+    if(formKey.currentState?.validate() ?? false) {
+      $users.updatePassword(
+        email: widget.initialText,
+        password: password,
+      );
+      Navigator.pop(context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final formKey = GlobalKey<FormState>();
     final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
@@ -85,7 +99,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       Padding(
                         padding: EdgeInsets.only(top: size.height * 0.012),
                         child: TextEdit(
-                          value: "email",
+                          value: widget.initialText,
                           isPassword: false,
                           isRead: true,
                           controller: TextEditingController(),
@@ -159,7 +173,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                               ),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: openHomePage,
                           child: Translate(
                               builder: (context, localization, child) {
                             return Text(

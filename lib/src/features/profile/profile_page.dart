@@ -159,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       context: context,
                       showDragHandle: true,
                       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                      constraints: const BoxConstraints(maxHeight: 300),
+                      constraints: const BoxConstraints(maxHeight: 350),
                       elevation: 0,
                       builder: (context) => const LanguageBottomSheet(),
                     );

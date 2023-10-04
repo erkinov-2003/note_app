@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/utils/translate.dart';
+import 'package:note_app/src/features/auth/widgets/register_page_controller.dart';
 
 import '../../../common/constants/app_colors.dart';
-import '../../auth/register_page_controller.dart';
 import 'language_changer_page.dart';
 import 'theme_changer_page.dart';
 
@@ -84,13 +84,17 @@ class _SplashScreenState extends State<SplashScreen> {
                                 );
                               }
                             },
-                            child: Text(
-                              GeneratedLocalization.of(context).next,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            child: Translate(
+                              builder: (context, l10n, _) {
+                                return Text(
+                                  l10n.next,
+                                  style: const TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                );
+                              }
                             ),
                           ),
                         ),

@@ -22,11 +22,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "addLink": MessageLookupByLibrary.simpleMessage("Add link"),
+        "addLink": MessageLookupByLibrary.simpleMessage("Add Link"),
         "addPassword": MessageLookupByLibrary.simpleMessage("Add Password"),
         "addPhoto": MessageLookupByLibrary.simpleMessage("Add Photo"),
         "alreadyRegister":
-            MessageLookupByLibrary.simpleMessage("You are already registered"),
+            MessageLookupByLibrary.simpleMessage("You are already Registered"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
         "bodyText": MessageLookupByLibrary.simpleMessage(
             "This is where your note will be. It’ll be housed here. You’ll save your note here. Type your memories here. Write down your thoughts."),
@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didNotPicture": MessageLookupByLibrary.simpleMessage(
             "User didn\'t take any picture."),
         "doNotHave":
-            MessageLookupByLibrary.simpleMessage("You don\'t have account"),
+            MessageLookupByLibrary.simpleMessage("You don\'t have Account"),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
         "enjoyNote": MessageLookupByLibrary.simpleMessage(
             "Enjoy note taking with friends"),
@@ -66,12 +66,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid email address!"),
         "invalidName": MessageLookupByLibrary.simpleMessage("Invalid name!"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "languageApp": MessageLookupByLibrary.simpleMessage("App\'s language"),
+        "languageApp": MessageLookupByLibrary.simpleMessage("Language APP"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log In"),
-        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
-        "newNote": MessageLookupByLibrary.simpleMessage("New note"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "newNote": MessageLookupByLibrary.simpleMessage("New Note"),
         "newSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Create your secret notes password"),
+            "Create your secret\nNotes password"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "oldPassword":
             MessageLookupByLibrary.simpleMessage("Your old password"),
@@ -87,13 +87,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordNumber": MessageLookupByLibrary.simpleMessage(
             "Password must have at least one number"),
         "passwordSpace": MessageLookupByLibrary.simpleMessage(
-            "Password should not have space"),
+            "Password shouldn\'t have space"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-        "profileImage": MessageLookupByLibrary.simpleMessage("Profile image"),
+        "profileImage": MessageLookupByLibrary.simpleMessage("Profile Image"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "secretPassword":
-            MessageLookupByLibrary.simpleMessage("Secret note password"),
+            MessageLookupByLibrary.simpleMessage("Secret note Password"),
         "sendCode": MessageLookupByLibrary.simpleMessage("Send code"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPassword2":
@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "themeApp": MessageLookupByLibrary.simpleMessage("Theme App"),
         "updateSecretPass": MessageLookupByLibrary.simpleMessage(
-            "Update your secret notes password"),
+            "Update your secret\nNotes password"),
         "wrongPassword": MessageLookupByLibrary.simpleMessage("Wrong password"),
         "yourEmailAddress":
             MessageLookupByLibrary.simpleMessage("Your email address"),

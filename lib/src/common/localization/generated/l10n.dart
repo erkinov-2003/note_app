@@ -690,6 +690,36 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Please fill all fields.`
+  String get snackBar {
+    return Intl.message(
+      'Please fill all fields.',
+      name: 'snackBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect password. Please try again.`
+  String get snackBar2 {
+    return Intl.message(
+      'Incorrect password. Please try again.',
+      name: 'snackBar2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a 4-digit new password.`
+  String get snackBar3 {
+    return Intl.message(
+      'Please enter a 4-digit new password.',
+      name: 'snackBar3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate

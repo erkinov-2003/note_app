@@ -32,15 +32,10 @@ class _NameDialogState extends State<NameDialog> {
   @override
   void didChangeDependencies() async {
     final User first=User(name:GeneratedLocalization.of(context).yourName);
-    nameController.text =
-        User.fromJson(jsonDecode(
-                await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-                    jsonEncode(first.toJson())))
-            .name ??
-        "";
-    user = User.fromJson(jsonDecode(
-        await $secureStorage.read(key: StorageKeys.oneUser.key) ??
-            jsonEncode(first.toJson()),),);
+    nameController.text = $users.currentUser.name ?? "";
+    // user = User.fromJson(jsonDecode(
+    //     await $secureStorage.read(key: StorageKeys.oneUser.key) ??
+    //         jsonEncode(first.toJson()),),);
     super.didChangeDependencies();
   }
 
@@ -98,15 +93,8 @@ class _NameDialogState extends State<NameDialog> {
         ),
         TextButton(
           onPressed: () async {
-            user = user.copyWith(name: nameController.text);
-            await $secureStorage.write(
-              key: StorageKeys.oneUser.key,
-              value: jsonEncode(
-                user.toJson(),
-              ),
-            );
+            $users.updateUser($users.currentUser.copyWith(name: nameController.text));
             widget.name.value = nameController.text;
-            // ignore: use_build_context_synchronously
             Navigator.pop(context);
           },
           child: Text(

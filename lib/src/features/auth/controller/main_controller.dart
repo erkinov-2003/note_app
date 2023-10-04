@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:note_app/src/common/models/controller/user_controller.dart';
 import 'package:note_app/src/common/utils/app_snack_bar.dart';
 import 'package:note_app/src/common/utils/functions.dart';
 import 'package:note_app/src/common/utils/storage.dart';
+import 'package:note_app/src/features/forgot_password/widget/forgot.dart';
 import 'package:note_app/src/features/home_screen/home_page.dart';
 
 class MainController with ChangeNotifier {
@@ -13,7 +13,6 @@ class MainController with ChangeNotifier {
   late TextEditingController passwordController;
   int pageNumber = 1;
   bool isRegistration = true;
-
 
   @override
   void dispose() {
@@ -65,6 +64,15 @@ class MainController with ChangeNotifier {
         );
       }
     }
+  }
+
+  void forgotPassword(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Forgot(initialText: ""),
+      ),
+    );
   }
 
   Future<void> checkRegistration(

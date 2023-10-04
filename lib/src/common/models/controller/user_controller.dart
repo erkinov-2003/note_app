@@ -46,6 +46,15 @@ class Users with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updatePassword({required String email,required String password}) async {
+    int index = _users.indexWhere((element) => element.email == email);
+    _users[index].loginPassword = password;
+    await $secureStorage.write(
+        key: StorageKeys.users.key,
+        value: jsonEncode(_users.map((e) => e.toJson()).toList()));
+    notifyListeners();
+  }
+
   Future<Status> checkLogin({
     required String email,
     required String password,

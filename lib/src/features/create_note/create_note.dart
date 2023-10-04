@@ -27,13 +27,7 @@ class CreateNote extends StatefulWidget {
 }
 
 class _CreateNoteState extends State<CreateNote> with NoteMixin {
-  ValueNotifier<String?> image = ValueNotifier(null);
 
-  @override
-  void initState() {
-    super.initState();
-    image.value = widget.note?.image;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +86,7 @@ class _CreateNoteState extends State<CreateNote> with NoteMixin {
                           builder: (context) => const CameraBottomSheet(),
                         );
                         image.value = imagePath ?? image.value;
+
                       }
                     : () {},
                 child: Padding(

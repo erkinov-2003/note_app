@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/src/features/auth/validator/text_field_validator.dart';
+import 'package:note_app/src/features/forgot_password/widget/change_password.dart';
 
 import '../../../common/constants/app_colors.dart';
 import '../../../common/localization/generated/l10n.dart';
@@ -86,7 +87,8 @@ class _ForgotState extends State<Forgot> {
                         child: TextEdit(
                           value: "you@example.com",
                           validateEmail: (value) =>
-                              TextFieldValidator.validateEmail(context, value),
+                              TextFieldValidator.validateEmailForgot(
+                                  value, context),
                           isPassword: false,
                           isRead: false,
                           controller: emailController,
@@ -114,7 +116,14 @@ class _ForgotState extends State<Forgot> {
                           ),
                           onPressed: () async {
                             if (formKey.currentState?.validate() ?? false) {
-
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChangePassword(
+                                    initialText: emailController.text,
+                                  ),
+                                ),
+                              );
                             }
                           },
                           child: Text(

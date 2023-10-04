@@ -31,6 +31,15 @@ abstract class TextFieldValidator {
     return null;
   }
 
+  static String? validateEmailForgot(String? value, BuildContext context) {
+    bool isSignedIn = $users.users.any((element) => element.email == value);
+
+    if (!isSignedIn) {
+      return "Bunday foydalanuvchi yo'q";
+    }
+    return null;
+  }
+
   static String? validateEmailR(BuildContext context, String? value) {
     if ($users.users.any((e) => e.email == value)) {
       return translate(context).alreadyRegister;
