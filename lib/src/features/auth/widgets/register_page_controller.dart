@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import '../../../common/localization/generated/l10n.dart';
 import '../controller/main_controller.dart';
@@ -68,6 +69,7 @@ class _ViewState extends State<View> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 500),
             child: SingleChildScrollView(
+              reverse: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

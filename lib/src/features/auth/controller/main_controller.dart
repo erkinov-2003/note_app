@@ -90,8 +90,8 @@ class MainController with ChangeNotifier {
   }
 
   Future<void> getAllUsers() async {
-    String json = await ($secureStorage.read(key: StorageKeys.users.key)) ?? "";
-    users = List.from(jsonDecode(json)).map((e) => User.fromJson(e)).toList();
+    String? json = await ($secureStorage.read(key: StorageKeys.users.key));
+    users = List.from(jsonDecode(json!)).map((e) => User.fromJson(e)).toList();
   }
 
   Future<void> setUsers(User user) async {
